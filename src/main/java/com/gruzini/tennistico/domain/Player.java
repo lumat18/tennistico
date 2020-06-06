@@ -1,5 +1,6 @@
 package com.gruzini.tennistico.domain;
 
+import com.gruzini.tennistico.enums.Gender;
 import com.gruzini.tennistico.enums.PlayerSkill;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
@@ -24,7 +25,7 @@ public class Player {
    @NotNull
    private String lastName;
 
-   private String gender;
+   private Gender gender;
 
    private LocalDate birthday;
 
