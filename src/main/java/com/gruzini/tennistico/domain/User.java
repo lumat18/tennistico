@@ -1,5 +1,6 @@
 package com.gruzini.tennistico.domain;
 
+import com.gruzini.tennistico.annotations.StrongPassword;
 import com.gruzini.tennistico.enums.UserStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,7 +19,7 @@ import java.time.LocalDateTime;
 @Builder
 public class User {
    @Id
-   @GeneratedValue
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Long id;
 
    @NotNull
