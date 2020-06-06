@@ -8,7 +8,6 @@ import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-import java.time.Period;
 import java.util.List;
 
 @Entity(name = "players")
@@ -31,9 +30,6 @@ public class Player {
 
    private LocalDate birthday;
 
-   @Transient
-   private Integer age;
-
    @Length(max = 1000)
    private String description;
 
@@ -52,8 +48,4 @@ public class Player {
            joinColumns = { @JoinColumn(name = "user_id") },
            inverseJoinColumns = { @JoinColumn(name = "game_id") })
    private List<Game> games;
-
-   public Integer getAge() {
-      return Period.between(birthday, LocalDate.now()).getYears();
-   }
 }
