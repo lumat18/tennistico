@@ -1,5 +1,6 @@
 package com.gruzini.tennistico.domain;
 
+import com.gruzini.tennistico.enums.PlayerSkill;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
@@ -32,6 +33,9 @@ public class Player {
    @Length(max = 1000)
    private String description;
 
+   @Enumerated(EnumType.STRING)
+   private PlayerSkill playerSkill;
+
 //   unsure if it's going to be just a number or separate class consisting of several factors
 //   private Integer rank;
 
@@ -43,6 +47,5 @@ public class Player {
    @JoinTable(name = "player_to_game",
            joinColumns = { @JoinColumn(name = "user_id") },
            inverseJoinColumns = { @JoinColumn(name = "game_id") })
-
    private List<Game> games;
 }
