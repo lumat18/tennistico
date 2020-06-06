@@ -22069,8 +22069,9 @@ fieldset[disabled][disabled] .dark-edition .has-error .form-control,
   }
 }
 .gruzini-title{
-  font-size: 32px;
-  text-align: center
+  font-size: 40px;
+  text-align: center;
+  padding-top: 10px;
 }
 /*  ======================own styles====================== */
 
