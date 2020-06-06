@@ -7,9 +7,11 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 import java.time.Period;
 
+import static java.util.Objects.nonNull;
+
 @Component
 public class PlayerMapper {
-    public Player mapPlayerDTOtoPlayer(final PlayerDTO playerDTO){
+    public Player mapPlayerDTOtoPlayer(final PlayerDTO playerDTO) {
         return Player.builder()
                 .firstName(playerDTO.getFirstName())
                 .lastName(playerDTO.getLastName())
@@ -24,15 +26,18 @@ public class PlayerMapper {
         return PlayerDTO.builder()
                 .firstName(player.getFirstName())
                 .lastName(player.getLastName())
-                .gender(player.getGender())
                 .birthday(player.getBirthday())
                 .age(calculateAge(player.getBirthday()))
+                .gender(player.getGender())
                 .description(player.getDescription())
                 .playerSkill(player.getPlayerSkill())
                 .build();
     }
 
-    private Integer calculateAge(final LocalDate birthday){
-        return Period.between(birthday, LocalDate.now()).getYears();
+    private Integer calculateAge(LocalDate birthday) {
+        if (nonNull(birthday)) {
+            return Period.between(birthday, LocalDate.now()).getYears();
+        }
+        return 0;
     }
 }

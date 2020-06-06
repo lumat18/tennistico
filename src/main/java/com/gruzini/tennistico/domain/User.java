@@ -1,6 +1,5 @@
 package com.gruzini.tennistico.domain;
 
-import com.gruzini.tennistico.annotations.StrongPassword;
 import com.gruzini.tennistico.enums.UserStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
