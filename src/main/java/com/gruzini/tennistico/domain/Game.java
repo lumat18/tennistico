@@ -24,6 +24,7 @@ public class Game {
 
    private LocalDateTime endingAt;
 
+   @Enumerated(EnumType.STRING)
    private GameStatus gameStatus;
 
    @ManyToOne(optional = false, fetch = FetchType.LAZY)

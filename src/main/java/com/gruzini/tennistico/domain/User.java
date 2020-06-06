@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -23,10 +22,6 @@ public class User {
    private Long id;
 
    @NotNull
-   @Length(min = 5, max = 300)
-   private String login;
-
-   @NotNull
    @Email
    private String email;
 
@@ -35,5 +30,6 @@ public class User {
 
    private LocalDateTime createdAt;
 
+   @Enumerated(EnumType.STRING)
    private UserStatus userStatus;
 }
