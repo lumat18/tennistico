@@ -1,14 +1,12 @@
 package com.gruzini.tennistico.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity(name = "players")
 @Data
@@ -40,4 +38,11 @@ public class Player {
    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
    @MapsId
    private User user;
+
+   @ManyToMany(cascade = CascadeType.ALL)
+   @JoinTable(name = "player_to_game",
+           joinColumns = { @JoinColumn(name = "user_id") },
+           inverseJoinColumns = { @JoinColumn(name = "game_id") })
+
+   private List<Game> games;
 }
