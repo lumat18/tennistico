@@ -1,11 +1,13 @@
 package com.gruzini.tennistico.models;
 
 import com.gruzini.tennistico.annotations.StrongPassword;
+import lombok.Data;
 
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
+@Data
 public class UserDTO {
 
     @NotNull
