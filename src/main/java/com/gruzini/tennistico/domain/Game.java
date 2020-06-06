@@ -1,13 +1,9 @@
 package com.gruzini.tennistico.domain;
 
 import com.gruzini.tennistico.enums.GameStatus;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -15,20 +11,27 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Game {
    @Id
    @GeneratedValue
+   @Column(name = "game_id")
    private Long id;
 
    private boolean isOpen;
 
-   private LocalDateTime createdAt;
+   private LocalDateTime startingAt;
+
+   private LocalDateTime endingAt;
 
    private GameStatus gameStatus;
 
-//   private Court location;
+   @ManyToOne(optional = false, fetch = FetchType.LAZY)
+   @JoinColumn(name = "court_id")
+   private Court court;
 
-//   private Player hostPlayer;
-
-//   private List<Player> joiningPlayers;
+   @ManyToMany(mappedBy = "games")
+   @ToString.Exclude
+   @EqualsAndHashCode.Exclude
+   private List<Player> players;
 }
