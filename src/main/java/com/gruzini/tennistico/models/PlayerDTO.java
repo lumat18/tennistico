@@ -2,6 +2,7 @@ package com.gruzini.tennistico.models;
 
 import com.gruzini.tennistico.enums.Gender;
 import com.gruzini.tennistico.enums.PlayerSkill;
+import lombok.Builder;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
@@ -10,6 +11,7 @@ import javax.validation.constraints.Past;
 import java.time.LocalDate;
 
 @Data
+@Builder
 public class PlayerDTO {
     @NotNull
     @Length(min = 3)
@@ -21,6 +23,7 @@ public class PlayerDTO {
     private Gender gender;
     @Past
     private LocalDate birthday;
+    private Integer age;
     @Length(max = 1000)
     private String description;
     private PlayerSkill playerSkill;
