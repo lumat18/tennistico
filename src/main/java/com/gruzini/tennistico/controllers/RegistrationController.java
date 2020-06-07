@@ -24,14 +24,14 @@ public class RegistrationController {
     @PostMapping("/step-one")
     public String processFirstRegistrationStep(@Valid @ModelAttribute final UserRegistrationForm userRegistrationForm, final Errors errors) {
         if (errors.hasErrors()) {
-            return "registartion1";
+            return "registration1";
         }
         return "redirect:/registration/step-two";
     }
 
     @GetMapping("/step-two")
     public String showSecondRegistrationStep(final Model model) {
-        model.addAttribute("userRegistrationForm", new PlayerRegistrationForm());
+        model.addAttribute("playerRegistrationForm", new PlayerRegistrationForm());
         return "registration2";
     }
 
