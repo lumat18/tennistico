@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.EnumType;
@@ -23,16 +24,18 @@ import java.time.LocalDate;
 public class PlayerRegistrationForm {
 
     @NotNull
+    @Length(min = 1, message = "First name cannot be empty")
     private String firstName;
 
     @NotNull
+    @Length(min = 1, message = "Last name cannot be empty")
     private String lastName;
 
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Past
+    @Past(message = "You cannot be born in future")
     private LocalDate birthday;
 
     @Min(0)
