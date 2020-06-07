@@ -13,6 +13,7 @@ import javax.persistence.Enumerated;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import java.time.LocalDate;
 
 @Data
@@ -31,6 +32,7 @@ public class PlayerRegistrationForm {
     private Gender gender;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Past
     private LocalDate birthday;
 
     @Min(0)
