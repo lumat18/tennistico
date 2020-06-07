@@ -3,11 +3,11 @@ package com.gruzini.tennistico.domain;
 import com.gruzini.tennistico.enums.Gender;
 import com.gruzini.tennistico.enums.PlayerSkill;
 import lombok.*;
-import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 
 @Entity(name = "players")
@@ -30,8 +30,7 @@ public class Player {
 
    private LocalDate birthday;
 
-   @Length(max = 1000)
-   private String description;
+   private Integer yearsOfExperience;
 
    @Enumerated(EnumType.STRING)
    private PlayerSkill playerSkill;
@@ -48,4 +47,8 @@ public class Player {
            joinColumns = { @JoinColumn(name = "user_id") },
            inverseJoinColumns = { @JoinColumn(name = "game_id") })
    private List<Game> games;
+
+   public Integer getAge(){
+      return Period.between(LocalDate.now(), getBirthday()).getYears();
+   }
 }

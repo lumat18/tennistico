@@ -13,6 +13,7 @@ public class UserService {
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
+
     public User getByEmail(final String email){
         return userRepository.findByEmail(email).orElseThrow(); //write custom exception
     }

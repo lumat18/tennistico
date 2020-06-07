@@ -3,7 +3,6 @@ package com.gruzini.tennistico.mappers;
 import com.gruzini.tennistico.domain.Player;
 import com.gruzini.tennistico.enums.Gender;
 import com.gruzini.tennistico.enums.PlayerSkill;
-import com.gruzini.tennistico.models.PlayerDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
