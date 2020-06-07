@@ -17,6 +17,7 @@ import java.util.List;
 @Builder
 public class Player {
    @Id
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Long id;
 
    @NotNull
@@ -38,9 +39,7 @@ public class Player {
 //   unsure if it's going to be just a number or separate class consisting of several factors
 //   private Integer rank;
 
-   @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-   @MapsId
-   private User user;
+
 
    @ManyToMany(cascade = CascadeType.ALL)
    @JoinTable(name = "player_to_game",

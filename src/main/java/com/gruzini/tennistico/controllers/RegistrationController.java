@@ -1,7 +1,12 @@
 package com.gruzini.tennistico.controllers;
 
+import com.gruzini.tennistico.domain.Player;
+import com.gruzini.tennistico.domain.User;
 import com.gruzini.tennistico.forms.PlayerRegistrationForm;
 import com.gruzini.tennistico.forms.UserRegistrationForm;
+import com.gruzini.tennistico.mappers.PlayerMapper;
+import com.gruzini.tennistico.mappers.UserMapper;
+import com.gruzini.tennistico.services.RegistrationService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -15,6 +20,16 @@ import javax.validation.Valid;
 @SessionAttributes("userRegistrationForm")
 public class RegistrationController {
 
+    private final UserMapper userMapper;
+    private final PlayerMapper playerMapper;
+    private final RegistrationService registrationService;
+
+    public RegistrationController(UserMapper userMapper, PlayerMapper playerMapper, RegistrationService registrationService) {
+        this.userMapper = userMapper;
+        this.playerMapper = playerMapper;
+        this.registrationService = registrationService;
+    }
+
     @GetMapping("/step-one")
     public String showFirstRegistrationStep(final Model model) {
         model.addAttribute("userRegistrationForm", new UserRegistrationForm());
@@ -24,14 +39,14 @@ public class RegistrationController {
     @PostMapping("/step-one")
     public String processFirstRegistrationStep(@Valid @ModelAttribute final UserRegistrationForm userRegistrationForm, final Errors errors) {
         if (errors.hasErrors()) {
-            return "registartion1";
+            return "registration1";
         }
         return "redirect:/registration/step-two";
     }
 
     @GetMapping("/step-two")
     public String showSecondRegistrationStep(final Model model) {
-        model.addAttribute("userRegistrationForm", new PlayerRegistrationForm());
+        model.addAttribute("playerRegistrationForm", new PlayerRegistrationForm());
         return "registration2";
     }
 
@@ -41,10 +56,15 @@ public class RegistrationController {
                                                 @ModelAttribute final UserRegistrationForm userRegistrationForm,
                                                 final SessionStatus sessionStatus) {
         if (errors.hasErrors()){
+            System.out.println("errors in player registration form");
             return "registration2";
         }
+        User user = userMapper.toUser(userRegistrationForm);
+        Player player = playerMapper.toPlayer(playerRegistrationForm);
+        user.setPlayer(player);
 
+        registrationService.register(user);
         sessionStatus.setComplete();
-        return  "login";
+        return  "redirect:/login";
     }
 }

@@ -32,4 +32,7 @@ public class User {
 
    @Enumerated(EnumType.STRING)
    private UserStatus userStatus;
+
+   @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+   private Player player;
 }
