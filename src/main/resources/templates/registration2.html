@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"><head>
+   <meta charset="UTF-8">
+   <title>Registration1</title>
+</head>
+<body>
+<form method="post" th:action="@{/registration/step-two}" th:object="${playerRegistrationForm}">
+   <div class="form-group">
+      <label for="firstName">First name:</label>
+      <input type="text" class="form-control" id="firstName" th:field="*{firstName}" placeholder="Enter first name">
+   </div>
+   <div class="form-group">
+      <label for="lastName">Last name:</label>
+      <input type="text" class="form-control" id="lastName" th:field="*{lastName}" placeholder="Enter last name">
+   </div>
+   <div class="form-group">
+      <input type="radio" id="male" name="gender" th:field="*{gender}" value="male">
+      <label for="male">Male</label><br>
+      <input type="radio" id="female" name="gender" th:field="*{gender}" value="female">
+      <label for="female">Female</label><br>
+   </div>
+   <div class="form-group">
+      <label for="birthday">Birthday:</label>
+      <input type="date" class="form-control" id="birthday" th:field="*{birthday}">
+   </div>
+   <div class="form-group">
+      <label for="yearsOfExperience">Years of Experience:</label>
+      <input type="number" class="form-control" id="yearsOfExperience" th:field="*{yearsOfExperience}" min="0" max="99">
+   </div>
+   <div class="form-group">
+      <input type="radio" id="beginner" name="playerSkill" th:field="*{beginner}" value="male">
+      <label for="beginner">Beginner</label><br>
+      <input type="radio" id="amateur" name="playerSkill" th:field="*{amateur}" value="female">
+      <label for="amateur">Amateur</label><br>
+      <input type="radio" id="advanced" name="playerSkill" th:field="*{advnaced}" value="female">
+      <label for="advanced">Advanced</label><br>
+      <input type="radio" id="professional" name="playerSkill" th:field="*{professional}" value="female">
+      <label for="professional">Professional</label><br>
+   </div>
+   <button type="submit">Submit</button>
+</form>
+</body>
+</html>
