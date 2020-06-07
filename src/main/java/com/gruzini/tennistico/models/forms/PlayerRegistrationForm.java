@@ -1,7 +1,7 @@
-package com.gruzini.tennistico.forms;
+package com.gruzini.tennistico.models.forms;
 
-import com.gruzini.tennistico.enums.Gender;
-import com.gruzini.tennistico.enums.PlayerSkill;
+import com.gruzini.tennistico.domain.enums.Gender;
+import com.gruzini.tennistico.domain.enums.PlayerSkill;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

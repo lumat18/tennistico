@@ -1,7 +1,7 @@
 package com.gruzini.tennistico.mappers;
 
 import com.gruzini.tennistico.domain.Player;
-import com.gruzini.tennistico.forms.PlayerRegistrationForm;
+import com.gruzini.tennistico.models.forms.PlayerRegistrationForm;
 import org.springframework.stereotype.Component;
 
 @Component

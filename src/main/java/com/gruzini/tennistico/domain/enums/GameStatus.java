@@ -1,4 +1,4 @@
-package com.gruzini.tennistico.enums;
+package com.gruzini.tennistico.domain.enums;
 
 public enum GameStatus {
    UPCOMING, PENDING, ARCHIVED

@@ -19,5 +19,10 @@ public class RegistrationService {
 
     public void register(final User user) {
         userRepository.save(user);
+        playerRepository.save(user.getPlayer());
+    }
+
+    public boolean isEmailExists(final String email) {
+        return userRepository.findByEmail(email).isPresent();
     }
 }

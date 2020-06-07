@@ -2,8 +2,9 @@ package com.gruzini.tennistico.controllers;
 
 import com.gruzini.tennistico.domain.Player;
 import com.gruzini.tennistico.domain.User;
-import com.gruzini.tennistico.forms.PlayerRegistrationForm;
-import com.gruzini.tennistico.forms.UserRegistrationForm;
+import com.gruzini.tennistico.exceptions.EmailAlreadyExistsException;
+import com.gruzini.tennistico.models.forms.PlayerRegistrationForm;
+import com.gruzini.tennistico.models.forms.UserRegistrationForm;
 import com.gruzini.tennistico.mappers.PlayerMapper;
 import com.gruzini.tennistico.mappers.UserMapper;
 import com.gruzini.tennistico.services.RegistrationService;
@@ -40,6 +41,9 @@ public class RegistrationController {
     public String processFirstRegistrationStep(@Valid @ModelAttribute final UserRegistrationForm userRegistrationForm, final Errors errors) {
         if (errors.hasErrors()) {
             return "registration1";
+        }
+        if(registrationService.isEmailExists(userRegistrationForm.getEmail())){
+            throw new EmailAlreadyExistsException("Email already exists."); //add exceptionHandler
         }
         return "redirect:/registration/step-two";
     }

@@ -1,6 +1,6 @@
 package com.gruzini.tennistico.domain;
 
-import com.gruzini.tennistico.enums.GameStatus;
+import com.gruzini.tennistico.domain.enums.GameStatus;
 import lombok.*;
 
 import javax.persistence.*;

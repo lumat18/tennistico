@@ -1,7 +1,7 @@
 package com.gruzini.tennistico.domain;
 
-import com.gruzini.tennistico.enums.Gender;
-import com.gruzini.tennistico.enums.PlayerSkill;
+import com.gruzini.tennistico.domain.enums.Gender;
+import com.gruzini.tennistico.domain.enums.PlayerSkill;
 import lombok.*;
 
 import javax.persistence.*;

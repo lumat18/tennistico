@@ -1,6 +1,6 @@
 package com.gruzini.tennistico.domain;
 
-import com.gruzini.tennistico.enums.UserStatus;
+import com.gruzini.tennistico.domain.enums.UserStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -33,6 +33,6 @@ public class User {
    @Enumerated(EnumType.STRING)
    private UserStatus userStatus;
 
-   @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+   @OneToOne(fetch = FetchType.LAZY)
    private Player player;
 }

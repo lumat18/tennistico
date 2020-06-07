@@ -1,8 +1,8 @@
 package com.gruzini.tennistico.mappers;
 
 import com.gruzini.tennistico.domain.User;
-import com.gruzini.tennistico.enums.UserStatus;
-import com.gruzini.tennistico.forms.UserRegistrationForm;
+import com.gruzini.tennistico.domain.enums.UserStatus;
+import com.gruzini.tennistico.models.forms.UserRegistrationForm;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 

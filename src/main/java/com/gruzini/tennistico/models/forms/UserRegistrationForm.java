@@ -1,4 +1,4 @@
-package com.gruzini.tennistico.forms;
+package com.gruzini.tennistico.models.forms;
 
 import com.gruzini.tennistico.annotations.StrongPassword;
 import lombok.AllArgsConstructor;

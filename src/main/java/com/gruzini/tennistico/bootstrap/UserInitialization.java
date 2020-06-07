@@ -1,7 +1,7 @@
 package com.gruzini.tennistico.bootstrap;
 
 import com.gruzini.tennistico.domain.User;
-import com.gruzini.tennistico.enums.UserStatus;
+import com.gruzini.tennistico.domain.enums.UserStatus;
 import com.gruzini.tennistico.repositories.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
