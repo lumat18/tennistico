@@ -18,6 +18,7 @@ public class RegistrationService {
     }
 
     public void register(final User user) {
+        playerRepository.save(user.getPlayer());
         userRepository.save(user);
     }
 }
