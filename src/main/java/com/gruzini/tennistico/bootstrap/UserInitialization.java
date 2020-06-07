@@ -1,4 +1,4 @@
-package com.gruzini.tennistico.initialization;
+package com.gruzini.tennistico.bootstrap;
 
 import com.gruzini.tennistico.domain.User;
 import com.gruzini.tennistico.enums.UserStatus;
