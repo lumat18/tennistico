@@ -21,12 +21,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/**").permitAll()
 //                .antMatchers("/**").authenticated()
-                .anyRequest().permitAll()
-                .and()
-                .formLogin()
-                .and()
-                .logout();
+                .anyRequest()
+                .permitAll();
 
+
+            http.formLogin()
+                .defaultSuccessUrl("/dashboard");
+
+            http.logout();
+
+            http.csrf().disable()
+                .headers().frameOptions().disable();
     }
 
     @Override
