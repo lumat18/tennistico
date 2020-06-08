@@ -1,5 +1,6 @@
 package com.gruzini.tennistico.controllers;
 
+import com.gruzini.tennistico.messages.ErrorMessages;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
@@ -15,8 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 public class LoginController {
 
-    public static final String USER_NOT_ACTIVE_MESSAGE = "User account is not active";
-    public static final String BAD_CREDENTIALS_MESSAGE = "Email or password you entered is incorrect";
+
 
     @GetMapping("/login-error") //to do: try using exceptionHandler or authenticationFailureHandler - how to return view from there?
     public String showLoginErrorsOnLoginPage(final HttpServletRequest request, final Model model) {
@@ -26,10 +26,10 @@ public class LoginController {
         String messageContent = "";
 
         if (authenticationException instanceof DisabledException){
-            messageContent = USER_NOT_ACTIVE_MESSAGE;
+            messageContent = ErrorMessages.USER_NOT_ACTIVE_MESSAGE;
         }
         if (authenticationException instanceof BadCredentialsException){
-            messageContent = BAD_CREDENTIALS_MESSAGE;
+            messageContent = ErrorMessages.BAD_CREDENTIALS_MESSAGE;
         }
         log.warn("Login error. " + messageContent);
         model.addAttribute("login-error-message", messageContent);
