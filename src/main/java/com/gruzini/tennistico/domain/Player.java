@@ -39,8 +39,6 @@ public class Player {
 //   unsure if it's going to be just a number or separate class consisting of several factors
 //   private Integer rank;
 
-
-
    @ManyToMany(cascade = CascadeType.ALL)
    @JoinTable(name = "player_to_game",
            joinColumns = { @JoinColumn(name = "user_id") },
