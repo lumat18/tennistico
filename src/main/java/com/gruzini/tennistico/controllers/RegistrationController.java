@@ -39,9 +39,7 @@ public class RegistrationController {
 
     @PostMapping("/step-one")
     public String processFirstRegistrationStep(@Valid @ModelAttribute final UserRegistrationForm userRegistrationForm, final Errors errors) {
-        if(registrationService.isEmailExists(userRegistrationForm.getEmail())){
-            throw new EmailAlreadyExistsException("Email already exists.");
-        }
+        registrationService.validateEmailExistence(userRegistrationForm.getEmail());
         if (errors.hasErrors()) {
             return "registration1";
         }

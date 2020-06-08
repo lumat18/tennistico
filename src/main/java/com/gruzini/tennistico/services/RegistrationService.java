@@ -1,6 +1,7 @@
 package com.gruzini.tennistico.services;
 
 import com.gruzini.tennistico.domain.User;
+import com.gruzini.tennistico.exceptions.EmailAlreadyExistsException;
 import com.gruzini.tennistico.repositories.PlayerRepository;
 import com.gruzini.tennistico.repositories.UserRepository;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,9 @@ public class RegistrationService {
         playerRepository.save(user.getPlayer());
     }
 
-    public boolean isEmailExists(final String email) {
-        return userRepository.findByEmail(email).isPresent();
+    public void validateEmailExistence(final String email) {
+        if(userRepository.findByEmail(email).isPresent()){
+            throw new EmailAlreadyExistsException("Email already exists");
+        }
     }
 }
