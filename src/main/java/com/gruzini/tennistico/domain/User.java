@@ -22,7 +22,6 @@ public class User {
    private Long id;
 
    @NotNull
-   @Email
    private String email;
 
    @NotNull
