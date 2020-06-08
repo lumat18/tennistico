@@ -4,6 +4,8 @@
    <title>Registration1</title>
 </head>
 <body>
+
+
 <form method="post" th:action="@{/registration/step-two}" th:object="${playerRegistrationForm}">
    <div class="form-group">
       <p class="error" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p>
@@ -42,5 +44,7 @@
    </div>
    <button type="submit">Submit</button>
 </form>
+
+
 </body>
 </html>
