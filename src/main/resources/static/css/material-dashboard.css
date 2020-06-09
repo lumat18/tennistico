@@ -22100,4 +22100,22 @@ fieldset[disabled][disabled] .dark-edition .has-error .form-control,
 .gruzini-input-group-text{
   color: #8b92a9;
 }
+.gruzini-select{
+  background-color: initial;
+  border-color: initial;
+  color: #8b92a9;
+  font-size: 14px;
+}
+
+/*work to be done here, to nullify the effects of browser autofill styling*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus{
+  border: none;
+  -webkit-text-fill-color: #8b92a9;
+  -webkit-box-shadow: #17233c inset;
+}
+
+::-webkit-inner-spin-button { display: none; }
+::-webkit-calendar-picker-indicator { display: none; }
 /*# sourceMappingURL=dashboard-free.css.map */

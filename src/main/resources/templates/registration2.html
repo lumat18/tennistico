@@ -160,7 +160,7 @@
                               <div class="input-group-prepend">
                                  <span class="input-group-text gruzini-input-group-text" id="genderSelect">Gender:</span>
                               </div>
-                              <select class="custom-select" aria-describedby="genderSelect">
+                              <select class="custom-select gruzini-select" aria-describedby="genderSelect">
                                  <option selected>Choose gender...</option>
                                  <option th:field="*{gender}" value="FEMALE">Female</option>
                                  <option th:field="*{gender}" value="MALE">Male</option>
@@ -192,13 +192,17 @@
                                      min="0" max="99" aria-label="last-name"
                                      aria-describedby="experienceAddon">
                            </div>
+                           <div class="d-flex justify-content-center">
+                              <span class="gruzini-registration-error" th:if="${#fields.hasErrors('yearsOfExperience')}"
+                                    th:errors="*{yearsOfExperience}"></span>
+                           </div>
 
                            <div class="input-group mb-3">
                               <div class="input-group-prepend">
                                  <span class="input-group-text gruzini-input-group-text" id="skillSelect">Player skill:</span>
                               </div>
-                              <select class="custom-select" aria-describedby="skillSelect">
-                                 <option selected>Choose gender...</option>
+                              <select class="custom-select gruzini-select" aria-describedby="skillSelect">
+                                 <option selected>Choose skill level...</option>
                                  <option th:field="*{playerSkill}" value="BEGINNER">Beginner</option>
                                  <option th:field="*{playerSkill}" value="AMATEUR">Amateur</option>
                                  <option th:field="*{playerSkill}" value="ADVANCED">Advanced</option>
@@ -264,6 +268,18 @@
          function submitByHiddenButton() {
             document.getElementById("hiddenSubmitButton").click();
          }
+      </script>
+
+<!--      or we can simply disable the autofill option so it stops ruining the styling-->
+      <script>
+         const inputs = document.querySelectorAll('input');
+
+         inputs.forEach(input => {
+            input.setAttribute('autocomplete', 'off')
+            input.setAttribute('autocorrect', 'off')
+            input.setAttribute('autocapitalize', 'off')
+            input.setAttribute('spellcheck', false)
+         })
       </script>
    </div>
 </div>
