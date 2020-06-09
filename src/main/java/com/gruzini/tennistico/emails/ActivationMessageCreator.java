@@ -3,7 +3,7 @@ package com.gruzini.tennistico.emails;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Component;
 
-@Component
+@Component("activation")
 public class ActivationMessageCreator implements MessageCreator {
 
     private static final String SUBJECT = "Welcome to Tennistico!";

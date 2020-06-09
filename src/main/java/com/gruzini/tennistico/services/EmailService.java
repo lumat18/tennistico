@@ -9,6 +9,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -35,7 +36,7 @@ public class EmailService {
 
         threadPoolExecutor().execute(() -> {
             javaMailSender.send(message);
-            log.info("Email message was sent to " + message.getFrom());
+            log.info("Email message was sent to " + Arrays.toString(message.getTo()));
         });
     }
 
