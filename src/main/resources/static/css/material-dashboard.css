@@ -22078,4 +22078,26 @@ fieldset[disabled][disabled] .dark-edition .has-error .form-control,
   text-align: center;
   padding-top: 10px;
 }
+.gruzini-btn-success {
+  font-size: 20px;
+  padding-top: 10px;
+  padding-bottom: 5px;
+}
+.gruzini-registration-progress{
+  height: 2rem;
+  font-size: 1.5rem;
+}
+.gruzini-registration-progress-bar-pending{
+  background-color: #d6b636;
+}
+.gruzini-registration-progress-bar-complete{
+  background-color: #4caf50;
+}
+.gruzini-registration-error{
+  color: #fae100;
+  font-size: 12px;
+}
+.gruzini-input-group-text{
+  color: #8b92a9;
+}
 /*# sourceMappingURL=dashboard-free.css.map */
