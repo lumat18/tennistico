@@ -19,6 +19,6 @@ public class ActivationMessageCreator implements MessageCreator {
     }
 
     private String createActivationLink(final String tokenValue) {
-        return "http://localhost:8080/activate?value?=" + tokenValue;
+        return "http://localhost:8080/activate?value=" + tokenValue;
     }
 }
