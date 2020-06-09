@@ -25,88 +25,16 @@
 
 <body class="dark-edition" style="background-image: url(/img/registration_1_background.jpg)">
 <div class="wrapper">
-   <div class="sidebar" data-color="green" data-background-color="black">
-      <div class="logo">
-         <a href="#" class="simple-text logo-normal">
-            <img th:src="@{/img/logo.jpg}" style="width: 250px"/>
-         </a>
-      </div>
-      <div class="sidebar-wrapper">
-         <ul class="nav">
-            <li class="nav-item active  ">
-               <a class="nav-link" href="#">
-                  <i class="material-icons">dashboard</i>
-                  <p>Dashboard</p>
-               </a>
-            </li>
-            <li class="nav-item ">
-               <a class="nav-link" href="#">
-                  <i class="material-icons">person</i>
-                  <p>User Profile</p>
-               </a>
-            </li>
-            <li class="nav-item ">
-               <a class="nav-link" href="#">
-                  <i class="material-icons">content_paste</i>
-                  <p>Open Games</p>
-               </a>
-            </li>
-            <li class="nav-item ">
-               <a class="nav-link" href="#">
-                  <i class="material-icons">library_books</i>
-                  <p>Your Games</p>
-               </a>
-            </li>
-            <li class="nav-item ">
-               <a class="nav-link" href="#">
-                  <i class="material-icons">bubble_chart</i>
-                  <p>Rankings</p>
-               </a>
-            </li>
-            <li class="nav-item ">
-               <a class="nav-link" href="#">
-                  <i class="material-icons">location_ons</i>
-                  <p>Court Database</p>
-               </a>
-            </li>
-            <li class="nav-item ">
-               <a class="nav-link" href="#">
-                  <i class="material-icons">notifications</i>
-                  <p>Rules&Conditions</p>
-               </a>
-            </li>
-         </ul>
-      </div>
-   </div>
-   <div class="main-panel">
-      <!-- Navbar -->
-      <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top " id="navigation-example">
-         <div class="container-fluid">
-            <!--            for some reason size is not the same as in dashboard.html -->
-            <div class="navbar-wrapper">
-               <a class="navbar-brand" href="javascript:void(0)">Dashboard</a>
-            </div>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index"
-                    aria-expanded="false" aria-label="Toggle navigation" data-target="#navigation-example">
-               <span class="sr-only">Toggle navigation</span>
-               <span class="navbar-toggler-icon icon-bar"></span>
-               <span class="navbar-toggler-icon icon-bar"></span>
-               <span class="navbar-toggler-icon icon-bar"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end">
-               <ul class="navbar-nav">
-               </ul>
-            </div>
-         </div>
-      </nav>
-      <!-- End Navbar -->
+
+   <div class="main-panel gruzini-registration-main-panel">
+
       <div class="content">
          <div class="container-fluid">
             <div class="row">
                <!--               placed here to put registration form in center -->
-               <div class="col-xl-4"></div>
+               <div class="col-xl-1"></div>
 
-               <div class="col-xl-4 col-lg-12">
+               <div class="col-xl-10 col-lg-12">
                   <div class="card card-chart">
                      <div class="card-header card-header-success">
                         <p class="gruzini-title">Registration</p>
@@ -124,14 +52,16 @@
 
                            <div class="input-group mb-3">
                               <div class="input-group-prepend">
-                                 <span class="input-group-text" id="emailAddon">
+                                 <span class="input-group-text gruzini-input-group-text" id="emailAddon">
                                     <span class="glyphicon glyphicon-envelope"></span>
                                  </span>
                               </div>
-                              <input type="text" class="form-control" th:field="*{email}"
-                                     placeholder="Enter email" aria-label="email" aria-describedby="emailAddon">
+                              <input type="text" class="form-control gruzini-registration-text"
+                                     th:field="*{email}"
+                                     placeholder="Enter email" aria-label="email"
+                                     aria-describedby="emailAddon">
                            </div>
-                           <div class="d-flex justify-content-center">
+                           <div class="d-flex justify-content-between">
                               <span class="gruzini-registration-error" th:if="${exp != null}">
                                  <span th:text="${exp}"></span></span>
                               <span class="gruzini-registration-error" th:if="${#fields.hasErrors('email')}"
@@ -141,31 +71,33 @@
 
                            <div class="input-group mb-3">
                               <div class="input-group-prepend">
-                                 <span class="input-group-text" id="passwordAddon">
+                                 <span class="input-group-text gruzini-input-group-text" id="passwordAddon">
                                     <span class="glyphicon glyphicon-lock"></span>
                                  </span>
                               </div>
-                              <input type="password" class="form-control" th:field="*{password}"
+                              <input type="password" class="form-control gruzini-registration-text"
+                                     th:field="*{password}"
                                      placeholder="Enter password" aria-label="password"
                                      aria-describedby="passwordAddon">
                            </div>
 
-                           <div class="d-flex justify-content-center">
+                           <div class="d-flex justify-content-between">
                               <span class="gruzini-registration-error" th:if="${#fields.hasErrors('password')}"
                                     th:errors="*{password}"></span>
                            </div>
 
                            <div class="input-group mb-3">
                               <div class="input-group-prepend">
-                                 <span class="input-group-text" id="confirmPasswordAddon">
+                                 <span class="input-group-text gruzini-input-group-text" id="confirmPasswordAddon">
                                     <span class="glyphicon glyphicon-lock"></span>
                                  </span>
                               </div>
-                              <input type="password" class="form-control" th:field="*{confirmedPassword}"
+                              <input type="password" class="form-control gruzini-registration-text"
+                                     th:field="*{confirmedPassword}"
                                      placeholder="Confirm password" aria-label="confirm-password"
                                      aria-describedby="confirmPasswordAddon">
                            </div>
-                           <div class="d-flex justify-content-center">
+                           <div class="d-flex justify-content-between">
                               <span class="gruzini-registration-error" th:if="${#fields.hasErrors('passwordMatching')}"
                                     th:errors="*{passwordMatching}"></span>
                            </div>
@@ -181,7 +113,7 @@
                </div>
 
                <!--               placed here to put registration form in center -->
-               <div class="col-xl-4"></div>
+               <div class="col-xl-1"></div>
 
             </div>
          </div>
@@ -246,9 +178,6 @@
 <script th:src="@{/js/core/popper.min.js}"></script>
 <script th:src="@{/js/core/bootstrap-material-design.min.js}"></script>
 <script th:src="@{/js/plugins/perfect-scrollbar.jquery.min.js}"></script>
-
-<!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-<script th:src="@{/js/material-dashboard.js}"></script>
 
 </body>
 </html>

@@ -25,81 +25,9 @@
 
 <body class="dark-edition" style="background-image: url(/img/registration_2_background.jpg)">
 <div class="wrapper">
-   <div class="sidebar" data-color="green" data-background-color="black">
-      <div class="logo">
-         <a href="#" class="simple-text logo-normal">
-            <img th:src="@{/img/logo.jpg}" style="width: 250px"/>
-         </a>
-      </div>
-      <div class="sidebar-wrapper">
-         <ul class="nav">
-            <li class="nav-item active  ">
-               <a class="nav-link" href="#">
-                  <i class="material-icons">dashboard</i>
-                  <p>Dashboard</p>
-               </a>
-            </li>
-            <li class="nav-item ">
-               <a class="nav-link" href="#">
-                  <i class="material-icons">person</i>
-                  <p>User Profile</p>
-               </a>
-            </li>
-            <li class="nav-item ">
-               <a class="nav-link" href="#">
-                  <i class="material-icons">content_paste</i>
-                  <p>Open Games</p>
-               </a>
-            </li>
-            <li class="nav-item ">
-               <a class="nav-link" href="#">
-                  <i class="material-icons">library_books</i>
-                  <p>Your Games</p>
-               </a>
-            </li>
-            <li class="nav-item ">
-               <a class="nav-link" href="#">
-                  <i class="material-icons">bubble_chart</i>
-                  <p>Rankings</p>
-               </a>
-            </li>
-            <li class="nav-item ">
-               <a class="nav-link" href="#">
-                  <i class="material-icons">location_ons</i>
-                  <p>Court Database</p>
-               </a>
-            </li>
-            <li class="nav-item ">
-               <a class="nav-link" href="#">
-                  <i class="material-icons">notifications</i>
-                  <p>Rules&Conditions</p>
-               </a>
-            </li>
-         </ul>
-      </div>
-   </div>
-   <div class="main-panel">
-      <!-- Navbar -->
-      <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top " id="navigation-example">
-         <div class="container-fluid">
-            <!--            for some reason size is not the same as in dashboard.html -->
-            <div class="navbar-wrapper">
-               <a class="navbar-brand" href="javascript:void(0)">Dashboard</a>
-            </div>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index"
-                    aria-expanded="false" aria-label="Toggle navigation" data-target="#navigation-example">
-               <span class="sr-only">Toggle navigation</span>
-               <span class="navbar-toggler-icon icon-bar"></span>
-               <span class="navbar-toggler-icon icon-bar"></span>
-               <span class="navbar-toggler-icon icon-bar"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end">
-               <ul class="navbar-nav">
-               </ul>
-            </div>
-         </div>
-      </nav>
-      <!-- End Navbar -->
+
+   <div class="main-panel gruzini-registration-main-panel">
+
       <div class="content">
          <div class="container-fluid">
             <div class="row">
@@ -132,11 +60,12 @@
                                     First name:
                                  </span>
                               </div>
-                              <input type="text" class="form-control" th:field="*{firstName}"
+                              <input type="text" class="form-control gruzini-registration-text"
+                                     th:field="*{firstName}"
                                      placeholder="Enter first name" aria-label="first-name"
                                      aria-describedby="firstNameAddon">
                            </div>
-                           <div class="d-flex justify-content-center">
+                           <div class="d-flex justify-content-between">
                               <span class="gruzini-registration-error" th:if="${#fields.hasErrors('firstName')}"
                                     th:errors="*{firstName}"></span>
                            </div>
@@ -147,11 +76,12 @@
                                     Last name:
                                  </span>
                               </div>
-                              <input type="text" class="form-control" th:field="*{lastName}"
+                              <input type="text" class="form-control gruzini-registration-text"
+                                     th:field="*{lastName}"
                                      placeholder="Enter last name" aria-label="last-name"
                                      aria-describedby="lastNameAddon">
                            </div>
-                           <div class="d-flex justify-content-center">
+                           <div class="d-flex justify-content-between">
                               <span class="gruzini-registration-error" th:if="${#fields.hasErrors('lastName')}"
                                     th:errors="*{lastName}"></span>
                            </div>
@@ -173,11 +103,12 @@
                                     Birthday:
                                  </span>
                               </div>
-                              <input type="date" class="form-control" th:field="*{birthday}"
+                              <input type="date" class="form-control gruzini-registration-text"
+                                     th:field="*{birthday}"
                                      aria-label="birthday"
                                      aria-describedby="birthdayAddon">
                            </div>
-                           <div class="d-flex justify-content-center">
+                           <div class="d-flex justify-content-between">
                               <span class="gruzini-registration-error" th:if="${#fields.hasErrors('birthday')}"
                                     th:errors="*{birthday}"></span>
                            </div>
@@ -188,11 +119,12 @@
                                     Years of experience:
                                  </span>
                               </div>
-                              <input type="number" class="form-control" th:field="*{yearsOfExperience}"
+                              <input type="number" class="form-control gruzini-registration-text"
+                                     th:field="*{yearsOfExperience}"
                                      min="0" max="99" aria-label="last-name"
                                      aria-describedby="experienceAddon">
                            </div>
-                           <div class="d-flex justify-content-center">
+                           <div class="d-flex justify-content-between">
                               <span class="gruzini-registration-error" th:if="${#fields.hasErrors('yearsOfExperience')}"
                                     th:errors="*{yearsOfExperience}"></span>
                            </div>
@@ -288,9 +220,6 @@
 <script th:src="@{/js/core/popper.min.js}"></script>
 <script th:src="@{/js/core/bootstrap-material-design.min.js}"></script>
 <script th:src="@{/js/plugins/perfect-scrollbar.jquery.min.js}"></script>
-
-<!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-<script th:src="@{/js/material-dashboard.js}"></script>
 
 </body>
 </html>

@@ -22078,8 +22078,12 @@ fieldset[disabled][disabled] .dark-edition .has-error .form-control,
   text-align: center;
   padding-top: 10px;
 }
+.gruzini-registration-text{
+  font-size: 24px;
+  height: 60px;
+}
 .gruzini-btn-success {
-  font-size: 20px;
+  font-size: 30px;
   padding-top: 10px;
   padding-bottom: 5px;
 }
@@ -22095,26 +22099,32 @@ fieldset[disabled][disabled] .dark-edition .has-error .form-control,
 }
 .gruzini-registration-error{
   color: #fae100;
-  font-size: 12px;
+  font-size: 20px;
+  padding-left: 50px;
 }
 .gruzini-input-group-text{
   color: #8b92a9;
+  font-size: 24px;
 }
 .gruzini-select{
   background-color: initial;
   border-color: initial;
   color: #8b92a9;
-  font-size: 14px;
+  font-size: 24px;
+  height: 60px;
+}
+.gruzini-registration-main-panel{
+  width: 100%;
 }
 
 /*work to be done here, to nullify the effects of browser autofill styling*/
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus{
-  border: none;
-  -webkit-text-fill-color: #8b92a9;
-  -webkit-box-shadow: #17233c inset;
-}
+/*input:-webkit-autofill,*/
+/*input:-webkit-autofill:hover,*/
+/*input:-webkit-autofill:focus{*/
+/*  border: none;*/
+/*  -webkit-text-fill-color: #8b92a9;*/
+/*  -webkit-box-shadow: #17233c inset;*/
+/*}*/
 
 ::-webkit-inner-spin-button { display: none; }
 ::-webkit-calendar-picker-indicator { display: none; }
