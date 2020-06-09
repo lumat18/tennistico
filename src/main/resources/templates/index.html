@@ -6,17 +6,108 @@
     <title>Tennistico</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Teko:300,400,500,700|Material+Icons" />
+    <link rel="stylesheet" type="text/css"
+          href="https://fonts.googleapis.com/css?family=Teko:300,400,500,700|Material+Icons"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="../static/css/material-dashboard.css"/>
+    <link rel="stylesheet" type="text/css" th:href="@{css/material-dashboard.css}"/>
 </head>
 <body>
-<body class="dark-edition" style="background-image: url(../static/img/welcome_page_background1.jpg); background-size: cover">
-<img src="../static/img/logo1.png"  width="892px" style="padding-top: 200px; padding-left: 200px"/>
+<section class="dark-edition gruzini-section-welcome">
+    <!--    <div>-->
+    <!--        <img src="../static/img/logo1.png" width="300px" style="padding-top: 10vh; padding-left: 2rem"/>-->
+    <!--    </div>-->
+    <div class="gruzini-text-field">
+        <div class="gruzini-text-title">
+            Get in touch with other players.
+            Keep track of your games. Get started with Tennistico today!
+        </div>
+        <div class="gruzini-text-content">
 
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam in dignissim lectus.
+            Donec ut scelerisque justo. Quisque at finibus justo. Donec molestie enim id aliquam molestie.
+            Aenean sodales tincidunt suscipit. Praesent venenatis velit ut mi posuere, quis semper arcu rutrum.
+            Donec orci enim, varius sed magna vel, luctus finibus magna. Donec pulvinar faucibus magna et
+            ultricies.
+
+        </div>
+        <button class="btn btn-success gruzini-btn-success gruzini-button-large">
+            Sign in & use
+        </button>
+        <button class="btn btn-rose gruzini-btn-success gruzini-button-large">
+            Register & Try it out
+        </button>
+    </div><br/>
+    <div class="gruzini-arrow bounce">
+        <i class="fa fa-arrow-down fa-2x"></i>
+    </div>
+</section>
+<section class="gruzini-section-info">
+    <div class="gruzini-text-dark">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam in dignissim lectus.
+        Donec ut scelerisque justo. Quisque at finibus justo. Donec molestie enim id aliquam molestie.
+        Aenean sodales tincidunt suscipit. Praesent venenatis velit ut mi posuere, quis semper arcu rutrum.
+        Donec orci enim, varius sed magna vel, luctus finibus magna. Donec pulvinar faucibus magna et
+        ultricies.
+        Phasellus fermentum quis ligula sit amet faucibus. Fusce sit amet est fringilla, gravida elit eu,
+        aliquam nulla. Aenean interdum enim lacinia orci egestas viverra. Nulla ullamcorper purus sit
+        amet vestibulum pulvinar. Pellentesque non tortor vel dui commodo sodales eu non erat. Quisque
+        eget lorem non erat interdum consequat. Integer consectetur posuere quam, ac tempus turpis
+        ultricies sed. Phasellus nisl justo, faucibus ac augue nec, iaculis tincidunt neque. Quisque
+        consectetur sem et ipsum aliquet blandit. Integer ut nibh quis ex posuere placerat. Ut rutrum
+        malesuada nunc nec euismod. Nulla lorem elit, accumsan eget augue sed, condimentum pellentesque
+        eros. Nullam nulla leo, commodo ut accumsan eget, sodales vel augue. Donec vel placerat odio, vel
+        tempus mauris. Morbi ac libero porttitor, dignissim leo in,
+        egestas risus. Duis consequat vestibulum tellus sit amet commodo.
+    </div>
+</section>
+
+
+<!--    FOOTER    -->
+<footer class="footer">
+    <div class="container-fluid">
+        <nav class="float-left">
+            <ul>
+                <li>
+                    <a href="https://www.creative-tim.com">
+                        Creative Tim
+                    </a>
+                </li>
+                <li>
+                    <a href="https://creative-tim.com/presentation">
+                        About Us
+                    </a>
+                </li>
+                <li>
+                    <a href="http://blog.creative-tim.com">
+                        Blog
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.creative-tim.com/license">
+                        Licenses
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="copyright float-right" id="date">
+            , made with <i class="material-icons">favorite</i> by
+            <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
+        </div>
+    </div>
+</footer>
+<!--    FOOTER END   -->
+
+
+<script th:src="@{/js/core/jquery.min.js}"></script>
+<script th:src="@{/js/core/popper.min.js}"></script>
+<script th:src="@{/js/core/bootstrap-material-design.min.js}"></script>
+<script th:src="@{/js/plugins/perfect-scrollbar.jquery.min.js}"></script>
+
+<!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+<script th:src="@{/js/material-dashboard.js}"></script>
 
 </body>
 
-
-</body>
 </html>
+
+

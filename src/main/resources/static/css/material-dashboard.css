@@ -22069,13 +22069,96 @@ fieldset[disabled][disabled] .dark-edition .has-error .form-control,
   }
 }
 /*  ======================own styles====================== */
-.gruzini-body-background {
-  background-image: url('/img/welcome_page_background1.jpg');
+.gruzini-section-welcome {
+  background-image: url('/img/welcome_page_background4.jpg');
   background-size: cover;
+  height: 100vh;
+  background-repeat: no-repeat;
+  min-height: 600px;
+}
+.gruzini-section-info {
+  height: 400px;
+  overflow: auto;
 }
 .gruzini-title{
   font-size: 40px;
   text-align: center;
   padding-top: 10px;
+  display: block;
 }
+.gruzini-text-field{
+  color: honeydew;
+  width: 65%;
+  padding-left: 10%;
+  text-align: center;
+  padding-top: 10vw;
+  min-width: 300px;
+  overflow: fragments;
+  max-width: 1200px;
+  min-width: 600px;
+}
+
+.gruzini-text-title{
+  line-height: 64px;
+  font-size: 64px;
+  font-weight: 500;
+}
+.gruzini-text-content{
+  margin-top: 2vw;
+  line-height: 40px;
+  font-size: 34px;
+
+}
+@media (max-height: 53em) {
+  .gruzini-text-content{
+    display: none;
+  }
+}
+
+@media (max-width: 60em) {
+  .gruzini-text-content{
+    display: none;
+  }
+}
+.gruzini-button-large{
+  font-size: 32px !important;
+  margin-top: 2vw;
+  margin-left: 20px;
+}
+.gruzini-clear{
+  clear: both;
+}
+.gruzini-arrow {
+  font-size: 40px;
+  text-align: center;
+  color: honeydew;
+  margin-bottom: 1%;
+  margin-left: 45%;
+  position: absolute;
+  bottom: 0;
+}
+.bounce {
+  -moz-animation: bounce 2s infinite;
+  -webkit-animation: bounce 2s infinite;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-30px);
+  }
+  60% {
+    transform: translateY(-15px);
+  }
+}
+.gruzini-text-dark{
+  color: #1b1e21;
+  font-size: 32px;
+  padding: 80px;
+  line-height: 32px;
+}
+
 /*# sourceMappingURL=dashboard-free.css.map */
