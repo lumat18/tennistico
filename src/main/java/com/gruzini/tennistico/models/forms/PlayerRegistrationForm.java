@@ -31,7 +31,6 @@ public class PlayerRegistrationForm {
     @Length(min = 1, message = "Last name cannot be empty")
     private String lastName;
 
-    @Enumerated(EnumType.STRING)
     private Gender gender;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -42,6 +41,5 @@ public class PlayerRegistrationForm {
     @Max(99)
     private Integer yearsOfExperience;
 
-    @Enumerated(EnumType.STRING)
     private PlayerSkill playerSkill;
 }

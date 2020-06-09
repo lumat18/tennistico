@@ -22,7 +22,6 @@ public class UserMapper {
                 .email(registrationForm.getEmail())
                 .password(passwordEncoder.encode(registrationForm.getPassword()))
                 .userStatus(UserStatus.INACTIVE)
-                .createdAt(LocalDateTime.now())
                 .build();
     }
 }
