@@ -37,7 +37,7 @@ class ActivationServiceTest {
     void setupEntities() {
         this.user = User.builder()
                 .email("user@user.com")
-                .password("abc")
+                .password("password")
                 .player(Player.builder()
                         .firstName("name")
                         .build())
