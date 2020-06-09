@@ -1,0 +1,17 @@
+spring:
+  h2.console:
+    path: /h2
+    enabled: true
+
+  datasource:
+    hikari.jdbc-url: jdbc:h2:mem:testdb
+
+  mail:
+    host: smtp.gmail.com
+    username: tennistico.app@gmail.com
+    password: Tennis1!
+    port: 587
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+      mail.smtp.ssl.trust: smtp.gmail.com
