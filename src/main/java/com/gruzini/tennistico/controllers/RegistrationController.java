@@ -66,6 +66,11 @@ public class RegistrationController {
 
         registrationService.register(user);
         sessionStatus.setComplete();
-        return  "redirect:/login";
+        return  "redirect:/registration/step-three";
+    }
+
+    @GetMapping("/step-three")
+    public String showThirdRegistrationStep() {
+        return "registration3";
     }
 }

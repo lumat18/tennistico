@@ -22117,6 +22117,10 @@ fieldset[disabled][disabled] .dark-edition .has-error .form-control,
 .gruzini-registration-main-panel{
   width: 100%;
 }
+.gruzini-registration-finish-text{
+  font-size: 24px;
+  padding-top: 10px;
+}
 
 /*work to be done here, to nullify the effects of browser autofill styling*/
 /*input:-webkit-autofill,*/
@@ -22209,6 +22213,9 @@ fieldset[disabled][disabled] .dark-edition .has-error .form-control,
 }
 .gruzini-progress-bar-steps-text{
   font-size: 24px;
+}
+.gruzini-registration-logo{
+  width: 400px;
 }
 
 ::-webkit-inner-spin-button { display: none; }
