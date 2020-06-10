@@ -1,6 +1,7 @@
 package com.gruzini.tennistico.services;
 
 import com.gruzini.tennistico.domain.ActivationToken;
+import com.gruzini.tennistico.exceptions.ActivationTokenNotFoundException;
 import com.gruzini.tennistico.repositories.ActivationTokenRepository;
 import org.springframework.stereotype.Service;
 
@@ -23,5 +24,10 @@ public class ActivationTokenService {
 
     public void saveToken(final ActivationToken token) {
         activationTokenRepository.save(token);
+    }
+
+    public ActivationToken findTokenByValue(String tokenValue) {
+        return activationTokenRepository.findByValue(tokenValue)
+                .orElseThrow(ActivationTokenNotFoundException::new);
     }
 }

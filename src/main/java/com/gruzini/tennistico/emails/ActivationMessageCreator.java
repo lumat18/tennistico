@@ -3,7 +3,7 @@ package com.gruzini.tennistico.emails;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Component;
 
-@Component
+@Component("activation")
 public class ActivationMessageCreator implements MessageCreator {
 
     private static final String SUBJECT = "Welcome to Tennistico!";
@@ -18,7 +18,8 @@ public class ActivationMessageCreator implements MessageCreator {
         return message;
     }
 
+    //TODO change link to real request address
     private String createActivationLink(final String tokenValue) {
-        return "http://localhost:8080/activate?value?=" + tokenValue;
+        return "http://localhost:8080/activate?value=" + tokenValue;
     }
 }
