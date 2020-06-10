@@ -37,8 +37,8 @@ public class PlayerRegistrationForm {
     @Past(message = "You cannot be born in future")
     private LocalDate birthday;
 
-    @Min(0)
-    @Max(99)
+    @Min(value = 0, message = "You must provide a number ranging from 0 to 99")
+    @Max(value = 99, message = "You must provide a number ranging from 0 to 99")
     private Integer yearsOfExperience;
 
     private PlayerSkill playerSkill;
