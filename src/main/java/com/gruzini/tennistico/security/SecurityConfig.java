@@ -16,15 +16,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         this.userDetailsService = userDetailsService;
     }
 
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/", "/login", "/registration/**").permitAll()
+                .antMatchers("/", "/login", "/registration/**", "/activate/**").permitAll()
+                .antMatchers("/css/**", "/js/**", "/img/**").permitAll()
+                .antMatchers("/h2/**").permitAll()
                 .antMatchers("/**").authenticated()
-                .anyRequest()
-                .permitAll();
-
+                .anyRequest().permitAll();
 
             http.formLogin()
                     .loginPage("/login")
