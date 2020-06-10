@@ -5,12 +5,10 @@ import com.gruzini.tennistico.security.UserDetailsServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -32,7 +30,7 @@ class LoginControllerTest {
     WebApplicationContext applicationContext;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         mockMvc = MockMvcBuilders.webAppContextSetup(applicationContext)
                 .build();
     }
@@ -43,16 +41,17 @@ class LoginControllerTest {
 
         mockMvc.perform(MockMvcRequestBuilders.get("/login-error")
                 .sessionAttr(WebAttributes.AUTHENTICATION_EXCEPTION, disabledException))
-                .andExpect(model().attribute("login-error-message", ErrorMessages.USER_NOT_ACTIVE_MESSAGE))
+                .andExpect(model().attribute("message", ErrorMessages.USER_NOT_ACTIVE_MESSAGE))
                 .andExpect(view().name("login"));
     }
+
     @Test
     void shouldSetBadCredentialsMessageIfSecurityThrowsBadCredentialsException() throws Exception {
         final BadCredentialsException credentialsException = new BadCredentialsException("");
 
         mockMvc.perform(MockMvcRequestBuilders.get("/login-error")
                 .sessionAttr(WebAttributes.AUTHENTICATION_EXCEPTION, credentialsException))
-                .andExpect(model().attribute("login-error-message", ErrorMessages.BAD_CREDENTIALS_MESSAGE))
+                .andExpect(model().attribute("message", ErrorMessages.BAD_CREDENTIALS_MESSAGE))
                 .andExpect(view().name("login"));
     }
 

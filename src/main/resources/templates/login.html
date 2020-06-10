@@ -58,21 +58,20 @@ background-size: cover">
                            </div>
 
                            <div class="input-group mb-3">
-                              <div class="input-group-prepend">
+                               <div class="input-group-prepend">
                                  <span class="input-group-text gruzini-input-group-text" id="passwordAddon">
                                     <span class="glyphicon glyphicon-lock"></span>
                                  </span>
-                              </div>
-                              <input type="password" class="form-control gruzini-registration-text"
-                                     name="password"
-                                     placeholder="Enter password" aria-label="password"
-                                     aria-describedby="passwordAddon">
+                               </div>
+                               <input type="password" class="form-control gruzini-registration-text"
+                                      name="password"
+                                      placeholder="Enter password" aria-label="password"
+                                      aria-describedby="passwordAddon">
                            </div>
-                           <div class="d-flex justify-content-between">
-                              <span class="gruzini-registration-error" th:if="${login-error-message != null}">
-                                 <span th:text="${login-error-message}"></span></span>
-                           </div>
-                           <button id="hiddenSubmitButton" type="submit" hidden></button>
+                            <div class="d-flex justify-content-between" th:if="${message != null}">
+                                <span class="gruzini-registration-error" th:text="${message}"></span>
+                            </div>
+                            <button id="hiddenSubmitButton" type="submit" hidden></button>
                         </form>
                      </div>
                      <div class="card-footer d-flex justify-content-center">

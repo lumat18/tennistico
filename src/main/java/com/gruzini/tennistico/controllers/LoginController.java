@@ -22,7 +22,7 @@ public class LoginController {
     }
 
     @GetMapping("/login-error")
-    //to do: try using exceptionHandler or authenticationFailureHandler - how to return view from there?
+    //TODO try using exceptionHandler or authenticationFailureHandler - how to return view from there?
     public String showLoginErrorsOnLoginPage(final HttpServletRequest request, final Model model) {
         final AuthenticationException authenticationException = (AuthenticationException) request
                 .getSession()
@@ -36,7 +36,7 @@ public class LoginController {
             messageContent = ErrorMessages.BAD_CREDENTIALS_MESSAGE;
         }
         log.warn("Login error. " + messageContent);
-        model.addAttribute("login-error-message", messageContent);
+        model.addAttribute("message", messageContent);
         return "login";
     }
 
