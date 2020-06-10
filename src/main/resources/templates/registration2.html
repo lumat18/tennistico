@@ -23,7 +23,8 @@
    <link th:href="@{/css/material-dashboard.css}" rel="stylesheet"/>
 </head>
 
-<body class="dark-edition" style="background-image: url(/img/registration_2_background.jpg)">
+<body class="dark-edition" style="background-image: url(/img/registration_2_background.jpg);
+background-size: cover">
 <div class="wrapper">
 
    <div class="main-panel gruzini-registration-main-panel">
@@ -40,15 +41,13 @@
                         <p class="gruzini-title">Registration</p>
                      </div>
                      <div class="card-body">
-                        <div class="progress progress-bar-striped gruzini-registration-progress">
-                           <div class="progress-bar gruzini-registration-progress-bar-complete"
-                                role="progressbar" style="width:33%">
-                              <span>Completed</span>
-                           </div>
-                           <div class="progress-bar gruzini-registration-progress-bar-pending"
-                                role="progressbar" style="width:33%">
-                              <span>Step 2 of 3</span>
-                           </div>
+
+                        <div class="gruzini-progress-bar">
+                           <ul class="list-unstyled multi-steps">
+                              <li class="gruzini-progress-bar-steps-text">First step</li>
+                              <li class="is-active gruzini-progress-bar-steps-text">Second Step</li>
+                              <li class="gruzini-progress-bar-steps-text">Finish</li>
+                           </ul>
                         </div>
 
                         <form method="post" th:action="@{/registration/step-two}"
@@ -88,7 +87,8 @@
 
                            <div class="input-group mb-3">
                               <div class="input-group-prepend">
-                                 <span class="input-group-text gruzini-input-group-text" id="genderSelect">Gender:</span>
+                                 <span class="input-group-text gruzini-input-group-text"
+                                       id="genderSelect">Gender:</span>
                               </div>
                               <select class="custom-select gruzini-select" aria-describedby="genderSelect">
                                  <option selected>Choose gender...</option>
@@ -131,7 +131,8 @@
 
                            <div class="input-group mb-3">
                               <div class="input-group-prepend">
-                                 <span class="input-group-text gruzini-input-group-text" id="skillSelect">Player skill:</span>
+                                 <span class="input-group-text gruzini-input-group-text"
+                                       id="skillSelect">Player skill:</span>
                               </div>
                               <select class="custom-select gruzini-select" aria-describedby="skillSelect">
                                  <option selected>Choose skill level...</option>
@@ -202,7 +203,7 @@
          }
       </script>
 
-<!--      or we can simply disable the autofill option so it stops ruining the styling-->
+      <!--      or we can simply disable the autofill option so it stops ruining the styling-->
       <script>
          const inputs = document.querySelectorAll('input');
 

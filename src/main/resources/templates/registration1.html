@@ -23,7 +23,8 @@
    <link th:href="@{/css/material-dashboard.css}" rel="stylesheet"/>
 </head>
 
-<body class="dark-edition" style="background-image: url(/img/registration_1_background.jpg)">
+<body class="dark-edition" style="background-image: url(/img/registration_1_background.jpg);
+background-size: cover">
 <div class="wrapper">
 
    <div class="main-panel gruzini-registration-main-panel">
@@ -40,13 +41,14 @@
                         <p class="gruzini-title">Registration</p>
                      </div>
                      <div class="card-body">
-                        <div class="progress progress-bar-striped gruzini-registration-progress">
-                           <div class="progress-bar gruzini-registration-progress-bar-pending"
-                                role="progressbar" style="width:33%">
-                              <span>Step 1 of 3</span>
-                           </div>
-                        </div>
 
+                        <div class="gruzini-progress-bar">
+                           <ul class="list-unstyled multi-steps">
+                              <li class="is-active gruzini-progress-bar-steps-text">First step</li>
+                              <li class="gruzini-progress-bar-steps-text">Second Step</li>
+                              <li class="gruzini-progress-bar-steps-text">Finish</li>
+                           </ul>
+                        </div>
                         <form method="post" th:action="@{/registration/step-one}"
                               th:object="${userRegistrationForm}">
 

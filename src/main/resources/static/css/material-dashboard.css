@@ -22101,6 +22101,7 @@ fieldset[disabled][disabled] .dark-edition .has-error .form-control,
   color: #fae100;
   font-size: 20px;
   padding-left: 50px;
+  padding-bottom: 10px;
 }
 .gruzini-input-group-text{
   color: #8b92a9;
@@ -22125,6 +22126,90 @@ fieldset[disabled][disabled] .dark-edition .has-error .form-control,
 /*  -webkit-text-fill-color: #8b92a9;*/
 /*  -webkit-box-shadow: #17233c inset;*/
 /*}*/
+
+/* progress bar styling */
+.multi-steps > li.is-active:before, .multi-steps > li.is-active ~ li:before {
+  content: counter(stepNum);
+  font-family: inherit;
+  font-weight: 700;
+  z-index: 10;
+}
+.multi-steps > li.is-active:after, .multi-steps > li.is-active ~ li:after {
+  background-color: #ededed;
+  z-index: -1;
+}
+
+.multi-steps {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+  z-index: 10;
+}
+.multi-steps > li {
+  counter-increment: stepNum;
+  text-align: center;
+  display: table-cell;
+  position: relative;
+  color: #4caf50;
+  z-index: 10;
+}
+.multi-steps > li:before {
+  content: "\f00c";
+  content: "\2713;";
+  content: "\10003";
+  content: "\10004";
+  content: "\2713";
+  display: block;
+  margin: 0 auto 10px;
+  background-color: #fff;
+  width: 48px;
+  height: 48px;
+  line-height: 44px;
+  text-align: center;
+  font-weight: bold;
+  border-width: 4px;
+  border-style: solid;
+  border-color: #4caf50;
+  border-radius: 50%;
+  z-index: 10;
+}
+.multi-steps > li:after {
+  content: "";
+  height: 4px;
+  width: 100%;
+  background-color: #4caf50;
+  position: absolute;
+  top: 22px;
+  left: 50%;
+  z-index: -1;
+}
+.multi-steps > li:last-child:after {
+  display: none;
+  z-index: 10;
+
+}
+.multi-steps > li.is-active:before {
+  background-color: #fff;
+  border-color: #4caf50;
+  z-index: 10;
+}
+.multi-steps > li.is-active ~ li {
+  color: #808080;
+  z-index: 10;
+}
+.multi-steps > li.is-active ~ li:before {
+  background-color: #ededed;
+  border-color: #ededed;
+  z-index: 10;
+}
+/* end of progress bar styling */
+
+.gruzini-progress-bar{
+  padding-top: 10px;
+}
+.gruzini-progress-bar-steps-text{
+  font-size: 24px;
+}
 
 ::-webkit-inner-spin-button { display: none; }
 ::-webkit-calendar-picker-indicator { display: none; }
