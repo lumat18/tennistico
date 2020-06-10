@@ -36,19 +36,15 @@ background-size: cover">
                <div class="col-xl-10 col-lg-12">
                   <div class="card card-chart">
                      <div class="card-header card-header-success">
-                        <p class="gruzini-title">Registration</p>
+                        <p class="gruzini-title">Login</p>
                      </div>
                      <div class="card-body">
-
-                        <div class="gruzini-progress-bar">
-                           <ul class="list-unstyled multi-steps">
-                              <li class="is-active gruzini-progress-bar-steps-text">First step</li>
-                              <li class="gruzini-progress-bar-steps-text">Second Step</li>
-                              <li class="gruzini-progress-bar-steps-text">Finish</li>
-                           </ul>
+                        <div class="d-flex justify-content-center">
+                           <img class="gruzini-registration-logo" th:src="@{/img/logo1.png}"/>
                         </div>
-                        <form method="post" th:action="@{/registration/step-one}"
-                              th:object="${userRegistrationForm}">
+
+                        <form method="post" th:action="@{/login}"
+                              th:object="${userLoginForm}">
 
                            <div class="input-group mb-3">
                               <div class="input-group-prepend">
@@ -60,13 +56,6 @@ background-size: cover">
                                      th:field="*{email}"
                                      placeholder="Enter email" aria-label="email"
                                      aria-describedby="emailAddon">
-                           </div>
-                           <div class="d-flex justify-content-between">
-                              <span class="gruzini-registration-error" th:if="${exp != null}">
-                                 <span th:text="${exp}"></span></span>
-                              <span class="gruzini-registration-error" th:if="${#fields.hasErrors('email')}"
-                                    th:errors="*{email}">
-                              </span>
                            </div>
 
                            <div class="input-group mb-3">
@@ -80,33 +69,16 @@ background-size: cover">
                                      placeholder="Enter password" aria-label="password"
                                      aria-describedby="passwordAddon">
                            </div>
-
                            <div class="d-flex justify-content-between">
-                              <span class="gruzini-registration-error" th:if="${#fields.hasErrors('password')}"
-                                    th:errors="*{password}"></span>
-                           </div>
-
-                           <div class="input-group mb-3">
-                              <div class="input-group-prepend">
-                                 <span class="input-group-text gruzini-input-group-text" id="confirmPasswordAddon">
-                                    <span class="glyphicon glyphicon-lock"></span>
-                                 </span>
-                              </div>
-                              <input type="password" class="form-control gruzini-registration-text"
-                                     th:field="*{confirmedPassword}"
-                                     placeholder="Confirm password" aria-label="confirm-password"
-                                     aria-describedby="confirmPasswordAddon">
-                           </div>
-                           <div class="d-flex justify-content-between">
-                              <span class="gruzini-registration-error" th:if="${#fields.hasErrors('passwordMatching')}"
-                                    th:errors="*{passwordMatching}"></span>
+                              <span class="gruzini-registration-error" th:if="${exp != null}">
+                                 <span th:text="${exp}"></span></span>
                            </div>
                            <button id="hiddenSubmitButton" type="submit" hidden></button>
                         </form>
                      </div>
                      <div class="card-footer d-flex justify-content-center">
                         <button class="btn btn-success gruzini-btn-success" id="buttonSubmit"
-                                onclick="submitByHiddenButton()">Next step
+                                onclick="submitByHiddenButton()">Login
                         </button>
                      </div>
                   </div>
@@ -114,6 +86,7 @@ background-size: cover">
 
                <!--               placed here to put registration form in center -->
                <div class="col-xl-1"></div>
+
             </div>
             <div class="row">
                <!--               placed here to put registration form in center -->
@@ -123,9 +96,9 @@ background-size: cover">
                   <div class="card card-chart">
                      <div class="card-body">
                         <p class="gruzini-registration-finish-text text-center">
-                           You have an account already? Click
+                           You don't have an account yet? Click
                            <a href="/login"> here </a>
-                           to login.
+                           to register.
                         </p>
                      </div>
                   </div>
