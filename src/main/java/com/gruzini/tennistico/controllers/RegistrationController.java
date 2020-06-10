@@ -2,11 +2,10 @@ package com.gruzini.tennistico.controllers;
 
 import com.gruzini.tennistico.domain.Player;
 import com.gruzini.tennistico.domain.User;
-import com.gruzini.tennistico.exceptions.EmailAlreadyExistsException;
-import com.gruzini.tennistico.models.forms.PlayerRegistrationForm;
-import com.gruzini.tennistico.models.forms.UserRegistrationForm;
 import com.gruzini.tennistico.mappers.PlayerMapper;
 import com.gruzini.tennistico.mappers.UserMapper;
+import com.gruzini.tennistico.models.forms.PlayerRegistrationForm;
+import com.gruzini.tennistico.models.forms.UserRegistrationForm;
 import com.gruzini.tennistico.services.RegistrationService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

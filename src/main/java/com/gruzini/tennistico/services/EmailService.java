@@ -31,8 +31,8 @@ public class EmailService {
         this.beanFactory = beanFactory;
     }
 
-    public void sendEmail(final String email, final String tokenValue, final MessageType messageType) {
-        final SimpleMailMessage message = prepareMailMessage(email, tokenValue, messageType);
+    public void sendEmail(final String email, final String content, final MessageType messageType) {
+        final SimpleMailMessage message = prepareMailMessage(email, content, messageType);
 
         threadPoolExecutor().execute(() -> {
             javaMailSender.send(message);
@@ -40,9 +40,9 @@ public class EmailService {
         });
     }
 
-    private SimpleMailMessage prepareMailMessage(final String email, final String tokenValue, final MessageType messageType) {
+    private SimpleMailMessage prepareMailMessage(final String email, final String content, final MessageType messageType) {
         final MessageCreator messageCreator = chooseMessageCreator(messageType);
-        return messageCreator.create(email, tokenValue);
+        return messageCreator.create(email, content);
     }
 
     private MessageCreator chooseMessageCreator(final MessageType messageType) {
