@@ -16,19 +16,23 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 public class LoginController {
 
+    @GetMapping("/login")
+    public String showLoginPage() {
+        return "login";
+    }
 
-
-    @GetMapping("/login-error") //to do: try using exceptionHandler or authenticationFailureHandler - how to return view from there?
+    @GetMapping("/login-error")
+    //to do: try using exceptionHandler or authenticationFailureHandler - how to return view from there?
     public String showLoginErrorsOnLoginPage(final HttpServletRequest request, final Model model) {
         final AuthenticationException authenticationException = (AuthenticationException) request
                 .getSession()
                 .getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
         String messageContent = "";
 
-        if (authenticationException instanceof DisabledException){
+        if (authenticationException instanceof DisabledException) {
             messageContent = ErrorMessages.USER_NOT_ACTIVE_MESSAGE;
         }
-        if (authenticationException instanceof BadCredentialsException){
+        if (authenticationException instanceof BadCredentialsException) {
             messageContent = ErrorMessages.BAD_CREDENTIALS_MESSAGE;
         }
         log.warn("Login error. " + messageContent);
