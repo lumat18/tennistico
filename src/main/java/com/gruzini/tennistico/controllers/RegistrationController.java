@@ -2,7 +2,6 @@ package com.gruzini.tennistico.controllers;
 
 import com.gruzini.tennistico.domain.Player;
 import com.gruzini.tennistico.domain.User;
-import com.gruzini.tennistico.exceptions.EmailAlreadyExistsException;
 import com.gruzini.tennistico.models.forms.PlayerRegistrationForm;
 import com.gruzini.tennistico.models.forms.UserRegistrationForm;
 import com.gruzini.tennistico.mappers.PlayerMapper;
@@ -67,6 +66,11 @@ public class RegistrationController {
 
         registrationService.register(user);
         sessionStatus.setComplete();
-        return  "redirect:/login";
+        return  "redirect:/registration/step-three";
+    }
+
+    @GetMapping("/step-three")
+    public String showThirdRegistrationStep() {
+        return "registration3";
     }
 }

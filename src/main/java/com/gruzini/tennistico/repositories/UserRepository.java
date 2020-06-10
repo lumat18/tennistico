@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
-    @Query("select u from users u join activation_tokens t on u.id=t.user.id where t.id= :token")
+    @Query("SELECT u FROM users u JOIN activation_tokens t ON u.id = t.user.id WHERE t.id = :token")
     User findUserByToken(final ActivationToken token);
 
     Optional<User> findByEmail(String email);

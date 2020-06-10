@@ -1,6 +1,7 @@
 package com.gruzini.tennistico.security;
 
 import com.gruzini.tennistico.domain.User;
+import com.gruzini.tennistico.domain.enums.UserStatus;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -47,6 +48,6 @@ public class UserDetailsAdapter implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return user.getUserStatus().equals(UserStatus.ACTIVE);
     }
 }

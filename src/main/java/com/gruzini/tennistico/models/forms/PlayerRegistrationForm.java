@@ -31,17 +31,15 @@ public class PlayerRegistrationForm {
     @Length(min = 1, message = "Last name cannot be empty")
     private String lastName;
 
-    @Enumerated(EnumType.STRING)
     private Gender gender;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Past(message = "You cannot be born in future")
     private LocalDate birthday;
 
-    @Min(0)
-    @Max(99)
+    @Min(value = 0, message = "You must provide a number ranging from 0 to 99")
+    @Max(value = 99, message = "You must provide a number ranging from 0 to 99")
     private Integer yearsOfExperience;
 
-    @Enumerated(EnumType.STRING)
     private PlayerSkill playerSkill;
 }
