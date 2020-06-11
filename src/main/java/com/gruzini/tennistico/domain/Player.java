@@ -44,7 +44,7 @@ public class Player {
    @JoinTable(name = "player_to_game",
            joinColumns = { @JoinColumn(name = "user_id") },
            inverseJoinColumns = { @JoinColumn(name = "game_id") })
-   private List<Game> games = new ArrayList<>();
+   private List<Game> games ;
 
    public Integer getAge(){
       return Period.between(LocalDate.now(), getBirthday()).getYears();

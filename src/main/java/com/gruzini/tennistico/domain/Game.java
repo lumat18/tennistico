@@ -37,5 +37,5 @@ public class Game {
    @ManyToMany(mappedBy = "games")
    @ToString.Exclude
    @EqualsAndHashCode.Exclude
-   private List<Player> players = new ArrayList<>();
+   private List<Player> players;
 }
