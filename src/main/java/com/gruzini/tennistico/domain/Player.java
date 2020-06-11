@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "players")
@@ -39,11 +40,11 @@ public class Player {
 //   unsure if it's going to be just a number or separate class consisting of several factors
 //   private Integer rank;
 
-   @ManyToMany(cascade = CascadeType.ALL)
+   @ManyToMany
    @JoinTable(name = "player_to_game",
            joinColumns = { @JoinColumn(name = "user_id") },
            inverseJoinColumns = { @JoinColumn(name = "game_id") })
-   private List<Game> games;
+   private List<Game> games ;
 
    public Integer getAge(){
       return Period.between(getBirthday(), LocalDate.now()).getYears();
