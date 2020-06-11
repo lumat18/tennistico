@@ -24749,15 +24749,19 @@ fieldset[disabled][disabled] .dark-edition .has-error .form-control,
   width: 100%;
   min-height: 50px;
   position: fixed;
+  z-index: 999;
+}
+.gruzini-topbar-solid {
+  background-color: rgb(26, 32, 53, 1);
 }
 .gruzini-tennistico-logo {
   float: left;
   width: 100px;
-  height: 80px;
+  height: 100px;
   background-image: url("../img/logo1.png");
   background-size: contain;
   background-repeat: no-repeat;
-  margin: 10px 50px;
+  margin: 10px 0 -10px 50px;
 }
 .gruzini-navbar {
   min-height: 100px;
@@ -24772,14 +24776,14 @@ fieldset[disabled][disabled] .dark-edition .has-error .form-control,
 .gruzini-navbar-tile {
   float: left;
   display: block;
-  width: 120px;
-  font-size: 18px;
+  width: 150px;
+  font-size: 20px;
   text-align: center;
 }
 .gruzini-navbar-tile:hover {
   font-weight: bolder;
 }
 .gruzini-corner-button {
-  font-size: 18px !important;
+  font-size: 20px !important;
 }
 /* end of navbar styling */
