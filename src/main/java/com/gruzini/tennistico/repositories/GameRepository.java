@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface GameRepository extends JpaRepository<Game, Long> {
     List<Game> findAllByGameStatusOrderByStartingAt(GameStatus gameStatus);
-   List<Game> getAllByPlayersAndGameStatus(Player player, GameStatus gameStatus);
+    List<Game> getAllByPlayersAndGameStatus(Player player, GameStatus gameStatus);
 }

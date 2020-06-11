@@ -34,7 +34,7 @@ public class Game {
    @JoinColumn(name = "court_id")
    private Court court;
 
-   @ManyToMany(mappedBy = "games", fetch = FetchType.LAZY)
+   @ManyToMany(mappedBy = "games", fetch = FetchType.EAGER)
    @ToString.Exclude
    @EqualsAndHashCode.Exclude
    private List<Player> players;

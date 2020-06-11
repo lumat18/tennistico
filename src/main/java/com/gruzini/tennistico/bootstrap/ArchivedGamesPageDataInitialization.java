@@ -5,6 +5,8 @@ import com.gruzini.tennistico.domain.Game;
 import com.gruzini.tennistico.domain.Player;
 import com.gruzini.tennistico.domain.User;
 import com.gruzini.tennistico.domain.enums.GameStatus;
+import com.gruzini.tennistico.domain.enums.Gender;
+import com.gruzini.tennistico.domain.enums.PlayerSkill;
 import com.gruzini.tennistico.domain.enums.UserStatus;
 import com.gruzini.tennistico.repositories.CourtRepository;
 import com.gruzini.tennistico.repositories.GameRepository;
@@ -60,6 +62,7 @@ public class ArchivedGamesPageDataInitialization implements CommandLineRunner {
               .build();
 
       final Game game2 = Game.builder()
+              .startingAt(LocalDateTime.of(2020, Month.JUNE, 21, 10, 10))
               .endingAt(LocalDateTime.of(2020, Month.JUNE, 21, 12, 10))
               .court(court)
               .gameStatus(GameStatus.UPCOMING)
@@ -80,18 +83,27 @@ public class ArchivedGamesPageDataInitialization implements CommandLineRunner {
       final Player player1 = Player.builder()
               .firstName("Jimmy")
               .lastName("Jimmy")
+              .gender(Gender.MALE)
+              .playerSkill(PlayerSkill.BEGINNER)
+              .yearsOfExperience(3)
               .birthday(LocalDate.of(2000, Month.AUGUST, 29))
               .games(List.of(game1, game2))
               .build();
       final Player player2 = Player.builder()
               .firstName("Sarah")
               .lastName("Sarah")
+              .gender(Gender.FEMALE)
+              .playerSkill(PlayerSkill.ADVANCED)
+              .yearsOfExperience(10)
               .birthday(LocalDate.of(2001, Month.MARCH, 12))
               .games(List.of(game1, game2, game3))
               .build();
       final Player player3 = Player.builder()
               .firstName("Todd")
               .lastName("Todd")
+              .playerSkill(PlayerSkill.BEGINNER)
+              .gender(Gender.MALE)
+              .yearsOfExperience(1)
               .birthday(LocalDate.of(1945, Month.APRIL, 30))
               .games(List.of(game3))
               .build();
