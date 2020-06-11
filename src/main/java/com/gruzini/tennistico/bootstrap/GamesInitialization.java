@@ -35,6 +35,7 @@ public class GamesInitialization implements CommandLineRunner {
 
     void dataInit() {
         final Court court = Court.builder()
+                .name("Krzysztof")
                 .city("Madrid")
                 .country("Spain")
                 .state("Castilla")
@@ -78,6 +79,11 @@ public class GamesInitialization implements CommandLineRunner {
                 .gameStatus(GameStatus.UPCOMING)
                 .isOpen(true)
                 .build();
+        gameRepository.save(game1);
+        gameRepository.save(game2);
+        gameRepository.save(game3);
+        gameRepository.save(game4);
+        gameRepository.save(game5);
 
         final Player player1 = Player.builder()
                 .firstName("Roger")
