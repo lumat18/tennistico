@@ -22306,6 +22306,15 @@ fieldset[disabled][disabled] .dark-edition .has-error .form-control,
 .gruzini-text-card-content{
   font-size: 22px !important;
 }
+.gruzini-today-sign{
+  color: #f44336;
+}
+.gruzini-tomorrow-sign{
+  color: #ff9800;
+}
+.gruzini-week-sign{
+  color: #4caf50;
+}
 
 ::-webkit-inner-spin-button { display: none; }
 ::-webkit-calendar-picker-indicator { display: none; }

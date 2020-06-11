@@ -11,7 +11,6 @@ import com.gruzini.tennistico.repositories.GameRepository;
 import com.gruzini.tennistico.repositories.PlayerRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -34,37 +33,44 @@ public class GamesInitialization implements CommandLineRunner {
         dataInit();
     }
 
-     void dataInit() {
-         final Court court = Court.builder()
-                 .city("Madrid")
-                 .country("Spain")
-                 .state("Castilla")
-                 .street("Calle")
-                 .zipCode("00-000")
-                 .build();
-         courtRepository.save(court);
+    void dataInit() {
+        final Court court = Court.builder()
+                .city("Madrid")
+                .country("Spain")
+                .state("Castilla")
+                .street("Calle")
+                .zipCode("00-000")
+                .build();
+        courtRepository.save(court);
 
-         final Game game1 = Game.builder()
-                 .court(court)
-                 .startingAt(LocalDateTime.of(2020, 6, 20, 8, 30))
-                 .endingAt(LocalDateTime.of(2020, 6, 20, 11, 30))
-                 .gameStatus(GameStatus.UPCOMING)
-                 .isOpen(true)
-                 .build();
-         final Game game2 = Game.builder()
-                 .court(court)
-                 .startingAt(LocalDateTime.of(2020, 6, 22, 10, 0))
-                 .endingAt(LocalDateTime.of(2020, 6, 22, 13, 0))
-                 .gameStatus(GameStatus.UPCOMING)
-                 .isOpen(true)
-                 .build();
-         final Game game3 = Game.builder()
-                 .court(court)
-                 .startingAt(LocalDateTime.of(2020, 6, 28, 13, 0))
-                 .endingAt(LocalDateTime.of(2020, 6, 28, 16, 0))
-                 .gameStatus(GameStatus.UPCOMING)
-                 .isOpen(true)
-                 .build();
+        final Game game1 = Game.builder()
+                .court(court)
+                .startingAt(LocalDateTime.of(2020, 6, 12, 8, 30))
+                .endingAt(LocalDateTime.of(2020, 6, 12, 11, 30))
+                .gameStatus(GameStatus.UPCOMING)
+                .isOpen(true)
+                .build();
+        final Game game2 = Game.builder()
+                .court(court)
+                .startingAt(LocalDateTime.of(2020, 6, 11, 18, 0))
+                .endingAt(LocalDateTime.of(2020, 6, 11, 21, 0))
+                .gameStatus(GameStatus.UPCOMING)
+                .isOpen(true)
+                .build();
+        final Game game3 = Game.builder()
+                .court(court)
+                .startingAt(LocalDateTime.of(2020, 6, 15, 13, 0))
+                .endingAt(LocalDateTime.of(2020, 6, 15, 16, 0))
+                .gameStatus(GameStatus.UPCOMING)
+                .isOpen(true)
+                .build();
+        final Game game4 = Game.builder()
+                .court(court)
+                .startingAt(LocalDateTime.of(2020, 6, 25, 13, 0))
+                .endingAt(LocalDateTime.of(2020, 6, 25, 16, 0))
+                .gameStatus(GameStatus.UPCOMING)
+                .isOpen(true)
+                .build();
 
         final Player player1 = Player.builder()
                 .firstName("Roger")
@@ -83,7 +89,7 @@ public class GamesInitialization implements CommandLineRunner {
                 .gender(Gender.MALE)
                 .playerSkill(PlayerSkill.PROFESSIONAL)
                 .yearsOfExperience(31)
-                .games(List.of(game2))
+                .games(List.of(game2, game4))
                 .build();
         playerRepository.save(player1);
         playerRepository.save(player2);

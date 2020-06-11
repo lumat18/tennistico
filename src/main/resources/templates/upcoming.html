@@ -65,7 +65,21 @@
                                                 <td th:text="${game.getPlayers().get(0).getPlayerSkill().name()}"></td>
                                                 <td th:text="${game.getPlayers().get(0).getYearsOfExperience()}"></td>
                                                 <td th:text="${game.getCourt().getStreet()}+', '+${game.getCourt().getCity()}"></td>
-                                                <td th:text="${#temporals.format(game.getStartingAt(),'yyyy-MM-dd')}"></td>
+                                                <td>
+                                                    <span th:text="${#temporals.format(game.getStartingAt(),'yyyy-MM-dd')}"></span>
+                                                    <span class="gruzini-week-sign" th:if="${game.getStartingAt().toLocalDate().isBefore(#temporals.createToday().plusDays(7))
+                                                                                            and
+                                                                                            game.getStartingAt().toLocalDate().isAfter(#temporals.createToday().plusDays(1))}">
+                                                        <span th:text="' - '+'this week!'"></span>
+                                                    </span>
+                                                    <span class="gruzini-today-sign" th:if="${game.getStartingAt().toLocalDate().isEqual(#temporals.createToday())}">
+                                                        <span th:text="' - '+'today!'"></span>
+                                                    </span>
+                                                    <span class="gruzini-tomorrow-sign" th:if="${game.getStartingAt().toLocalDate().isEqual(#temporals.createToday().plusDays(1))}">
+                                                        <span th:text="' - '+'tomorrow!'"></span>
+                                                    </span>
+
+                                                </td>
                                                 <td th:text="${#temporals.format(game.getStartingAt(),'HH:mm')}"></td>
                                                 <td th:text="${#temporals.format(game.getEndingAt(),'HH:mm')}"></td>
                                                 <td style="width: 110px !important;">
@@ -73,6 +87,7 @@
                                                         Join
                                                     </a>
                                                 </td>
+
                                             </tr>
                                         </div>
                                         </tbody>
