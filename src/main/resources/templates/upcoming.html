@@ -44,30 +44,30 @@
                                     <table class="table table-hover">
                                         <thead>
                                         <th class="gruzini-text-card-content">ID</th>
-                                        <th class="gruzini-text-card-content">Type</th>
-                                        <th class="gruzini-text-card-content">Date</th>
+                                        <th class="gruzini-text-card-content">Player</th>
+                                        <th class="gruzini-text-card-content">Gender</th>
+                                        <th class="gruzini-text-card-content">Age</th>
+                                        <th class="gruzini-text-card-content">Level</th>
+                                        <th class="gruzini-text-card-content">Exp</th>
+                                        <th class="gruzini-text-card-content">Court</th>
+                                        <th class="gruzini-text-card-content">Starts At</th>
+                                        <th class="gruzini-text-card-content">Ends At</th>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Won match against Grzegorz Wanta</td>
-                                            <td>24.05.2020</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Won match against Lukasz Matuszewski</td>
-                                            <td>22.05.2020</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Won match against Sage Rodriguez</td>
-                                            <td>14.05.2020</td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td>Lost match against Philip Chaney</td>
-                                            <td>04.05.2020</td>
-                                        </tr>
+                                        <div th:each="game : ${upcomingGames}" >
+                                            <tr>
+                                                <td>1</td>
+                                                <td th:text="${game.getPlayers().get(0).firstName}"></td>
+                                                <td th:text="${game.getPlayers().get(0).getGender().name()}"></td>
+                                                <td th:text="${game.getPlayers().get(0).getAge()}"></td>
+                                                <td th:text="${game.getPlayers().get(0).getPlayerSkill().name()}"></td>
+                                                <td th:text="${game.getPlayers().get(0).getYearsOfExperience()}"></td>
+                                                <td th:text="${game.getCourt().getStreet()}"></td>
+                                                <td th:text="${game.getStartingAt()}"></td>
+                                                <td th:text="${game.getEndingAt()}"></td>
+
+                                            </tr>
+                                        </div>
                                         </tbody>
                                     </table>
                                 </div>
