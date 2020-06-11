@@ -24743,20 +24743,34 @@ fieldset[disabled][disabled] .dark-edition .has-error .form-control,
 /*# sourceMappingURL=dashboard-free.css.map */
 
 /* nabvar styling */
-.gruzini-navbar {
+.gruzini-topbar {
   background-color: rgb(26, 32, 53, 0.8);
   color: red;
   width: 100%;
   min-height: 50px;
   position: fixed;
 }
-
 .gruzini-tennistico-logo {
+  float: left;
   width: 100px;
   height: 80px;
   background-image: url("../img/logo1.png");
   background-size: contain;
   background-repeat: no-repeat;
   margin: 10px 50px;
+}
+.gruzini-navbar {
+  min-height: 100px;
+  float: right;
+  display: flex;
+  align-items: center;
+}
+.gruzini-navbar::after {
+  clear: both;
+}
+.gruzini-navbar-tile {
+  float: left;
+  display: block;
+  width: 100px;
 }
 /* end of navbar styling */
