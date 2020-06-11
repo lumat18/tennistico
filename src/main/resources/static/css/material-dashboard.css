@@ -24775,7 +24775,6 @@ fieldset[disabled][disabled] .dark-edition .has-error .form-control,
   clear: both;
 }
 .gruzini-navbar-tile {
-  float: left;
   display: block;
   width: 150px;
   font-size: 20px;
@@ -24786,5 +24785,45 @@ fieldset[disabled][disabled] .dark-edition .has-error .form-control,
 }
 .gruzini-corner-button {
   font-size: 20px !important;
+}
+.gruzini-burger {
+  display: none;
+}
+.gruzini-burger div {
+  background-color: white;
+  width: 25px;
+  height: 2px;
+  margin: 4px;
+}
+
+@media screen and (max-width: 950px) {
+  .gruzini-navbar {
+    flex-direction: column;
+    position: absolute;
+    right: 0;
+    height: 100vh;
+    background-color: rgb(26, 32, 53, 0.85);
+    margin-right: 0;
+    margin-top: 100px;
+    transform: translateX(100%);
+    transition: transform 0.5s ease-in;
+  }
+  .gruzini-burger {
+    display: block;
+    position: absolute;
+    right: 0;
+    margin: 39px 58px;
+    cursor: pointer;
+  }
+  .gruzini-navbar-tile {
+    padding: 20px 30px;
+  }
+  .gruzini-navbar-tile:hover {
+    background-color: #288c6c;
+    transition: 0.7s;
+  }
+}
+.gruzini-navbar-active {
+  transform: translateX(0%);
 }
 /* end of navbar styling */
