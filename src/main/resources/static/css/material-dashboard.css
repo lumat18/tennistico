@@ -22125,6 +22125,9 @@ fieldset[disabled][disabled] .dark-edition .has-error .form-control,
   margin-top: 2vw;
   margin-left: 20px;
 }
+.gruzini-button-small{
+  font-size: 20px !important;
+}
 .gruzini-clear{
   clear: both;
 }

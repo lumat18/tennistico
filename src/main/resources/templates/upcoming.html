@@ -53,6 +53,7 @@
                                         <th class="gruzini-text-card-content">Day</th>
                                         <th class="gruzini-text-card-content">Starts At</th>
                                         <th class="gruzini-text-card-content">Ends At</th>
+                                        <th class="gruzini-text-card-content"></th>
                                         </thead>
                                         <tbody>
                                         <div th:each="game, iter : ${upcomingGames}" >
@@ -67,7 +68,11 @@
                                                 <td th:text="${#temporals.format(game.getStartingAt(),'yyyy-MM-dd')}"></td>
                                                 <td th:text="${#temporals.format(game.getStartingAt(),'HH:mm')}"></td>
                                                 <td th:text="${#temporals.format(game.getEndingAt(),'HH:mm')}"></td>
-                                                
+                                                <td style="width: 110px !important;">
+                                                    <a class="btn btn-success gruzini-btn-success gruzini-button-small" href="/dashboard" role="button">
+                                                        Join
+                                                    </a>
+                                                </td>
                                             </tr>
                                         </div>
                                         </tbody>
