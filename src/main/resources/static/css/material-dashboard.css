@@ -24499,7 +24499,7 @@ fieldset[disabled][disabled] .dark-edition .has-error .form-control,
 }
 /*  ======================own styles====================== */
 .gruzini-section-welcome {
-  background-image: url("/img/welcome_page_background4.jpg");
+  background-image: url("../img/welcome_page_background4.jpg");
   background-size: cover;
   height: 100vh;
   background-repeat: no-repeat;
@@ -24744,15 +24744,16 @@ fieldset[disabled][disabled] .dark-edition .has-error .form-control,
 
 /* nabvar styling */
 .gruzini-topbar {
-  background-color: rgb(26, 32, 53, 0.8);
+  background-color: rgb(26, 32, 53, 0.85);
   color: #ffffff;
   width: 100%;
   min-height: 50px;
   position: fixed;
   z-index: 999;
+  box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.5), 0 10px 20px 0 rgba(0, 0, 0, 0.3);
 }
 .gruzini-topbar-solid {
-  background-color: rgb(26, 32, 53, 1);
+  background-color: rgb(26, 32, 53, 0.99);
 }
 .gruzini-tennistico-logo {
   float: left;
