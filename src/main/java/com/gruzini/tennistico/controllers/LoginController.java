@@ -4,6 +4,7 @@ import com.gruzini.tennistico.messages.ErrorMessages;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
+import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.stereotype.Controller;
@@ -32,7 +33,7 @@ public class LoginController {
         if (authenticationException instanceof DisabledException) {
             messageContent = ErrorMessages.USER_NOT_ACTIVE_MESSAGE;
         }
-        if (authenticationException instanceof BadCredentialsException) {
+        if (authenticationException instanceof InternalAuthenticationServiceException) {
             messageContent = ErrorMessages.BAD_CREDENTIALS_MESSAGE;
         }
         log.warn("Login error. " + messageContent);
