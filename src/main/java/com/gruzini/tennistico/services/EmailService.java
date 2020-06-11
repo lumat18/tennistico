@@ -5,12 +5,10 @@ import com.gruzini.tennistico.emails.MessageType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.annotation.Bean;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import javax.mail.internet.MimeMessage;
-import java.util.Arrays;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -37,7 +35,7 @@ public class EmailService {
 
         threadPoolExecutor().execute(() -> {
             javaMailSender.send(message);
-            log.info("Email message was sent to "+ email);
+            log.info("Email message was sent to " + email);
         });
     }
 
