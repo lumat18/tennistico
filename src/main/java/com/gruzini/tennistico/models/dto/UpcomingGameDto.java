@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class GameInfoDto {
+public class UpcomingGameDto {
     private String hostName;
     private String hostGender;
     private Integer hostAge;
