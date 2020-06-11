@@ -9,6 +9,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import javax.mail.internet.MimeMessage;
 import java.util.Arrays;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -32,15 +33,15 @@ public class EmailService {
     }
 
     public void sendEmail(final String email, final String content, final MessageType messageType) {
-        final SimpleMailMessage message = prepareMailMessage(email, content, messageType);
+        final MimeMessage message = prepareMailMessage(email, content, messageType);
 
         threadPoolExecutor().execute(() -> {
             javaMailSender.send(message);
-            log.info("Email message was sent to " + Arrays.toString(message.getTo()));
+            log.info("Email message was sent to "/* + Arrays.toString(message.getTo())*/);
         });
     }
 
-    private SimpleMailMessage prepareMailMessage(final String email, final String content, final MessageType messageType) {
+    private MimeMessage prepareMailMessage(final String email, final String content, final MessageType messageType) {
         final MessageCreator messageCreator = chooseMessageCreator(messageType);
         return messageCreator.create(email, content);
     }
