@@ -25,18 +25,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**").authenticated()
                 .anyRequest().permitAll();
 
-            http.formLogin()
-                    .loginPage("/login")
-                    .usernameParameter("username")
-                    .passwordParameter("password")
-                    .defaultSuccessUrl("/dashboard")
+        http.formLogin()
+                .loginPage("/login")
+                .usernameParameter("username")
+                .passwordParameter("password")
+                .defaultSuccessUrl("/dashboard")
                 .failureUrl("/login-error");
 
         http.logout();
 
         http.csrf().disable()
                 .headers().frameOptions().disable();
-
     }
 
     @Override
