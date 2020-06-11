@@ -21,7 +21,8 @@ public class UpcomingGamesController {
     @GetMapping
     public String showUpcomingGamesPage(final Model model){
         final List<Game> allUpcomingGames = gameService.getAllUpcoming();
-        model.addAttribute(allUpcomingGames);
+        System.out.println("players in first game = " + allUpcomingGames.get(0).getPlayers().size());
+        model.addAttribute("upcomingGames",allUpcomingGames);
         return "upcoming";
     }
 }
