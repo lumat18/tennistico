@@ -37,7 +37,7 @@ public class EmailService {
 
         threadPoolExecutor().execute(() -> {
             javaMailSender.send(message);
-            log.info("Email message was sent to "/* + Arrays.toString(message.getTo())*/);
+            log.info("Email message was sent to "+ email);
         });
     }
 
