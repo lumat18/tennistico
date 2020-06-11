@@ -25,6 +25,8 @@ public class Game {
 
    private LocalDateTime endingAt;
 
+   private String score;
+
    @Enumerated(EnumType.STRING)
    private GameStatus gameStatus;
 

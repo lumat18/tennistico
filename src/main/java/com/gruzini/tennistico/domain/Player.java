@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "players")
@@ -43,7 +44,7 @@ public class Player {
    @JoinTable(name = "player_to_game",
            joinColumns = { @JoinColumn(name = "user_id") },
            inverseJoinColumns = { @JoinColumn(name = "game_id") })
-   private List<Game> games;
+   private List<Game> games = new ArrayList<>();
 
    public Integer getAge(){
       return Period.between(LocalDate.now(), getBirthday()).getYears();

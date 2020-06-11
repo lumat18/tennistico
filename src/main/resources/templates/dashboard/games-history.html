@@ -170,29 +170,18 @@
                         <table class="table table-hover">
                            <thead class="text-warning">
                            <th>ID</th>
-                           <th>Type</th>
+                           <th>Opponent</th>
+                           <th>Score</th>
+                           <th>Court</th>
                            <th>Date</th>
                            </thead>
                            <tbody>
-                           <tr>
-                              <td>1</td>
-                              <td>Won match against Grzegorz Wanta</td>
-                              <td>24.05.2020</td>
-                           </tr>
-                           <tr>
-                              <td>2</td>
-                              <td>Won match against Lukasz Matuszewski</td>
-                              <td>22.05.2020</td>
-                           </tr>
-                           <tr>
-                              <td>3</td>
-                              <td>Won match against Sage Rodriguez</td>
-                              <td>14.05.2020</td>
-                           </tr>
-                           <tr>
-                              <td>4</td>
-                              <td>Lost match against Philip Chaney</td>
-                              <td>04.05.2020</td>
+                           <tr th:each="game, iter : ${archivedGames}">
+                              <td th:text="${iter.index+1}"></td>
+                              <td th:text="${game.opponentName}"></td>
+                              <td th:text="${game.score}"></td>
+                              <td th:text="${game.courtName}"></td>
+                              <td th:id="${iter.index+1}"></td>
                            </tr>
                            </tbody>
                         </table>
@@ -243,6 +232,13 @@
          const currentDate = new Date();
          let shownFullDate = document.getElementById('fullDate');
          shownFullDate.innerHTML = shownFullDate.innerHTML + dateFormatter(currentDate);
+
+         let theList = [[${modelAttribute}]]
+         for (let id = 1; id <= theList.length; id++) {
+            let idString = id.toString();
+            let gameDate = document.getElementById(idString);
+            gameDate.innerHTML = dateFormatter(currentDate);
+         }
 
          function dateFormatter(inputDate) {
             const dayOfWeek = inputDate.toLocaleString('en-GB', {weekday: 'short'});
