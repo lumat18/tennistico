@@ -7,7 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -20,11 +19,9 @@ public class UpcomingGamesController {
     }
 
     @GetMapping
-    public String showUpcomingGamesPage(final Model model){
+    public String showUpcomingGamesPage(final Model model) {
         final List<Game> allUpcomingGames = gameService.getAllUpcoming();
-        System.out.println("today = " + LocalDate.now());
-        model.addAttribute("upcomingGames",allUpcomingGames);
-        model.addAttribute("today", LocalDate.now());
+        model.addAttribute("upcomingGames", allUpcomingGames);
         return "upcoming";
     }
 }
