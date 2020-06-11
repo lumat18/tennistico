@@ -24742,6 +24742,7 @@ fieldset[disabled][disabled] .dark-edition .has-error .form-control,
 .gruzini-registration-logo {
   width: 400px;
 }
+
 .gruzini-text-card-content{
   font-size: 20px !important;
 }
@@ -24760,7 +24761,8 @@ fieldset[disabled][disabled] .dark-edition .has-error .form-control,
 }
 .gruzini-table-collapsing-first{
 }
-.gruzini-table-collapsing-second{
+.gruzini-table-collapsing-second {
+}
 
 ::-webkit-inner-spin-button { display: none; }
 ::-webkit-calendar-picker-indicator { display: none; }
