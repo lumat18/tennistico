@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "games")
@@ -34,5 +35,5 @@ public class Game {
    @ManyToMany(mappedBy = "games")
    @ToString.Exclude
    @EqualsAndHashCode.Exclude
-   private List<Player> players;
+   private List<Player> players = new ArrayList<>();
 }
