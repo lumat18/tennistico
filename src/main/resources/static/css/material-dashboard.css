@@ -22165,6 +22165,9 @@ fieldset[disabled][disabled] .dark-edition .has-error .form-control,
   font-size: 24px;
   height: 60px;
 }
+.gruzini-registration-text::placeholder{
+  font-size: 24px;
+}
 .gruzini-btn-success {
   font-size: 30px;
   padding-top: 10px;
