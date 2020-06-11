@@ -24553,7 +24553,10 @@ fieldset[disabled][disabled] .dark-edition .has-error .form-control,
   margin-top: 2vw;
   margin-left: 20px;
 }
-.gruzini-clear {
+.gruzini-button-small{
+  font-size: 22px !important;
+}
+.gruzini-clear{
   clear: both;
 }
 .gruzini-arrow {
@@ -24733,13 +24736,28 @@ fieldset[disabled][disabled] .dark-edition .has-error .form-control,
 .gruzini-registration-logo {
   width: 400px;
 }
+.gruzini-text-card-content{
+  font-size: 20px !important;
+}
+.gruzini-today-sign{
+  color: #f44336;
+}
+.gruzini-tomorrow-sign{
+  color: #ff9800;
+}
+.gruzini-week-sign{
+  color: #4caf50;
+}
+.gruzini-card-desc{
+  text-align: center;
+  padding: 30px;
+}
+.gruzini-table-collapsing-first{
+}
+.gruzini-table-collapsing-second{
 
-::-webkit-inner-spin-button {
-  display: none;
-}
-::-webkit-calendar-picker-indicator {
-  display: none;
-}
+::-webkit-inner-spin-button { display: none; }
+::-webkit-calendar-picker-indicator { display: none; }
 /*# sourceMappingURL=dashboard-free.css.map */
 
 /* nabvar styling */

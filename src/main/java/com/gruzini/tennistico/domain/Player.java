@@ -46,6 +46,6 @@ public class Player {
    private List<Game> games;
 
    public Integer getAge(){
-      return Period.between(LocalDate.now(), getBirthday()).getYears();
+      return Period.between(getBirthday(), LocalDate.now()).getYears();
    }
 }
