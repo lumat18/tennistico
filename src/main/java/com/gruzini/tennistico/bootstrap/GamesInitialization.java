@@ -71,6 +71,13 @@ public class GamesInitialization implements CommandLineRunner {
                 .gameStatus(GameStatus.UPCOMING)
                 .isOpen(true)
                 .build();
+        final Game game5 = Game.builder()
+                .court(court)
+                .startingAt(LocalDateTime.of(2020, 6, 17, 10, 0))
+                .endingAt(LocalDateTime.of(2020, 6, 17, 12, 0))
+                .gameStatus(GameStatus.UPCOMING)
+                .isOpen(true)
+                .build();
 
         final Player player1 = Player.builder()
                 .firstName("Roger")
@@ -89,7 +96,7 @@ public class GamesInitialization implements CommandLineRunner {
                 .gender(Gender.MALE)
                 .playerSkill(PlayerSkill.PROFESSIONAL)
                 .yearsOfExperience(31)
-                .games(List.of(game2, game4))
+                .games(List.of(game2, game4, game5))
                 .build();
         playerRepository.save(player1);
         playerRepository.save(player2);

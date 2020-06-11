@@ -27,7 +27,7 @@ class GameServiceTest {
     void shouldFindOneGameByStatus() {
         //given
         final Game game = Game.builder().gameStatus(GameStatus.UPCOMING).build();
-        when(gameRepository.findAllByGameStatus(any())).thenReturn(List.of(game));
+        when(gameRepository.findAllByGameStatusOrderByStartingAt(any())).thenReturn(List.of(game));
         //when
         final List<Game> result = gameService.getAllUpcoming();
         //then
@@ -39,7 +39,7 @@ class GameServiceTest {
     void shouldNotFindUpcomingGameByStatusIfDoesNotExistInRepo() {
         //given
         final Game game = Game.builder().gameStatus(GameStatus.UPCOMING).build();
-        when(gameRepository.findAllByGameStatus(any())).thenReturn(List.of());
+        when(gameRepository.findAllByGameStatusOrderByStartingAt(any())).thenReturn(List.of());
         //when
         final List<Game> result = gameService.getAllUpcoming();
         //then

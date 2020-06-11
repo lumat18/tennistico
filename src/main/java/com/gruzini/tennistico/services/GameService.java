@@ -23,7 +23,7 @@ public class GameService {
         return gameRepository.findAll();
     }
     public List<Game> getAllUpcoming(){
-        final List<Game> result = gameRepository.findAllByGameStatus(GameStatus.UPCOMING);
+        final List<Game> result = gameRepository.findAllByGameStatusOrderByStartingAt(GameStatus.UPCOMING);
         log.info("found "+result.size()+" upcoming games");
         return result;
     }
