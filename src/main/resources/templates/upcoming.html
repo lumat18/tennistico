@@ -25,14 +25,132 @@
 
 <body class="dark-edition" style="background-image: url(/img/upcoming_background.jpg); background-size: cover">
 <div class="wrapper">
+
+    <div class="sidebar" data-color="green" data-background-color="black" >
+        <!--
+          Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
+
+          Tip 2: you can also add an image using data-image tag
+      -->
+        <div class="logo"><a href="http://www.creative-tim.com" class="simple-text logo-normal">
+            <img th:src="@{/img/logo1.png}" style="width: 250px"/>
+        </a></div>
+        <div class="sidebar-wrapper">
+            <ul class="nav">
+                <li class="nav-item active  ">
+                    <a class="nav-link" href="/dashboard">
+                        <i class="material-icons">dashboard</i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="./user.html">
+                        <i class="material-icons">person</i>
+                        <p>User Profile</p>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="/dashboard/upcoming">
+                        <i class="material-icons">content_paste</i>
+                        <p>Open Games</p>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="./typography.html">
+                        <i class="material-icons">library_books</i>
+                        <p>Your Games</p>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="./icons.html">
+                        <i class="material-icons">bubble_chart</i>
+                        <p>Rankings</p>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="./map.html">
+                        <i class="material-icons">location_ons</i>
+                        <p>Court Database</p>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="./notifications.html">
+                        <i class="material-icons">notifications</i>
+                        <p>Rules&Conditions</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="main-panel">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top " id="navigation-example">
+            <div class="container-fluid">
+                <div class="navbar-wrapper">
+                    <a class="navbar-brand" href="javascript:void(0)">Dashboard</a>
+                </div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation" data-target="#navigation-example">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="navbar-toggler-icon icon-bar"></span>
+                    <span class="navbar-toggler-icon icon-bar"></span>
+                    <span class="navbar-toggler-icon icon-bar"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end">
+                    <form class="navbar-form">
+                        <div class="input-group no-border">
+                            <div class="ripple-container"></div>
+                            </button>
+                        </div>
+                    </form>
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="javascript:void(0)">
+                                <i class="material-icons">dashboard</i>
+                                <p class="d-lg-none d-md-block">
+                                    Stats
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" href="javscript:void(0)" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="material-icons">notifications</i>
+                                <span class="notification">5</span>
+                                <p class="d-lg-none d-md-block">
+                                    Some Actions
+                                </p>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="javascript:void(0)">Mike John responded to your email</a>
+                                <a class="dropdown-item" href="javascript:void(0)">You have 5 new tasks</a>
+                                <a class="dropdown-item" href="javascript:void(0)">You're now friend with Andrew</a>
+                                <a class="dropdown-item" href="javascript:void(0)">Another Notification</a>
+                                <a class="dropdown-item" href="javascript:void(0)">Another One</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="javascript:void(0)">
+                                <i class="material-icons">person</i>
+                                <p class="d-lg-none d-md-block">
+                                    Account
+                                </p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- End Navbar -->
+
     <div class="main-panel gruzini-registration-main-panel">
         <div class="content">
             <div class="container-fluid">
+
+
                 <div class="row">
                     <!--               placed here to put the card in center -->
-                    <div class="col-xl-1"></div>
+<!--                    <div class="col-xl-1"></div>-->
 
-                    <div class="col-xl-10 col-lg-12">
+                    <div class="col-lg-12">
                         <div class="card card-chart">
                             <div class="card-header card-header-success">
                                 <p class="gruzini-title">Open Games</p>
@@ -48,43 +166,43 @@
                                         <thead>
                                         <th class="gruzini-text-card-content">ID</th>
                                         <th class="gruzini-text-card-content">Opponent</th>
-                                        <th class="gruzini-text-card-content">Gender</th>
-                                        <th class="gruzini-text-card-content">Age</th>
+                                        <th class="gruzini-text-card-content gruzini-table-collapsing-first">Gender</th>
+                                        <th class="gruzini-text-card-content gruzini-table-collapsing-second">Age</th>
                                         <th class="gruzini-text-card-content">Level</th>
-                                        <th class="gruzini-text-card-content">Exp</th>
+                                        <th class="gruzini-text-card-content gruzini-table-collapsing-first">Exp</th>
                                         <th class="gruzini-text-card-content">Court</th>
                                         <th class="gruzini-text-card-content">Day</th>
                                         <th class="gruzini-text-card-content">Starts At</th>
-                                        <th class="gruzini-text-card-content">Ends At</th>
+                                        <th class="gruzini-text-card-content gruzini-table-collapsing-second">Ends At</th>
                                         <th class="gruzini-text-card-content"></th>
                                         </thead>
                                         <tbody>
                                         <div th:each="game, iter : ${upcomingGames}" >
                                             <tr>
                                                 <td th:text="${iter.index+1}"></td>
-                                                <td th:text="'vs. '+${game.getPlayers().get(0).firstName}+' '+${game.getPlayers().get(0).lastName}"></td>
-                                                <td th:text="${game.getPlayers().get(0).getGender().name()}"></td>
-                                                <td th:text="${game.getPlayers().get(0).getAge()}"></td>
-                                                <td th:text="${game.getPlayers().get(0).getPlayerSkill().name()}"></td>
-                                                <td th:text="${game.getPlayers().get(0).getYearsOfExperience()}"></td>
-                                                <td th:text="${game.getCourt().getStreet()}+', '+${game.getCourt().getCity()}"></td>
+                                                <td th:text="'vs. '+${game.getHostName()}"></td>
+                                                <td th:text="${game.getHostGender()}" class="gruzini-table-collapsing-first"></td>
+                                                <td th:text="${game.getHostAge()}" class="gruzini-table-collapsing-second"></td>
+                                                <td th:text="${game.getHostLevel()}"></td>
+                                                <td th:text="${game.getHostExp()}" class="gruzini-table-collapsing-first"></td>
+                                                <td th:text="${game.getAddress()}"></td>
                                                 <td>
-                                                    <span th:text="${#temporals.format(game.getStartingAt(),'yyyy-MM-dd')}"></span>
-                                                    <span class="gruzini-week-sign" th:if="${game.getStartingAt().toLocalDate().isBefore(#temporals.createToday().plusDays(7))
-                                                                                            and
-                                                                                            game.getStartingAt().toLocalDate().isAfter(#temporals.createToday().plusDays(1))}">
+                                                    <span th:text="${#temporals.format(game.getStart(),'yyyy-MM-dd')}"></span>
+                                                    <span th:if="${game.getStart().toLocalDate().isBefore(#temporals.createToday().plusDays(7))
+                                                                 and
+                                                                 game.getStart().toLocalDate().isAfter(#temporals.createToday().plusDays(1))}" class="gruzini-week-sign">
                                                         <span th:text="' - '+'this week!'"></span>
                                                     </span>
-                                                    <span class="gruzini-today-sign" th:if="${game.getStartingAt().toLocalDate().isEqual(#temporals.createToday())}">
+                                                    <span class="gruzini-today-sign" th:if="${game.getStart().toLocalDate().isEqual(#temporals.createToday())}">
                                                         <span th:text="' - '+'today!'"></span>
                                                     </span>
-                                                    <span class="gruzini-tomorrow-sign" th:if="${game.getStartingAt().toLocalDate().isEqual(#temporals.createToday().plusDays(1))}">
+                                                    <span th:if="${game.getStart().toLocalDate().isEqual(#temporals.createToday().plusDays(1))}" class="gruzini-tomorrow-sign">
                                                         <span th:text="' - '+'tomorrow!'"></span>
                                                     </span>
 
                                                 </td>
-                                                <td th:text="${#temporals.format(game.getStartingAt(),'HH:mm')}"></td>
-                                                <td th:text="${#temporals.format(game.getEndingAt(),'HH:mm')}"></td>
+                                                <td th:text="${#temporals.format(game.getStart(),'HH:mm')}"></td>
+                                                <td th:text="${#temporals.format(game.getEnd(),'HH:mm')}" class="gruzini-table-collapsing-second"></td>
                                                 <td style="width: 110px !important;">
                                                     <a class="btn btn-success gruzini-btn-success gruzini-button-small" href="/dashboard" role="button">
                                                         Join
@@ -100,19 +218,16 @@
 
                             </div>
                             <div class="card-footer d-flex justify-content-center">
-                                <a href="/dashboard/create" class="btn btn-success gruzini-btn-success" style="margin-right: 100px" role="button"
+                                <a href="/dashboard/create" class="btn btn-success gruzini-btn-success" role="button"
                                    aria-pressed="true">
-                                    Create new one
-                                </a>
-                                <a href="/dashboard" class="btn btn-light gruzini-btn-success" role="button">
-                                    Go back to dashboard
+                                    No game seems right? Create a new one
                                 </a>
                             </div>
                         </div>
                     </div>
 
                     <!--               placed here to put the card in center -->
-                    <div class="col-xl-1"></div>
+<!--                    <div class="col-xl-1"></div>-->
                 </div>
             </div>
         </div>

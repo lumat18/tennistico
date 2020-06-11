@@ -22319,6 +22319,21 @@ fieldset[disabled][disabled] .dark-edition .has-error .form-control,
   text-align: center;
   padding: 30px;
 }
+.gruzini-table-collapsing-first{
+}
+.gruzini-table-collapsing-second{
+
+}
+@media(max-width: 1300px){
+  .gruzini-table-collapsing-first{
+    display: none;
+  }
+}
+@media(max-width: 1150px){
+  .gruzini-table-collapsing-second{
+    display: none;
+  }
+}
 
 ::-webkit-inner-spin-button { display: none; }
 ::-webkit-calendar-picker-indicator { display: none; }
