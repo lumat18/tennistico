@@ -22315,6 +22315,10 @@ fieldset[disabled][disabled] .dark-edition .has-error .form-control,
 .gruzini-week-sign{
   color: #4caf50;
 }
+.gruzini-card-desc{
+  text-align: center;
+  padding: 30px;
+}
 
 ::-webkit-inner-spin-button { display: none; }
 ::-webkit-calendar-picker-indicator { display: none; }
