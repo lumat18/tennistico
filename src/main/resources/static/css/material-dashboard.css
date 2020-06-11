@@ -22126,7 +22126,7 @@ fieldset[disabled][disabled] .dark-edition .has-error .form-control,
   margin-left: 20px;
 }
 .gruzini-button-small{
-  font-size: 20px !important;
+  font-size: 22px !important;
 }
 .gruzini-clear{
   clear: both;
@@ -22304,7 +22304,7 @@ fieldset[disabled][disabled] .dark-edition .has-error .form-control,
   width: 400px;
 }
 .gruzini-text-card-content{
-  font-size: 20px !important;
+  font-size: 22px !important;
 }
 
 ::-webkit-inner-spin-button { display: none; }
