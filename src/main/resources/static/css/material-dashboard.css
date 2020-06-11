@@ -24745,7 +24745,7 @@ fieldset[disabled][disabled] .dark-edition .has-error .form-control,
 /* nabvar styling */
 .gruzini-topbar {
   background-color: rgb(26, 32, 53, 0.8);
-  color: red;
+  color: #ffffff;
   width: 100%;
   min-height: 50px;
   position: fixed;
@@ -24764,6 +24764,7 @@ fieldset[disabled][disabled] .dark-edition .has-error .form-control,
   float: right;
   display: flex;
   align-items: center;
+  margin-right: 3vw;
 }
 .gruzini-navbar::after {
   clear: both;
@@ -24771,6 +24772,14 @@ fieldset[disabled][disabled] .dark-edition .has-error .form-control,
 .gruzini-navbar-tile {
   float: left;
   display: block;
-  width: 100px;
+  width: 120px;
+  font-size: 18px;
+  text-align: center;
+}
+.gruzini-navbar-tile:hover {
+  font-weight: bolder;
+}
+.gruzini-corner-button {
+  font-size: 18px !important;
 }
 /* end of navbar styling */
