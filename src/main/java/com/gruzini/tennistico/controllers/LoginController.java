@@ -36,6 +36,9 @@ public class LoginController {
         if (authenticationException instanceof InternalAuthenticationServiceException) {
             messageContent = ErrorMessages.BAD_CREDENTIALS_MESSAGE;
         }
+        if (authenticationException instanceof BadCredentialsException) {
+            messageContent = ErrorMessages.BAD_CREDENTIALS_MESSAGE;
+        }
         log.warn("Login error. " + messageContent);
         model.addAttribute("message", messageContent);
         return "login";
