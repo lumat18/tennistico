@@ -233,11 +233,11 @@
          let shownFullDate = document.getElementById('fullDate');
          shownFullDate.innerHTML = shownFullDate.innerHTML + dateFormatter(currentDate);
 
-         let theList = [[${modelAttribute}]]
+         let theList = [[${archivedGames}]];
          for (let id = 1; id <= theList.length; id++) {
             let idString = id.toString();
             let gameDate = document.getElementById(idString);
-            gameDate.innerHTML = dateFormatter(currentDate);
+            gameDate.innerHTML = dateFormatter(theList[id].getDate());
          }
 
          function dateFormatter(inputDate) {

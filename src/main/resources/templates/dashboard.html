@@ -202,9 +202,9 @@
                         <h4 class="card-title">Your Last Game's Score</h4>
                         <p class="card-category">Last Campaign Performance</p>
                      </div>
-                     <div class="card-footer">
+                     <div class="card-footer" data-link="/dashboard/games-history" style="cursor: pointer">
                         <div class="stats">
-                           <a th:href="@{/dashboard/games-history}">View your playing history</a>
+                           View your playing history
                         </div>
                      </div>
                   </div>
@@ -622,6 +622,12 @@
 <script th:src="@{/js/material-dashboard.js}"></script>
 
 <script>
+   $(document).ready(function() {
+      $("[data-link]").click(function() {
+         window.location.href = $(this).attr("data-link");
+         return false;
+      });
+   });
    $(document).ready(function () {
       $().ready(function () {
          $sidebar = $('.sidebar');
