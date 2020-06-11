@@ -24796,12 +24796,13 @@ fieldset[disabled][disabled] .dark-edition .has-error .form-control,
   margin: 4px;
 }
 
-@media screen and (max-width: 950px) {
+@media screen and (max-width: 750px) {
   .gruzini-navbar {
     flex-direction: column;
     position: absolute;
     right: 0;
     height: 100vh;
+    width: 200px;
     background-color: rgb(26, 32, 53, 0.85);
     margin-right: 0;
     margin-top: 100px;
@@ -24812,7 +24813,7 @@ fieldset[disabled][disabled] .dark-edition .has-error .form-control,
     display: block;
     position: absolute;
     right: 0;
-    margin: 39px 58px;
+    margin: 39px 88px;
     cursor: pointer;
   }
   .gruzini-navbar-tile {

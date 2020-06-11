@@ -38,9 +38,6 @@
             <a href="#">AUTHORS</a>
           </div>
           <div class="gruzini-navbar-tile">
-            <a href="#">CONTACT</a>
-          </div>
-          <div class="gruzini-navbar-tile">
             <a href="#">GITHUB</a>
           </div>
           <div class="gruzini-button-tile">
@@ -63,6 +60,18 @@
             $(topbar).removeClass("gruzini-topbar-solid");
           }
         });
+
+        const navbarSlide = () => {
+          const burger = document.querySelector(".gruzini-burger");
+          const nav = document.querySelector(".gruzini-navbar");
+
+          burger.addEventListener("click", () => {
+            console.log("burger clicked");
+            nav.classList.toggle("gruzini-navbar-active");
+          });
+        };
+
+        navbarSlide();
       </script>
     </section>
     <section class="dark-edition gruzini-section-welcome">
