@@ -22204,6 +22204,9 @@ fieldset[disabled][disabled] .dark-edition .has-error .form-control,
   font-size: 24px;
   padding-top: 10px;
 }
+.gruzini-text-card-content{
+  font-size: 20px !important;
+}
 
 /*work to be done here, to nullify the effects of browser autofill styling*/
 /*input:-webkit-autofill,*/

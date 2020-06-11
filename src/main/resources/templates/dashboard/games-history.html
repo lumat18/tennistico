@@ -115,7 +115,6 @@
                <form class="navbar-form">
                   <div class="input-group no-border">
                      <div class="ripple-container"></div>
-                     </button>
                   </div>
                </form>
                <ul class="navbar-nav">
@@ -163,25 +162,26 @@
                <div class="col-md-12">
                   <div class="card">
                      <div class="card-header card-header-success">
-                        <h4 class="card-title">Games History</h4>
-                        <p class="card-category" id="fullDate">Current date </p>
+                        <p class="gruzini-title">Games History</p>
                      </div>
                      <div class="card-body table-responsive">
                         <table class="table table-hover">
                            <thead class="text-warning">
-                           <th>ID</th>
-                           <th>Opponent</th>
-                           <th>Score</th>
-                           <th>Court</th>
-                           <th>Date</th>
+                           <th class="gruzini-text-card-content">ID</th>
+                           <th class="gruzini-text-card-content">Opponent</th>
+                           <th class="gruzini-text-card-content">Court</th>
+                           <th class="gruzini-text-card-content">Date</th>
+                           <th class="gruzini-text-card-content">Score</th>
+                           <th class="gruzini-text-card-content">Win / Loss</th>
                            </thead>
                            <tbody>
                            <tr th:each="game, iter : ${archivedGames}">
-                              <td th:text="${iter.index+1}"></td>
-                              <td th:text="${game.opponentName}"></td>
-                              <td th:text="${game.score}"></td>
-                              <td th:text="${game.courtName}"></td>
-                              <td th:id="${iter.index+1}"></td>
+                              <td class="gruzini-text-card-content" th:text="${iter.index+1}"></td>
+                              <td class="gruzini-text-card-content" th:text="${game.opponentName}"></td>
+                              <td class="gruzini-text-card-content" th:text="${game.courtName}"></td>
+                              <td class="gruzini-text-card-content" th:text="${game.date}"></td>
+                              <td class="gruzini-text-card-content" th:text="${game.score}"></td>
+                              <td></td>
                            </tr>
                            </tbody>
                         </table>
@@ -232,40 +232,6 @@
          const currentDate = new Date();
          let shownFullDate = document.getElementById('fullDate');
          shownFullDate.innerHTML = shownFullDate.innerHTML + dateFormatter(currentDate);
-
-         let theList = [[${archivedGames}]];
-         for (let id = 1; id <= theList.length; id++) {
-            let idString = id.toString();
-            let gameDate = document.getElementById(idString);
-            gameDate.innerHTML = dateFormatter(theList[id].getDate());
-         }
-
-         function dateFormatter(inputDate) {
-            const dayOfWeek = inputDate.toLocaleString('en-GB', {weekday: 'short'});
-            const day = inputDate.getDate();
-            let dayAppend = '';
-            switch (day) {
-               case 1:
-               case 21:
-               case 31:
-                  dayAppend = 'st';
-                  break;
-               case 2:
-               case 22:
-                  dayAppend = 'nd';
-                  break;
-               case 3:
-               case 23:
-                  dayAppend = 'rd';
-                  break;
-               default:
-                  dayAppend = "th";
-            }
-            const formattedMonthAndYear = inputDate.toLocaleDateString('en-GB', {
-               month: 'long', year: 'numeric'
-            });
-            return  dayOfWeek + ', ' + day + dayAppend + ' ' + formattedMonthAndYear;
-         }
       </script>
    </div>
 </div>

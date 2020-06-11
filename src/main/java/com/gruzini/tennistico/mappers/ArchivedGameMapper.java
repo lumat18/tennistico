@@ -13,7 +13,7 @@ public class ArchivedGameMapper {
       return ArchivedGameDTO.builder()
               .opponentName(getOpponentName(game.getPlayers(), player))
               .score(game.getScore())
-              .courtName(game.getCourt().getName())
+              .courtName(game.getCourt().getName() + ", " + game.getCourt().getCity())
               .date(game.getEndingAt().toLocalDate())
               .build();
    }

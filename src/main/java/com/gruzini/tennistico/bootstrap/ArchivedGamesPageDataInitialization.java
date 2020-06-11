@@ -13,6 +13,7 @@ import com.gruzini.tennistico.repositories.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -51,20 +52,48 @@ public class ArchivedGamesPageDataInitialization implements CommandLineRunner {
               .build();
       courtRepository.save(court);
 
+      final Game game1 = Game.builder()
+              .endingAt(LocalDateTime.of(2020, Month.FEBRUARY, 21, 12, 10))
+              .court(court)
+              .gameStatus(GameStatus.ARCHIVED)
+              .score("3-2")
+              .build();
+
+      final Game game2 = Game.builder()
+              .endingAt(LocalDateTime.of(2020, Month.JUNE, 21, 12, 10))
+              .court(court)
+              .gameStatus(GameStatus.UPCOMING)
+              .score("3-2")
+              .build();
+
+      final Game game3 = Game.builder()
+              .endingAt(LocalDateTime.of(2020, Month.FEBRUARY, 21, 12, 10))
+              .court(court)
+              .gameStatus(GameStatus.ARCHIVED)
+              .score("3-2")
+              .build();
+
+      gameRepository.save(game1);
+      gameRepository.save(game2);
+      gameRepository.save(game3);
+
       final Player player1 = Player.builder()
               .firstName("Jimmy")
               .lastName("Jimmy")
               .birthday(LocalDate.of(2000, Month.AUGUST, 29))
+              .games(List.of(game1, game2))
               .build();
       final Player player2 = Player.builder()
               .firstName("Sarah")
               .lastName("Sarah")
               .birthday(LocalDate.of(2001, Month.MARCH, 12))
+              .games(List.of(game1, game2, game3))
               .build();
       final Player player3 = Player.builder()
               .firstName("Todd")
               .lastName("Todd")
               .birthday(LocalDate.of(1945, Month.APRIL, 30))
+              .games(List.of(game3))
               .build();
       final User user1 = User.builder()
               .email("jimmy@test.pl")
@@ -93,35 +122,5 @@ public class ArchivedGamesPageDataInitialization implements CommandLineRunner {
       userRepository.save(user1);
       userRepository.save(user2);
       userRepository.save(user3);
-
-
-      final Game game1 = Game.builder()
-              .endingAt(LocalDateTime.of(2020, Month.FEBRUARY, 21, 12, 10))
-              .court(court)
-              .gameStatus(GameStatus.ARCHIVED)
-              .score("3-2")
-              .build();
-
-      final Game game2 = Game.builder()
-              .endingAt(LocalDateTime.of(2020, Month.JUNE, 21, 12, 10))
-              .court(court)
-              .gameStatus(GameStatus.UPCOMING)
-              .score("3-2")
-              .build();
-
-      final Game game3 = Game.builder()
-              .endingAt(LocalDateTime.of(2020, Month.FEBRUARY, 21, 12, 10))
-              .court(court)
-              .gameStatus(GameStatus.ARCHIVED)
-              .score("3-2")
-              .build();
-
-      player1.setGames(List.of(game1, game2));
-      player2.setGames(List.of(game1, game2, game3));
-      player2.setGames(List.of(game3));
-
-      playerRepository.save(player1);
-      playerRepository.save(player2);
-      playerRepository.save(player3);
    }
 }
