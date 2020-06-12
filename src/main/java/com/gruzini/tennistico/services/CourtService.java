@@ -1,5 +1,7 @@
 package com.gruzini.tennistico.services;
 
+import com.gruzini.tennistico.domain.Court;
+import com.gruzini.tennistico.exceptions.CourtNotFoundException;
 import com.gruzini.tennistico.mappers.CourtInfoMapper;
 import com.gruzini.tennistico.models.dto.CourtInfoDto;
 import com.gruzini.tennistico.repositories.CourtRepository;
@@ -25,5 +27,9 @@ public class CourtService {
         return courtRepository.findAll().stream()
                 .map(courtInfoMapper::toCourtInfoDto)
                 .collect(Collectors.toList());
+    }
+
+    public Court getById(Long courtId) {
+        return courtRepository.findById(courtId).orElseThrow(CourtNotFoundException::new);
     }
 }
