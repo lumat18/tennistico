@@ -28,9 +28,9 @@ class GameServiceTest {
     void shouldFindOneGameByStatus() {
         //given
         final Game game = Game.builder().gameStatus(GameStatus.HOSTED).build();
-        when(gameRepository.findAllByGameStatusOrderByStartingAt(any())).thenReturn(List.of(game));
+        when(gameRepository.findAllByGameStatusIsAndPlayersNotContainsOrderByStartingAt(any(), any())).thenReturn(List.of(game));
         //when
-        final List<HostedGameDto> result = hostedGameService.getAll();
+        final List<HostedGameDto> result = hostedGameService.getAll(any());
         //then
         assertThat(result.size()).isEqualTo(1);
         assertThat(result.get(0).getHostLevel()).isEqualTo(GameStatus.HOSTED.toString());
@@ -40,9 +40,9 @@ class GameServiceTest {
     void shouldNotFindUpcomingGameByStatusIfDoesNotExistInRepo() {
         //given
         final Game game = Game.builder().gameStatus(GameStatus.HOSTED).build();
-        when(gameRepository.findAllByGameStatusOrderByStartingAt(any())).thenReturn(List.of());
+        when(gameRepository.findAllByGameStatusIsAndPlayersNotContainsOrderByStartingAt(any(), any())).thenReturn(List.of());
         //when
-        final List<HostedGameDto> result = hostedGameService.getAll();
+        final List<HostedGameDto> result = hostedGameService.getAll(any());
         //then
         assertThat(result.size()).isEqualTo(0);
     }
