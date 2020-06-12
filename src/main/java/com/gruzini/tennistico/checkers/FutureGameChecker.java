@@ -12,9 +12,6 @@ import java.util.List;
 
 @Component
 public class FutureGameChecker {
-    //TODO co 15min szuka gier, których data startu już była
-    //TODO jeżeli mają status UPCOMING to zmienia na PENDING
-    //TODO jeżeli mają status HOSTED lub JOIN_REQUEST to zmienia na BUSTED
 
     private final UpcomingGameService upcomingGameService;
     private final HostedGameService hostedGameService;
@@ -26,7 +23,7 @@ public class FutureGameChecker {
         this.joinRequestGameService = joinRequestGameService;
     }
 
-    @Scheduled(cron = "* */15 * * * *")
+    @Scheduled(cron = "0 0/15 * * * *")
     public void updateFutureGamesStatus() {
         changeGameStatusFromUpcomingToPending();
         changeGameStatusFromHostedToBusted();
@@ -34,17 +31,17 @@ public class FutureGameChecker {
     }
 
     private void changeGameStatusFromUpcomingToPending() {
-        final List<Game> games = upcomingGameService.getAllUpcomingGamesThatPassed();
+        final List<Game> games = upcomingGameService.getAllGamesThatPassed();
         games.forEach(game -> game.setGameStatus(GameStatus.PENDING));
     }
 
     private void changeGameStatusFromHostedToBusted() {
-        final List<Game> games = hostedGameService.getAllHostedGamesThatPassed();
-        games.forEach(game -> game.setGameStatus(GameStatus.BUSTED));
+        final List<Game> games = hostedGameService.getAllGamesThatPassed();
+        hostedGameService.changeGameStatusTo(games, GameStatus.BUSTED);
     }
 
     private void changeGameStatusFromJoinRequestToBusted() {
-        final List<Game> games = joinRequestGameService.getAllJoinRequestGamesThatPassed();
-        games.forEach(game -> game.setGameStatus(GameStatus.BUSTED));
+        final List<Game> games = joinRequestGameService.getAllGamesThatPassed();
+        joinRequestGameService.changeGameStatusTo(games, GameStatus.BUSTED);
     }
 }

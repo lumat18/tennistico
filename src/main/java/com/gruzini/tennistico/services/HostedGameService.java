@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 @Slf4j
-public class HostedGameService {
+public class HostedGameService implements GameService {
     private final GameRepository gameRepository;
     private final HostedGameMapper gameInfoMapper;
 
@@ -32,7 +32,16 @@ public class HostedGameService {
                 .collect(Collectors.toList());
     }
 
-    public List<Game> getAllHostedGamesThatPassed() {
+    @Override
+    public List<Game> getAllGamesThatPassed() {
         return gameRepository.findByStartingAtBeforeAndGameStatus(LocalDateTime.now(), GameStatus.HOSTED);
+    }
+
+    @Override
+    public void changeGameStatusTo(List<Game> games, GameStatus gameStatus) {
+        games.forEach(game -> {
+            game.setGameStatus(gameStatus);
+            gameRepository.save(game);
+        });
     }
 }

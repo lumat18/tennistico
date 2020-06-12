@@ -16,7 +16,14 @@ public class JoinRequestGameService {
         this.gameRepository = gameRepository;
     }
 
-    public List<Game> getAllJoinRequestGamesThatPassed() {
+    public List<Game> getAllGamesThatPassed() {
         return gameRepository.findByStartingAtBeforeAndGameStatus(LocalDateTime.now(), GameStatus.JOIN_REQUEST);
+    }
+
+    public void changeGameStatusTo(final List<Game> games, final GameStatus gameStatus) {
+        games.forEach(game -> {
+            game.setGameStatus(gameStatus);
+            gameRepository.save(game);
+        });
     }
 }
