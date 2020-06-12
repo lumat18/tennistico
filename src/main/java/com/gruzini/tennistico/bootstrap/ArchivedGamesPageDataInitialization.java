@@ -55,22 +55,22 @@ public class ArchivedGamesPageDataInitialization implements CommandLineRunner {
       courtRepository.save(court);
 
       final Game game1 = Game.builder()
-              .endingAt(LocalDateTime.of(2020, Month.FEBRUARY, 21, 12, 10))
+              .endingAt(LocalDateTime.of(2020, Month.JUNE, 1, 12, 10))
               .court(court)
               .gameStatus(GameStatus.ARCHIVED)
               .score("3-2")
               .build();
 
       final Game game2 = Game.builder()
-              .startingAt(LocalDateTime.of(2020, Month.JUNE, 21, 10, 10))
-              .endingAt(LocalDateTime.of(2020, Month.JUNE, 21, 12, 10))
+              .startingAt(LocalDateTime.of(2020, Month.JUNE, 1, 10, 10))
+              .endingAt(LocalDateTime.of(2020, Month.JUNE, 1, 12, 10))
               .court(court)
               .gameStatus(GameStatus.UPCOMING)
               .score("3-2")
               .build();
 
       final Game game3 = Game.builder()
-              .endingAt(LocalDateTime.of(2020, Month.FEBRUARY, 21, 12, 10))
+              .endingAt(LocalDateTime.of(2020, Month.JUNE, 21, 12, 10))
               .court(court)
               .gameStatus(GameStatus.ARCHIVED)
               .score("3-2")
