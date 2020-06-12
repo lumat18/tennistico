@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-public class UpcomingGameService implements GameService {
+public class UpcomingGameService {
 
     private final GameRepository gameRepository;
 
@@ -17,12 +17,10 @@ public class UpcomingGameService implements GameService {
         this.gameRepository = gameRepository;
     }
 
-    @Override
     public List<Game> getAllGamesThatPassed() {
         return gameRepository.findByStartingAtBeforeAndGameStatus(LocalDateTime.now(), GameStatus.UPCOMING);
     }
 
-    @Override
     public void changeGameStatusTo(List<Game> games, GameStatus gameStatus) {
         games.forEach(game -> {
             game.setGameStatus(gameStatus);
