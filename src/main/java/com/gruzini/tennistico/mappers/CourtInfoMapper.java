@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 public class CourtInfoMapper {
     public CourtInfoDto toCourtInfoDto (final Court court){
         return CourtInfoDto.builder()
+                .courtId(court.getId())
                 .name(court.getName())
                 .address(court.getStreet() + ", " + court.getState())
                 .city(court.getCity())
