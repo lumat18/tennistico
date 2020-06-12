@@ -177,7 +177,7 @@
                                         <th class="gruzini-text-card-content"></th>
                                         </thead>
                                         <tbody>
-                                        <div th:each="game, iter : ${upcomingGames}" >
+                                        <div th:each="game, iter : ${hostedGames}" >
                                             <tr>
                                                 <td th:text="${iter.index+1}"></td>
                                                 <td th:text="'vs. '+${game.getHostName()}"></td>

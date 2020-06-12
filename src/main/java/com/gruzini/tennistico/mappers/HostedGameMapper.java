@@ -1,15 +1,15 @@
 package com.gruzini.tennistico.mappers;
 
 import com.gruzini.tennistico.domain.Game;
-import com.gruzini.tennistico.models.dto.UpcomingGameDto;
+import com.gruzini.tennistico.models.dto.HostedGameDto;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UpcomingGameMapper {
+public class HostedGameMapper {
     private static final int HOST_INDEX = 0;
 
-    public UpcomingGameDto toGameInfoDto(final Game game) {
-        return UpcomingGameDto.builder()
+    public HostedGameDto toGameInfoDto(final Game game) {
+        return HostedGameDto.builder()
                 .hostName(game.getPlayers().get(HOST_INDEX).getFirstName() + " " + game.getPlayers().get(HOST_INDEX).getLastName())
                 .hostGender(game.getPlayers().get(HOST_INDEX).getGender().toString())
                 .hostAge(game.getPlayers().get(HOST_INDEX).getAge())

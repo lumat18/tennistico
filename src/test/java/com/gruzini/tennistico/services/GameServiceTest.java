@@ -2,7 +2,7 @@ package com.gruzini.tennistico.services;
 
 import com.gruzini.tennistico.domain.Game;
 import com.gruzini.tennistico.domain.enums.GameStatus;
-import com.gruzini.tennistico.models.dto.UpcomingGameDto;
+import com.gruzini.tennistico.models.dto.HostedGameDto;
 import com.gruzini.tennistico.repositories.GameRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,27 +22,27 @@ class GameServiceTest {
     private GameRepository gameRepository;
 
     @Autowired
-    private UpcomingGameService gameService;
+    private HostedGameService hostedGameService;
 
     @Test
     void shouldFindOneGameByStatus() {
         //given
-        final Game game = Game.builder().gameStatus(GameStatus.UPCOMING).build();
+        final Game game = Game.builder().gameStatus(GameStatus.HOSTED).build();
         when(gameRepository.findAllByGameStatusOrderByStartingAt(any())).thenReturn(List.of(game));
         //when
-        final List<UpcomingGameDto> result = gameService.getAll();
+        final List<HostedGameDto> result = hostedGameService.getAll();
         //then
         assertThat(result.size()).isEqualTo(1);
-        assertThat(result.get(0).getHostLevel()).isEqualTo(GameStatus.UPCOMING.toString());
+        assertThat(result.get(0).getHostLevel()).isEqualTo(GameStatus.HOSTED.toString());
     }
 
     @Test
     void shouldNotFindUpcomingGameByStatusIfDoesNotExistInRepo() {
         //given
-        final Game game = Game.builder().gameStatus(GameStatus.UPCOMING).build();
+        final Game game = Game.builder().gameStatus(GameStatus.HOSTED).build();
         when(gameRepository.findAllByGameStatusOrderByStartingAt(any())).thenReturn(List.of());
         //when
-        final List<UpcomingGameDto> result = gameService.getAll();
+        final List<HostedGameDto> result = hostedGameService.getAll();
         //then
         assertThat(result.size()).isEqualTo(0);
     }
