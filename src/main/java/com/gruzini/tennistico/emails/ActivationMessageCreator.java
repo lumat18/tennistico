@@ -1,6 +1,6 @@
 package com.gruzini.tennistico.emails;
 
-import com.gruzini.tennistico.models.forms.VerificationEmail;
+import com.gruzini.tennistico.models.emails.ActivationEmail;
 import lombok.SneakyThrows;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -27,7 +27,7 @@ public class ActivationMessageCreator implements MessageCreator {
         final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
         helper.setSubject(SUBJECT);
         helper.setTo(email);
-        helper.setText(new VerificationEmail(createActivationLink(tokenValue)).getBody(), true);
+        helper.setText(new ActivationEmail(createActivationLink(tokenValue)).getBody(), true);
         return mimeMessage;
     }
 

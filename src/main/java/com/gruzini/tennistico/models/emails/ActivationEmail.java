@@ -1,4 +1,4 @@
-package com.gruzini.tennistico.models.forms;
+package com.gruzini.tennistico.models.emails;
 
 import lombok.Data;
 import org.apache.commons.io.FileUtils;
@@ -11,13 +11,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Data
-public class VerificationEmail {
+public class ActivationEmail {
 
     private static final String ACTIVATION_EMAIL_TEMPLATE_LOCATION = "/static/emailTemplate/activation.html";
 
     private String verificationLink;
 
-    public VerificationEmail(String verificationLink) {
+    public ActivationEmail(String verificationLink) {
         this.verificationLink = verificationLink;
     }
 
