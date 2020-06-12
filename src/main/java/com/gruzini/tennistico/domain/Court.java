@@ -36,4 +36,7 @@ public class Court {
 
    @NotNull
    private String zipCode;
+
+   @NotNull
+   private String phoneNumber;
 }
