@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,7 +27,7 @@ public class HostedGameService {
     }
 
     public List<HostedGameDto> getAll(Player player) {
-        final List<Game> result = gameRepository.findAllByGameStatusIsAndPlayersNotContainsOrderByStartingAt(GameStatus.HOSTED, player);
+        final List<Game> result = gameRepository.findAllByGameStatusIsAndPlayersNotContainsAndStartingAtIsAfterOrderByStartingAt(GameStatus.HOSTED, player, LocalDateTime.now());
         return result.stream()
                 .map(gameInfoMapper::toGameInfoDto)
                 .collect(Collectors.toList());
