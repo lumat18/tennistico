@@ -32,7 +32,7 @@ public class FutureGameChecker {
 
     private void changeGameStatusFromUpcomingToPending() {
         final List<Game> games = upcomingGameService.getAllGamesThatPassed();
-        games.forEach(game -> game.setGameStatus(GameStatus.PENDING));
+        upcomingGameService.changeGameStatusTo(games, GameStatus.PENDING);
     }
 
     private void changeGameStatusFromHostedToBusted() {
