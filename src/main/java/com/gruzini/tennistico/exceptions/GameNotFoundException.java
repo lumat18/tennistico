@@ -1,4 +1,4 @@
 package com.gruzini.tennistico.exceptions;
 
-public class GameNotFoundException {
+public class GameNotFoundException extends RuntimeException {
 }

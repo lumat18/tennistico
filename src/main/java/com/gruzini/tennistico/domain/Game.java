@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Entity(name = "games")
 @Data
@@ -38,4 +39,16 @@ public class Game {
    @ToString.Exclude
    @EqualsAndHashCode.Exclude
    private List<Player> players;
+
+   public Player getHost(){
+      return players.get(0);
+   }
+
+   public Optional<Player> getGuest(){
+      return Optional.ofNullable(players.get(1));
+   }
+
+   public void addGuest(final Player player){
+      players.add(player);
+   }
 }
