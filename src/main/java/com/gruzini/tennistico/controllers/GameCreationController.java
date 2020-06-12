@@ -42,8 +42,7 @@ public class GameCreationController {
             model.addAttribute("chosenCourtId", createdGameDto.getCourtId());
             return "create";
         }
-        final Player player = userService.getByEmail(principal.getName()).getPlayer();
-        gameCreationService.create(createdGameDto, player);
+        gameCreationService.create(createdGameDto, principal.getName());
         return "dashboard";
     }
 }

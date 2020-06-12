@@ -16,16 +16,24 @@ public class GameCreationService {
     private final CreatedGameMapper createdGameMapper;
     private final HostedGameService hostedGameService;
     private final PlayerService playerService;
+    private final UserService userService;
 
-    public GameCreationService(CreatedGameMapper createdGameMapper, HostedGameService hostedGameService, PlayerService playerService) {
+    public GameCreationService(CreatedGameMapper createdGameMapper, HostedGameService hostedGameService, PlayerService playerService, UserService userService) {
         this.createdGameMapper = createdGameMapper;
         this.hostedGameService = hostedGameService;
         this.playerService = playerService;
+        this.userService = userService;
     }
 
-    public void create(final CreatedGameDto createdGameDto, final Player player){
+    public void create(final CreatedGameDto createdGameDto, final String username){
+        final Player player = userService.getByEmail(username).getPlayer();
+        final Game createdGame = saveCreatedGame(createdGameDto);
+        playerService.add(player, createdGame);
+    }
+
+    private Game saveCreatedGame(CreatedGameDto createdGameDto) {
         final Game createdGame = createdGameMapper.toGame(createdGameDto);
         hostedGameService.save(createdGame);
-        playerService.add(player, createdGame);
+        return createdGame;
     }
 }
