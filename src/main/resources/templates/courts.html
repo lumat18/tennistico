@@ -180,11 +180,11 @@
                                                     <td th:text="'vs. '+${court.getCity()}"></td>
                                                     <td th:text="'vs. '+${court.getPhoneNumber()}"></td>
                                                     <td style="width: 110px !important;">
-                                                        <a class="btn btn-success gruzini-btn-success gruzini-button-small" href="/create" role="button">
-                                                            Play here!
-                                                        </a>
+                                                        <form method="post" th:action="@{/dashboard/create/begin}">
+                                                            <input hidden type="text" name="courtId" th:value="${court.getCourtId()}"/>
+                                                            <input type="submit" class="btn btn-success gruzini-btn-success gruzini-button-small" value="Play here!">
+                                                        </form>
                                                     </td>
-
                                                 </tr>
                                             </div>
                                             </tbody>
