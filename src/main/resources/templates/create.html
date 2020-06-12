@@ -167,16 +167,49 @@
                                         </div>
                                         <form method="post" th:action="@{/dashboard/create/process}"
                                               th:object="${game}">
-                                            <input hidden type="text" th:field="*{courtId}" th:value="${courtId}">
-<!--                                            <input type="" class="form-control gruzini-registration-text"-->
-<!--                                                   th:field="*{startingAt}"-->
-<!--                                                   aria-label="birthday"-->
-<!--                                                   aria-describedby="birthdayAddon">-->
-<!--                                            <div class="d-flex justify-content-between">-->
-<!--                                                <span class="gruzini-registration-error" th:if="${#fields.hasErrors('birthday')}"-->
-<!--                                                    th:errors="*{birthday}">-->
-<!--                                                </span>-->
-<!--                                            </div>-->
+
+                                            <input hidden type="text" th:name="courtId" th:id="courtId" th:value="${chosenCourtId}">
+
+                                            <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text gruzini-input-group-text" id="dateAddon">
+                                                        Please select date:
+                                                        </span>
+                                                    </div>
+                                                        <input type="date" class="form-control gruzini-registration-text"
+                                                             th:field="*{date}" aria-label="date" aria-describedby="dateAddon">
+                                                </div>
+                                            <div class="d-flex justify-content-between">
+                                                <span class="gruzini-registration-error" th:if="${#fields.hasErrors('date')}"
+                                                    th:errors="*{date}">
+                                                </span>
+                                            </div>
+
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                        <span class="input-group-text gruzini-input-group-text" id="startAddon">
+                                                        Choose starting hour:
+                                                        </span>
+                                                </div>
+                                                <input type="time" class="form-control gruzini-registration-text"
+                                                       th:field="*{start}" aria-label="start" aria-describedby="startAddon">
+                                            </div>
+
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                        <span class="input-group-text gruzini-input-group-text" id="endAddon">
+                                                        Choose ending hour:
+                                                        </span>
+                                                </div>
+                                                <input type="time" class="form-control gruzini-registration-text"
+                                                       th:field="*{end}" aria-label="end" aria-describedby="endAddon">
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <span class="gruzini-registration-error" th:if="${#fields.hasErrors('startAndEndingTimeValid')}"
+                                                      th:errors="*{startAndEndingTimeValid}">
+                                                </span>
+                                            </div>
+
                                             <button id="hiddenSubmitButton" type="submit" hidden></button>
                                         </form>
                                     </div>
@@ -189,7 +222,7 @@
                                         Go back
                                     </a>
                                     <button class="btn btn-success gruzini-btn-success" id="buttonSubmit"
-                                            onclick="submitByHiddenButton()">Next step
+                                            onclick="submitByHiddenButton()">Create
                                     </button>
 
 

@@ -21,8 +21,8 @@ public class CreatedGameMapper {
                 .gameStatus(GameStatus.HOSTED)
                 .isOpen(true)
                 .court(courtService.getById(createdGameDto.getCourtId()))
-//                .startingAt(LocalDateTime.of(createdGameDto.getDate(), createdGameDto.getStart()))
-//                .endingAt(LocalDateTime.of(createdGameDto.getDate(), createdGameDto.getEnd()))
+                .startingAt(LocalDateTime.of(createdGameDto.getDate(), createdGameDto.getStart()))
+                .endingAt(LocalDateTime.of(createdGameDto.getDate(), createdGameDto.getEnd()))
                 .build();
     }
 }

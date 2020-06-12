@@ -29,15 +29,17 @@ public class GameCreationController {
 
     @PostMapping("/begin")
     public String beginGameCreation(@RequestParam(name = "courtId") final Long courtId, final Model model) {
-        model.addAttribute("courtId", courtId);
-        model.addAttribute("game", new CreatedGameDto());
+        System.out.println("chosen court " + courtId);
+        model.addAttribute("chosenCourtId", courtId);
+        model.addAttribute("game", CreatedGameDto.builder().build());
         return "create";
     }
 
     @PostMapping("/process")
-    public String processGameCreation(@Valid @ModelAttribute final CreatedGameDto createdGameDto, final Errors errors, final Model model, final Principal principal) {
+    public String processGameCreation(@Valid @ModelAttribute("game") final CreatedGameDto createdGameDto, final Errors errors, final Model model, final Principal principal) {
 
         if (errors.hasErrors()) {
+            model.addAttribute("chosenCourtId", createdGameDto.getCourtId());
             return "create";
         }
         final Player player = userService.getByEmail(principal.getName()).getPlayer();

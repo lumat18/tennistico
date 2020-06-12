@@ -1,13 +1,15 @@
 package com.gruzini.tennistico.models.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gruzini.tennistico.domain.enums.GameStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.AssertTrue;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Future;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -18,17 +20,23 @@ import java.time.LocalTime;
 public class CreatedGameDto {
 
     private GameStatus gameStatus;
-    @NotNull
+
     private Long courtId;
-//    @NotNull
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Future(message = "Game has to take place in the future")
     private LocalDate date;
-//    @NotNull
+
     private LocalTime start;
-//    @NotNull
+
     private LocalTime end;
 
-//    @AssertTrue
-//    public boolean isStartAndEndingTimeValid(){
-//        return start.isBefore(end);
-//    }
+    @AssertTrue(message = "Game has to start before it ends!")
+    @JsonIgnore
+    public boolean isStartAndEndingTimeValid(){
+        if(start == null || end == null){
+            return false;
+        }
+        return start.isBefore(end);
+    }
 }
