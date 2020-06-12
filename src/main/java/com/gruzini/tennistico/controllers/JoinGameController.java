@@ -29,6 +29,8 @@ public class JoinGameController {
         return "dashboard";
     }
 
+    //TODO modify handlers according to general decision
+    //TODO move handlers to controller advice
     @ExceptionHandler(GameNotFoundException.class)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public String handleGameNotFoundException(final Exception exception, final Model model){
