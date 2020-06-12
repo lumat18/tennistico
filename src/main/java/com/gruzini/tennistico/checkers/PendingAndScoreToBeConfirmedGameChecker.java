@@ -20,12 +20,12 @@ public class PendingAndScoreToBeConfirmedGameChecker {
 
    @Scheduled(cron="0 0 * * * *")
    public void clearPendingAndScoreToBeConfirmedGamesOlderThanWeek(){
+      System.out.println("Lunched");
       final List<Game> allByGameStatusPendingOrGameStatusConfirm
-              = gameRepository.getAllByGameStatusIsOrGameStatusIs(GameStatus.PENDING, GameStatus.SCORE_TO_BE_CONFIRMED);
-      allByGameStatusPendingOrGameStatusConfirm.stream()
-              .filter(game -> game.getEndingAt().plusWeeks(1).isBefore(LocalDateTime.now()))
-              .collect(Collectors.toList())
+              = gameRepository.getAllByEndingAtBeforeAndGameStatusIsOrGameStatusIs(LocalDateTime.now().minusHours(168), GameStatus.PENDING, GameStatus.SCORE_TO_BE_CONFIRMED);
+      allByGameStatusPendingOrGameStatusConfirm
               .forEach(game -> {
+                 System.out.println("Worked");
                  game.setGameStatus(GameStatus.BUSTED);
                  gameRepository.save(game);
               });

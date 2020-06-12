@@ -57,7 +57,7 @@ public class ArchivedGamesPageDataInitialization implements CommandLineRunner {
       final Game game1 = Game.builder()
               .endingAt(LocalDateTime.of(2020, Month.JUNE, 1, 12, 10))
               .court(court)
-              .gameStatus(GameStatus.ARCHIVED)
+              .gameStatus(GameStatus.PENDING)
               .score("3-2")
               .build();
 
@@ -70,9 +70,9 @@ public class ArchivedGamesPageDataInitialization implements CommandLineRunner {
               .build();
 
       final Game game3 = Game.builder()
-              .endingAt(LocalDateTime.of(2020, Month.JUNE, 21, 12, 10))
+              .endingAt(LocalDateTime.of(2020, Month.JUNE, 5, 12, 10))
               .court(court)
-              .gameStatus(GameStatus.ARCHIVED)
+              .gameStatus(GameStatus.SCORE_TO_BE_CONFIRMED)
               .score("3-2")
               .build();
 
