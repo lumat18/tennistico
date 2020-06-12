@@ -16,13 +16,13 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
-class GameServiceTest {
+class HostedGameServiceTest {
 
     @MockBean
     private GameRepository gameRepository;
 
     @Autowired
-    private GameService hostedGameService;
+    private HostedGameService hostedGameService;
 
     @Test
     void shouldFindOneGameByStatus() {
