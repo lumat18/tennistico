@@ -15,11 +15,11 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 @Slf4j
-public class HostedGameService {
+public class GameService {
     private final GameRepository gameRepository;
     private final HostedGameMapper gameInfoMapper;
 
-    public HostedGameService(GameRepository gameRepository, HostedGameMapper gameInfoMapper) {
+    public GameService(GameRepository gameRepository, HostedGameMapper gameInfoMapper) {
         this.gameRepository = gameRepository;
         this.gameInfoMapper = gameInfoMapper;
     }
@@ -29,5 +29,9 @@ public class HostedGameService {
         return result.stream()
                 .map(gameInfoMapper::toGameInfoDto)
                 .collect(Collectors.toList());
+    }
+
+    public Game save(Game game) {
+        return gameRepository.save(game);
     }
 }
