@@ -1,8 +1,5 @@
 package com.gruzini.tennistico.controllers;
 
-import com.gruzini.tennistico.domain.Game;
-import com.gruzini.tennistico.domain.Player;
-import com.gruzini.tennistico.domain.enums.GameStatus;
 import com.gruzini.tennistico.exceptions.GameNotFoundException;
 import com.gruzini.tennistico.exceptions.PlayerNotFoundException;
 import com.gruzini.tennistico.services.HostedGameService;
@@ -25,11 +22,11 @@ public class JoinGameController {
         this.joinGameService = joinGameService;
     }
 
-    @PostMapping("/{game_id}")
+    @GetMapping("/{game_id}")
     public String joinGame(@PathVariable(name = "game_id") final Long gameId, final Principal principal){
         joinGameService.joinGuestToGame(principal.getName(), gameId);
         //TODO send the notification to host
-        return null;
+        return "dashboard";
     }
 
     @ExceptionHandler(GameNotFoundException.class)

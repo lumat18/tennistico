@@ -5,7 +5,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,9 +45,5 @@ public class Game {
 
    public Optional<Player> getGuest(){
       return Optional.ofNullable(players.get(1));
-   }
-
-   public void addGuest(final Player player){
-      players.add(player);
    }
 }

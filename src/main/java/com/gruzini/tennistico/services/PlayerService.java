@@ -14,7 +14,11 @@ public class PlayerService {
         this.playerRepository = playerRepository;
     }
 
-    public Player getByUsername(final String username){
+    public Player getByUsername(final String username) {
         return playerRepository.findByUsername(username).orElseThrow(PlayerNotFoundException::new);
+    }
+
+    public Player save(Player player) {
+        return playerRepository.save(player);
     }
 }

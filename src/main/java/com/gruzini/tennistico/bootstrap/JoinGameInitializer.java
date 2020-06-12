@@ -68,13 +68,33 @@ public class JoinGameInitializer implements CommandLineRunner {
                 .build();
         playerRepository.save(host);
 
-        final User user = User.builder()
-                .email("user@user.pl")
+        final User userHost = User.builder()
+                .email("roger@user.pl")
                 .createdAt(LocalDateTime.now())
                 .password(passwordEncoder.encode("pass"))
                 .player(host)
                 .userStatus(UserStatus.ACTIVE)
                 .build();
-        userRepository.save(user);
+        userRepository.save(userHost);
+
+        final Player guest = Player.builder()
+                .firstName("Rafael")
+                .lastName("Nadal")
+                .birthday(LocalDate.of(1982, 4, 21))
+                .gender(Gender.MALE)
+                .playerSkill(PlayerSkill.PROFESSIONAL)
+                .yearsOfExperience(32)
+                .games(List.of())
+                .build();
+        playerRepository.save(guest);
+
+        final User userGuest = User.builder()
+                .email("nadal@user.pl")
+                .createdAt(LocalDateTime.now())
+                .password(passwordEncoder.encode("pass"))
+                .player(guest)
+                .userStatus(UserStatus.ACTIVE)
+                .build();
+        userRepository.save(userGuest);
     }
 }
