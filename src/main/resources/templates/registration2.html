@@ -94,6 +94,10 @@ background-size: cover">
                                  <option th:field="*{gender}" value="MALE">Male</option>
                               </select>
                            </div>
+                           <div class="d-flex justify-content-between">
+                              <span class="gruzini-registration-error" th:if="${#fields.hasErrors('gender')}"
+                                    th:errors="*{gender}"></span>
+                           </div>
 
                            <div class="input-group mb-3">
                               <div class="input-group-prepend">
@@ -139,6 +143,10 @@ background-size: cover">
                                  <option th:field="*{playerSkill}" value="ADVANCED">Advanced</option>
                                  <option th:field="*{playerSkill}" value="PROFESSIONAL">Professional</option>
                               </select>
+                           </div>
+                           <div class="d-flex justify-content-between">
+                              <span class="gruzini-registration-error" th:if="${#fields.hasErrors('playerSkill')}"
+                                    th:errors="*{playerSkill}"></span>
                            </div>
 
                            <button id="hiddenSubmitButton" type="submit" hidden></button>
