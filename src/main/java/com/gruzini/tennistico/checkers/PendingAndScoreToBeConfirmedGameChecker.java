@@ -18,7 +18,7 @@ public class PendingAndScoreToBeConfirmedGameChecker {
       this.gameRepository = gameRepository;
    }
 
-   @Scheduled(cron="0 0/5 * * * *")
+   @Scheduled(cron="0 0 * * * *")
    public void clearPendingAndScoreToBeConfirmedGamesOlderThanWeek(){
       final List<Game> allByGameStatusPendingOrGameStatusConfirm
               = gameRepository.getAllByGameStatusIsOrGameStatusIs(GameStatus.PENDING, GameStatus.SCORE_TO_BE_CONFIRMED);
