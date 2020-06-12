@@ -22,7 +22,7 @@ class GameServiceTest {
     private GameRepository gameRepository;
 
     @Autowired
-    private HostedGameService hostedGameService;
+    private GameService hostedGameService;
 
     @Test
     void shouldFindOneGameByStatus() {
