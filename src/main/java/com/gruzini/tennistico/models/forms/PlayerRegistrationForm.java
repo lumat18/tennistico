@@ -32,6 +32,7 @@ public class PlayerRegistrationForm {
     @Length(min = 1, message = "Last name cannot be empty")
     private String lastName;
 
+    @Pattern(regexp = "^((?!NONE).)*$", message = "You have to choose gender")
     private String gender;
 
     @NotNull(message = "You have to provide your date of birth")
@@ -44,15 +45,6 @@ public class PlayerRegistrationForm {
     @Max(value = 99, message = "You must provide a number ranging from 0 to 99")
     private Integer yearsOfExperience;
 
+    @Pattern(regexp = "^((?!NONE).)*$", message = "You have to choose your skill level")
     private String playerSkill;
-
-//    @AssertTrue(message = "You have to pick gender")
-//    public boolean isGenderValid(){
-//        return !gender.equals("NONE");
-//    }
-//
-//    @AssertTrue(message = "You have to pick your level of skill")
-//    public boolean isPlayerSkillValid(){
-//        return !playerSkill.equals("NONE");
-//    }
 }
