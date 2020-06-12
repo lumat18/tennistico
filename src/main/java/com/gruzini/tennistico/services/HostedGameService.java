@@ -27,7 +27,7 @@ public class HostedGameService {
     }
 
     public List<HostedGameDto> getAll(Player player) {
-        final List<Game> result = gameRepository.findAllByGameStatusIsAndPlayersNotContainsAndStartingAtIsAfterOrderByStartingAt(GameStatus.HOSTED, player, LocalDateTime.now());
+        final List<Game> result = gameRepository.findAllByGameStatusAndPlayersNotContainsAndStartingAtIsAfterOrderByStartingAt(GameStatus.HOSTED, player, LocalDateTime.now());
         return result.stream()
                 .map(gameInfoMapper::toGameInfoDto)
                 .collect(Collectors.toList());
