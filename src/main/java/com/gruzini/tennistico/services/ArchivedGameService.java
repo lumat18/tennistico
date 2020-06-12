@@ -1,11 +1,10 @@
 package com.gruzini.tennistico.services;
 
 import com.gruzini.tennistico.domain.Game;
-import com.gruzini.tennistico.domain.Player;
 import com.gruzini.tennistico.domain.User;
 import com.gruzini.tennistico.domain.enums.GameStatus;
 import com.gruzini.tennistico.mappers.ArchivedGameMapper;
-import com.gruzini.tennistico.models.forms.ArchivedGameDTO;
+import com.gruzini.tennistico.models.dto.ArchivedGameDto;
 import com.gruzini.tennistico.repositories.GameRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,7 +23,7 @@ public class ArchivedGameService {
       this.mapper = mapper;
    }
 
-   public List<ArchivedGameDTO> getUserGames(final User user){
+   public List<ArchivedGameDto> getUserGames(final User user){
       final List<Game> allArchivedGamesByPlayer =
               gameRepository.getAllByPlayersAndGameStatus(user.getPlayer(), GameStatus.ARCHIVED);
       return allArchivedGamesByPlayer.stream()

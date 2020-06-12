@@ -1,4 +1,4 @@
-package com.gruzini.tennistico.models.forms;
+package com.gruzini.tennistico.models.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ArchivedGameDTO {
+public class ArchivedGameDto {
    private String opponentName;
    private String score;
    private String courtName;
