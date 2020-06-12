@@ -12,15 +12,15 @@ import java.util.List;
 @Controller
 @RequestMapping("/dashboard/hosted")
 public class HostedGamesController {
-    private final HostedGameService gameService;
+    private final HostedGameService hostedGameService;
 
-    public HostedGamesController(HostedGameService gameService) {
-        this.gameService = gameService;
+    public HostedGamesController(HostedGameService hostedGameService) {
+        this.hostedGameService = hostedGameService;
     }
 
     @GetMapping
     public String showUpcomingGamesPage(final Model model) {
-        final List<HostedGameDto> allHostedGames = gameService.getAll();
+        final List<HostedGameDto> allHostedGames = hostedGameService.getAll();
         model.addAttribute("hostedGames", allHostedGames);
         return "hosted";
     }

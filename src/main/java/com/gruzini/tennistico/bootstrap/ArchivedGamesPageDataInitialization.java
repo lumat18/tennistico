@@ -50,6 +50,7 @@ public class ArchivedGamesPageDataInitialization implements CommandLineRunner {
               .city("Glad")
               .state("Liquid")
               .country("Utopia")
+              .phoneNumber("+48 666 66 66")
               .zipCode("69-420")
               .build();
       courtRepository.save(court);

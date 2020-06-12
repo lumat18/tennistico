@@ -44,6 +44,7 @@ public class JoinGameInitializer implements CommandLineRunner {
                 .country("Spain")
                 .state("Castilla")
                 .street("Calle")
+                .phoneNumber("+00 700 777 777")
                 .zipCode("00-000")
                 .build();
         courtRepository.save(court);

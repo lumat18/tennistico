@@ -14,25 +14,25 @@ import java.util.Optional;
 @AllArgsConstructor
 @Builder
 public class Game {
-   @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
-   @Column(name = "game_id")
-   private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "game_id")
+    private Long id;
 
-   private boolean isOpen;
+    private boolean isOpen;
 
-   private LocalDateTime startingAt;
+    private LocalDateTime startingAt;
 
-   private LocalDateTime endingAt;
+    private LocalDateTime endingAt;
 
-   private String score;
+    private String score;
 
-   @Enumerated(EnumType.STRING)
-   private GameStatus gameStatus;
+    @Enumerated(EnumType.STRING)
+    private GameStatus gameStatus;
 
-   @ManyToOne(optional = false, fetch = FetchType.LAZY)
-   @JoinColumn(name = "court_id")
-   private Court court;
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "court_id")
+    private Court court;
 
    @ManyToMany(mappedBy = "games", fetch = FetchType.EAGER)
    @ToString.Exclude
