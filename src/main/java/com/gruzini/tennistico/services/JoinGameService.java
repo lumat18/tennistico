@@ -20,7 +20,8 @@ public class JoinGameService {
 
     public void joinGuestToGame(final String guestUsername, final Long gameId) {
         final Game game = changeGameStatus(gameId);
-        addGameToPlayer(guestUsername, game);
+        final Player guest = playerService.getByUsername(guestUsername);
+        addGameToPlayer(guest, game);
     }
 
     private Game changeGameStatus(Long gameId) {
@@ -30,8 +31,7 @@ public class JoinGameService {
         return game;
     }
 
-    private void addGameToPlayer(String guestUsername, Game game) {
-        final Player guest = playerService.getByUsername(guestUsername);
+    private void addGameToPlayer(Player guest, Game game) {
         guest.addGame(game);
         playerService.save(guest);
     }
