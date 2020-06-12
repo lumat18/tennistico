@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class CourtInfoDto {
+    private Long courtId;
     private String name;
     private String address;
     private String city;
