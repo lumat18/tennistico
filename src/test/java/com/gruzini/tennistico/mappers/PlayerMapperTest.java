@@ -18,7 +18,7 @@ class PlayerMapperTest {
     void shouldMapPlayerRegistrationFormToPlayer() {
         //given
         final PlayerRegistrationForm playerRegistrationForm =
-                new PlayerRegistrationForm("name", "surname", Gender.MALE, LocalDate.of(2000, 1, 1), 1, PlayerSkill.BEGINNER);
+                new PlayerRegistrationForm("name", "surname", Gender.MALE.toString(), LocalDate.of(2000, 1, 1), 1, PlayerSkill.BEGINNER.toString());
         //when
         final Player player = playerMapper.toPlayer(playerRegistrationForm);
         //then
