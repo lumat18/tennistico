@@ -5,7 +5,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "games")
@@ -14,6 +13,9 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class Game {
+
+   private static final int HOST_INDEX = 0;
+
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    @Column(name = "game_id")
@@ -38,4 +40,8 @@ public class Game {
    @ToString.Exclude
    @EqualsAndHashCode.Exclude
    private List<Player> players;
+
+   public Player getHost() {
+      return players.get(HOST_INDEX);
+   }
 }
