@@ -32,4 +32,14 @@ public class CourtService {
     public Court getById(Long courtId) {
         return courtRepository.findById(courtId).orElseThrow(CourtNotFoundException::new);
     }
+
+    public List<String> getCities() {
+        return courtRepository.getCities();
+    }
+
+    public List<CourtInfoDto> getByCity(final String city) {
+        return courtRepository.getByCity(city).stream()
+                .map(courtInfoMapper::toCourtInfoDto)
+                .collect(Collectors.toList());
+    }
 }

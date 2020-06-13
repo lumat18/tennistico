@@ -24757,11 +24757,31 @@ fieldset[disabled][disabled] .dark-edition .has-error .form-control,
 }
 .gruzini-card-desc{
   text-align: center;
-  padding: 30px;
+  padding-top: 30px;
 }
 .gruzini-table-collapsing-first{
 }
 .gruzini-table-collapsing-second {
+}
+.gruzini-search{
+  position: relative; height: 75px;
+  padding-top: 15px !important;
+}
+.gruzini-search-form{
+  display: inline-block !important;
+  width: 250px;
+}
+.gruzini-search-title{
+  font-size: 22px !important;
+}
+.gruzini-search-field{
+  font-size: 22px;
+  height: 46px;
+  margin-top: 2px !important;
+}
+.gruzini-search-button{
+  display: inline-block !important;
+  font-size: 22px !important;
 }
 
 ::-webkit-inner-spin-button { display: none; }
