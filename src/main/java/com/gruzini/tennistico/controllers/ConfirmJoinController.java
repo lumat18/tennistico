@@ -23,7 +23,6 @@ public class ConfirmJoinController {
     @GetMapping("/{game_id}")
     public String confirmGuestJoiningTheGame(@PathVariable(name = "game_id") final Long gameId, final Principal principal) {
         joinConfirmService.confirmJoin(gameId, principal.getName());
-
         //TODO wysłać notification do Guesta
         return "dashboard";
     }

@@ -22,10 +22,14 @@ public class JoinConfirmService {
     public void confirmJoin(final Long gameId, final String username) {
         final Player player = playerService.getByUsername(username);
         final Game game = gameService.getById(gameId);
+        validateGameAndPlayer(game, player);
+        gameService.setGameStatusTo(game, GameStatus.UPCOMING);
+    }
+
+    private void validateGameAndPlayer(final Game game, final Player player) {
         validateGameStatus(game);
         validateGameHost(game, player);
         validateGamePlayers(game);
-        gameService.setGameStatusTo(game, GameStatus.UPCOMING);
     }
 
     private void validateGamePlayers(final Game game) {
