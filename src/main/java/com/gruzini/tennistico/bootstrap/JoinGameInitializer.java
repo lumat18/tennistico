@@ -13,6 +13,7 @@ import com.gruzini.tennistico.repositories.GameRepository;
 import com.gruzini.tennistico.repositories.PlayerRepository;
 import com.gruzini.tennistico.repositories.UserRepository;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -21,6 +22,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Component
+@Profile("dev")
 public class JoinGameInitializer implements CommandLineRunner {
     private final PlayerRepository playerRepository;
     private final UserRepository userRepository;
