@@ -1,7 +1,6 @@
 package com.gruzini.tennistico.controllers;
 
 import com.gruzini.tennistico.domain.User;
-import com.gruzini.tennistico.services.ArchivedGameService;
 import com.gruzini.tennistico.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

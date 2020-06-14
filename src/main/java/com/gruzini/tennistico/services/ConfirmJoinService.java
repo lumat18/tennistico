@@ -23,7 +23,7 @@ public class ConfirmJoinService {
         final Player player = playerService.getByUsername(username);
         final Game game = gameService.getById(gameId);
         validateGameAndPlayer(game, player);
-        gameService.setGameStatusTo(game, GameStatus.UPCOMING);
+        gameService.updateGameStatus(game, GameStatus.UPCOMING);
     }
 
     private void validateGameAndPlayer(final Game game, final Player player) {

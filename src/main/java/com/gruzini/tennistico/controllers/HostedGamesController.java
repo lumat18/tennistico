@@ -2,7 +2,6 @@ package com.gruzini.tennistico.controllers;
 
 import com.gruzini.tennistico.domain.Player;
 import com.gruzini.tennistico.models.dto.HostedGameDto;
-import com.gruzini.tennistico.services.HostedGameService;
 import com.gruzini.tennistico.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
