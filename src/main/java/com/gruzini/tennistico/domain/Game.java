@@ -14,10 +14,13 @@ import java.util.Optional;
 @AllArgsConstructor
 @Builder
 public class Game {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "game_id")
-    private Long id;
+
+   private static final int HOST_INDEX = 0;
+
+   @Id
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
+   @Column(name = "game_id")
+   private Long id;
 
     private boolean isOpen;
 
@@ -39,8 +42,8 @@ public class Game {
    @EqualsAndHashCode.Exclude
    private List<Player> players;
 
-   public Player getHost(){
-      return players.get(0);
+   public Player getHost() {
+      return players.get(HOST_INDEX);
    }
 
    public Optional<Player> getGuest(){
