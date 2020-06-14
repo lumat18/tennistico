@@ -2,8 +2,8 @@ package com.gruzini.tennistico.exceptions;
 
 import com.gruzini.tennistico.messages.ErrorMessages;
 
-public class ResourceNotFoundException extends RuntimeException {
-    public ResourceNotFoundException() {
+public class IllegalActionException extends RuntimeException {
+    public IllegalActionException() {
         super(ErrorMessages.ILLEGAL_ACTION_MESSAGE);
     }
 }

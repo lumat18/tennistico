@@ -1,5 +1,6 @@
 package com.gruzini.tennistico.controllers;
 
+import com.gruzini.tennistico.exceptions.IllegalActionException;
 import com.gruzini.tennistico.models.dto.CreatedMatchDto;
 import com.gruzini.tennistico.services.MatchCreationService;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.validation.Valid;
 import java.security.Principal;
 
+import static java.util.Objects.isNull;
+
 @Controller
 @RequestMapping("/dashboard/create")
 public class MatchCreationController {
@@ -25,7 +28,7 @@ public class MatchCreationController {
 
     @PostMapping("/begin")
     public String beginMatchCreation(@RequestParam(name = "courtId") final Long courtId, final Model model) {
-        System.out.println("chosen court " + courtId);
+        if (isNull(courtId)) throw new IllegalActionException();
         model.addAttribute("chosenCourtId", courtId);
         model.addAttribute("match", CreatedMatchDto.builder().build());
         return "create";

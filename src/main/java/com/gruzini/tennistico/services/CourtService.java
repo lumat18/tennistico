@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.util.Objects.isNull;
+
 @Service
 @Transactional
 @Slf4j
@@ -38,6 +40,7 @@ public class CourtService {
     }
 
     public List<CourtInfoDto> getByCity(final String city) {
+        if (isNull(city)) throw new CourtNotFoundException();
         return courtRepository.getByCity(city).stream()
                 .map(courtInfoMapper::toCourtInfoDto)
                 .collect(Collectors.toList());

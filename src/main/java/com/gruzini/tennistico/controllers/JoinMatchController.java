@@ -2,7 +2,6 @@ package com.gruzini.tennistico.controllers;
 
 import com.gruzini.tennistico.exceptions.MatchNotFoundException;
 import com.gruzini.tennistico.exceptions.PlayerNotFoundException;
-import com.gruzini.tennistico.exceptions.ResourceNotFoundException;
 import com.gruzini.tennistico.services.JoinMatchService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -10,8 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-
-import static java.util.Objects.isNull;
 
 @Controller
 @RequestMapping("/join-match")
@@ -25,8 +22,6 @@ public class JoinMatchController {
 
     @GetMapping("/{match_id}")
     public String joinMatch(@PathVariable(name = "match_id") final Long matchId, final Principal principal) {
-        if (isNull(matchId)) throw new ResourceNotFoundException();
-
         joinMatchService.joinGuestToMatch(principal.getName(), matchId);
         //TODO send the notification to host
         return "dashboard";
