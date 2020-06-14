@@ -14,13 +14,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class GameCreationService {
 
     private final CreatedGameMapper createdGameMapper;
-    private final HostedGameService hostedGameService;
+    private final GameService gameService;
     private final PlayerService playerService;
     private final UserService userService;
 
-    public GameCreationService(CreatedGameMapper createdGameMapper, HostedGameService hostedGameService, PlayerService playerService, UserService userService) {
+    public GameCreationService(CreatedGameMapper createdGameMapper, GameService gameService, PlayerService playerService, UserService userService) {
         this.createdGameMapper = createdGameMapper;
-        this.hostedGameService = hostedGameService;
+        this.gameService = gameService;
         this.playerService = playerService;
         this.userService = userService;
     }
@@ -33,7 +33,7 @@ public class GameCreationService {
 
     private Game saveCreatedGame(CreatedGameDto createdGameDto) {
         final Game createdGame = createdGameMapper.toGame(createdGameDto);
-        hostedGameService.save(createdGame);
+        gameService.save(createdGame);
         return createdGame;
     }
 }

@@ -3,7 +3,6 @@ package com.gruzini.tennistico.controllers;
 import com.gruzini.tennistico.exceptions.GameNotFoundException;
 import com.gruzini.tennistico.exceptions.PlayerNotFoundException;
 import com.gruzini.tennistico.services.JoinGameService;
-import com.gruzini.tennistico.services.PlayerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +16,7 @@ public class JoinGameController {
 
     private final JoinGameService joinGameService;
 
-    public JoinGameController(HostedGameService hostedGameService, PlayerService playerService, JoinGameService joinGameService) {
+    public JoinGameController(JoinGameService joinGameService) {
         this.joinGameService = joinGameService;
     }
 

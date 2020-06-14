@@ -10,11 +10,11 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class JoinGameService {
 
-    private final HostedGameService hostedGameService;
+    private final GameService gameService;
     private final PlayerService playerService;
 
-    public JoinGameService(HostedGameService hostedGameService, PlayerService playerService) {
-        this.hostedGameService = hostedGameService;
+    public JoinGameService(GameService gameService, PlayerService playerService) {
+        this.gameService = gameService;
         this.playerService = playerService;
     }
 
@@ -25,9 +25,9 @@ public class JoinGameService {
     }
 
     private Game changeGameStatus(Long gameId) {
-        final Game game = hostedGameService.getById(gameId);
+        final Game game = gameService.getById(gameId);
         game.setGameStatus(GameStatus.JOIN_REQUEST);
-        hostedGameService.save(game);
+        gameService.save(game);
         return game;
     }
 
