@@ -1,0 +1,83 @@
+<!--
+=========================================================
+* Material Dashboard Dark Edition - v2.1.0
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/material-dashboard-dark
+* Copyright 2019 Creative Tim (http://www.creative-tim.com)
+
+* Coded by www.creative-tim.com
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+
+<head th:insert="/fragments/head :: head"></head>
+
+<body class="dark-edition" style="background-image: url(/static/img/background.jpg)">
+<div class="wrapper ">
+
+   <!--Side Bar-->
+   <div th:insert="fragments/sidebar :: sidebar"></div>
+   <!--End Side Bar-->
+
+   <div class="main-panel">
+      <!-- Navbar -->
+      <nav th:insert="/fragments/navbar :: navbar"></nav>
+      <!-- End Navbar -->
+      <div class="content">
+         <div class="container-fluid">
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="card">
+                     <div class="card-header card-header-success">
+                        <p class="gruzini-title">Games History</p>
+                     </div>
+                     <div class="card-body table-responsive">
+                        <table class="table table-hover">
+                           <thead class="text-warning">
+                           <th class="gruzini-text-card-content">ID</th>
+                           <th class="gruzini-text-card-content">Opponent</th>
+                           <th class="gruzini-text-card-content">Court</th>
+                           <th class="gruzini-text-card-content">Date</th>
+                           <th class="gruzini-text-card-content">Score</th>
+                           <th class="gruzini-text-card-content">Win / Loss</th>
+                           </thead>
+                           <tbody>
+                           <tr th:each="game, iter : ${archivedGames}">
+                              <td class="gruzini-text-card-content" th:text="${iter.index+1}"></td>
+                              <td class="gruzini-text-card-content" th:text="${game.opponentName}"></td>
+                              <td class="gruzini-text-card-content" th:text="${game.courtName}"></td>
+                              <td class="gruzini-text-card-content" th:text="${game.date}"></td>
+                              <td class="gruzini-text-card-content" th:text="${game.score}"></td>
+                              <td></td>
+                           </tr>
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!--FOOTER-->
+      <footer th:insert="/fragments/footer :: footer"></footer>
+      <!--END FOOTER-->
+      <script>
+         const currentDate = new Date();
+         let shownFullDate = document.getElementById('fullDate');
+         shownFullDate.innerHTML = shownFullDate.innerHTML + dateFormatter(currentDate);
+      </script>
+   </div>
+</div>
+<!--JAVASCRIPT IMPORTS-->
+<div th:replace="/fragments/js-imports :: js-imports"></div>
+<!--END JAVASCRIPT IMPORTS-->
+</body>
+
+</html>

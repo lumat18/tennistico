@@ -14,8 +14,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.Objects;
 
 @Controller
 @RequestMapping("/registration")
@@ -39,16 +41,22 @@ public class RegistrationController {
     }
 
     @PostMapping("/step-one")
-    public String processFirstRegistrationStep(@Valid @ModelAttribute final UserRegistrationForm userRegistrationForm, final Errors errors) {
+    public String processFirstRegistrationStep(@Valid @ModelAttribute final UserRegistrationForm userRegistrationForm,
+                                               final Errors errors,
+                                               final RedirectAttributes attributes) {
         registrationService.validateEmailExistence(userRegistrationForm.getEmail());
         if (errors.hasErrors()) {
             return "registration1";
         }
+        attributes.addFlashAttribute("stepTwoPermit", "permit");
         return "redirect:/registration/step-two";
     }
 
     @GetMapping("/step-two")
     public String showSecondRegistrationStep(final Model model) {
+        if(model.getAttribute("stepTwoPermit") == null){
+            return "redirect:/registration/step-one";
+        }
         model.addAttribute("playerRegistrationForm", new PlayerRegistrationForm());
         return "registration2";
     }
@@ -57,7 +65,8 @@ public class RegistrationController {
     public String processSecondRegistrationStep(@Valid @ModelAttribute final PlayerRegistrationForm playerRegistrationForm,
                                                 final Errors errors,
                                                 @ModelAttribute final UserRegistrationForm userRegistrationForm,
-                                                final SessionStatus sessionStatus) {
+                                                final SessionStatus sessionStatus,
+                                                final RedirectAttributes attributes) {
         if (errors.hasErrors()){
             System.out.println("errors in player registration form");
             return "registration2";
@@ -68,11 +77,15 @@ public class RegistrationController {
 
         registrationService.register(user);
         sessionStatus.setComplete();
+        attributes.addFlashAttribute("stepThreePermit", "permit");
         return  "redirect:/registration/step-three";
     }
 
     @GetMapping("/step-three")
-    public String showThirdRegistrationStep() {
+    public String showThirdRegistrationStep(final Model model) {
+        if(model.getAttribute("stepThreePermit") == null){
+            return "redirect:/registration/step-two";
+        }
         return "registration3";
     }
 }

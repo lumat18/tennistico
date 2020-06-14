@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+>
+
+<head th:insert="/fragments/head :: head"></head>
+
+<body class="dark-edition" style="background-image: url(/img/upcoming_background.jpg); background-size: cover">
+<div class="wrapper">
+
+    <!--Side Bar-->
+    <div th:insert="fragments/sidebar :: sidebar"></div>
+    <!--End Side Bar-->
+
+    <div class="main-panel">
+        <!-- Navbar -->
+        <nav th:insert="/fragments/navbar :: navbar"></nav>
+        <!-- End Navbar -->
+
+        <div class="main-panel gruzini-registration-main-panel">
+            <div class="content">
+                <div class="container-fluid">
+
+
+                    <div class="row">
+                        <!--               placed here to put the card in center -->
+                        <!--                    <div class="col-xl-1"></div>-->
+
+                        <div class="col-lg-12">
+                            <div class="card card-chart">
+                                <div class="card-header card-header-success">
+                                    <p class="gruzini-title">Create New Game</p>
+                                </div>
+                                <div class="card-body">
+
+                                    <div class="card-body table-responsive gruzini-text-card-content">
+                                        <div class="gruzini-card-desc">
+                                            Please fill in the details. Remember that this information will be visible
+                                            to other users. Be serious. We recommend to check court's availibility up in
+                                            front. Good luck!
+                                        </div>
+                                        <form method="post" th:action="@{/dashboard/create/process}"
+                                              th:object="${game}">
+
+                                            <input hidden type="text" th:name="courtId" th:id="courtId" th:value="${chosenCourtId}">
+
+                                            <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text gruzini-input-group-text" id="dateAddon">
+                                                        Please select date:
+                                                        </span>
+                                                    </div>
+                                                        <input type="date" class="form-control gruzini-registration-text"
+                                                             th:field="*{date}" aria-label="date" aria-describedby="dateAddon">
+                                                </div>
+                                            <div class="d-flex justify-content-between">
+                                                <span class="gruzini-registration-error" th:if="${#fields.hasErrors('date')}"
+                                                    th:errors="*{date}">
+                                                </span>
+                                            </div>
+
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                        <span class="input-group-text gruzini-input-group-text" id="startAddon">
+                                                        Choose starting hour:
+                                                        </span>
+                                                </div>
+                                                <input type="time" class="form-control gruzini-registration-text"
+                                                       th:field="*{start}" aria-label="start" aria-describedby="startAddon">
+                                            </div>
+
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                        <span class="input-group-text gruzini-input-group-text" id="endAddon">
+                                                        Choose ending hour:
+                                                        </span>
+                                                </div>
+                                                <input type="time" class="form-control gruzini-registration-text"
+                                                       th:field="*{end}" aria-label="end" aria-describedby="endAddon">
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <span class="gruzini-registration-error" th:if="${#fields.hasErrors('startAndEndingTimeValid')}"
+                                                      th:errors="*{startAndEndingTimeValid}">
+                                                </span>
+                                            </div>
+
+                                            <button id="hiddenSubmitButton" type="submit" hidden></button>
+                                        </form>
+                                    </div>
+
+                                </div>
+                                <div class="card-footer d-flex justify-content-center">
+                                    <a th:href="@{/dashboard}" class="btn btn-warning gruzini-btn-success"
+                                       role="button"
+                                       aria-pressed="true">
+                                        Go back
+                                    </a>
+                                    <button class="btn btn-success gruzini-btn-success" id="buttonSubmit"
+                                            onclick="submitByHiddenButton()">Create
+                                    </button>
+
+
+                                </div>
+                                <!--                                <div class="card-footer d-flex justify-content-center">-->
+                                <!--                                    <a href="/dashboard/create" class="btn btn-success gruzini-btn-success" role="button"-->
+                                <!--                                       aria-pressed="true">-->
+                                <!--                                        No game seems right? Create a new one-->
+                                <!--                                    </a>-->
+                                <!--                                </div>-->
+                            </div>
+                        </div>
+
+                        <!--               placed here to put the card in center -->
+                        <!--                    <div class="col-xl-1"></div>-->
+                    </div>
+                </div>
+            </div>
+            <!--FOOTER-->
+            <footer th:insert="/fragments/footer :: footer"></footer>
+            <!--END FOOTER-->
+            <script>
+                function submitByHiddenButton() {
+                    document.getElementById("hiddenSubmitButton").click();
+                }
+            </script>
+        </div>
+    </div>
+
+    <!--JAVASCRIPT IMPORTS-->
+    <div th:replace="/fragments/js-imports :: js-imports"></div>
+    <!--END JAVASCRIPT IMPORTS-->
+</div>
+</body>
+</html>

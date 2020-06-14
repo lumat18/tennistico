@@ -2,26 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
 >
 
-<head>
-   <meta charset="utf-8"/>
-   <link rel="apple-touch-icon" sizes="76x76" th:href="@{/img/apple-icon.png}">
-   <link rel="icon" type="image/png" th:href="@{/img/favicon.png}">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-   <title>
-      Tennistico
-   </title>
-   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
-         name='viewport'/>
-   <!--     Fonts and icons     -->
-   <link rel="stylesheet" type="text/css"
-         href="https://fonts.googleapis.com/css?family=Teko:300,400,500,700|Material+Icons"/>
-   <link rel="stylesheet" type="text/css"
-         href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"/>
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
-   <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css">
-   <!-- CSS Files -->
-   <link th:href="@{/css/material-dashboard.css}" rel="stylesheet"/>
-</head>
+<head th:insert="/fragments/head :: head"></head>
 
 <body class="dark-edition" style="background-image: url(/img/registration_2_background.jpg);
 background-size: cover">
@@ -88,11 +69,15 @@ background-size: cover">
                                  <span class="input-group-text gruzini-input-group-text"
                                        id="genderSelect">Gender:</span>
                               </div>
-                              <select class="custom-select gruzini-select" aria-describedby="genderSelect">
-                                 <option selected>Choose gender...</option>
-                                 <option th:field="*{gender}" value="FEMALE">Female</option>
-                                 <option th:field="*{gender}" value="MALE">Male</option>
+                              <select th:field="*{gender}" class="custom-select gruzini-select" aria-describedby="genderSelect">
+                                 <option th:value="NONE" selected>Choose gender...</option>
+                                 <option th:value="FEMALE">Female</option>
+                                 <option th:value="MALE">Male</option>
                               </select>
+                           </div>
+                           <div class="d-flex justify-content-between">
+                              <span class="gruzini-registration-error" th:if="${#fields.hasErrors('gender')}"
+                                    th:errors="*{gender}"></span>
                            </div>
 
                            <div class="input-group mb-3">
@@ -132,13 +117,17 @@ background-size: cover">
                                  <span class="input-group-text gruzini-input-group-text"
                                        id="skillSelect">Player skill:</span>
                               </div>
-                              <select class="custom-select gruzini-select" aria-describedby="skillSelect">
-                                 <option selected>Choose skill level...</option>
-                                 <option th:field="*{playerSkill}" value="BEGINNER">Beginner</option>
-                                 <option th:field="*{playerSkill}" value="AMATEUR">Amateur</option>
-                                 <option th:field="*{playerSkill}" value="ADVANCED">Advanced</option>
-                                 <option th:field="*{playerSkill}" value="PROFESSIONAL">Professional</option>
+                              <select th:field="*{playerSkill}" class="custom-select gruzini-select" aria-describedby="skillSelect">
+                                 <option th:value="NONE" selected>Choose skill level...</option>
+                                 <option th:value="BEGINNER">Beginner</option>
+                                 <option th:value="AMATEUR">Amateur</option>
+                                 <option th:value="ADVANCED">Advanced</option>
+                                 <option th:value="PROFESSIONAL">Professional</option>
                               </select>
+                           </div>
+                           <div class="d-flex justify-content-between">
+                              <span class="gruzini-registration-error" th:if="${#fields.hasErrors('playerSkill')}"
+                                    th:errors="*{playerSkill}"></span>
                            </div>
 
                            <button id="hiddenSubmitButton" type="submit" hidden></button>
@@ -180,67 +169,20 @@ background-size: cover">
             </div>
          </div>
       </div>
-      <footer class="footer">
-         <div class="container-fluid">
-            <nav class="float-left">
-               <ul>
-                  <li>
-                     <a href="https://www.creative-tim.com">
-                        Creative Tim
-                     </a>
-                  </li>
-                  <li>
-                     <a href="https://creative-tim.com/presentation">
-                        About Us
-                     </a>
-                  </li>
-                  <li>
-                     <a href="http://blog.creative-tim.com">
-                        Blog
-                     </a>
-                  </li>
-                  <li>
-                     <a href="https://www.creative-tim.com/license">
-                        Licenses
-                     </a>
-                  </li>
-               </ul>
-            </nav>
-            <div class="copyright float-right" id="date">
-               , made with <i class="material-icons">favorite</i> by
-               <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
-            </div>
-         </div>
-      </footer>
-      <script>
-         const x = new Date().getFullYear();
-         let date = document.getElementById('date');
-         date.innerHTML = '&copy; ' + x + date.innerHTML;
-      </script>
+      <!--FOOTER-->
+      <footer th:insert="/fragments/footer :: footer"></footer>
+      <!--END FOOTER-->
       <script>
          function submitByHiddenButton() {
             document.getElementById("hiddenSubmitButton").click();
          }
       </script>
-
-      <!--      or we can simply disable the autofill option so it stops ruining the styling-->
-      <script>
-         const inputs = document.querySelectorAll('input');
-
-         inputs.forEach(input => {
-            input.setAttribute('autocomplete', 'off')
-            input.setAttribute('autocorrect', 'off')
-            input.setAttribute('autocapitalize', 'off')
-            input.setAttribute('spellcheck', false)
-         })
-      </script>
    </div>
 </div>
 
-<script th:src="@{/js/core/jquery.min.js}"></script>
-<script th:src="@{/js/core/popper.min.js}"></script>
-<script th:src="@{/js/core/bootstrap-material-design.min.js}"></script>
-<script th:src="@{/js/plugins/perfect-scrollbar.jquery.min.js}"></script>
+<!--JAVASCRIPT IMPORTS-->
+<div th:replace="/fragments/js-imports :: js-imports"></div>
+<!--END JAVASCRIPT IMPORTS-->
 
 </body>
 </html>

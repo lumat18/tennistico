@@ -22,18 +22,16 @@ public class Court {
    @NotNull
    private String name;
 
-   @NotNull
    private String street;
 
    @NotNull
    private String city;
 
-   @NotNull
    private String state;
 
-   @NotNull
    private String country;
 
-   @NotNull
    private String zipCode;
+
+   private String phoneNumber;
 }
