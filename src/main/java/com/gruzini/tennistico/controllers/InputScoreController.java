@@ -46,7 +46,6 @@ public class InputScoreController {
         final Player winner = winValidator.validateWinner(match);
         //TODO zrobić update WIN/LOSS playerów
 
-
         return "dashboard";
     }
 }
