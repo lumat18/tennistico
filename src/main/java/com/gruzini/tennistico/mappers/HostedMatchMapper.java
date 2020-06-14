@@ -10,6 +10,7 @@ public class HostedMatchMapper {
 
     public HostedMatchDto toMatchInfoDto(final Match match) {
         return HostedMatchDto.builder()
+                .id(match.getId())
                 .hostName(match.getPlayers().get(HOST_INDEX).getFirstName() + " " + match.getPlayers().get(HOST_INDEX).getLastName())
                 .hostGender(match.getPlayers().get(HOST_INDEX).getGender().toString())
                 .hostAge(match.getPlayers().get(HOST_INDEX).getAge())
