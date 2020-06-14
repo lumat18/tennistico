@@ -11,11 +11,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
+import java.util.Arrays;
+
+import static java.util.Objects.isNull;
+import static java.util.Objects.nonNull;
 
 @Data
 @AllArgsConstructor
@@ -31,15 +32,19 @@ public class PlayerRegistrationForm {
     @Length(min = 1, message = "Last name cannot be empty")
     private String lastName;
 
-    private Gender gender;
+    @Pattern(regexp = "^((?!NONE).)*$", message = "You have to choose gender")
+    private String gender;
 
+    @NotNull(message = "You have to provide your date of birth")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Past(message = "You cannot be born in future")
     private LocalDate birthday;
 
+    @NotNull(message = "You have to provide number of years you have played")
     @Min(value = 0, message = "You must provide a number ranging from 0 to 99")
     @Max(value = 99, message = "You must provide a number ranging from 0 to 99")
     private Integer yearsOfExperience;
 
-    private PlayerSkill playerSkill;
+    @Pattern(regexp = "^((?!NONE).)*$", message = "You have to choose your skill level")
+    private String playerSkill;
 }

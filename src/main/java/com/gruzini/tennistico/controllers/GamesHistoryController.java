@@ -1,9 +1,6 @@
 package com.gruzini.tennistico.controllers;
 
-import com.gruzini.tennistico.domain.Game;
 import com.gruzini.tennistico.domain.User;
-import com.gruzini.tennistico.mappers.ArchivedGameMapper;
-import com.gruzini.tennistico.models.forms.ArchivedGameDTO;
 import com.gruzini.tennistico.services.ArchivedGameService;
 import com.gruzini.tennistico.services.UserService;
 import org.springframework.stereotype.Controller;
@@ -12,8 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/dashboard/games-history")

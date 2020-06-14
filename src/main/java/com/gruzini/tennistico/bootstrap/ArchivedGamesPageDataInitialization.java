@@ -13,6 +13,7 @@ import com.gruzini.tennistico.repositories.GameRepository;
 import com.gruzini.tennistico.repositories.PlayerRepository;
 import com.gruzini.tennistico.repositories.UserRepository;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +24,7 @@ import java.time.Month;
 import java.util.List;
 
 @Component
+@Profile("dev")
 public class ArchivedGamesPageDataInitialization implements CommandLineRunner {
    private final CourtRepository courtRepository;
    private final GameRepository gameRepository;
@@ -50,29 +52,30 @@ public class ArchivedGamesPageDataInitialization implements CommandLineRunner {
               .city("Glad")
               .state("Liquid")
               .country("Utopia")
+              .phoneNumber("+48 666 66 66")
               .zipCode("69-420")
               .build();
       courtRepository.save(court);
 
       final Game game1 = Game.builder()
-              .endingAt(LocalDateTime.of(2020, Month.FEBRUARY, 21, 12, 10))
+              .endingAt(LocalDateTime.of(2020, Month.JUNE, 1, 12, 10))
               .court(court)
-              .gameStatus(GameStatus.ARCHIVED)
+              .gameStatus(GameStatus.PENDING)
               .score("3-2")
               .build();
 
       final Game game2 = Game.builder()
-              .startingAt(LocalDateTime.of(2020, Month.JUNE, 21, 10, 10))
-              .endingAt(LocalDateTime.of(2020, Month.JUNE, 21, 12, 10))
+              .startingAt(LocalDateTime.of(2020, Month.JUNE, 1, 10, 10))
+              .endingAt(LocalDateTime.of(2020, Month.JUNE, 1, 12, 10))
               .court(court)
               .gameStatus(GameStatus.UPCOMING)
               .score("3-2")
               .build();
 
       final Game game3 = Game.builder()
-              .endingAt(LocalDateTime.of(2020, Month.FEBRUARY, 21, 12, 10))
+              .endingAt(LocalDateTime.of(2020, Month.JUNE, 5, 12, 10))
               .court(court)
-              .gameStatus(GameStatus.ARCHIVED)
+              .gameStatus(GameStatus.SCORE_TO_BE_CONFIRMED)
               .score("3-2")
               .build();
 

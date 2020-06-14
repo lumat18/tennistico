@@ -88,11 +88,15 @@ background-size: cover">
                                  <span class="input-group-text gruzini-input-group-text"
                                        id="genderSelect">Gender:</span>
                               </div>
-                              <select class="custom-select gruzini-select" aria-describedby="genderSelect">
-                                 <option selected>Choose gender...</option>
-                                 <option th:field="*{gender}" value="FEMALE">Female</option>
-                                 <option th:field="*{gender}" value="MALE">Male</option>
+                              <select th:field="*{gender}" class="custom-select gruzini-select" aria-describedby="genderSelect">
+                                 <option th:value="NONE" selected>Choose gender...</option>
+                                 <option th:value="FEMALE">Female</option>
+                                 <option th:value="MALE">Male</option>
                               </select>
+                           </div>
+                           <div class="d-flex justify-content-between">
+                              <span class="gruzini-registration-error" th:if="${#fields.hasErrors('gender')}"
+                                    th:errors="*{gender}"></span>
                            </div>
 
                            <div class="input-group mb-3">
@@ -132,13 +136,17 @@ background-size: cover">
                                  <span class="input-group-text gruzini-input-group-text"
                                        id="skillSelect">Player skill:</span>
                               </div>
-                              <select class="custom-select gruzini-select" aria-describedby="skillSelect">
-                                 <option selected>Choose skill level...</option>
-                                 <option th:field="*{playerSkill}" value="BEGINNER">Beginner</option>
-                                 <option th:field="*{playerSkill}" value="AMATEUR">Amateur</option>
-                                 <option th:field="*{playerSkill}" value="ADVANCED">Advanced</option>
-                                 <option th:field="*{playerSkill}" value="PROFESSIONAL">Professional</option>
+                              <select th:field="*{playerSkill}" class="custom-select gruzini-select" aria-describedby="skillSelect">
+                                 <option th:value="NONE" selected>Choose skill level...</option>
+                                 <option th:value="BEGINNER">Beginner</option>
+                                 <option th:value="AMATEUR">Amateur</option>
+                                 <option th:value="ADVANCED">Advanced</option>
+                                 <option th:value="PROFESSIONAL">Professional</option>
                               </select>
+                           </div>
+                           <div class="d-flex justify-content-between">
+                              <span class="gruzini-registration-error" th:if="${#fields.hasErrors('playerSkill')}"
+                                    th:errors="*{playerSkill}"></span>
                            </div>
 
                            <button id="hiddenSubmitButton" type="submit" hidden></button>
