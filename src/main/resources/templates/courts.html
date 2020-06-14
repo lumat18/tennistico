@@ -19,12 +19,7 @@
         <div class="main-panel gruzini-registration-main-panel">
             <div class="content">
                 <div class="container-fluid">
-
-
                     <div class="row">
-                        <!--               placed here to put the card in center -->
-                        <!--                    <div class="col-xl-1"></div>-->
-
                         <div class="col-lg-12">
                             <div class="card card-chart">
                                 <div class="card-header card-header-success">
@@ -86,20 +81,10 @@
                                             </tbody>
                                         </table>
                                     </div>
-
-
                                 </div>
-<!--                                <div class="card-footer d-flex justify-content-center">-->
-<!--                                    <a href="/dashboard/create" class="btn btn-success gruzini-btn-success" role="button"-->
-<!--                                       aria-pressed="true">-->
-<!--                                        No game seems right? Create a new one-->
-<!--                                    </a>-->
-<!--                                </div>-->
                             </div>
                         </div>
 
-                        <!--               placed here to put the card in center -->
-                        <!--                    <div class="col-xl-1"></div>-->
                     </div>
                 </div>
             </div>
@@ -111,24 +96,11 @@
                     document.getElementById("hiddenSubmitButton").click();
                 }
             </script>
-            <!--      or we can simply disable the autofill option so it stops ruining the styling-->
-            <script>
-                const inputs = document.querySelectorAll('input');
-
-                inputs.forEach(input => {
-                    input.setAttribute('autocomplete', 'off')
-                    input.setAttribute('autocorrect', 'off')
-                    input.setAttribute('autocapitalize', 'off')
-                    input.setAttribute('spellcheck', false)
-                })
-            </script>
         </div>
     </div>
-
-    <script th:src="@{/js/core/jquery.min.js}"></script>
-    <script th:src="@{/js/core/popper.min.js}"></script>
-    <script th:src="@{/js/core/bootstrap-material-design.min.js}"></script>
-    <script th:src="@{/js/plugins/perfect-scrollbar.jquery.min.js}"></script>
-
+    <!--JAVASCRIPT IMPORTS-->
+    <div th:replace="/fragments/js-imports :: js-imports"></div>
+    <!--END JAVASCRIPT IMPORTS-->
+</div>
 </body>
 </html>
