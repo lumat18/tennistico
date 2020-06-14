@@ -5,14 +5,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.AssertTrue;
 import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class HostedGameDto {
+public class HostedMatchDto {
     private String hostName;
     private String hostGender;
     private Integer hostAge;

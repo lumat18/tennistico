@@ -1,6 +1,6 @@
 package com.gruzini.tennistico.services;
 
-import com.gruzini.tennistico.domain.Game;
+import com.gruzini.tennistico.domain.Match;
 import com.gruzini.tennistico.domain.Player;
 import com.gruzini.tennistico.exceptions.PlayerNotFoundException;
 import com.gruzini.tennistico.repositories.PlayerRepository;
@@ -27,9 +27,9 @@ public class PlayerService {
         return playerRepository.save(player);
     }
 
-    public Player add(Player player, Game game) {
-        final List<Game> games = player.getGames();
-        games.add(game);
-        return playerRepository.save(player);
+    public void add(Player player, Match match) {
+        final List<Match> matches = player.getMatches();
+        matches.add(match);
+        playerRepository.save(player);
     }
 }

@@ -1,52 +1,52 @@
 package com.gruzini.tennistico.services;
 
-import com.gruzini.tennistico.domain.Game;
+import com.gruzini.tennistico.domain.Match;
 import com.gruzini.tennistico.domain.Player;
-import com.gruzini.tennistico.domain.enums.GameStatus;
-import com.gruzini.tennistico.exceptions.GamePlayersException;
-import com.gruzini.tennistico.exceptions.PlayerIsNotAGameHostException;
-import com.gruzini.tennistico.exceptions.WrongGameStatusException;
+import com.gruzini.tennistico.domain.enums.MatchStatus;
+import com.gruzini.tennistico.exceptions.MatchPlayersException;
+import com.gruzini.tennistico.exceptions.PlayerIsNotAMatchHostException;
+import com.gruzini.tennistico.exceptions.WrongMatchStatusException;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ConfirmJoinService {
 
     private final PlayerService playerService;
-    private final GameService gameService;
+    private final MatchService matchService;
 
-    public ConfirmJoinService(PlayerService playerService, GameService gameService) {
+    public ConfirmJoinService(PlayerService playerService, MatchService matchService) {
         this.playerService = playerService;
-        this.gameService = gameService;
+        this.matchService = matchService;
     }
 
-    public void confirmJoin(final Long gameId, final String username) {
+    public void confirmJoin(final Long matchId, final String username) {
         final Player player = playerService.getByUsername(username);
-        final Game game = gameService.getById(gameId);
-        validateGameAndPlayer(game, player);
-        gameService.updateGameStatus(game, GameStatus.UPCOMING);
+        final Match match = matchService.getById(matchId);
+        validateMatchAndPlayer(match, player);
+        matchService.updateMatchStatus(match, MatchStatus.UPCOMING);
     }
 
-    private void validateGameAndPlayer(final Game game, final Player player) {
-        validateGameStatus(game);
-        validateGameHost(game, player);
-        validateGamePlayers(game);
+    private void validateMatchAndPlayer(final Match match, final Player player) {
+        validateMatchStatus(match);
+        validateMatchHost(match, player);
+        validateMatchPlayers(match);
     }
 
-    private void validateGamePlayers(final Game game) {
-        if (game.getPlayers().size() != 2) {
-            throw new GamePlayersException();
+    private void validateMatchPlayers(final Match match) {
+        if (match.getPlayers().size() != 2) {
+            throw new MatchPlayersException();
         }
     }
 
-    private void validateGameStatus(final Game game) {
-        if (!game.getGameStatus().equals(GameStatus.JOIN_REQUEST)) {
-            throw new WrongGameStatusException();
+    private void validateMatchStatus(final Match match) {
+        if (!match.getMatchStatus().equals(MatchStatus.JOIN_REQUEST)) {
+            throw new WrongMatchStatusException();
         }
     }
 
-    private void validateGameHost(final Game game, final Player player) {
-        if (!game.getHost().equals(player)) {
-            throw new PlayerIsNotAGameHostException();
+    private void validateMatchHost(final Match match, final Player player) {
+        if (!match.getHost().equals(player)) {
+            throw new PlayerIsNotAMatchHostException();
         }
     }
 }

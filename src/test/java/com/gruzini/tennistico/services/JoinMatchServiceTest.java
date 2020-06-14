@@ -1,8 +1,8 @@
 package com.gruzini.tennistico.services;
 
-import com.gruzini.tennistico.domain.Game;
+import com.gruzini.tennistico.domain.Match;
 import com.gruzini.tennistico.domain.Player;
-import com.gruzini.tennistico.domain.enums.GameStatus;
+import com.gruzini.tennistico.domain.enums.MatchStatus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,69 +18,69 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class JoinGameServiceTest {
+class JoinMatchServiceTest {
     @Mock
-    private GameService gameService;
+    private MatchService matchService;
     @Mock
     private PlayerService playerService;
     @InjectMocks
-    private JoinGameService joinGameService;
+    private JoinMatchService joinMatchService;
 
-    private Game game;
+    private Match match;
     private Player player;
 
     @BeforeEach
     void setup() {
-        game = Game.builder()
+        match = Match.builder()
                 .id(1L)
                 .players(new ArrayList<>())
                 .build();
         player = Player.builder()
                 .id(99L)
-                .games(new ArrayList<>())
+                .matches(new ArrayList<>())
                 .build();
-        when(gameService.getById(game.getId())).thenReturn(game);
-        when(gameService.save(any())).thenReturn(game);
+        when(matchService.getById(match.getId())).thenReturn(match);
+        when(matchService.save(any())).thenReturn(match);
         when(playerService.getByUsername("username")).thenReturn(player);
         when(playerService.save(any())).thenReturn(player);
     }
 
     @Test
-    void shouldAddGuestPlayerToTheGame() {
+    void shouldAddGuestPlayerToTheMatch() {
         //given
         //when
-        joinGameService.joinGuestToGame("username", 1L);
+        joinMatchService.joinGuestToMatch("username", 1L);
         //then
-        verify(gameService, times(1)).getById(game.getId());
+        verify(matchService, times(1)).getById(match.getId());
         verify(playerService, times(1)).getByUsername("username");
-        assertEquals(1, player.getGames().size());
-        assertTrue(player.getGames().contains(game));
-        verifyNoMoreInteractions(gameService, playerService);
+        assertEquals(1, player.getMatches().size());
+        assertTrue(player.getMatches().contains(match));
+        verifyNoMoreInteractions(matchService, playerService);
     }
 
     @Test
-    void shouldChangeGameStatusToJoinRequest() {
+    void shouldChangeMatchStatusToJoinRequest() {
         //given
         //when
-        joinGameService.joinGuestToGame("username", 1L);
+        joinMatchService.joinGuestToMatch("username", 1L);
         //then
-        assertEquals(GameStatus.JOIN_REQUEST, game.getGameStatus());
+        assertEquals(MatchStatus.JOIN_REQUEST, match.getMatchStatus());
     }
 
     @Test
-    void shouldSaveGameToDatabase() {
+    void shouldSaveMatchToDatabase() {
         //given
         //when
-        joinGameService.joinGuestToGame("username", 1L);
+        joinMatchService.joinGuestToMatch("username", 1L);
         //then
-        verify(gameService, times(1)).save(game);
+        verify(matchService, times(1)).save(match);
     }
 
     @Test
     void shouldSavePlayerToDatabase() {
         //given
         //when
-        joinGameService.joinGuestToGame("username", 1L);
+        joinMatchService.joinGuestToMatch("username", 1L);
         //then
         verify(playerService, times(1)).save(player);
     }

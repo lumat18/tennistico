@@ -43,16 +43,16 @@ public class Player {
 //   private Integer rank;
 
     @ManyToMany
-    @JoinTable(name = "player_to_game",
+    @JoinTable(name = "player_to_match",
             joinColumns = {@JoinColumn(name = "user_id")},
-            inverseJoinColumns = {@JoinColumn(name = "game_id")})
-    private List<Game> games;
+            inverseJoinColumns = {@JoinColumn(name = "match_id")})
+    private List<Match> matches;
 
     public Integer getAge() {
         return Period.between(getBirthday(), LocalDate.now()).getYears();
     }
 
-    public void addGame(Game game) {
-        games.add(game);
+    public void addMatch(Match match) {
+        matches.add(match);
     }
 }

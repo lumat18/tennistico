@@ -36,7 +36,7 @@
                <div class="col-md-12">
                   <div class="card">
                      <div class="card-header card-header-success">
-                        <p class="gruzini-title">Games History</p>
+                        <p class="gruzini-title">Matches History</p>
                      </div>
                      <div class="card-body table-responsive">
                         <table class="table table-hover">
@@ -49,12 +49,12 @@
                            <th class="gruzini-text-card-content">Win / Loss</th>
                            </thead>
                            <tbody>
-                           <tr th:each="game, iter : ${archivedGames}">
+                           <tr th:each="match, iter : ${archivedMatches}">
                               <td class="gruzini-text-card-content" th:text="${iter.index+1}"></td>
-                              <td class="gruzini-text-card-content" th:text="${game.opponentName}"></td>
-                              <td class="gruzini-text-card-content" th:text="${game.courtName}"></td>
-                              <td class="gruzini-text-card-content" th:text="${game.date}"></td>
-                              <td class="gruzini-text-card-content" th:text="${game.score}"></td>
+                              <td class="gruzini-text-card-content" th:text="${match.opponentName}"></td>
+                              <td class="gruzini-text-card-content" th:text="${match.courtName}"></td>
+                              <td class="gruzini-text-card-content" th:text="${match.date}"></td>
+                              <td class="gruzini-text-card-content" th:text="${match.score}"></td>
                               <td></td>
                            </tr>
                            </tbody>

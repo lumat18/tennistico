@@ -1,6 +1,6 @@
 package com.gruzini.tennistico.domain.enums;
 
-public enum GameStatus {
+public enum MatchStatus {
    HOSTED,
    JOIN_REQUEST,
    UPCOMING,

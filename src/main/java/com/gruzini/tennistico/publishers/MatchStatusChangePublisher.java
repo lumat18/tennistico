@@ -1,7 +1,7 @@
 package com.gruzini.tennistico.publishers;
 
-import com.gruzini.tennistico.domain.enums.GameStatus;
-import com.gruzini.tennistico.events.ChangeGameStatusEvent;
+import com.gruzini.tennistico.domain.enums.MatchStatus;
+import com.gruzini.tennistico.events.ChangeMatchStatusEvent;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -9,46 +9,46 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
 
 @Component
-public class GameStatusChangePublisher {
+public class MatchStatusChangePublisher {
 
     private final ApplicationEventPublisher applicationEventPublisher;
 
-    public GameStatusChangePublisher(ApplicationEventPublisher applicationEventPublisher) {
+    public MatchStatusChangePublisher(ApplicationEventPublisher applicationEventPublisher) {
         this.applicationEventPublisher = applicationEventPublisher;
     }
 
     @Scheduled(cron = "0 0/15 * * * *")
     public void changeStatusFromUpcomingToPending() {
-        final ChangeGameStatusEvent event =
-                new ChangeGameStatusEvent(this, LocalDateTime.now(), GameStatus.UPCOMING, GameStatus.PENDING);
+        final ChangeMatchStatusEvent event =
+                new ChangeMatchStatusEvent(this, LocalDateTime.now(), MatchStatus.UPCOMING, MatchStatus.PENDING);
         applicationEventPublisher.publishEvent(event);
     }
 
     @Scheduled(cron = "0 0/15 * * * *")
     public void changeStatusFromJoinRequestToBusted() {
-        final ChangeGameStatusEvent event =
-                new ChangeGameStatusEvent(this, LocalDateTime.now(), GameStatus.JOIN_REQUEST, GameStatus.BUSTED);
+        final ChangeMatchStatusEvent event =
+                new ChangeMatchStatusEvent(this, LocalDateTime.now(), MatchStatus.JOIN_REQUEST, MatchStatus.BUSTED);
         applicationEventPublisher.publishEvent(event);
     }
 
     @Scheduled(cron = "0 0/15 * * * *")
     public void changeStatusFromHostedToBusted() {
-        final ChangeGameStatusEvent event =
-                new ChangeGameStatusEvent(this, LocalDateTime.now(), GameStatus.HOSTED, GameStatus.BUSTED);
+        final ChangeMatchStatusEvent event =
+                new ChangeMatchStatusEvent(this, LocalDateTime.now(), MatchStatus.HOSTED, MatchStatus.BUSTED);
         applicationEventPublisher.publishEvent(event);
     }
 
     @Scheduled(cron = "0 0 * * * *")
     public void changeStatusFromScoreToBeConfirmedToBusted() {
-        final ChangeGameStatusEvent event =
-                new ChangeGameStatusEvent(this, LocalDateTime.now().plusDays(7), GameStatus.SCORE_TO_BE_CONFIRMED, GameStatus.BUSTED);
+        final ChangeMatchStatusEvent event =
+                new ChangeMatchStatusEvent(this, LocalDateTime.now().plusDays(7), MatchStatus.SCORE_TO_BE_CONFIRMED, MatchStatus.BUSTED);
         applicationEventPublisher.publishEvent(event);
     }
 
     @Scheduled(cron = "0 0 * * * *")
     public void changeStatusFromPendingToBusted() {
-        final ChangeGameStatusEvent event =
-                new ChangeGameStatusEvent(this, LocalDateTime.now().plusDays(7), GameStatus.PENDING, GameStatus.BUSTED);
+        final ChangeMatchStatusEvent event =
+                new ChangeMatchStatusEvent(this, LocalDateTime.now().plusDays(7), MatchStatus.PENDING, MatchStatus.BUSTED);
         applicationEventPublisher.publishEvent(event);
     }
 }

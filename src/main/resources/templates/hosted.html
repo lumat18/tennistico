@@ -23,12 +23,13 @@
                     <div class="col-lg-12">
                         <div class="card card-chart">
                             <div class="card-header card-header-success">
-                                <p class="gruzini-title">Open Games</p>
+                                <p class="gruzini-title">Open Matches</p>
                             </div>
                             <div class="card-body">
                                 <div class="card-body table-responsive gruzini-text-card-content">
                                     <div class="gruzini-card-desc">
-                                        Below you can see available games that other users created. Check the details and if you feel ready for the challenge - join them!
+                                        Below you can see available matches that other users created. Check the details
+                                        and if you feel ready for the challenge - join them!
                                     </div>
                                     <table class="table table-hover">
                                         <thead>
@@ -45,34 +46,42 @@
                                         <th class="gruzini-text-card-content"></th>
                                         </thead>
                                         <tbody>
-                                        <div th:each="game, iter : ${hostedGames}" >
+                                        <div th:each="match, iter : ${hostedMatches}">
                                             <tr>
                                                 <td th:text="${iter.index+1}"></td>
-                                                <td th:text="'vs. '+${game.getHostName()}"></td>
-                                                <td th:text="${game.getHostGender()}" class="gruzini-table-collapsing-first"></td>
-                                                <td th:text="${game.getHostAge()}" class="gruzini-table-collapsing-second"></td>
-                                                <td th:text="${game.getHostLevel()}"></td>
-                                                <td th:text="${game.getHostExp()}" class="gruzini-table-collapsing-first"></td>
-                                                <td th:text="${game.getAddress()}"></td>
+                                                <td th:text="'vs. '+${match.getHostName()}"></td>
+                                                <td th:text="${match.getHostGender()}"
+                                                    class="gruzini-table-collapsing-first"></td>
+                                                <td th:text="${match.getHostAge()}"
+                                                    class="gruzini-table-collapsing-second"></td>
+                                                <td th:text="${match.getHostLevel()}"></td>
+                                                <td th:text="${match.getHostExp()}"
+                                                    class="gruzini-table-collapsing-first"></td>
+                                                <td th:text="${match.getAddress()}"></td>
                                                 <td>
-                                                    <span th:text="${#temporals.format(game.getStart(),'yyyy-MM-dd')}"></span>
-                                                    <span th:if="${game.getStart().toLocalDate().isBefore(#temporals.createToday().plusDays(7))
+                                                    <span th:text="${#temporals.format(match.getStart(),'yyyy-MM-dd')}"></span>
+                                                    <span th:if="${match.getStart().toLocalDate().isBefore(#temporals.createToday().plusDays(7))
                                                                  and
-                                                                 game.getStart().toLocalDate().isAfter(#temporals.createToday().plusDays(1))}" class="gruzini-week-sign">
+                                                                 match.getStart().toLocalDate().isAfter(#temporals.createToday().plusDays(1))}"
+                                                          class="gruzini-week-sign">
                                                         <span th:text="' - '+'this week!'"></span>
                                                     </span>
-                                                    <span class="gruzini-today-sign" th:if="${game.getStart().toLocalDate().isEqual(#temporals.createToday())}">
+                                                    <span class="gruzini-today-sign"
+                                                          th:if="${match.getStart().toLocalDate().isEqual(#temporals.createToday())}">
                                                         <span th:text="' - '+'today!'"></span>
                                                     </span>
-                                                    <span th:if="${game.getStart().toLocalDate().isEqual(#temporals.createToday().plusDays(1))}" class="gruzini-tomorrow-sign">
+                                                    <span th:if="${match.getStart().toLocalDate().isEqual(#temporals.createToday().plusDays(1))}"
+                                                          class="gruzini-tomorrow-sign">
                                                         <span th:text="' - '+'tomorrow!'"></span>
                                                     </span>
 
                                                 </td>
-                                                <td th:text="${#temporals.format(game.getStart(),'HH:mm')}"></td>
-                                                <td th:text="${#temporals.format(game.getEnd(),'HH:mm')}" class="gruzini-table-collapsing-second"></td>
+                                                <td th:text="${#temporals.format(match.getStart(),'HH:mm')}"></td>
+                                                <td th:text="${#temporals.format(match.getEnd(),'HH:mm')}"
+                                                    class="gruzini-table-collapsing-second"></td>
                                                 <td style="width: 110px !important;">
-                                                    <a class="btn btn-success gruzini-btn-success gruzini-button-small" href="/dashboard" role="button">
+                                                    <a class="btn btn-success gruzini-btn-success gruzini-button-small"
+                                                       href="/dashboard" role="button">
                                                         Join
                                                     </a>
                                                 </td>
@@ -87,7 +96,7 @@
                             <div class="card-footer d-flex justify-content-center">
                                 <a href="/dashboard/create" class="btn btn-success gruzini-btn-success" role="button"
                                    aria-pressed="true">
-                                    No game seems right? Create a new one
+                                    No match seems right? Create a new one
                                 </a>
                             </div>
                         </div>

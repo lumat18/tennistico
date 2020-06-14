@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ArchivedGameDto {
+public class ArchivedMatchDto {
    private String opponentName;
    private String score;
    private String courtName;

@@ -1,7 +1,7 @@
 package com.gruzini.tennistico.models.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.gruzini.tennistico.domain.enums.GameStatus;
+import com.gruzini.tennistico.domain.enums.MatchStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,21 +17,21 @@ import java.time.LocalTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class CreatedGameDto {
+public class CreatedMatchDto {
 
-    private GameStatus gameStatus;
+    private MatchStatus matchStatus;
 
     private Long courtId;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Future(message = "Game has to take place in the future")
+    @Future(message = "Match has to take place in the future")
     private LocalDate date;
 
     private LocalTime start;
 
     private LocalTime end;
 
-    @AssertTrue(message = "Game has to start before it ends!")
+    @AssertTrue(message = "Match has to start before it ends!")
     @JsonIgnore
     public boolean isStartAndEndingTimeValid(){
         if(start == null || end == null){
