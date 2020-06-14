@@ -11,8 +11,10 @@ import java.util.Optional;
 
 public interface GameRepository extends JpaRepository<Game, Long> {
 
+    List<Game> findByStartingAtBeforeAndGameStatus(LocalDateTime startingDateTime, GameStatus gameStatus);
     List<Game> findAllByGameStatusAndPlayersNotContainsAndStartingAtIsAfterOrderByStartingAt(GameStatus status, Player player, LocalDateTime now);
     List<Game> getAllByPlayersAndGameStatus(Player player, GameStatus gameStatus);
     Optional<Game> findById(Long id);
     List<Game> getAllByEndingAtBeforeAndGameStatusIsOrGameStatusIs(LocalDateTime time, GameStatus pending, GameStatus confirm);
+
 }

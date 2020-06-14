@@ -34,11 +34,22 @@ public class HostedGameService {
                 .collect(Collectors.toList());
     }
 
+    public List<Game> getAllGamesThatPassed() {
+        return gameRepository.findByStartingAtBeforeAndGameStatus(LocalDateTime.now(), GameStatus.HOSTED);
+    }
+
+    public void changeGameStatusTo(List<Game> games, GameStatus gameStatus) {
+        games.forEach(game -> {
+            game.setGameStatus(gameStatus);
+            gameRepository.save(game);
+        });
+      
     public Game getById(final Long gameId) {
         return gameRepository.findById(gameId).orElseThrow(GameNotFoundException::new);
     }
 
     public Game save(final Game game) {
         return gameRepository.save(game);
+
     }
 }
