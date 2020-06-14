@@ -43,7 +43,8 @@ public class HostedGameService {
             game.setGameStatus(gameStatus);
             gameRepository.save(game);
         });
-      
+    }
+
     public Game getById(final Long gameId) {
         return gameRepository.findById(gameId).orElseThrow(GameNotFoundException::new);
     }

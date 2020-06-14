@@ -9,12 +9,12 @@ import com.gruzini.tennistico.exceptions.WrongGameStatusException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class JoinConfirmService {
+public class ConfirmJoinService {
 
     private final PlayerService playerService;
     private final GameService gameService;
 
-    public JoinConfirmService(PlayerService playerService, GameService gameService) {
+    public ConfirmJoinService(PlayerService playerService, GameService gameService) {
         this.playerService = playerService;
         this.gameService = gameService;
     }
