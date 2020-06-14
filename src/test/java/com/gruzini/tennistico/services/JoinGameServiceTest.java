@@ -20,7 +20,7 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class JoinGameServiceTest {
     @Mock
-    private HostedGameService hostedGameService;
+    private GameService gameService;
     @Mock
     private PlayerService playerService;
     @InjectMocks
@@ -39,8 +39,8 @@ class JoinGameServiceTest {
                 .id(99L)
                 .games(new ArrayList<>())
                 .build();
-        when(hostedGameService.getById(game.getId())).thenReturn(game);
-        when(hostedGameService.save(any())).thenReturn(game);
+        when(gameService.getById(game.getId())).thenReturn(game);
+        when(gameService.save(any())).thenReturn(game);
         when(playerService.getByUsername("username")).thenReturn(player);
         when(playerService.save(any())).thenReturn(player);
     }
@@ -51,11 +51,11 @@ class JoinGameServiceTest {
         //when
         joinGameService.joinGuestToGame("username", 1L);
         //then
-        verify(hostedGameService, times(1)).getById(game.getId());
+        verify(gameService, times(1)).getById(game.getId());
         verify(playerService, times(1)).getByUsername("username");
         assertEquals(1, player.getGames().size());
         assertTrue(player.getGames().contains(game));
-        verifyNoMoreInteractions(hostedGameService, playerService);
+        verifyNoMoreInteractions(gameService, playerService);
     }
 
     @Test
@@ -73,7 +73,7 @@ class JoinGameServiceTest {
         //when
         joinGameService.joinGuestToGame("username", 1L);
         //then
-        verify(hostedGameService, times(1)).save(game);
+        verify(gameService, times(1)).save(game);
     }
 
     @Test
