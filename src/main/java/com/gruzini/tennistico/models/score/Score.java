@@ -5,6 +5,7 @@ import lombok.Data;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.AssertTrue;
+import java.util.List;
 
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
@@ -34,5 +35,9 @@ public class Score {
             return true;
         }
         return nonNull(set1) && nonNull(set2) && nonNull(set3) && nonNull(set4);
+    }
+
+    public List<Set> getSets() {
+        return List.of(set1, set2, set3, set4, set5);
     }
 }
