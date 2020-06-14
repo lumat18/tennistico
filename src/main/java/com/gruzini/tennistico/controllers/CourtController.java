@@ -1,5 +1,7 @@
 package com.gruzini.tennistico.controllers;
 
+import com.gruzini.tennistico.exceptions.CourtNotFoundException;
+import com.gruzini.tennistico.exceptions.ResourceNotFoundException;
 import com.gruzini.tennistico.models.dto.CourtInfoDto;
 import com.gruzini.tennistico.services.CourtService;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.util.Objects.isNull;
 
 @Controller
 @RequestMapping("/dashboard/courts")
@@ -34,6 +38,7 @@ public class CourtController {
     }
     @PostMapping
     public String processCourtSearch(@RequestParam("selectedCity") final String city, final Model model){
+        if (isNull(city)) throw new CourtNotFoundException();
         List<String> cities = courtService.getCities();
         List<CourtInfoDto> foundCourts = courtService.getByCity(city);
         model.addAttribute("cities", cities);
