@@ -29,6 +29,15 @@ public class GameService {
         return gameRepository.save(game);
     }
 
+    public void updateExpiredGamesStatus(final LocalDateTime expirationDateTime, final GameStatus currentStatus, final GameStatus newStatus) {
+        final List<Game> gamesToUpdate = getAllExpiredByStatus(expirationDateTime, currentStatus);
+        updateGameStatus(gamesToUpdate, newStatus);
+    }
+
+    private List<Game> getAllExpiredByStatus(final LocalDateTime expirationDateTime, final GameStatus gameStatus) {
+        return gameRepository.findByStartingAtBeforeAndGameStatus(expirationDateTime, gameStatus);
+    }
+
     public void updateGameStatus(final List<Game> games, final GameStatus gameStatus) {
         games.forEach(game -> updateGameStatus(game, gameStatus));
     }
@@ -49,9 +58,5 @@ public class GameService {
 
     public List<Game> getByPlayerAndStatus(final Player player, final GameStatus gameStatus) {
         return gameRepository.getAllByPlayersAndGameStatus(player, gameStatus);
-    }
-
-    public List<Game> getAllThatStartingDateTimePassedByStatus(final GameStatus gameStatus) {
-        return gameRepository.findByStartingAtBeforeAndGameStatus(LocalDateTime.now(), gameStatus);
     }
 }

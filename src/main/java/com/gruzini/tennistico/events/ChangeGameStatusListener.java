@@ -1,5 +1,6 @@
 package com.gruzini.tennistico.events;
 
+import com.gruzini.tennistico.services.GameService;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
@@ -7,17 +8,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class ChangeGameStatusListener {
 
-//    private final GameService gameService;
+    private final GameService gameService;
+
+    public ChangeGameStatusListener(GameService gameService) {
+        this.gameService = gameService;
+    }
 
     @Async
     @EventListener
-    public synchronized void handleEventPublish(ChangeGameStatusEvent changeGameStatusEvent) {
-        //TODO create generic GameService
-//        List<Game> games = gameService.findExpierdGamesByStatus(changeGameStatusEvent.getExpirationDateTime(), changeGameStatusEvent.getCurrentGameStatus());
-//        games.forEach(game -> {
-//            game.setGameStatus(changeGameStatusEvent.getDesiredGameStatus());
-//            gameService.save(game);
-//        });
-        System.out.println("Event published" + changeGameStatusEvent.getCurrentGameStatus());
+    public synchronized void handleEventPublish(ChangeGameStatusEvent event) {
+        gameService.updateExpiredGamesStatus(event.getExpirationDateTime(), event.getCurrentGameStatus(), event.getDesiredGameStatus());
     }
 }

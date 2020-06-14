@@ -1,8 +1,7 @@
 package com.gruzini.tennistico.controllers;
 
-import com.gruzini.tennistico.domain.Player;
 import com.gruzini.tennistico.models.dto.HostedGameDto;
-import com.gruzini.tennistico.services.UserService;
+import com.gruzini.tennistico.services.GameDtoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,18 +13,15 @@ import java.util.List;
 @Controller
 @RequestMapping("/dashboard/hosted")
 public class HostedGamesController {
-    private final HostedGameService gameService;
-    private final UserService userService;
+    private final GameDtoService gameDtoService;
 
-    public HostedGamesController(HostedGameService gameService, UserService userService) {
-        this.gameService = gameService;
-        this.userService = userService;
+    public HostedGamesController(GameDtoService gameDtoService) {
+        this.gameDtoService = gameDtoService;
     }
 
     @GetMapping
     public String showUpcomingGamesPage(final Model model, final Principal principal) {
-        final Player player = userService.getByEmail(principal.getName()).getPlayer();
-        final List<HostedGameDto> allHostedGames = gameService.getAll(player);
+        final List<HostedGameDto> allHostedGames = gameDtoService.getHostedGameDtoExceptHostedBy(principal.getName());
         model.addAttribute("hostedGames", allHostedGames);
         return "hosted";
     }

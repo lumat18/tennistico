@@ -16,14 +16,35 @@ public class GameStatusChangePublisher {
         this.applicationEventPublisher = applicationEventPublisher;
     }
 
-    @Scheduled(cron = "0/15 * * * * *")
+    @Scheduled(cron = "0 0/15 * * * *")
     public void changeStatusFromUpcomingToPending() {
         final ChangeGameStatusEvent event =
                 new ChangeGameStatusEvent(this, LocalDateTime.now(), GameStatus.UPCOMING, GameStatus.PENDING);
         applicationEventPublisher.publishEvent(event);
     }
 
-    @Scheduled(cron = "0/15 * * * * *")
+    @Scheduled(cron = "0 0/15 * * * *")
+    public void changeStatusFromJoinRequestToBusted() {
+        final ChangeGameStatusEvent event =
+                new ChangeGameStatusEvent(this, LocalDateTime.now(), GameStatus.JOIN_REQUEST, GameStatus.BUSTED);
+        applicationEventPublisher.publishEvent(event);
+    }
+
+    @Scheduled(cron = "0 0/15 * * * *")
+    public void changeStatusFromHostedToBusted() {
+        final ChangeGameStatusEvent event =
+                new ChangeGameStatusEvent(this, LocalDateTime.now(), GameStatus.HOSTED, GameStatus.BUSTED);
+        applicationEventPublisher.publishEvent(event);
+    }
+
+    @Scheduled(cron = "0 0 * * * *")
+    public void changeStatusFromScoreToBeConfirmedToBusted() {
+        final ChangeGameStatusEvent event =
+                new ChangeGameStatusEvent(this, LocalDateTime.now().plusDays(7), GameStatus.SCORE_TO_BE_CONFIRMED, GameStatus.BUSTED);
+        applicationEventPublisher.publishEvent(event);
+    }
+
+    @Scheduled(cron = "0 0 * * * *")
     public void changeStatusFromPendingToBusted() {
         final ChangeGameStatusEvent event =
                 new ChangeGameStatusEvent(this, LocalDateTime.now().plusDays(7), GameStatus.PENDING, GameStatus.BUSTED);
