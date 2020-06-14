@@ -1,6 +1,7 @@
-package com.gruzini.tennistico.events;
+package com.gruzini.tennistico.publishers;
 
 import com.gruzini.tennistico.domain.enums.GameStatus;
+import com.gruzini.tennistico.events.ChangeGameStatusEvent;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;

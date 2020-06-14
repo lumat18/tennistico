@@ -1,5 +1,6 @@
-package com.gruzini.tennistico.events;
+package com.gruzini.tennistico.listeners;
 
+import com.gruzini.tennistico.events.ChangeGameStatusEvent;
 import com.gruzini.tennistico.services.GameService;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
