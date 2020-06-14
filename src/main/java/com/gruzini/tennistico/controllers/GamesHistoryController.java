@@ -27,6 +27,6 @@ public class GamesHistoryController {
                                       final Principal principal){
       final User user = userService.getByEmail(principal.getName());
       model.addAttribute("archivedGames", archivedGameService.getUserGames(user));
-      return "dashboard/games-history";
+      return "games-history";
    }
 }
