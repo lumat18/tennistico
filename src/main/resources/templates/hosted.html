@@ -80,10 +80,10 @@
                                                 <td th:text="${#temporals.format(match.getEnd(),'HH:mm')}"
                                                     class="gruzini-table-collapsing-second"></td>
                                                 <td style="width: 110px !important;">
-                                                    <a class="btn btn-success gruzini-btn-success gruzini-button-small"
-                                                       href="/dashboard" role="button">
-                                                        Join
-                                                    </a>
+                                                    <form method="post" th:action="@{/join-match}">
+                                                        <input hidden type="text" name="match_id" th:value="${match.getId()}"/>
+                                                        <input type="submit" class="btn btn-success gruzini-btn-success gruzini-button-small" value="Join!">
+                                                    </form>
                                                 </td>
                                             </tr>
                                         </div>

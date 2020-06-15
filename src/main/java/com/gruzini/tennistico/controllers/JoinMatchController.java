@@ -20,8 +20,8 @@ public class JoinMatchController {
         this.joinMatchService = joinMatchService;
     }
 
-    @GetMapping("/{match_id}")
-    public String joinMatch(@PathVariable(name = "match_id") final Long matchId, final Principal principal) {
+    @PostMapping
+    public String joinMatch(@RequestParam(name = "match_id") final Long matchId, final Principal principal) {
         joinMatchService.joinGuestToMatch(principal.getName(), matchId);
         //TODO send the notification to host
         return "dashboard";
