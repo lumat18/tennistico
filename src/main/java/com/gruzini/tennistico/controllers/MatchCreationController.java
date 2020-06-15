@@ -1,5 +1,6 @@
 package com.gruzini.tennistico.controllers;
 
+import com.gruzini.tennistico.exceptions.IllegalActionException;
 import com.gruzini.tennistico.models.dto.CreatedMatchDto;
 import com.gruzini.tennistico.services.CourtService;
 import com.gruzini.tennistico.services.MatchCreationService;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.security.Principal;
+
+import static java.util.Objects.isNull;
 
 @Controller
 @RequestMapping("/dashboard/create")
