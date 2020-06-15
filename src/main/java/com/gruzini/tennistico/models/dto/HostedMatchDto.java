@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 public class HostedMatchDto {
+    private Long id;
     private String hostName;
     private String hostGender;
     private Integer hostAge;
