@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.security.Principal;
 
 @Controller
-@RequestMapping("/confirm-score")
+@RequestMapping("/dashboard/confirm-score")
 public class ConfirmScoreController {
 
    private final ConfirmScoreService confirmScoreService;
