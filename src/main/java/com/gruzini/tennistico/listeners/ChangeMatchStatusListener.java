@@ -18,6 +18,6 @@ public class ChangeMatchStatusListener {
     @Async
     @EventListener
     public synchronized void handleEventPublish(ChangeMatchStatusEvent event) {
-        matchService.updateExpiredMatchesStatus(event.getExpirationDateTime(), event.getCurrentMatchStatus(), event.getDesiredMatchStatus());
+        matchService.updateExpiredMatchesStatus(event);
     }
 }

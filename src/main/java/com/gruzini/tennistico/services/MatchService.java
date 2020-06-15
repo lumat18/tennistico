@@ -3,7 +3,9 @@ package com.gruzini.tennistico.services;
 import com.gruzini.tennistico.domain.Match;
 import com.gruzini.tennistico.domain.Player;
 import com.gruzini.tennistico.domain.enums.MatchStatus;
+import com.gruzini.tennistico.events.ChangeMatchStatusEvent;
 import com.gruzini.tennistico.exceptions.MatchNotFoundException;
+import com.gruzini.tennistico.publishers.DateTimeSelector;
 import com.gruzini.tennistico.repositories.MatchRepository;
 import com.gruzini.tennistico.repositories.PlayerRepository;
 import org.springframework.stereotype.Service;
@@ -29,13 +31,19 @@ public class MatchService {
         return matchRepository.save(match);
     }
 
-    public void updateExpiredMatchesStatus(final LocalDateTime expirationDateTime, final MatchStatus currentStatus, final MatchStatus newStatus) {
-        final List<Match> matchesToUpdate = getAllExpiredByStatus(expirationDateTime, currentStatus);
-        updateMatchStatus(matchesToUpdate, newStatus);
+    public void updateExpiredMatchesStatus(final ChangeMatchStatusEvent event) {
+        List<Match> matchesToUpdate = getAllExpiredByStatus(event.getExpirationDateTime(), event.getCurrentMatchStatus(), event.getDateTimeSelector());
+        updateMatchStatus(matchesToUpdate, event.getDesiredMatchStatus());
     }
 
-    private List<Match> getAllExpiredByStatus(final LocalDateTime expirationDateTime, final MatchStatus matchStatus) {
-        return matchRepository.findByStartingAtBeforeAndMatchStatus(expirationDateTime, matchStatus);
+    private List<Match> getAllExpiredByStatus(final LocalDateTime expirationDateTime,
+                                              final MatchStatus matchStatus,
+                                              final DateTimeSelector dateTimeSelector) {
+        if(dateTimeSelector.equals(DateTimeSelector.STARTING_AT)){
+            return matchRepository.findByStartingAtBeforeAndMatchStatus(expirationDateTime, matchStatus);
+        } else {
+            return matchRepository.findByEndingAtBeforeAndMatchStatus(expirationDateTime, matchStatus);
+        }
     }
 
     public void updateMatchStatus(final List<Match> matches, final MatchStatus matchStatus) {

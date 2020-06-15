@@ -13,6 +13,8 @@ public interface MatchRepository extends JpaRepository<Match, Long> {
 
     List<Match> findByStartingAtBeforeAndMatchStatus(LocalDateTime startingDateTime, MatchStatus matchStatus);
 
+    List<Match> findByEndingAtBeforeAndMatchStatus(LocalDateTime endingDateTime, MatchStatus matchStatus);
+
     List<Match> findAllByMatchStatusAndPlayersNotContainsAndStartingAtIsAfterOrderByStartingAt(MatchStatus status, Player player, LocalDateTime now);
 
     List<Match> getAllByPlayersAndMatchStatus(Player player, MatchStatus matchStatus);

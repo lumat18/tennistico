@@ -20,35 +20,35 @@ public class MatchStatusChangePublisher {
     @Scheduled(cron = "0 0/15 * * * *")
     public void changeStatusFromUpcomingToPending() {
         final ChangeMatchStatusEvent event =
-                new ChangeMatchStatusEvent(this, LocalDateTime.now(), MatchStatus.UPCOMING, MatchStatus.PENDING);
+                new ChangeMatchStatusEvent(this, LocalDateTime.now(), MatchStatus.UPCOMING, MatchStatus.PENDING, DateTimeSelector.STARTING_AT);
         applicationEventPublisher.publishEvent(event);
     }
 
     @Scheduled(cron = "0 0/15 * * * *")
     public void changeStatusFromJoinRequestToBusted() {
         final ChangeMatchStatusEvent event =
-                new ChangeMatchStatusEvent(this, LocalDateTime.now(), MatchStatus.JOIN_REQUEST, MatchStatus.BUSTED);
+                new ChangeMatchStatusEvent(this, LocalDateTime.now(), MatchStatus.JOIN_REQUEST, MatchStatus.BUSTED, DateTimeSelector.STARTING_AT);
         applicationEventPublisher.publishEvent(event);
     }
 
     @Scheduled(cron = "0 0/15 * * * *")
     public void changeStatusFromHostedToBusted() {
         final ChangeMatchStatusEvent event =
-                new ChangeMatchStatusEvent(this, LocalDateTime.now(), MatchStatus.HOSTED, MatchStatus.BUSTED);
+                new ChangeMatchStatusEvent(this, LocalDateTime.now(), MatchStatus.HOSTED, MatchStatus.BUSTED, DateTimeSelector.STARTING_AT);
         applicationEventPublisher.publishEvent(event);
     }
 
     @Scheduled(cron = "0 0 * * * *")
     public void changeStatusFromScoreToBeConfirmedToBusted() {
         final ChangeMatchStatusEvent event =
-                new ChangeMatchStatusEvent(this, LocalDateTime.now().plusDays(7), MatchStatus.SCORE_TO_BE_CONFIRMED, MatchStatus.BUSTED);
+                new ChangeMatchStatusEvent(this, LocalDateTime.now().minusDays(7), MatchStatus.SCORE_TO_BE_CONFIRMED, MatchStatus.BUSTED, DateTimeSelector.ENDING_AT);
         applicationEventPublisher.publishEvent(event);
     }
 
     @Scheduled(cron = "0 0 * * * *")
     public void changeStatusFromPendingToBusted() {
         final ChangeMatchStatusEvent event =
-                new ChangeMatchStatusEvent(this, LocalDateTime.now().plusDays(7), MatchStatus.PENDING, MatchStatus.BUSTED);
+                new ChangeMatchStatusEvent(this, LocalDateTime.now().minusDays(7), MatchStatus.PENDING, MatchStatus.BUSTED, DateTimeSelector.ENDING_AT);
         applicationEventPublisher.publishEvent(event);
     }
 }
