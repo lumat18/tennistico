@@ -45,7 +45,6 @@
                                     <tr>
                                        <td th:text="${iter.index+1}"></td>
                                        <td th:text="${match.getHostName()} + ' vs. ' + ${match.getGuestName()}"></td>
-                                           class="gruzini-table-collapsing-first"></td>
                                        <td th:text="${match.getCourt()}"></td>
                                        <td>
                                           <span th:text="${#temporals.format(match.getStart(),'yyyy-MM-dd')}"></span>
