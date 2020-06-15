@@ -1,7 +1,6 @@
 package com.gruzini.tennistico.events;
 
 import com.gruzini.tennistico.domain.enums.MatchStatus;
-import com.gruzini.tennistico.publishers.DateTimeSelector;
 import org.springframework.context.ApplicationEvent;
 
 import java.time.LocalDateTime;
@@ -11,17 +10,17 @@ public class ChangeMatchStatusEvent extends ApplicationEvent {
     private final LocalDateTime expirationDateTime;
     private final MatchStatus currentMatchStatus;
     private final MatchStatus desiredMatchStatus;
-    private final DateTimeSelector dateTimeSelector;
+    private final boolean checkedByStartingMatchTime;
 
     public ChangeMatchStatusEvent(Object source, LocalDateTime expirationDateTime,
                                   MatchStatus currentMatchStatus,
                                   MatchStatus desiredMatchStatus,
-                                  DateTimeSelector dateTimeSelector) {
+                                  boolean checkedByStartingMatchTime) {
         super(source);
         this.expirationDateTime = expirationDateTime;
         this.currentMatchStatus = currentMatchStatus;
         this.desiredMatchStatus = desiredMatchStatus;
-        this.dateTimeSelector = dateTimeSelector;
+        this.checkedByStartingMatchTime = checkedByStartingMatchTime;
     }
 
     public LocalDateTime getExpirationDateTime() {
@@ -36,7 +35,7 @@ public class ChangeMatchStatusEvent extends ApplicationEvent {
         return desiredMatchStatus;
     }
 
-    public DateTimeSelector getDateTimeSelector() {
-        return dateTimeSelector;
+    public boolean isCheckedByStartingMatchTime() {
+        return checkedByStartingMatchTime;
     }
 }

@@ -5,7 +5,6 @@ import com.gruzini.tennistico.domain.Player;
 import com.gruzini.tennistico.domain.enums.MatchStatus;
 import com.gruzini.tennistico.events.ChangeMatchStatusEvent;
 import com.gruzini.tennistico.exceptions.MatchNotFoundException;
-import com.gruzini.tennistico.publishers.DateTimeSelector;
 import com.gruzini.tennistico.repositories.MatchRepository;
 import com.gruzini.tennistico.repositories.PlayerRepository;
 import org.springframework.stereotype.Service;
@@ -32,14 +31,14 @@ public class MatchService {
     }
 
     public void updateExpiredMatchesStatus(final ChangeMatchStatusEvent event) {
-        List<Match> matchesToUpdate = getAllExpiredByStatus(event.getExpirationDateTime(), event.getCurrentMatchStatus(), event.getDateTimeSelector());
+        List<Match> matchesToUpdate = getAllExpiredByStatus(event.getExpirationDateTime(), event.getCurrentMatchStatus(), event.isCheckedByStartingMatchTime());
         updateMatchStatus(matchesToUpdate, event.getDesiredMatchStatus());
     }
 
     private List<Match> getAllExpiredByStatus(final LocalDateTime expirationDateTime,
                                               final MatchStatus matchStatus,
-                                              final DateTimeSelector dateTimeSelector) {
-        if(dateTimeSelector.equals(DateTimeSelector.STARTING_AT)){
+                                              final boolean isCheckedByStartingMatchTime) {
+        if(isCheckedByStartingMatchTime){
             return matchRepository.findByStartingAtBeforeAndMatchStatus(expirationDateTime, matchStatus);
         } else {
             return matchRepository.findByEndingAtBeforeAndMatchStatus(expirationDateTime, matchStatus);
