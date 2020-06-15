@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+>
+
+<head th:insert="/fragments/head :: head"></head>
+
+<body class="dark-edition" style="background-image: url(/img/upcoming_background.jpg); background-size: cover">
+<div class="wrapper">
+
+   <!--Side Bar-->
+   <div th:insert="fragments/sidebar :: sidebar"></div>
+   <!--End Side Bar-->
+
+   <div class="main-panel">
+      <!-- Navbar -->
+      <nav th:insert="/fragments/navbar :: navbar"></nav>
+      <!-- End Navbar -->
+
+      <div class="main-panel gruzini-registration-main-panel">
+         <div class="content">
+            <div class="container-fluid">
+               <div class="row">
+                  <div class="col-lg-12">
+                     <div class="card card-chart">
+                        <div class="card-header card-header-success">
+                           <p class="gruzini-title">My Upcoming Matches</p>
+                        </div>
+                        <div class="card-body">
+                           <div class="card-body table-responsive gruzini-text-card-content">
+                              <div class="gruzini-card-desc">
+                                 Below you can see all your upcoming matches.
+                              </div>
+                              <table class="table table-hover">
+                                 <thead>
+                                 <th class="gruzini-text-card-content">ID</th>
+                                 <th class="gruzini-text-card-content">Opponent</th>
+                                 <th class="gruzini-text-card-content gruzini-table-collapsing-first">Gender</th>
+                                 <th class="gruzini-text-card-content gruzini-table-collapsing-second">Age</th>
+                                 <th class="gruzini-text-card-content">Level</th>
+                                 <th class="gruzini-text-card-content gruzini-table-collapsing-first">Exp</th>
+                                 <th class="gruzini-text-card-content">Court</th>
+                                 <th class="gruzini-text-card-content">Day</th>
+                                 <th class="gruzini-text-card-content">Starts At</th>
+                                 <th class="gruzini-text-card-content gruzini-table-collapsing-second">Ends At</th>
+                                 <th class="gruzini-text-card-content"></th>
+                                 </thead>
+                                 <tbody>
+                                 <div th:each="match, iter : ${myMatches}">
+                                    <tr>
+                                       <td th:text="${iter.index+1}"></td>
+                                       <td th:text="'vs. '+${match.getHostName()}"></td>
+                                       <td th:text="${match.getHostGender()}"
+                                           class="gruzini-table-collapsing-first"></td>
+                                       <td th:text="${match.getHostAge()}"
+                                           class="gruzini-table-collapsing-second"></td>
+                                       <td th:text="${match.getHostLevel()}"></td>
+                                       <td th:text="${match.getHostExp()}"
+                                           class="gruzini-table-collapsing-first"></td>
+                                       <td th:text="${match.getAddress()}"></td>
+                                       <td>
+                                          <span th:text="${#temporals.format(match.getStart(),'yyyy-MM-dd')}"></span>
+                                          <span th:if="${match.getStart().toLocalDate().isBefore(#temporals.createToday().plusDays(7))
+                                                                 and
+                                                                 match.getStart().toLocalDate().isAfter(#temporals.createToday().plusDays(1))}"
+                                                class="gruzini-week-sign">
+                                                        <span th:text="' - '+'this week!'"></span>
+                                                    </span>
+                                          <span class="gruzini-today-sign"
+                                                th:if="${match.getStart().toLocalDate().isEqual(#temporals.createToday())}">
+                                                        <span th:text="' - '+'today!'"></span>
+                                                    </span>
+                                          <span th:if="${match.getStart().toLocalDate().isEqual(#temporals.createToday().plusDays(1))}"
+                                                class="gruzini-tomorrow-sign">
+                                                        <span th:text="' - '+'tomorrow!'"></span>
+                                                    </span>
+
+                                       </td>
+                                       <td th:text="${#temporals.format(match.getStart(),'HH:mm')}"></td>
+                                       <td th:text="${#temporals.format(match.getEnd(),'HH:mm')}"
+                                           class="gruzini-table-collapsing-second"></td>
+                                       <!--                                                <td style="width: 110px !important;">-->
+                                       <!--                                                    <a class="btn btn-success gruzini-btn-success gruzini-button-small"-->
+                                       <!--                                                       href="/dashboard" role="button">-->
+                                       <!--                                                        Join-->
+                                       <!--                                                    </a>-->
+                                       <!--                                                </td>-->
+                                    </tr>
+                                 </div>
+                                 </tbody>
+                              </table>
+                           </div>
+
+
+                        </div>
+                        <div class="card-footer d-flex justify-content-center">
+                           <a href="/dashboard/create" class="btn btn-success gruzini-btn-success" role="button"
+                              aria-pressed="true">
+                              No match seems right? Create a new one
+                           </a>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!--FOOTER-->
+         <footer th:insert="/fragments/footer :: footer"></footer>
+         <!--END FOOTER-->
+      </div>
+   </div>
+</div>
+<!--JAVASCRIPT IMPORTS-->
+<div th:replace="/fragments/js-imports :: js-imports"></div>
+<!--END JAVASCRIPT IMPORTS-->
+</body>
+</html>

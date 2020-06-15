@@ -43,4 +43,9 @@ public class MatchDtoService {
                 .map(match -> archivedMatchMapper.toArchivedMatchDTO(match, user.getPlayer()))
                 .collect(Collectors.toList());
     }
+
+    public List<HostedMatchDto> getAllFutureMatchesPlayerIsInvolvedIn(final String username) {
+        final User user = userService.getByEmail(username);
+        return null;
+    }
 }
