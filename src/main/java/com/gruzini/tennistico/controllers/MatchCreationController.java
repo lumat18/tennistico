@@ -1,6 +1,7 @@
 package com.gruzini.tennistico.controllers;
 
 import com.gruzini.tennistico.models.dto.CreatedMatchDto;
+import com.gruzini.tennistico.services.CourtService;
 import com.gruzini.tennistico.services.MatchCreationService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,16 +19,17 @@ import java.security.Principal;
 public class MatchCreationController {
 
     private final MatchCreationService matchCreationService;
+    private final CourtService courtService;
 
-    public MatchCreationController(MatchCreationService matchCreationService) {
+    public MatchCreationController(MatchCreationService matchCreationService, CourtService courtService) {
         this.matchCreationService = matchCreationService;
+        this.courtService = courtService;
     }
 
     @PostMapping("/begin")
     public String beginMatchCreation(@RequestParam(name = "courtId") final Long courtId, final Model model) {
-        System.out.println("chosen court " + courtId);
-        model.addAttribute("chosenCourtId", courtId);
-        model.addAttribute("match", CreatedMatchDto.builder().build());
+        model.addAttribute("chosenCourt", courtService.getById(courtId));
+        model.addAttribute("match", new CreatedMatchDto());
         return "create";
     }
 
@@ -35,7 +37,7 @@ public class MatchCreationController {
     public String processMatchCreation(@Valid @ModelAttribute("match") final CreatedMatchDto createdMatchDto, final Errors errors, final Model model, final Principal principal) {
 
         if (errors.hasErrors()) {
-            model.addAttribute("chosenCourtId", createdMatchDto.getCourtId());
+            model.addAttribute("chosenCourt", courtService.getById(createdMatchDto.getCourtId()));
             return "create";
         }
         matchCreationService.create(createdMatchDto, principal.getName());

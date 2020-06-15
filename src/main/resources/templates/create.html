@@ -22,9 +22,6 @@
 
 
                     <div class="row">
-                        <!--               placed here to put the card in center -->
-                        <!--                    <div class="col-xl-1"></div>-->
-
                         <div class="col-lg-12">
                             <div class="card card-chart">
                                 <div class="card-header card-header-success">
@@ -33,6 +30,9 @@
                                 <div class="card-body">
 
                                     <div class="card-body table-responsive gruzini-text-card-content">
+                                        <div class="gruzini-card-desc" style="font-size: 24px">
+                                            Selected court: <span th:text="${chosenCourt.name}+', '+${chosenCourt.city}"></span>
+                                        </div>
                                         <div class="gruzini-card-desc">
                                             Please fill in the details. Remember that this information will be visible
                                             to other users. Be serious. We recommend to check court's availibility up in
@@ -42,7 +42,7 @@
                                               th:object="${match}">
 
                                             <input hidden type="text" th:name="courtId" th:id="courtId"
-                                                   th:value="${chosenCourtId}">
+                                                   th:value="${chosenCourt.id}">
 
                                             <div class="input-group mb-3">
                                                 <div class="input-group-prepend">
@@ -92,28 +92,21 @@
 
                                 </div>
                                 <div class="card-footer d-flex justify-content-center">
-                                    <a th:href="@{/dashboard}" class="btn btn-warning gruzini-btn-success"
+                                    <a th:href="@{/courts}" class="btn btn-warning gruzini-btn-success"
                                        role="button"
-                                       aria-pressed="true">
+                                       aria-pressed="true"
+                                    style="margin-right: 15px">
                                         Go back
                                     </a>
-                                    <button class="btn btn-success gruzini-btn-success" id="buttonSubmit"
+                                    <button class="btn btn-success gruzini-btn-success" id="buttonSubmit" style="margin-left: 15px"
                                             onclick="submitByHiddenButton()">Create
                                     </button>
 
 
                                 </div>
-                                <!--                                <div class="card-footer d-flex justify-content-center">-->
-                                <!--                                    <a href="/dashboard/create" class="btn btn-success gruzini-btn-success" role="button"-->
-                                <!--                                       aria-pressed="true">-->
-                                <!--                                        No match seems right? Create a new one-->
-                                <!--                                    </a>-->
-                                <!--                                </div>-->
+
                             </div>
                         </div>
-
-                        <!--               placed here to put the card in center -->
-                        <!--                    <div class="col-xl-1"></div>-->
                     </div>
                 </div>
             </div>
