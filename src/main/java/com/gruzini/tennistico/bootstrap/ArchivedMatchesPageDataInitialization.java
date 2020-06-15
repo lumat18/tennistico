@@ -72,7 +72,7 @@ public class ArchivedMatchesPageDataInitialization implements CommandLineRunner 
               .build();
 
       final Match match3 = Match.builder()
-              .endingAt(LocalDateTime.of(2020, Month.JUNE, 5, 12, 10))
+              .endingAt(LocalDateTime.of(2020, Month.JUNE, 12, 12, 10))
               .court(court)
               .matchStatus(MatchStatus.SCORE_TO_BE_CONFIRMED)
               .score("3-2")
