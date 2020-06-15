@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -58,5 +59,9 @@ public class MatchService {
 
     public List<Match> getByPlayerAndStatus(final Player player, final MatchStatus matchStatus) {
         return matchRepository.getAllByPlayersAndMatchStatus(player, matchStatus);
+    }
+
+    public List<Match> getJoinRequestMatchesExceptHostedBy(final Player player) {
+        return matchRepository.findAllByMatchStatusAndPlayersNotContainsAndStartingAtIsAfterOrderByStartingAt(MatchStatus.JOIN_REQUEST, player, LocalDateTime.now());
     }
 }

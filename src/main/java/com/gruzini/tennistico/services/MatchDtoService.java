@@ -10,6 +10,7 @@ import com.gruzini.tennistico.models.dto.HostedMatchDto;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,6 +47,17 @@ public class MatchDtoService {
 
     public List<HostedMatchDto> getAllFutureMatchesPlayerIsInvolvedIn(final String username) {
         final User user = userService.getByEmail(username);
-        return null;
+        return prepareFutureGamesList(user).stream()
+                .map(hostedMatchMapper::toMatchInfoDto)
+                .collect(Collectors.toList());
+    }
+
+    private List<Match> prepareFutureGamesList(final User user){
+        List<Match> allFutureGames = new ArrayList<>();
+        allFutureGames.addAll(matchService.getHostedMatchesExceptHostedBy(user.getPlayer()));
+        allFutureGames.addAll(matchService.getJoinRequestMatchesExceptHostedBy(user.getPlayer()));
+        allFutureGames.addAll(matchService.getByPlayerAndStatus(user.getPlayer(), MatchStatus.UPCOMING));
+        return allFutureGames.stream().sorted()
+                .collect(Collectors.toList());
     }
 }
