@@ -1,5 +1,6 @@
 package com.gruzini.tennistico.controllers;
 
+import com.gruzini.tennistico.models.dto.FutureMatchDto;
 import com.gruzini.tennistico.models.dto.HostedMatchDto;
 import com.gruzini.tennistico.services.MatchDtoService;
 import org.springframework.stereotype.Controller;
@@ -21,7 +22,7 @@ public class MyMatchesController {
 
    @GetMapping
    public String showAllFutureMatchesPlayerIsInvolvedIn(final Model model, final Principal principal){
-      final List<HostedMatchDto> allFutureMatches = matchDtoService.getAllFutureMatchesPlayerIsInvolvedIn(principal.getName());
+      final List<FutureMatchDto> allFutureMatches = matchDtoService.getAllFutureMatchesPlayerIsInvolvedIn(principal.getName());
       model.addAttribute("myMatches", allFutureMatches);
       return "my-matches";
    }

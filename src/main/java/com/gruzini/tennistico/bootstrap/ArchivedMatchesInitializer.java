@@ -24,18 +24,18 @@ import java.util.List;
 
 @Component
 @Profile("dev")
-public class ArchivedMatchesPageDataInitialization implements CommandLineRunner {
+public class ArchivedMatchesInitializer implements CommandLineRunner {
    private final CourtRepository courtRepository;
    private final MatchRepository matchRepository;
    private final PlayerRepository playerRepository;
    private final UserRepository userRepository;
    private final PasswordEncoder passwordEncoder;
 
-   public ArchivedMatchesPageDataInitialization(final CourtRepository courtRepository,
-                                                final MatchRepository matchRepository,
-                                                final PlayerRepository playerRepository,
-                                                final UserRepository userRepository,
-                                                final PasswordEncoder passwordEncoder) {
+   public ArchivedMatchesInitializer(final CourtRepository courtRepository,
+                                     final MatchRepository matchRepository,
+                                     final PlayerRepository playerRepository,
+                                     final UserRepository userRepository,
+                                     final PasswordEncoder passwordEncoder) {
       this.courtRepository = courtRepository;
       this.matchRepository = matchRepository;
       this.playerRepository = playerRepository;
@@ -64,8 +64,8 @@ public class ArchivedMatchesPageDataInitialization implements CommandLineRunner 
               .build();
 
       final Match match2 = Match.builder()
-              .startingAt(LocalDateTime.of(2020, Month.JUNE, 1, 10, 10))
-              .endingAt(LocalDateTime.of(2020, Month.JUNE, 1, 12, 10))
+              .startingAt(LocalDateTime.of(2020, Month.JUNE, 16, 10, 10))
+              .endingAt(LocalDateTime.of(2020, Month.JUNE, 16, 12, 10))
               .court(court)
               .matchStatus(MatchStatus.UPCOMING)
               .score("3-2")

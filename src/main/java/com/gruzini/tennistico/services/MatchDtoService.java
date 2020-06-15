@@ -4,8 +4,10 @@ import com.gruzini.tennistico.domain.Match;
 import com.gruzini.tennistico.domain.User;
 import com.gruzini.tennistico.domain.enums.MatchStatus;
 import com.gruzini.tennistico.mappers.ArchivedMatchMapper;
+import com.gruzini.tennistico.mappers.FutureMatchMapper;
 import com.gruzini.tennistico.mappers.HostedMatchMapper;
 import com.gruzini.tennistico.models.dto.ArchivedMatchDto;
+import com.gruzini.tennistico.models.dto.FutureMatchDto;
 import com.gruzini.tennistico.models.dto.HostedMatchDto;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,12 +24,14 @@ public class MatchDtoService {
     private final UserService userService;
     private final HostedMatchMapper hostedMatchMapper;
     private final ArchivedMatchMapper archivedMatchMapper;
+    private final FutureMatchMapper futureMatchMapper;
 
-    public MatchDtoService(MatchService matchService, UserService userService, HostedMatchMapper hostedMatchMapper, ArchivedMatchMapper archivedMatchMapper) {
+    public MatchDtoService(MatchService matchService, UserService userService, HostedMatchMapper hostedMatchMapper, ArchivedMatchMapper archivedMatchMapper, final FutureMatchMapper futureMatchMapper) {
         this.matchService = matchService;
         this.userService = userService;
         this.hostedMatchMapper = hostedMatchMapper;
         this.archivedMatchMapper = archivedMatchMapper;
+        this.futureMatchMapper = futureMatchMapper;
     }
 
     public List<HostedMatchDto> getHostedMatchesDtoExceptHostedBy(final String username) {
@@ -45,10 +49,10 @@ public class MatchDtoService {
                 .collect(Collectors.toList());
     }
 
-    public List<HostedMatchDto> getAllFutureMatchesPlayerIsInvolvedIn(final String username) {
+    public List<FutureMatchDto> getAllFutureMatchesPlayerIsInvolvedIn(final String username) {
         final User user = userService.getByEmail(username);
         return prepareFutureGamesList(user).stream()
-                .map(hostedMatchMapper::toMatchInfoDto)
+                .map(futureMatchMapper::toFutureMatchDto)
                 .collect(Collectors.toList());
     }
 
