@@ -3,7 +3,6 @@ package com.gruzini.tennistico.services;
 import com.gruzini.tennistico.domain.Player;
 import com.gruzini.tennistico.domain.Ranking;
 import com.gruzini.tennistico.models.score.RankingPointCounter;
-import com.gruzini.tennistico.models.score.WinDecider;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +13,6 @@ public class RankingService {
     private final RankingPointCounter rankingPointCounter;
 
     public RankingService(PlayerService playerService,
-                          WinDecider winDecider,
                           @Qualifier("simple") RankingPointCounter rankingPointCounter) {
         this.playerService = playerService;
         this.rankingPointCounter = rankingPointCounter;

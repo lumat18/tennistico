@@ -10,9 +10,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class RankingServiceTest {
@@ -33,7 +34,7 @@ class RankingServiceTest {
                 .ranking(new Ranking())
                 .build();
 
-        doNothing().when(playerService).save(any());
+        when(playerService.save(any())).thenReturn(player);
     }
 
     @Test
@@ -49,21 +50,36 @@ class RankingServiceTest {
     @Test
     void shouldChangeWinnerRankingPoints() {
         //given
+        final int rankingPoints = player.getRanking().getRankingPoints();
+        when(rankingPointCounter.calculateWinPoints()).thenReturn(rankingPoints + 1);
         //when
+        rankingService.updateWinner(player);
         //then
+        verify(rankingPointCounter, times(1)).calculateWinPoints();
+        assertEquals(rankingPoints + 1, player.getRanking().getRankingPoints());
+        verifyNoMoreInteractions(rankingPointCounter);
     }
 
     @Test
     void shouldIncreaseLoserLosses() {
         //given
+        final int losses = player.getRanking().getLosses();
         //when
+        rankingService.updateLoser(player);
         //then
+        assertTrue(player.getRanking().getLosses() > losses);
     }
 
     @Test
     void shouldChangeLoserRankingPoints() {
         //given
+        final int rankingPoints = player.getRanking().getRankingPoints();
+        when(rankingPointCounter.calculateLossPoints()).thenReturn(rankingPoints + 1);
         //when
+        rankingService.updateLoser(player);
         //then
+        verify(rankingPointCounter, times(1)).calculateLossPoints();
+        assertEquals(rankingPoints + 1, player.getRanking().getRankingPoints());
+        verifyNoMoreInteractions(rankingPointCounter);
     }
 }
