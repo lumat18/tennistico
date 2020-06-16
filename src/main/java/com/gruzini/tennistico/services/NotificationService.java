@@ -29,13 +29,13 @@ public class NotificationService {
         this.userService = userService;
     }
 
-    public Notification createNotificationFor(final String email, NotificationType notificationType){
+    public Notification createNotificationFor(final User user, NotificationType notificationType){
         final Notification notification = Notification.builder()
-                .recipient(userService.getByEmail(email))
+                .recipient(user)
                 .notificationType(notificationType)
                 .createdAt(LocalDateTime.now())
                 .build();
-        log.info("Notification of type " + notificationType.toString() + " for user " + email + " created");
+        log.info("Notification of type " + notificationType.toString() + " for user " + user.getEmail() + " created");
         return notificationRepository.save(notification);
     }
 

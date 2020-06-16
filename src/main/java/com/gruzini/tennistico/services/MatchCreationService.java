@@ -32,12 +32,16 @@ public class MatchCreationService {
         final Player player = userService.getByEmail(username).getPlayer();
         final Match createdMatch = saveCreatedMatch(createdMatchDto);
         playerService.add(player, createdMatch);
-        notificationService.createNotificationFor(username, NotificationType.MATCH_CREATED);
+        sendNotificationToMatchHost(username);
     }
 
     private Match saveCreatedMatch(CreatedMatchDto createdMatchDto) {
         final Match createdMatch = createdMatchMapper.toMatch(createdMatchDto);
         matchService.save(createdMatch);
         return createdMatch;
+    }
+
+    private void sendNotificationToMatchHost(String username) {
+        notificationService.createNotificationFor(userService.getByEmail(username), NotificationType.MATCH_CREATED);
     }
 }
