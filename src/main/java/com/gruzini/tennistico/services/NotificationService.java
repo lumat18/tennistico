@@ -7,6 +7,7 @@ import com.gruzini.tennistico.repositories.NotificationRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -24,6 +25,7 @@ public class NotificationService {
                 .recipient(recipient)
                 .actionLink(createActionLink(notificationType))
                 .message(notificationType.getMessage())
+                .localDateTime(LocalDateTime.now())
                 .build();
         return notificationRepository.save(notification);
     }
