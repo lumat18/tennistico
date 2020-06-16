@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.List;
+import java.time.LocalDateTime;
 
 @Entity(name = "notifications")
 @Data
@@ -28,4 +28,5 @@ public class Notification {
     @Column(name = "target_id")
     private Long targetId;
     private String message;
+    private LocalDateTime localDateTime;
 }
