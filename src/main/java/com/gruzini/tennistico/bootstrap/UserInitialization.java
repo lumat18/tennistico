@@ -53,37 +53,37 @@ public class UserInitialization implements CommandLineRunner {
                 .player(player)
                 .build();
         userRepository.save(user);
-        final Notification notification1 = Notification.builder()
-                .notificationType(NotificationType.MATCH_CREATED)
-                .recipient(user)
-                .createdAt(LocalDateTime.now().plusDays(4))
-                .build();
-        final Notification notification2 = Notification.builder()
-                .notificationType(NotificationType.JOIN_REQUEST)
-                .recipient(user)
-                .createdAt(LocalDateTime.now().plusDays(3))
-                .build();
-        final Notification notification3 = Notification.builder()
-                .notificationType(NotificationType.JOIN_CONFIRMED)
-                .recipient(user)
-                .createdAt(LocalDateTime.now().plusDays(2))
-                .build();
-        final Notification notification4 = Notification.builder()
-                .notificationType(NotificationType.SCORE_TO_SUBMIT)
-                .recipient(user)
-                .createdAt(LocalDateTime.now().plusDays(1))
-                .build();
-        final Notification notification5 = Notification.builder()
-                .notificationType(NotificationType.SCORE_TO_CONFIRM)
-                .recipient(user)
-                .createdAt(LocalDateTime.now())
-                .build();
-
-        notificationRepository.save(notification1);
-        notificationRepository.save(notification2);
-        notificationRepository.save(notification3);
-        notificationRepository.save(notification4);
-        notificationRepository.save(notification5);
+//        final Notification notification1 = Notification.builder()
+//                .notificationType(NotificationType.MATCH_CREATED)
+//                .recipient(user)
+//                .createdAt(LocalDateTime.now().plusDays(4))
+//                .build();
+//        final Notification notification2 = Notification.builder()
+//                .notificationType(NotificationType.JOIN_REQUEST)
+//                .recipient(user)
+//                .createdAt(LocalDateTime.now().plusDays(3))
+//                .build();
+//        final Notification notification3 = Notification.builder()
+//                .notificationType(NotificationType.JOIN_CONFIRMED)
+//                .recipient(user)
+//                .createdAt(LocalDateTime.now().plusDays(2))
+//                .build();
+//        final Notification notification4 = Notification.builder()
+//                .notificationType(NotificationType.SCORE_TO_SUBMIT)
+//                .recipient(user)
+//                .createdAt(LocalDateTime.now().plusDays(1))
+//                .build();
+//        final Notification notification5 = Notification.builder()
+//                .notificationType(NotificationType.SCORE_TO_CONFIRM)
+//                .recipient(user)
+//                .createdAt(LocalDateTime.now())
+//                .build();
+//
+//        notificationRepository.save(notification1);
+//        notificationRepository.save(notification2);
+//        notificationRepository.save(notification3);
+//        notificationRepository.save(notification4);
+//        notificationRepository.save(notification5);
 
     }
 }

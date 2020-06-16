@@ -21,19 +21,21 @@ public class NotificationService {
 
     private final NotificationRepository notificationRepository;
     private final NotificationMapper notificationMapper;
+    private final UserService userService;
 
-    public NotificationService(NotificationRepository notificationRepository, NotificationMapper notificationMapper) {
+    public NotificationService(NotificationRepository notificationRepository, NotificationMapper notificationMapper, UserService userService) {
         this.notificationRepository = notificationRepository;
         this.notificationMapper = notificationMapper;
+        this.userService = userService;
     }
 
-    private Notification createNotificationFor(final User recipient, NotificationType notificationType){
+    public Notification createNotificationFor(final String email, NotificationType notificationType){
         final Notification notification = Notification.builder()
-                .recipient(recipient)
+                .recipient(userService.getByEmail(email))
                 .notificationType(notificationType)
                 .createdAt(LocalDateTime.now())
                 .build();
-        log.info("Notification of type " + notificationType.toString() + " for user " + recipient.getEmail() + " created");
+        log.info("Notification of type " + notificationType.toString() + " for user " + email + " created");
         return notificationRepository.save(notification);
     }
 
