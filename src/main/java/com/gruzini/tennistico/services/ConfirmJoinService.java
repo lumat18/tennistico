@@ -6,8 +6,11 @@ import com.gruzini.tennistico.domain.enums.MatchStatus;
 import com.gruzini.tennistico.domain.enums.NotificationType;
 import com.gruzini.tennistico.exceptions.MatchPlayersException;
 import com.gruzini.tennistico.exceptions.PlayerIsNotAMatchHostException;
+import com.gruzini.tennistico.exceptions.PlayerNotFoundException;
 import com.gruzini.tennistico.exceptions.WrongMatchStatusException;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class ConfirmJoinService {
@@ -55,6 +58,7 @@ public class ConfirmJoinService {
     }
 
     private void sendNotificationToMatchGuest(final Long matchId) {
-        notificationService.createNotificationFor(matchService.getById(matchId).getGuest().get(), NotificationType.JOIN_CONFIRMED);
+        final Player guest = matchService.getById(matchId).getGuest().orElseThrow(PlayerNotFoundException::new);
+        notificationService.createNotificationFor(guest, NotificationType.JOIN_CONFIRMED);
     }
 }
