@@ -3,6 +3,7 @@ package com.gruzini.tennistico.services;
 import com.gruzini.tennistico.domain.Match;
 import com.gruzini.tennistico.domain.Player;
 import com.gruzini.tennistico.domain.enums.MatchStatus;
+import com.gruzini.tennistico.domain.enums.NotificationType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -12,16 +13,21 @@ public class JoinMatchService {
 
     private final MatchService matchService;
     private final PlayerService playerService;
+    private final NotificationService notificationService;
+    private final UserService userService;
 
-    public JoinMatchService(MatchService matchService, PlayerService playerService) {
+    public JoinMatchService(MatchService matchService, PlayerService playerService, NotificationService notificationService, UserService userService) {
         this.matchService = matchService;
         this.playerService = playerService;
+        this.notificationService = notificationService;
+        this.userService = userService;
     }
 
     public void joinGuestToMatch(final String guestUsername, final Long matchId) {
         final Match match = changeMatchStatus(matchId);
         final Player guest = playerService.getByUsername(guestUsername);
         addMatchToPlayer(guest, match);
+        sendNotificationForMatchHost(matchId);
     }
 
     private Match changeMatchStatus(Long matchId) {
@@ -34,5 +40,9 @@ public class JoinMatchService {
     private void addMatchToPlayer(Player guest, Match match) {
         guest.addMatch(match);
         playerService.save(guest);
+    }
+
+    private void sendNotificationForMatchHost(Long matchId) {
+        notificationService.createNotificationFor(userService.getByPlayer(matchService.getById(matchId).getHost()), NotificationType.JOIN_REQUEST);
     }
 }
