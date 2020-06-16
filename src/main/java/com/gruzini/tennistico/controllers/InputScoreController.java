@@ -2,6 +2,7 @@ package com.gruzini.tennistico.controllers;
 
 import com.gruzini.tennistico.domain.Match;
 import com.gruzini.tennistico.domain.Player;
+import com.gruzini.tennistico.domain.enums.MatchStatus;
 import com.gruzini.tennistico.models.score.Score;
 import com.gruzini.tennistico.models.score.ScoreMapper;
 import com.gruzini.tennistico.models.score.WinValidator;
@@ -45,6 +46,8 @@ public class InputScoreController {
         //TODO sprawdzić kto wygrał
         final Player winner = winValidator.validateWinner(match);
         //TODO zrobić update WIN/LOSS playerów
+        //TODO zmienić status gry z PENDING na SCORE_TO_BE_CONFIRMED
+        matchService.updateMatchStatus(match, MatchStatus.SCORE_TO_BE_CONFIRMED);
 
         return "dashboard";
     }
