@@ -15,13 +15,11 @@ public class ConfirmJoinService {
     private final PlayerService playerService;
     private final MatchService matchService;
     private final NotificationService notificationService;
-    private final UserService userService;
 
-    public ConfirmJoinService(PlayerService playerService, MatchService matchService, NotificationService notificationService, UserService userService) {
+    public ConfirmJoinService(PlayerService playerService, MatchService matchService, NotificationService notificationService) {
         this.playerService = playerService;
         this.matchService = matchService;
         this.notificationService = notificationService;
-        this.userService = userService;
     }
 
     public void confirmJoin(final Long matchId, final String username) {
@@ -56,7 +54,7 @@ public class ConfirmJoinService {
         }
     }
 
-    private void sendNotificationToMatchGuest(Long matchId) {
-        notificationService.createNotificationFor(userService.getByPlayer(matchService.getById(matchId).getGuest().get()), NotificationType.JOIN_CONFIRMED);
+    private void sendNotificationToMatchGuest(final Long matchId) {
+        notificationService.createNotificationFor(matchService.getById(matchId).getGuest().get(), NotificationType.JOIN_CONFIRMED);
     }
 }

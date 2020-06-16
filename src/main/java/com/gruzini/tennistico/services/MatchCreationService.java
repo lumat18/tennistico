@@ -42,6 +42,6 @@ public class MatchCreationService {
     }
 
     private void sendNotificationToMatchHost(String username) {
-        notificationService.createNotificationFor(userService.getByEmail(username), NotificationType.MATCH_CREATED);
+        notificationService.createNotificationFor(userService.getByEmail(username).getPlayer(), NotificationType.MATCH_CREATED);
     }
 }

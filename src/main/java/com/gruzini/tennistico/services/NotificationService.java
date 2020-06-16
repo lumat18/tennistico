@@ -1,6 +1,7 @@
 package com.gruzini.tennistico.services;
 
 import com.gruzini.tennistico.domain.Notification;
+import com.gruzini.tennistico.domain.Player;
 import com.gruzini.tennistico.domain.User;
 import com.gruzini.tennistico.domain.enums.NotificationType;
 import com.gruzini.tennistico.mappers.NotificationMapper;
@@ -29,13 +30,14 @@ public class NotificationService {
         this.userService = userService;
     }
 
-    public Notification createNotificationFor(final User user, NotificationType notificationType){
+    public Notification createNotificationFor(final Player player, NotificationType notificationType) {
+        final User recipient = userService.getByPlayer(player);
         final Notification notification = Notification.builder()
-                .recipient(user)
+                .recipient(recipient)
                 .notificationType(notificationType)
                 .createdAt(LocalDateTime.now())
                 .build();
-        log.info("Notification of type " + notificationType.toString() + " for user " + user.getEmail() + " created");
+        log.info("Notification of type " + notificationType.toString() + " for user " + recipient.getEmail() + " created");
         return notificationRepository.save(notification);
     }
 

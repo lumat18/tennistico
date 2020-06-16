@@ -14,14 +14,12 @@ public class ConfirmScoreService {
     private final PlayerService playerService;
     private final MatchService matchService;
     private final NotificationService notificationService;
-    private final UserService userService;
 
     public ConfirmScoreService(final PlayerService playerService,
-                               final MatchService matchService, NotificationService notificationService, UserService userService) {
+                               final MatchService matchService, NotificationService notificationService) {
         this.playerService = playerService;
         this.matchService = matchService;
         this.notificationService = notificationService;
-        this.userService = userService;
     }
 
     public void confirmScore(final Long matchId, final String username) {
@@ -29,7 +27,7 @@ public class ConfirmScoreService {
         final Match match = matchService.getById(matchId);
         validateMatchAndPlayer(match, player);
         matchService.updateMatchStatus(match, MatchStatus.ARCHIVED);
-        sendNotificationToMatchHost(matchId);
+        sendNotificationToMatchGuest(matchId);
     }
 
     private void validateMatchAndPlayer(final Match match, final Player player) {
@@ -50,7 +48,7 @@ public class ConfirmScoreService {
         }
     }
 
-    private void sendNotificationToMatchHost(Long matchId) {
-        notificationService.createNotificationFor(userService.getByPlayer(matchService.getById(matchId).getHost()), NotificationType.SCORE_TO_CONFIRM);
+    private void sendNotificationToMatchGuest(final Long matchId) {
+        notificationService.createNotificationFor(matchService.getById(matchId).getGuest().get(), NotificationType.SCORE_TO_CONFIRM);
     }
 }

@@ -14,13 +14,11 @@ public class JoinMatchService {
     private final MatchService matchService;
     private final PlayerService playerService;
     private final NotificationService notificationService;
-    private final UserService userService;
 
-    public JoinMatchService(MatchService matchService, PlayerService playerService, NotificationService notificationService, UserService userService) {
+    public JoinMatchService(MatchService matchService, PlayerService playerService, NotificationService notificationService) {
         this.matchService = matchService;
         this.playerService = playerService;
         this.notificationService = notificationService;
-        this.userService = userService;
     }
 
     public void joinGuestToMatch(final String guestUsername, final Long matchId) {
@@ -30,19 +28,19 @@ public class JoinMatchService {
         sendNotificationForMatchHost(matchId);
     }
 
-    private Match changeMatchStatus(Long matchId) {
+    private Match changeMatchStatus(final Long matchId) {
         final Match match = matchService.getById(matchId);
         match.setMatchStatus(MatchStatus.JOIN_REQUEST);
         matchService.save(match);
         return match;
     }
 
-    private void addMatchToPlayer(Player guest, Match match) {
+    private void addMatchToPlayer(final Player guest, final Match match) {
         guest.addMatch(match);
         playerService.save(guest);
     }
 
-    private void sendNotificationForMatchHost(Long matchId) {
-        notificationService.createNotificationFor(userService.getByPlayer(matchService.getById(matchId).getHost()), NotificationType.JOIN_REQUEST);
+    private void sendNotificationForMatchHost(final Long matchId) {
+        notificationService.createNotificationFor(matchService.getById(matchId).getHost(), NotificationType.JOIN_REQUEST);
     }
 }
