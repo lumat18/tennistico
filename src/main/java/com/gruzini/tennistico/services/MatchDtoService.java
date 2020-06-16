@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -58,10 +59,11 @@ public class MatchDtoService {
 
     private List<Match> prepareFutureGamesList(final User user){
         List<Match> allFutureGames = new ArrayList<>();
-        allFutureGames.addAll(matchService.getHostedMatchesExceptHostedBy(user.getPlayer()));
-        allFutureGames.addAll(matchService.getJoinRequestMatchesExceptHostedBy(user.getPlayer()));
+        allFutureGames.addAll(matchService.getByMatchStatusAndHostedBy(MatchStatus.HOSTED, user.getPlayer()));
+        allFutureGames.addAll(matchService.getByMatchStatusAndHostedBy(MatchStatus.JOIN_REQUEST, user.getPlayer()));
         allFutureGames.addAll(matchService.getByPlayerAndStatus(user.getPlayer(), MatchStatus.UPCOMING));
-        return allFutureGames.stream().sorted()
+        return allFutureGames.stream()
+                .sorted(Comparator.comparing(Match::getStartingAt))
                 .collect(Collectors.toList());
     }
 }

@@ -14,11 +14,12 @@ public class FutureMatchMapper {
               .court(match.getCourt().getName() + ", " + match.getCourt().getCity())
               .start(match.getStartingAt())
               .end(match.getEndingAt())
+              .matchStatus(match.getMatchStatus().toString())
               .build();
    }
 
    private String prepareGuestName(final Match match){
-      if(match.getGuest().isEmpty()){
+      if(match.getPlayers().size() < 2 || match.getGuest().isEmpty()){
          return "";
       }
       return match.getGuest().get().getFirstName() + " " + match.getGuest().get().getLastName();

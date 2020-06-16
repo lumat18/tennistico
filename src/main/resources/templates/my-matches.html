@@ -38,7 +38,7 @@
                                  <th class="gruzini-text-card-content">Day</th>
                                  <th class="gruzini-text-card-content">Starts At</th>
                                  <th class="gruzini-text-card-content gruzini-table-collapsing-first">Ends At</th>
-                                 <th class="gruzini-text-card-content"></th>
+                                 <th class="gruzini-text-card-content" style="width: 110px !important;"></th>
                                  </thead>
                                  <tbody>
                                  <div th:each="match, iter : ${myMatches}">
@@ -67,12 +67,18 @@
                                        <td th:text="${#temporals.format(match.getStart(),'HH:mm')}"></td>
                                        <td th:text="${#temporals.format(match.getEnd(),'HH:mm')}"
                                            class="gruzini-table-collapsing-first"></td>
-<!--                                       <td style="width: 110px !important;">-->
-<!--                                          <a class="btn btn-success gruzini-btn-success gruzini-button-small"-->
-<!--                                             href="/dashboard" role="button">-->
-<!--                                             Join-->
-<!--                                          </a>-->
-<!--                                       </td>-->
+                                       <td th:if="${match.getMatchStatus()=='JOIN_REQUEST'}">
+                                          <a class="btn btn-success gruzini-btn-success gruzini-button-small"
+                                             href="#" role="button" style="width: 110px !important;">
+                                             Accept
+                                          </a>
+                                       </td>
+                                       <td th:if="${match.getMatchStatus()=='HOSTED'}">
+                                          <a class="btn btn-success gruzini-btn-success gruzini-button-small"
+                                             href="#" role="button" style="width: 110px !important;">
+                                             Edit
+                                          </a>
+                                       </td>
                                     </tr>
                                  </div>
                                  </tbody>

@@ -16,6 +16,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -57,6 +58,7 @@ public class ArchivedMatchesInitializer implements CommandLineRunner {
       courtRepository.save(court);
 
       final Match match1 = Match.builder()
+              .startingAt(LocalDateTime.of(2020, Month.JUNE, 1, 10, 10))
               .endingAt(LocalDateTime.of(2020, Month.JUNE, 1, 12, 10))
               .court(court)
               .matchStatus(MatchStatus.PENDING)
@@ -64,23 +66,38 @@ public class ArchivedMatchesInitializer implements CommandLineRunner {
               .build();
 
       final Match match2 = Match.builder()
-              .startingAt(LocalDateTime.of(2020, Month.JUNE, 16, 10, 10))
-              .endingAt(LocalDateTime.of(2020, Month.JUNE, 16, 12, 10))
+              .startingAt(LocalDateTime.of(2020, Month.JUNE, 18, 10, 10))
+              .endingAt(LocalDateTime.of(2020, Month.JUNE, 18, 12, 10))
               .court(court)
               .matchStatus(MatchStatus.UPCOMING)
               .score("3-2")
               .build();
 
       final Match match3 = Match.builder()
+              .startingAt(LocalDateTime.of(2020, Month.JUNE, 5, 10, 10))
               .endingAt(LocalDateTime.of(2020, Month.JUNE, 5, 12, 10))
               .court(court)
               .matchStatus(MatchStatus.SCORE_TO_BE_CONFIRMED)
               .score("3-2")
               .build();
 
-      matchRepository.save(match1);
-      matchRepository.save(match2);
-      matchRepository.save(match3);
+      final Match match4 = Match.builder()
+              .startingAt(LocalDateTime.of(2020, Month.JUNE, 19, 10, 10))
+              .endingAt(LocalDateTime.of(2020, Month.JUNE, 19, 12, 10))
+              .court(court)
+              .matchStatus(MatchStatus.HOSTED)
+              .score("3-2")
+              .build();
+
+      final Match match5 = Match.builder()
+              .startingAt(LocalDateTime.of(2020, Month.JUNE, 20, 10, 10))
+              .endingAt(LocalDateTime.of(2020, Month.JUNE, 20, 12, 10))
+              .court(court)
+              .matchStatus(MatchStatus.JOIN_REQUEST)
+              .score("3-2")
+              .build();
+
+      matchRepository.saveAll(List.of(match1, match2, match3, match4, match5));
 
       final Player player1 = Player.builder()
               .firstName("Jimmy")
@@ -89,7 +106,7 @@ public class ArchivedMatchesInitializer implements CommandLineRunner {
               .playerSkill(PlayerSkill.BEGINNER)
               .yearsOfExperience(3)
               .birthday(LocalDate.of(2000, Month.AUGUST, 29))
-              .matches(List.of(match1, match2))
+              .matches(List.of(match1, match2, match4, match5))
               .build();
       final Player player2 = Player.builder()
               .firstName("Sarah")
@@ -109,32 +126,31 @@ public class ArchivedMatchesInitializer implements CommandLineRunner {
               .birthday(LocalDate.of(1945, Month.APRIL, 30))
               .matches(List.of(match3))
               .build();
+
+      playerRepository.saveAll(List.of(player1, player2, player3));
+
       final User user1 = User.builder()
               .email("jimmy@test.pl")
               .createdAt(LocalDateTime.now())
               .password(passwordEncoder.encode("pass1"))
               .userStatus(UserStatus.ACTIVE)
+              .player(player1)
               .build();
       final User user2 = User.builder()
               .email("sarah@test.pl")
               .createdAt(LocalDateTime.now())
               .password(passwordEncoder.encode("pass1"))
               .userStatus(UserStatus.ACTIVE)
+              .player(player2)
               .build();
       final User user3 = User.builder()
               .email("todd@test.pl")
               .createdAt(LocalDateTime.now())
               .password(passwordEncoder.encode("pass1"))
               .userStatus(UserStatus.ACTIVE)
+              .player(player3)
               .build();
-      playerRepository.save(player1);
-      playerRepository.save(player2);
-      playerRepository.save(player3);
-      user1.setPlayer(player1);
-      user2.setPlayer(player2);
-      user3.setPlayer(player3);
-      userRepository.save(user1);
-      userRepository.save(user2);
-      userRepository.save(user3);
+
+      userRepository.saveAll(List.of(user1, user2, user3));
    }
 }

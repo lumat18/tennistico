@@ -61,7 +61,7 @@ public class MatchService {
         return matchRepository.getAllByPlayersAndMatchStatus(player, matchStatus);
     }
 
-    public List<Match> getJoinRequestMatchesExceptHostedBy(final Player player) {
-        return matchRepository.findAllByMatchStatusAndPlayersNotContainsAndStartingAtIsAfterOrderByStartingAt(MatchStatus.JOIN_REQUEST, player, LocalDateTime.now());
+    public List<Match> getByMatchStatusAndHostedBy(final MatchStatus matchStatus, final Player player) {
+        return matchRepository.findAllByMatchStatusAndPlayersContainsAndStartingAtIsAfter(matchStatus, player, LocalDateTime.now());
     }
 }
