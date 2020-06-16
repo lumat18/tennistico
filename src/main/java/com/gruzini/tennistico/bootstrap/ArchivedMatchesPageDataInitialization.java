@@ -57,7 +57,7 @@ public class ArchivedMatchesPageDataInitialization implements CommandLineRunner 
       courtRepository.save(court);
 
       final Match match1 = Match.builder()
-              .endingAt(LocalDateTime.of(2020, Month.JUNE, 1, 12, 10))
+              .endingAt(LocalDateTime.of(2020, Month.JUNE, 12, 12, 10))
               .court(court)
               .matchStatus(MatchStatus.PENDING)
               .score("3-2")

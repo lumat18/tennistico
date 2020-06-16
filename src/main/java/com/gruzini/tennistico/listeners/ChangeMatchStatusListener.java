@@ -1,6 +1,7 @@
 package com.gruzini.tennistico.listeners;
 
-import com.gruzini.tennistico.events.ChangeMatchStatusEvent;
+import com.gruzini.tennistico.events.ChangeMatchStatusByEndingDateTimeEvent;
+import com.gruzini.tennistico.events.ChangeMatchStatusByStartingDateTimeEvent;
 import com.gruzini.tennistico.services.MatchService;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
@@ -17,7 +18,13 @@ public class ChangeMatchStatusListener {
 
     @Async
     @EventListener
-    public synchronized void handleEventPublish(ChangeMatchStatusEvent event) {
-        matchService.updateExpiredMatchesStatus(event);
+    public synchronized void handleEventPublishByStartingDateTime(ChangeMatchStatusByStartingDateTimeEvent event) {
+        matchService.updateExpiredMatchesStatusByStartingDateTime(event);
+    }
+
+    @Async
+    @EventListener
+    public synchronized void handleEventPublishByEndingDateTime(ChangeMatchStatusByEndingDateTimeEvent event) {
+        matchService.updateExpiredMatchesStatusByEndingDateTime(event);
     }
 }
