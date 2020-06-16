@@ -1,5 +1,6 @@
 package com.gruzini.tennistico.controllers;
 
+import com.gruzini.tennistico.domain.Notification;
 import com.gruzini.tennistico.exceptions.MatchNotFoundException;
 import com.gruzini.tennistico.exceptions.PlayerNotFoundException;
 import com.gruzini.tennistico.services.JoinMatchService;
@@ -26,6 +27,8 @@ public class JoinMatchController {
     @PostMapping
     public String joinMatch(@RequestParam(name = "match_id") final Long matchId, final Principal principal) {
         joinMatchService.joinGuestToMatch(principal.getName(), matchId);
+        notificationService.sendNotification(new Notification(), principal.getName());
+        //TODO add notification creation
         return "dashboard";
     }
 
