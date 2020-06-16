@@ -1,8 +1,10 @@
 package com.gruzini.tennistico.controllers;
 
+import com.gruzini.tennistico.domain.Notification;
 import com.gruzini.tennistico.exceptions.MatchNotFoundException;
 import com.gruzini.tennistico.exceptions.PlayerNotFoundException;
 import com.gruzini.tennistico.services.JoinMatchService;
+import com.gruzini.tennistico.services.NotificationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,15 +17,18 @@ import java.security.Principal;
 public class JoinMatchController {
 
     private final JoinMatchService joinMatchService;
+    private final NotificationService notificationService;
 
-    public JoinMatchController(JoinMatchService joinMatchService) {
+    public JoinMatchController(JoinMatchService joinMatchService, NotificationService notificationService) {
         this.joinMatchService = joinMatchService;
+        this.notificationService = notificationService;
     }
 
     @PostMapping
     public String joinMatch(@RequestParam(name = "match_id") final Long matchId, final Principal principal) {
         joinMatchService.joinGuestToMatch(principal.getName(), matchId);
-        //TODO send the notification to host
+        notificationService.sendNotification(new Notification(), principal.getName());
+        //TODO add notification creation
         return "dashboard";
     }
 
