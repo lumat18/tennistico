@@ -1,4 +1,4 @@
-package com.gruzini.tennistico.models.score;
+package com.gruzini.tennistico.services.score;
 
 import com.gruzini.tennistico.domain.Match;
 import com.gruzini.tennistico.domain.Player;

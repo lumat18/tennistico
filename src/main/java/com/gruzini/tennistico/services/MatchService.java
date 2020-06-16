@@ -19,7 +19,6 @@ public class MatchService {
     private final MatchRepository matchRepository;
     private final PlayerRepository playerRepository;
 
-
     public MatchService(MatchRepository matchRepository, PlayerRepository playerRepository) {
         this.matchRepository = matchRepository;
         this.playerRepository = playerRepository;
@@ -46,6 +45,11 @@ public class MatchService {
         match.setMatchStatus(matchStatus);
         matchRepository.save(match);
         match.getPlayers().forEach(playerRepository::save);
+    }
+
+    public void updateMatchScore(final Match match, final String score) {
+        match.setScore(score);
+        save(match);
     }
 
     public Match getById(final Long id) {

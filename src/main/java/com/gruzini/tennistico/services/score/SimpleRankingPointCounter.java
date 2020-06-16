@@ -1,4 +1,4 @@
-package com.gruzini.tennistico.models.score;
+package com.gruzini.tennistico.services.score;
 
 import org.springframework.stereotype.Component;
 

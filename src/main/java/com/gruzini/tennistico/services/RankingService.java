@@ -2,7 +2,7 @@ package com.gruzini.tennistico.services;
 
 import com.gruzini.tennistico.domain.Player;
 import com.gruzini.tennistico.domain.Ranking;
-import com.gruzini.tennistico.models.score.RankingPointCounter;
+import com.gruzini.tennistico.services.score.RankingPointCounter;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 

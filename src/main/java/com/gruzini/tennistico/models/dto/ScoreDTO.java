@@ -1,4 +1,4 @@
-package com.gruzini.tennistico.models.score;
+package com.gruzini.tennistico.models.dto;
 
 import lombok.Builder;
 import lombok.Data;

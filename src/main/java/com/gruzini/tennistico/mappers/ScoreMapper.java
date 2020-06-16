@@ -1,5 +1,7 @@
-package com.gruzini.tennistico.models.score;
+package com.gruzini.tennistico.mappers;
 
+import com.gruzini.tennistico.models.dto.ScoreDTO;
+import com.gruzini.tennistico.models.dto.SetDTO;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
