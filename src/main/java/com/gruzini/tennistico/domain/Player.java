@@ -42,6 +42,10 @@ public class Player {
 //   unsure if it's going to be just a number or separate class consisting of several factors
 //   private Integer rank;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ranking_id")
+    private Ranking ranking;
+
     @ManyToMany
     @JoinTable(name = "player_to_match",
             joinColumns = {@JoinColumn(name = "user_id")},

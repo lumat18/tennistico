@@ -1,11 +1,9 @@
 package com.gruzini.tennistico.controllers;
 
 import com.gruzini.tennistico.domain.Match;
-import com.gruzini.tennistico.domain.Player;
 import com.gruzini.tennistico.domain.enums.MatchStatus;
 import com.gruzini.tennistico.models.score.ScoreDTO;
 import com.gruzini.tennistico.models.score.ScoreMapper;
-import com.gruzini.tennistico.models.score.WinValidator;
 import com.gruzini.tennistico.services.MatchService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,12 +19,11 @@ import javax.validation.Valid;
 public class InputScoreController {
     private final MatchService matchService;
     private final ScoreMapper scoreMapper;
-    private final WinValidator winValidator;
 
-    public InputScoreController(MatchService matchService, ScoreMapper scoreMapper, WinValidator winValidator) {
+
+    public InputScoreController(MatchService matchService, ScoreMapper scoreMapper) {
         this.matchService = matchService;
         this.scoreMapper = scoreMapper;
-        this.winValidator = winValidator;
     }
 
     @PostMapping
@@ -42,10 +39,12 @@ public class InputScoreController {
         //TODO wyciągnąć grę po id
         final Match match = matchService.getById(matchId);
         //TODO przeliczyć score na stringa, który pójdzie do encji
-        match.setScore(scoreMapper.mapScoreToString(scoreDTO));
+        final String score = scoreMapper.mapScoreToString(scoreDTO);
+        match.setScore(score);
         //TODO sprawdzić kto wygrał
-        final Player winner = winValidator.validateWinner(match);
+
         //TODO zrobić update WIN/LOSS playerów
+
         //TODO zmienić status gry z PENDING na SCORE_TO_BE_CONFIRMED
         matchService.updateMatchStatus(match, MatchStatus.SCORE_TO_BE_CONFIRMED);
 

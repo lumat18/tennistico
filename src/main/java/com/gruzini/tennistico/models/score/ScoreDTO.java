@@ -31,8 +31,4 @@ public class ScoreDTO {
 
         return hostSetDTOS.size() <= 3 && guestSetDTOS.size() <= 3;
     }
-
-    public List<SetDTO> getSetDtoList() {
-        return setDtoList;
-    }
 }

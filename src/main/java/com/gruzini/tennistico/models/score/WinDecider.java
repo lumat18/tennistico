@@ -6,12 +6,12 @@ import com.gruzini.tennistico.exceptions.MatchPlayersException;
 import org.springframework.stereotype.Component;
 
 @Component
-public class WinValidator {
+public class WinDecider {
     private static final int HOST_INDEX = 0;
     private static final int GUEST_INDEX = 1;
     private static final String SEPARATOR = "-";
 
-    public Player validateWinner(final Match match) {
+    public Player decideWinner(final Match match) {
         if (isDraw(match)) {
             return null;
         }
@@ -39,5 +39,16 @@ public class WinValidator {
     private int getPlayerScore(final String score, final int playerIndex) {
         final String[] split = score.split(SEPARATOR);
         return Integer.parseInt(split[playerIndex]);
+    }
+
+    public Player decideLoser(final Match match) {
+        if (isDraw(match)) {
+            return null;
+        }
+        if (hostWins(match)) {
+            return match.getGuest().orElseThrow(MatchPlayersException::new);
+        } else {
+            return match.getHost();
+        }
     }
 }
