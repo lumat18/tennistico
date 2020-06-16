@@ -8,6 +8,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface NotificationRepository extends JpaRepository<Notification, Long> {
-    @Query("SELECT n FROM  notifications n WHERE n.recipient = :username")
+    @Query("SELECT n FROM  notifications n WHERE n.recipient.email = :username")
     List<Notification> findAllByRecipientContaining(@Param("username") final String username);
 }
