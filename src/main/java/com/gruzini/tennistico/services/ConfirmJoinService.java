@@ -3,6 +3,7 @@ package com.gruzini.tennistico.services;
 import com.gruzini.tennistico.domain.Match;
 import com.gruzini.tennistico.domain.Player;
 import com.gruzini.tennistico.domain.enums.MatchStatus;
+import com.gruzini.tennistico.domain.enums.NotificationType;
 import com.gruzini.tennistico.exceptions.MatchPlayersException;
 import com.gruzini.tennistico.exceptions.PlayerIsNotAMatchHostException;
 import com.gruzini.tennistico.exceptions.WrongMatchStatusException;
@@ -13,10 +14,14 @@ public class ConfirmJoinService {
 
     private final PlayerService playerService;
     private final MatchService matchService;
+    private final NotificationService notificationService;
+    private final UserService userService;
 
-    public ConfirmJoinService(PlayerService playerService, MatchService matchService) {
+    public ConfirmJoinService(PlayerService playerService, MatchService matchService, NotificationService notificationService, UserService userService) {
         this.playerService = playerService;
         this.matchService = matchService;
+        this.notificationService = notificationService;
+        this.userService = userService;
     }
 
     public void confirmJoin(final Long matchId, final String username) {
@@ -24,6 +29,7 @@ public class ConfirmJoinService {
         final Match match = matchService.getById(matchId);
         validateMatchAndPlayer(match, player);
         matchService.updateMatchStatus(match, MatchStatus.UPCOMING);
+        sendNotificationToMatchGuest(matchId);
     }
 
     private void validateMatchAndPlayer(final Match match, final Player player) {
@@ -48,5 +54,9 @@ public class ConfirmJoinService {
         if (!match.getHost().equals(player)) {
             throw new PlayerIsNotAMatchHostException();
         }
+    }
+
+    private void sendNotificationToMatchGuest(Long matchId) {
+        notificationService.createNotificationFor(userService.getByPlayer(matchService.getById(matchId).getGuest().get()), NotificationType.JOIN_CONFIRMED);
     }
 }
