@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+>
+
+<head th:insert="/fragments/head :: head"></head>
+
+<body class="dark-edition" style="background-image: url(/img/upcoming_background.jpg); background-size: cover">
+<div class="wrapper">
+
+   <!--Side Bar-->
+   <div th:insert="fragments/sidebar :: sidebar"></div>
+   <!--End Side Bar-->
+
+   <div class="main-panel">
+      <!-- Navbar -->
+      <nav th:insert="/fragments/navbar :: navbar"></nav>
+      <!-- End Navbar -->
+
+      <div class="main-panel gruzini-registration-main-panel">
+         <div class="content">
+            <div class="container-fluid">
+               <div class="row">
+                  <!-- placed here to put score card in center -->
+                  <div class="col-xl-1"></div>
+                  <div class="col-xl-10 col-lg-12">
+                     <div class="card card-chart">
+                        <div class="card-header card-header-success">
+                           <p class="gruzini-title">Registration</p>
+                        </div>
+                        <div class="card-body">
+                           <form method="post" th:action="@{/submit-score}" th:object="">
+
+
+                              <button id="hiddenSubmitButton" type="submit" hidden></button>
+                           </form>
+                        </div>
+                        <div class="card-footer d-flex justify-content-center">
+                           <button class="btn btn-success gruzini-btn-success" id="buttonSubmit"
+                                   onclick="submitByHiddenButton()">Next step
+                           </button>
+                        </div>
+                     </div>
+                  </div>
+                  <!-- placed here to put score card in center -->
+                  <div class="col-xl-1"></div>
+               </div>
+            </div>
+         </div>
+         <!--FOOTER-->
+         <footer th:insert="/fragments/footer :: footer"></footer>
+         <!--END FOOTER-->
+      </div>
+   </div>
+   <script>
+      function submitByHiddenButton() {
+         document.getElementById("hiddenSubmitButton").click();
+      }
+   </script>
+   <!--JAVASCRIPT IMPORTS-->
+   <div th:replace="/fragments/js-imports :: js-imports"></div>
+   <!--END JAVASCRIPT IMPORTS-->
+</div>
+</body>
+</html>
