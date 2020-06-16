@@ -11,4 +11,8 @@ public class NotificationEvent extends ApplicationEvent {
         super(source);
         this.notification = notification;
     }
+
+    public Notification getNotification() {
+        return notification;
+    }
 }

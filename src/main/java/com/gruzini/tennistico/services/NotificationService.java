@@ -25,4 +25,8 @@ public class NotificationService {
         notificationSender.send(notification, user);
         notificationRepository.save(notification);
     }
+
+    public void saveNotification(final Notification notification) {
+        notificationRepository.save(notification);
+    }
 }
