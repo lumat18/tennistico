@@ -3,7 +3,7 @@ package com.gruzini.tennistico.controllers;
 import com.gruzini.tennistico.domain.Match;
 import com.gruzini.tennistico.domain.Player;
 import com.gruzini.tennistico.domain.enums.MatchStatus;
-import com.gruzini.tennistico.models.score.Score;
+import com.gruzini.tennistico.models.score.ScoreDTO;
 import com.gruzini.tennistico.models.score.ScoreMapper;
 import com.gruzini.tennistico.models.score.WinValidator;
 import com.gruzini.tennistico.services.MatchService;
@@ -31,7 +31,7 @@ public class InputScoreController {
 
     @PostMapping
     public String inputScore(final Long matchId,
-                             @Valid @ModelAttribute(name = "score") final Score score,
+                             @Valid @ModelAttribute(name = "score") final ScoreDTO scoreDTO,
                              final Errors errors,
                              final Model model) {
         if (errors.hasErrors()) {
@@ -42,7 +42,7 @@ public class InputScoreController {
         //TODO wyciągnąć grę po id
         final Match match = matchService.getById(matchId);
         //TODO przeliczyć score na stringa, który pójdzie do encji
-        match.setScore(scoreMapper.mapScoreToString(score));
+        match.setScore(scoreMapper.mapScoreToString(scoreDTO));
         //TODO sprawdzić kto wygrał
         final Player winner = winValidator.validateWinner(match);
         //TODO zrobić update WIN/LOSS playerów
