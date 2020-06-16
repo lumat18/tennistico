@@ -1,10 +1,13 @@
 package com.gruzini.tennistico.bootstrap;
 
+import com.gruzini.tennistico.domain.Notification;
 import com.gruzini.tennistico.domain.Player;
 import com.gruzini.tennistico.domain.User;
 import com.gruzini.tennistico.domain.enums.Gender;
 import com.gruzini.tennistico.domain.enums.PlayerSkill;
 import com.gruzini.tennistico.domain.enums.UserStatus;
+import com.gruzini.tennistico.messages.NotificationMessages;
+import com.gruzini.tennistico.repositories.NotificationRepository;
 import com.gruzini.tennistico.repositories.PlayerRepository;
 import com.gruzini.tennistico.repositories.UserRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -21,11 +24,13 @@ public class UserInitialization implements CommandLineRunner {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final PlayerRepository playerRepository;
+    private final NotificationRepository notificationRepository;
 
-    public UserInitialization(PasswordEncoder passwordEncoder, UserRepository userRepository, PlayerRepository playerRepository) {
+    public UserInitialization(PasswordEncoder passwordEncoder, UserRepository userRepository, PlayerRepository playerRepository, NotificationRepository notificationRepository) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.playerRepository = playerRepository;
+        this.notificationRepository = notificationRepository;
     }
 
     @Override
@@ -47,5 +52,36 @@ public class UserInitialization implements CommandLineRunner {
                 .player(player)
                 .build();
         userRepository.save(user);
+        final Notification notification1 = Notification.builder()
+                .message(NotificationMessages.MATCH_CREATED)
+                .recipient(user)
+                .localDateTime(LocalDateTime.now())
+                .build();
+        final Notification notification2 = Notification.builder()
+                .message(NotificationMessages.JOIN_REQUEST)
+                .recipient(user)
+                .localDateTime(LocalDateTime.now())
+                .build();
+        final Notification notification3 = Notification.builder()
+                .message(NotificationMessages.JOIN_CONFIRMED)
+                .recipient(user)
+                .localDateTime(LocalDateTime.now())
+                .build();
+        final Notification notification4 = Notification.builder()
+                .message(NotificationMessages.SCORE_TO_CONFIRM)
+                .recipient(user)
+                .localDateTime(LocalDateTime.now())
+                .build();
+        final Notification notification5 = Notification.builder()
+                .message(NotificationMessages.SCORE_TO_CONFIRM)
+                .recipient(user)
+                .localDateTime(LocalDateTime.now())
+                .build();
+        notificationRepository.save(notification1);
+        notificationRepository.save(notification2);
+        notificationRepository.save(notification3);
+        notificationRepository.save(notification4);
+        notificationRepository.save(notification5);
+
     }
 }
