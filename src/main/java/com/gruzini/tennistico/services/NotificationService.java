@@ -19,9 +19,9 @@ public class NotificationService {
         this.notificationRepository = notificationRepository;
     }
 
-    private Notification createNotificationFor(final List<User> recipients, NotificationType notificationType){
+    private Notification createNotificationFor(final User recipient, NotificationType notificationType){
         final Notification notification = Notification.builder()
-                .recipients(recipients)
+                .recipient(recipient)
                 .actionLink(createActionLink(notificationType))
                 .message(notificationType.getMessage())
                 .build();
@@ -30,5 +30,9 @@ public class NotificationService {
 
     private String createActionLink(final NotificationType notificationType) {
         return "http://localhost:8080/" +notificationType.getEndpoint();
+    }
+
+    public List<Notification> getByUser(String username) {
+        return notificationRepository.findAllByRecipientContaining(username);
     }
 }

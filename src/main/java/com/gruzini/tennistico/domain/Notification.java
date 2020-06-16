@@ -20,10 +20,9 @@ public class Notification {
     @GeneratedValue
     private Long id;
 
-    @OneToMany
-    @JoinColumn(name = "recipents")
+    @ManyToOne
     @NotNull
-    private List<User> recipients;
+    private User recipient;
     @Column(name = "action_link")
     private String actionLink;
     @Column(name = "target_id")
