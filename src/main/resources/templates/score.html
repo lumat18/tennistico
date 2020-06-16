@@ -25,11 +25,48 @@
                   <div class="col-xl-10 col-lg-12">
                      <div class="card card-chart">
                         <div class="card-header card-header-success">
-                           <p class="gruzini-title">Registration</p>
+                           <p class="gruzini-title">Submit Score</p>
                         </div>
                         <div class="card-body">
-                           <form method="post" th:action="@{/submit-score}" th:object="">
-
+                           <form method="post" th:action="@{/submit-score}" th:object="${match}">
+                              <table class="table table-hover">
+                                 <thead>
+                                 <th class="gruzini-text-card-content"
+                                     th:text="${match.getHost().getFirstName() + ' ' + match.getHost().getLastName()}">
+                                 </th>
+                                 <th class="gruzini-text-card-content"> .vs </th>
+                                 <th class="gruzini-text-card-content"
+                                     th:text="${match.getGuest().get().getFirstName() + ' ' + match.getGuest().get().getLastName()}">
+                                 </th>
+                                 </thead>
+                                 <tbody>
+                                 <tr>
+                                    <td></td>
+                                    <td> - </td>
+                                    <td></td>
+                                 </tr>
+                                 <tr>
+                                    <td></td>
+                                    <td> - </td>
+                                    <td></td>
+                                 </tr>
+                                 <tr>
+                                    <td></td>
+                                    <td> - </td>
+                                    <td></td>
+                                 </tr>
+                                 <tr>
+                                    <td></td>
+                                    <td> - </td>
+                                    <td></td>
+                                 </tr>
+                                 <tr>
+                                    <td></td>
+                                    <td> - </td>
+                                    <td></td>
+                                 </tr>
+                                 </tbody>
+                              </table>
 
                               <button id="hiddenSubmitButton" type="submit" hidden></button>
                            </form>
