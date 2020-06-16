@@ -14,6 +14,11 @@ public enum NotificationType {
         public String getMessage() {
             return NotificationMessages.MATCH_CREATED;
         }
+
+        @Override
+        public String getButtonName() {
+            return null;
+        }
     },
     JOIN_REQUEST{
         @Override
@@ -24,6 +29,11 @@ public enum NotificationType {
         public String getMessage() {
             return NotificationMessages.JOIN_REQUEST;
         }
+
+        @Override
+        public String getButtonName() {
+            return "CONFIRM";
+        }
     },
     JOIN_CONFIRMED{
         @Override
@@ -33,6 +43,11 @@ public enum NotificationType {
         @Override
         public String getMessage() {
             return NotificationMessages.JOIN_CONFIRMED;
+        }
+
+        @Override
+        public String getButtonName() {
+            return null;
         }
     },
 
@@ -45,6 +60,11 @@ public enum NotificationType {
         public String getMessage() {
             return NotificationMessages.SCORE_TO_SUBMIT;
         }
+
+        @Override
+        public String getButtonName() {
+            return "FILL IN";
+        }
     },
     SCORE_TO_CONFIRM{
         @Override
@@ -55,8 +75,14 @@ public enum NotificationType {
         public String getMessage() {
             return NotificationMessages.SCORE_TO_CONFIRM;
         }
+
+        @Override
+        public String getButtonName() {
+            return "CONFIRM";
+        }
     };
 
     public abstract String getEndpoint();
     public abstract String getMessage();
+    public abstract String getButtonName();
 }

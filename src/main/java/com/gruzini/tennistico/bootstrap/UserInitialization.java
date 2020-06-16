@@ -4,6 +4,7 @@ import com.gruzini.tennistico.domain.Notification;
 import com.gruzini.tennistico.domain.Player;
 import com.gruzini.tennistico.domain.User;
 import com.gruzini.tennistico.domain.enums.Gender;
+import com.gruzini.tennistico.domain.enums.NotificationType;
 import com.gruzini.tennistico.domain.enums.PlayerSkill;
 import com.gruzini.tennistico.domain.enums.UserStatus;
 import com.gruzini.tennistico.messages.NotificationMessages;
@@ -53,30 +54,31 @@ public class UserInitialization implements CommandLineRunner {
                 .build();
         userRepository.save(user);
         final Notification notification1 = Notification.builder()
-                .message(NotificationMessages.MATCH_CREATED)
+                .notificationType(NotificationType.MATCH_CREATED)
                 .recipient(user)
-                .localDateTime(LocalDateTime.now())
+                .createdAt(LocalDateTime.now().plusDays(4))
                 .build();
         final Notification notification2 = Notification.builder()
-                .message(NotificationMessages.JOIN_REQUEST)
+                .notificationType(NotificationType.JOIN_REQUEST)
                 .recipient(user)
-                .localDateTime(LocalDateTime.now())
+                .createdAt(LocalDateTime.now().plusDays(3))
                 .build();
         final Notification notification3 = Notification.builder()
-                .message(NotificationMessages.JOIN_CONFIRMED)
+                .notificationType(NotificationType.JOIN_CONFIRMED)
                 .recipient(user)
-                .localDateTime(LocalDateTime.now())
+                .createdAt(LocalDateTime.now().plusDays(2))
                 .build();
         final Notification notification4 = Notification.builder()
-                .message(NotificationMessages.SCORE_TO_CONFIRM)
+                .notificationType(NotificationType.SCORE_TO_SUBMIT)
                 .recipient(user)
-                .localDateTime(LocalDateTime.now())
+                .createdAt(LocalDateTime.now().plusDays(1))
                 .build();
         final Notification notification5 = Notification.builder()
-                .message(NotificationMessages.SCORE_TO_CONFIRM)
+                .notificationType(NotificationType.SCORE_TO_CONFIRM)
                 .recipient(user)
-                .localDateTime(LocalDateTime.now())
+                .createdAt(LocalDateTime.now())
                 .build();
+
         notificationRepository.save(notification1);
         notificationRepository.save(notification2);
         notificationRepository.save(notification3);

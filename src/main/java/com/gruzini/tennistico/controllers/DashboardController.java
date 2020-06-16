@@ -1,5 +1,6 @@
 package com.gruzini.tennistico.controllers;
 
+import com.gruzini.tennistico.models.dto.NotificationDto;
 import com.gruzini.tennistico.services.NotificationService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequestMapping("/dashboard")
@@ -20,7 +22,9 @@ public class DashboardController {
 
     @GetMapping
     public String showDashboard(final Model model, final Principal principal){
-        model.addAttribute("notifications", notificationService.getByUser(principal.getName()));
+        final List<NotificationDto> notifications = notificationService.getByUser(principal.getName());
+        System.out.println("notifications = " + notifications.size());
+        model.addAttribute("notifications", notifications);
         return "dashboard";
     }
 }
