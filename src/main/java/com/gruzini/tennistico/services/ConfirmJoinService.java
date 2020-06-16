@@ -59,6 +59,6 @@ public class ConfirmJoinService {
 
     private void sendNotificationToMatchGuest(final Long matchId) {
         final Player guest = matchService.getById(matchId).getGuest().orElseThrow(PlayerNotFoundException::new);
-        notificationService.createNotificationFor(guest, NotificationType.JOIN_CONFIRMED);
+        notificationService.createNotificationFor(guest, matchId,  NotificationType.JOIN_CONFIRMED);
     }
 }

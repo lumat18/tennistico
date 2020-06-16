@@ -23,7 +23,6 @@ public class DashboardController {
     @GetMapping
     public String showDashboard(final Model model, final Principal principal){
         final List<NotificationDto> notifications = notificationService.getByUser(principal.getName());
-        System.out.println("notifications = " + notifications.size());
         model.addAttribute("notifications", notifications);
         return "dashboard";
     }

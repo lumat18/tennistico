@@ -41,6 +41,7 @@ public class JoinMatchService {
     }
 
     private void sendNotificationForMatchHost(final Long matchId) {
-        notificationService.createNotificationFor(matchService.getById(matchId).getHost(), NotificationType.JOIN_REQUEST);
+        final Player host = matchService.getById(matchId).getHost();
+        notificationService.createNotificationFor(host, matchId, NotificationType.JOIN_REQUEST);
     }
 }

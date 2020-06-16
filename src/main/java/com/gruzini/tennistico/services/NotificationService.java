@@ -30,10 +30,11 @@ public class NotificationService {
         this.userService = userService;
     }
 
-    public Notification createNotificationFor(final Player player, NotificationType notificationType) {
+    public Notification createNotificationFor(final Player player, final Long matchId, final NotificationType notificationType) {
         final User recipient = userService.getByPlayer(player);
         final Notification notification = Notification.builder()
                 .recipient(recipient)
+                .matchId(matchId)
                 .notificationType(notificationType)
                 .createdAt(LocalDateTime.now())
                 .build();

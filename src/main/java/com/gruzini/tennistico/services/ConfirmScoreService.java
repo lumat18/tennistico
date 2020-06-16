@@ -51,6 +51,6 @@ public class ConfirmScoreService {
 
     private void sendNotificationToMatchGuest(final Long matchId) {
         final Player guest = matchService.getById(matchId).getGuest().orElseThrow(PlayerNotFoundException::new);
-        notificationService.createNotificationFor(guest, NotificationType.SCORE_TO_CONFIRM);
+        notificationService.createNotificationFor(guest, matchId, NotificationType.SCORE_TO_CONFIRM);
     }
 }
