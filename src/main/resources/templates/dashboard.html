@@ -24,424 +24,216 @@
     <!--Side Bar-->
     <div th:insert="/fragments/sidebar :: sidebar"></div>
     <!--End Side Bar-->
-   <div class="main-panel">
-      <!-- Navbar -->
-       <nav th:insert="/fragments/navbar :: navbar"></nav>
-      <!-- End Navbar -->
-      <div class="content">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-xl-4 col-lg-12">
-              <div class="card card-chart">
-                <div class="card-header card-header-success">
-                    <p class="gruzini-title">Create New</p>
-                </div>
-                <div class="card-body" >
-                  <h4 class="card-title">New Match</h4>
-                  <p class="card-category">
-                  <p class="card-category">Set up date and location, let other people join you</p>
-                </div>
-                <a href="/dashboard/hosted">
-                    <div class="card-footer">
-                        <div class="stats">
-                            <i class="material-icons">access_time</i> Go and see all open matches
+    <div class="main-panel">
+        <!-- Navbar -->
+        <nav th:insert="/fragments/navbar :: navbar"></nav>
+        <!-- End Navbar -->
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xl-4 col-lg-12">
+                        <div class="card card-chart">
+                            <div class="card-header card-header-success">
+                                <p class="gruzini-title">Create New</p>
+                            </div>
+                            <div class="card-body">
+                                <h4 class="card-title">New Match</h4>
+                                <p class="card-category">
+                                <p class="card-category">Set up date and location, let other people join you</p>
+                            </div>
+                            <a href="/dashboard/hosted">
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <i class="material-icons">access_time</i> Go and see all open matches
+                                    </div>
+                                </div>
+                            </a>
                         </div>
                     </div>
-                </a>
-              </div>
-            </div>
-            <div class="col-xl-4 col-lg-12">
-              <div class="card card-chart">
-                <div class="card-header card-header-warning card-title-content">
-                  <p style="font-size: 40px; text-align: center; padding-top: 10px">0 - 0</p>
-                </div>
-                <div class="card-body">
-                    <h4 class="card-title">Your Next Match</h4>
-                  <p class="card-category">Upcoming Campaign Performance</p>
-                </div>
-                <div class="card-footer">
-                  <div class="stats">
-                    <i class="material-icons">access_time</i> 24/06/2020, Sopot  2 days remaining
-                  </div>
-               </div>
-              </div>
-            </div>
-               <div class="col-xl-4 col-lg-12">
-                   <div class="card card-chart">
-                       <div class="card-header card-header-success  card-title-content">
-                           <p style="font-size: 40px; text-align: center; padding-top: 10px">6-4 4-6 6-2</p>
-                       </div>
-                       <div class="card-body">
-                           <h4 class="card-title">Your Last Match Score</h4>
-                           <p class="card-category">Last Campaign Performance</p>
-                       </div>
-                       <div class="card-footer" data-link="/dashboard/matches-history" style="cursor: pointer">
-                           <div class="stats">
-                               View your playing history
-                           </div>
-                       </div>
-                   </div>
-               </div>
+                    <div class="col-xl-4 col-lg-12">
+                        <div class="card card-chart">
+                            <div class="card-header card-header-warning card-title-content">
+                                <p style="font-size: 40px; text-align: center; padding-top: 10px">0 - 0</p>
+                            </div>
+                            <div class="card-body">
+                                <h4 class="card-title">Your Next Match</h4>
+                                <p class="card-category">Upcoming Campaign Performance</p>
+                            </div>
+                            <div class="card-footer">
+                                <div class="stats">
+                                    <i class="material-icons">access_time</i> 24/06/2020, Sopot 2 days remaining
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-12">
+                        <div class="card card-chart">
+                            <div class="card-header card-header-success  card-title-content">
+                                <p style="font-size: 40px; text-align: center; padding-top: 10px">6-4 4-6 6-2</p>
+                            </div>
+                            <div class="card-body">
+                                <h4 class="card-title">Your Last Match Score</h4>
+                                <p class="card-category">Last Campaign Performance</p>
+                            </div>
+                            <div class="card-footer" data-link="/dashboard/matches-history" style="cursor: pointer">
+                                <div class="stats">
+                                    View your playing history
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
+                </div>
+                <div class="row">
+                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                        <div class="card card-stats">
+                            <div class="card-header card-header-success card-header-icon">
+                                <div class="card-icon">
+                                    <i class="material-icons">emoji_events</i>
+                                </div>
+                                <p class="card-category">Your position in the rankings</p>
+                                <h3 class="card-title">1
+                                    <small>st</small>
+                                </h3>
+                            </div>
+                            <div class="card-footer">
+                                <div class="stats">
+                                    <a href="#pablo" class="warning-link">See rankings</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                        <div class="card card-stats">
+                            <div class="card-header card-header-success card-header-icon">
+                                <div class="card-icon">
+                                    <i class="material-icons">sports_tennis</i>
+                                </div>
+                                <p class="card-category">Wins / Loses</p>
+                                <h3 class="card-title">12-2</h3>
+                            </div>
+                            <div class="card-footer">
+                                <div class="stats">
+                                    <i class="material-icons">date_range</i> 3 wins in a row
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                        <div class="card card-stats">
+                            <div class="card-header card-header-success card-header-icon">
+                                <div class="card-icon">
+                                    <i class="material-icons">home</i>
+                                </div>
+                                <p class="card-category">Favourite Court</p>
+                                <h3 class="card-title">Arthur Ashe Stadium</h3>
+                            </div>
+                            <div class="card-footer">
+                                <div class="stats">
+                                    7 matches
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                        <div class="card card-stats">
+                            <div class="card-header card-header-success card-header-icon">
+                                <div class="card-icon">
+                                    <i class="fa fa-twitter"></i>
+                                </div>
+                                <p class="card-category">Followers</p>
+                                <h3 class="card-title">+245</h3>
+                            </div>
+                            <div class="card-footer">
+                                <div class="stats">
+                                    <i class="material-icons">update</i> Just Updated
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-12">
+                        <div class="card">
+                            <div class="card-header card-header-success">
+                                <h4 class="card-title">Activity</h4>
+                                <p class="card-category">Current date 6th June, 2020</p>
+                            </div>
+                            <div class="card-body table-responsive">
+                                <table class="table table-hover">
+                                    <thead class="text-warning">
+                                    <th>ID</th>
+                                    <th>Type</th>
+                                    <th>Date</th>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Won match against Grzegorz Wanta</td>
+                                        <td>24.05.2020</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Won match against Lukasz Matuszewski</td>
+                                        <td>22.05.2020</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Won match against Sage Rodriguez</td>
+                                        <td>14.05.2020</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>Lost match against Philip Chaney</td>
+                                        <td>04.05.2020</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-12">
+                        <div class="card">
+                            <div class="card-header card-header-success">
+                                <h4 class="card-title">Activity</h4>
+                                <p class="card-category">Current date 6th June, 2020</p>
+                            </div>
+                            <div class="card-body table-responsive">
+                                <table class="table table-hover">
+<!--                                    <thead class="text-warning">-->
+<!--                                    <th>ID</th>-->
+<!--                                    <th>Type</th>-->
+<!--                                    <th>Date</th>-->
+<!--                                    </thead>-->
+                                    <tbody>
+                                        <tr th:each="notification : ${notifications}">
+                                            <td th:text="${notification.getCreatedAt()}"></td>
+                                            <td th:text="${notification.getMessage()}"></td>
+                                            <td class="td-actions text-right">
+                                                <div th:if="${notification.getButtonName() != null}">
+                                                    <form method="post" th:action="@{__${notification.getEndpoint()}__}">
+                                                        <input hidden type="text" name="match_id" th:value="${notification.getMatchId()}"/>
+                                                        <input hidden id="hiddenSubmitButton" type="submit" value="${notification.getButtonName()}">
+                                                        <button class="btn btn-success gruzini-btn-success gruzini-button-small" th:text="${notification.getButtonName()}" id="buttonSubmit"
+                                                                onclick="submitByHiddenButton()"></button>
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-            <div class="row">
-               <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
-                  <div class="card card-stats">
-                     <div class="card-header card-header-success card-header-icon">
-                        <div class="card-icon">
-                           <i class="material-icons">emoji_events</i>
-                        </div>
-                        <p class="card-category">Your position in the rankings</p>
-                        <h3 class="card-title">1
-                           <small>st</small>
-                        </h3>
-                     </div>
-                     <div class="card-footer">
-                        <div class="stats">
-                           <a href="#pablo" class="warning-link">See rankings</a>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
-                  <div class="card card-stats">
-                     <div class="card-header card-header-success card-header-icon">
-                        <div class="card-icon">
-                           <i class="material-icons">sports_tennis</i>
-                        </div>
-                        <p class="card-category">Wins / Loses</p>
-                        <h3 class="card-title">12-2</h3>
-                     </div>
-                     <div class="card-footer">
-                        <div class="stats">
-                           <i class="material-icons">date_range</i> 3 wins in a row
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
-                  <div class="card card-stats">
-                     <div class="card-header card-header-success card-header-icon">
-                        <div class="card-icon">
-                           <i class="material-icons">home</i>
-                        </div>
-                        <p class="card-category">Favourite Court</p>
-                        <h3 class="card-title">Arthur Ashe Stadium</h3>
-                     </div>
-                     <div class="card-footer">
-                        <div class="stats">
-                           7 matches
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
-                  <div class="card card-stats">
-                     <div class="card-header card-header-success card-header-icon">
-                        <div class="card-icon">
-                           <i class="fa fa-twitter"></i>
-                        </div>
-                        <p class="card-category">Followers</p>
-                        <h3 class="card-title">+245</h3>
-                     </div>
-                     <div class="card-footer">
-                        <div class="stats">
-                           <i class="material-icons">update</i> Just Updated
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <div class="row">
-               <div class="col-lg-6 col-md-12">
-                  <div class="card">
-                     <div class="card-header card-header-success">
-                        <h4 class="card-title">Activity</h4>
-                        <p class="card-category">Current date 6th June, 2020</p>
-                     </div>
-                     <div class="card-body table-responsive">
-                        <table class="table table-hover">
-                           <thead class="text-warning">
-                           <th>ID</th>
-                           <th>Type</th>
-                           <th>Date</th>
-                           </thead>
-                           <tbody>
-                           <tr>
-                              <td>1</td>
-                              <td>Won match against Grzegorz Wanta</td>
-                              <td>24.05.2020</td>
-                           </tr>
-                           <tr>
-                              <td>2</td>
-                              <td>Won match against Lukasz Matuszewski</td>
-                              <td>22.05.2020</td>
-                           </tr>
-                           <tr>
-                              <td>3</td>
-                              <td>Won match against Sage Rodriguez</td>
-                              <td>14.05.2020</td>
-                           </tr>
-                           <tr>
-                              <td>4</td>
-                              <td>Lost match against Philip Chaney</td>
-                              <td>04.05.2020</td>
-                           </tr>
-                           </tbody>
-                        </table>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-lg-6 col-md-12">
-                  <div class="card">
-                     <div class="card-header card-header-success">
-                        <h4 class="card-title">Notifications</h4>
-                        <p class="card-category">Current date 6th June, 2020</p>
-                     </div>
-                     <div class="card-body">
-                        <div class="tab-content">
-                           <div class="tab-pane active" id="profile">
-                              <table class="table">
-                                 <tbody>
-                                 <tr>
-                                    <td>
-                                       <div class="form-check">
-                                          <label class="form-check-label">
-                                             <input class="form-check-input" type="checkbox" value="" checked>
-                                             <span class="form-check-sign">
-                                    <span class="check"></span>
-                                  </span>
-                                          </label>
-                                       </div>
-                                    </td>
-                                    <td>Sign contract for "What are conference organizers afraid of?"</td>
-                                    <td class="td-actions text-right">
-                                       <button type="button" rel="tooltip" title="Edit Task"
-                                               class="btn btn-white btn-link btn-sm">
-                                          <i class="material-icons">edit</i>
-                                       </button>
-                                       <button type="button" rel="tooltip" title="Remove"
-                                               class="btn btn-white btn-link btn-sm">
-                                          <i class="material-icons">close</i>
-                                       </button>
-                                    </td>
-                                 </tr>
-                                 <tr>
-                                    <td>
-                                       <div class="form-check">
-                                          <label class="form-check-label">
-                                             <input class="form-check-input" type="checkbox" value="">
-                                             <span class="form-check-sign">
-                                    <span class="check"></span>
-                                  </span>
-                                          </label>
-                                       </div>
-                                    </td>
-                                    <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
-                                    <td class="td-actions text-right">
-                                       <button type="button" rel="tooltip" title="Edit Task"
-                                               class="btn btn-white btn-link btn-sm">
-                                          <i class="material-icons">edit</i>
-                                       </button>
-                                       <button type="button" rel="tooltip" title="Remove"
-                                               class="btn btn-white btn-link btn-sm">
-                                          <i class="material-icons">close</i>
-                                       </button>
-                                    </td>
-                                 </tr>
-                                 <tr>
-                                    <td>
-                                       <div class="form-check">
-                                          <label class="form-check-label">
-                                             <input class="form-check-input" type="checkbox" value="">
-                                             <span class="form-check-sign">
-                                    <span class="check"></span>
-                                  </span>
-                                          </label>
-                                       </div>
-                                    </td>
-                                    <td>Flooded: One year later, assessing what was lost and what was found when a
-                                       ravaging rain swept through metro Detroit
-                                    </td>
-                                    <td class="td-actions text-right">
-                                       <button type="button" rel="tooltip" title="Edit Task"
-                                               class="btn btn-white btn-link btn-sm">
-                                          <i class="material-icons">edit</i>
-                                       </button>
-                                       <button type="button" rel="tooltip" title="Remove"
-                                               class="btn btn-white btn-link btn-sm">
-                                          <i class="material-icons">close</i>
-                                       </button>
-                                    </td>
-                                 </tr>
-                                 <tr>
-                                    <td>
-                                       <div class="form-check">
-                                          <label class="form-check-label">
-                                             <input class="form-check-input" type="checkbox" value="" checked>
-                                             <span class="form-check-sign">
-                                    <span class="check"></span>
-                                  </span>
-                                          </label>
-                                       </div>
-                                    </td>
-                                    <td>Create 4 Invisible User Experiences you Never Knew About</td>
-                                    <td class="td-actions text-right">
-                                       <button type="button" rel="tooltip" title="Edit Task"
-                                               class="btn btn-white btn-link btn-sm">
-                                          <i class="material-icons">edit</i>
-                                       </button>
-                                       <button type="button" rel="tooltip" title="Remove"
-                                               class="btn btn-white btn-link btn-sm">
-                                          <i class="material-icons">close</i>
-                                       </button>
-                                    </td>
-                                 </tr>
-                                 </tbody>
-                              </table>
-                           </div>
-                           <div class="tab-pane" id="messages">
-                              <table class="table">
-                                 <tbody>
-                                 <tr>
-                                    <td>
-                                       <div class="form-check">
-                                          <label class="form-check-label">
-                                             <input class="form-check-input" type="checkbox" value="" checked>
-                                             <span class="form-check-sign">
-                                    <span class="check"></span>
-                                  </span>
-                                          </label>
-                                       </div>
-                                    </td>
-                                    <td>Flooded: One year later, assessing what was lost and what was found when a
-                                       ravaging rain swept through metro Detroit
-                                    </td>
-                                    <td class="td-actions text-right">
-                                       <button type="button" rel="tooltip" title="Edit Task"
-                                               class="btn btn-white btn-link btn-sm">
-                                          <i class="material-icons">edit</i>
-                                       </button>
-                                       <button type="button" rel="tooltip" title="Remove"
-                                               class="btn btn-white btn-link btn-sm">
-                                          <i class="material-icons">close</i>
-                                       </button>
-                                    </td>
-                                 </tr>
-                                 <tr>
-                                    <td>
-                                       <div class="form-check">
-                                          <label class="form-check-label">
-                                             <input class="form-check-input" type="checkbox" value="">
-                                             <span class="form-check-sign">
-                                    <span class="check"></span>
-                                  </span>
-                                          </label>
-                                       </div>
-                                    </td>
-                                    <td>Sign contract for "What are conference organizers afraid of?"</td>
-                                    <td class="td-actions text-right">
-                                       <button type="button" rel="tooltip" title="Edit Task"
-                                               class="btn btn-white btn-link btn-sm">
-                                          <i class="material-icons">edit</i>
-                                       </button>
-                                       <button type="button" rel="tooltip" title="Remove"
-                                               class="btn btn-white btn-link btn-sm">
-                                          <i class="material-icons">close</i>
-                                       </button>
-                                    </td>
-                                 </tr>
-                                 </tbody>
-                              </table>
-                           </div>
-                           <div class="tab-pane" id="settings">
-                              <table class="table">
-                                 <tbody>
-                                 <tr>
-                                    <td>
-                                       <div class="form-check">
-                                          <label class="form-check-label">
-                                             <input class="form-check-input" type="checkbox" value="">
-                                             <span class="form-check-sign">
-                                    <span class="check"></span>
-                                  </span>
-                                          </label>
-                                       </div>
-                                    </td>
-                                    <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
-                                    <td class="td-actions text-right">
-                                       <button type="button" rel="tooltip" title="Edit Task"
-                                               class="btn btn-white btn-link btn-sm">
-                                          <i class="material-icons">edit</i>
-                                       </button>
-                                       <button type="button" rel="tooltip" title="Remove"
-                                               class="btn btn-white btn-link btn-sm">
-                                          <i class="material-icons">close</i>
-                                       </button>
-                                    </td>
-                                 </tr>
-                                 <tr>
-                                    <td>
-                                       <div class="form-check">
-                                          <label class="form-check-label">
-                                             <input class="form-check-input" type="checkbox" value="" checked>
-                                             <span class="form-check-sign">
-                                    <span class="check"></span>
-                                  </span>
-                                          </label>
-                                       </div>
-                                    </td>
-                                    <td>Flooded: One year later, assessing what was lost and what was found when a
-                                       ravaging rain swept through metro Detroit
-                                    </td>
-                                    <td class="td-actions text-right">
-                                       <button type="button" rel="tooltip" title="Edit Task"
-                                               class="btn btn-white btn-link btn-sm">
-                                          <i class="material-icons">edit</i>
-                                       </button>
-                                       <button type="button" rel="tooltip" title="Remove"
-                                               class="btn btn-white btn-link btn-sm">
-                                          <i class="material-icons">close</i>
-                                       </button>
-                                    </td>
-                                 </tr>
-                                 <tr>
-                                    <td>
-                                       <div class="form-check">
-                                          <label class="form-check-label">
-                                             <input class="form-check-input" type="checkbox" value="" checked>
-                                             <span class="form-check-sign">
-                                    <span class="check"></span>
-                                  </span>
-                                          </label>
-                                       </div>
-                                    </td>
-                                    <td>Sign contract for "What are conference organizers afraid of?"</td>
-                                    <td class="td-actions text-right">
-                                       <button type="button" rel="tooltip" title="Edit Task"
-                                               class="btn btn-white btn-link btn-sm">
-                                          <i class="material-icons">edit</i>
-                                       </button>
-                                       <button type="button" rel="tooltip" title="Remove"
-                                               class="btn btn-white btn-link btn-sm">
-                                          <i class="material-icons">close</i>
-                                       </button>
-                                    </td>
-                                 </tr>
-                                 </tbody>
-                              </table>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-<!--FOOTER-->
-       <footer th:insert="/fragments/footer :: footer"></footer>
-<!--END FOOTER-->
-   </div>
+        </div>
+        <!--FOOTER-->
+        <footer th:insert="/fragments/footer :: footer"></footer>
+        <!--END FOOTER-->
+    </div>
 </div>
 <!--JAVASCRIPT IMPORTS-->
 <div th:replace="/fragments/js-imports :: js-imports"></div>
