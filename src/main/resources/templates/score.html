@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+>
+
+<head th:insert="/fragments/head :: head"></head>
+
+<body class="dark-edition" style="background-image: url(/img/upcoming_background.jpg); background-size: cover">
+<div class="wrapper">
+
+   <!--Side Bar-->
+   <div th:insert="fragments/sidebar :: sidebar"></div>
+   <!--End Side Bar-->
+
+   <div class="main-panel">
+      <!-- Navbar -->
+      <nav th:insert="/fragments/navbar :: navbar"></nav>
+      <!-- End Navbar -->
+
+      <div class="main-panel gruzini-registration-main-panel">
+         <div class="content">
+            <div class="container-fluid">
+               <div class="row">
+                  <!-- placed here to put score card in center -->
+                  <div class="col-xl-1"></div>
+                  <div class="col-xl-10 col-lg-12">
+                     <div class="card card-chart">
+                        <div class="card-header card-header-success">
+                           <p class="gruzini-title">Submit Score</p>
+                        </div>
+                        <div class="card-body">
+                           <form method="post" th:action="@{/submit-score}" th:object="${match}">
+                              <table class="table table-hover">
+                                 <thead class="d-flex justify-content-center">
+                                 <th class="gruzini-text-card-content"
+                                     th:text="${match.getHost().getFirstName() + ' ' + match.getHost().getLastName()}">
+                                 </th>
+                                 <th class="gruzini-text-card-content">vs.</th>
+                                 <th class="gruzini-text-card-content"
+                                     th:text="${match.getGuest().get().getFirstName() + ' ' + match.getGuest().get().getLastName()}">
+                                 </th>
+                                 </thead>
+                                 <tbody>
+                                 <tr class="d-flex justify-content-center">
+                                    <td>
+                                       <div class="input-group mb-3">
+                                          <div class="input-group-prepend">
+                                             <span class="input-group-text gruzini-input-group-text"
+                                                   id="setOneHostAddon">
+                                                Host
+                                             </span>
+                                          </div>
+                                          <input class="form-control gruzini-input-check" type="number" id="setOneHost"
+                                                 aria-label="set-one-host"
+                                                 aria-describedby="setOneHostAddon" required>
+                                       </div>
+                                    </td>
+                                    <td> -</td>
+                                    <td>
+                                       <div class="input-group mb-3">
+                                          <input class="form-control gruzini-input-check" type="number" id="setOneGuest"
+                                                 aria-label="set-one-guest"
+                                                 aria-describedby="setOneGuestAddon" required>
+                                          <div class="input-group-append">
+                                             <span class="input-group-text gruzini-input-group-text"
+                                                   id="setOneGuestAddon">
+                                                Guest
+                                             </span>
+                                          </div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr class="d-flex justify-content-center">
+                                 <tr class="d-flex justify-content-center">
+                                    <td>
+                                       <div class="input-group mb-3">
+                                          <div class="input-group-prepend">
+                                             <span class="input-group-text gruzini-input-group-text"
+                                                   id="setTwoHostAddon">
+                                                Host
+                                             </span>
+                                          </div>
+                                          <input class="form-control gruzini-input-check" type="number" id="setTwoHost"
+                                                 aria-label="set-two-host"
+                                                 aria-describedby="setTwoHostAddon" disabled>
+                                       </div>
+                                    </td>
+                                    <td> -</td>
+                                    <td>
+                                       <div class="input-group mb-3">
+                                          <input class="form-control gruzini-input-check" type="number" id="setTwoGuest"
+                                                 aria-label="set-two-guest"
+                                                 aria-describedby="setTwoGuestAddon" disabled>
+                                          <div class="input-group-append">
+                                             <span class="input-group-text gruzini-input-group-text"
+                                                   id="setTwoGuestAddon">
+                                                Guest
+                                             </span>
+                                          </div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr class="d-flex justify-content-center">
+                                 <tr class="d-flex justify-content-center">
+                                    <td>
+                                       <div class="input-group mb-3">
+                                          <div class="input-group-prepend">
+                                             <span class="input-group-text gruzini-input-group-text"
+                                                   id="setThreeHostAddon">
+                                                Host
+                                             </span>
+                                          </div>
+                                          <input class="form-control gruzini-input-check" type="number" id="setThreeHost"
+                                                 aria-label="set-three-host"
+                                                 aria-describedby="setThreeHostAddon" disabled>
+                                       </div>
+                                    </td>
+                                    <td> -</td>
+                                    <td>
+                                       <div class="input-group mb-3">
+                                          <input class="form-control gruzini-input-check" type="number" id="setThreeGuest"
+                                                 aria-label="set-three-guest"
+                                                 aria-describedby="setThreeGuestAddon" disabled>
+                                          <div class="input-group-append">
+                                             <span class="input-group-text gruzini-input-group-text"
+                                                   id="setThreeGuestAddon">
+                                                Guest
+                                             </span>
+                                          </div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr class="d-flex justify-content-center">
+                                 <tr class="d-flex justify-content-center">
+                                    <td>
+                                       <div class="input-group mb-3">
+                                          <div class="input-group-prepend">
+                                             <span class="input-group-text gruzini-input-group-text"
+                                                   id="setFourHostAddon">
+                                                Host
+                                             </span>
+                                          </div>
+                                          <input class="form-control gruzini-input-check" type="number" id="setFourHost"
+                                                 aria-label="set-four-host"
+                                                 aria-describedby="setFourHostAddon" disabled>
+                                       </div>
+                                    </td>
+                                    <td> -</td>
+                                    <td>
+                                       <div class="input-group mb-3">
+                                          <input class="form-control gruzini-input-check" type="number" id="setFourGuest"
+                                                 aria-label="set-four-guest"
+                                                 aria-describedby="setFourGuestAddon" disabled>
+                                          <div class="input-group-append">
+                                             <span class="input-group-text gruzini-input-group-text"
+                                                   id="setFourGuestAddon">
+                                                Guest
+                                             </span>
+                                          </div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr class="d-flex justify-content-center">
+                                 <tr class="d-flex justify-content-center">
+                                    <td>
+                                       <div class="input-group mb-3">
+                                          <div class="input-group-prepend">
+                                             <span class="input-group-text gruzini-input-group-text"
+                                                   id="setFiveHostAddon">
+                                                Host
+                                             </span>
+                                          </div>
+                                          <input class="form-control gruzini-input-check" type="number" id="setFiveHost"
+                                                 aria-label="set-five-host"
+                                                 aria-describedby="setFiveHostAddon" disabled>
+                                       </div>
+                                    </td>
+                                    <td> -</td>
+                                    <td>
+                                       <div class="input-group mb-3">
+                                          <input class="form-control gruzini-input-check" type="number" id="setFiveGuest"
+                                                 aria-label="set-five-guest"
+                                                 aria-describedby="setFiveGuestAddon" disabled>
+                                          <div class="input-group-append">
+                                             <span class="input-group-text gruzini-input-group-text"
+                                                   id="setFiveGuestAddon">
+                                                Guest
+                                             </span>
+                                          </div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 </tbody>
+                              </table>
+                              <div class="d-flex justify-content-center">
+                                 <button type="button" id="btnRemoveSet" class="btn btn-danger gruzini-btn-success" disabled>
+                                    Remove Set</button>
+                                 <button type="button" id="btnAddSet" class="btn btn-success gruzini-btn-success" disabled>
+                                    Add Set</button>
+                              </div>
+                              <button id="hiddenSubmitButton" type="submit" hidden></button>
+                           </form>
+                        </div>
+                        <div class="card-footer d-flex justify-content-center">
+                           <button class="btn btn-success gruzini-btn-success" id="buttonSubmit"
+                                   onclick="submitByHiddenButton()">Submit
+                           </button>
+                        </div>
+                     </div>
+                  </div>
+                  <!-- placed here to put score card in center -->
+                  <div class="col-xl-1"></div>
+               </div>
+            </div>
+         </div>
+         <!--FOOTER-->
+         <footer th:insert="/fragments/footer :: footer"></footer>
+         <!--END FOOTER-->
+      </div>
+   </div>
+   <script>
+      function submitByHiddenButton() {
+         document.getElementById("hiddenSubmitButton").click();
+      }
+   </script>
+
+   <!--JAVASCRIPT IMPORTS-->
+   <div th:replace="/fragments/js-imports :: js-imports"></div>
+   <!--END JAVASCRIPT IMPORTS-->
+</div>
+</body>
+</html>
+
+<script>
+   $(document).ready(function () {
+      $(document).change(function () {
+         if(checkIfAllRequiredFilled()){
+            $(document).ready(function () {
+               $("#btnAddSet").prop("disabled", false);
+            })
+         } else {
+            $(document).ready(function () {
+               $("#btnAddSet").prop("disabled", true);
+            })
+         }
+      })
+
+      function checkIfAllRequiredFilled(){
+         let required = $('.gruzini-input-check').filter('[required]:visible');
+         let isValid = true;
+         required.each(function(){
+            if(!$(this).val()){
+               isValid = false;
+            }
+         });
+         if(!$("#setFiveHost").prop("disabled")){
+            isValid = false;
+         }
+         return isValid;
+      }
+
+      //function for adding sets with button
+      $("#btnAddSet").click(function () {
+         if($("#setTwoHost").prop("disabled")){
+            $("#setOneHost").prop("readonly", true);
+            $("#setOneGuest").prop("readonly", true);
+            $("#setTwoHost").prop("disabled", false).prop("required", true);
+            $("#setTwoGuest").prop("disabled", false).prop("required", true);
+            $("#btnRemoveSet").prop("disabled", false);
+         } else if($("#setThreeHost").prop("disabled")){
+            $("#setTwoHost").prop("readonly", true);
+            $("#setTwoGuest").prop("readonly", true);
+            $("#setThreeHost").prop("disabled", false).prop("required", true);
+            $("#setThreeGuest").prop("disabled", false).prop("required", true);
+         } else if($("#setFourHost").prop("disabled")){
+            $("#setThreeHost").prop("readonly", true);
+            $("#setThreeGuest").prop("readonly", true);
+            $("#setFourHost").prop("disabled", false).prop("required", true);
+            $("#setFourGuest").prop("disabled", false).prop("required", true);
+         } else {
+            $("#setFourHost").prop("readonly", true);
+            $("#setFourGuest").prop("readonly", true);
+            $("#setFiveHost").prop("disabled", false).prop("required", true);
+            $("#setFiveGuest").prop("disabled", false).prop("required", true);
+            $("#btnAddSet").prop("disabled", true);
+         }
+      });
+
+      //function for removing sets with button
+      $("#btnRemoveSet").click(function () {
+         if($("#setThreeHost").prop("disabled")){
+            $("#setOneHost").prop("readonly", false);
+            $("#setOneGuest").prop("readonly", false);
+            $("#setTwoHost").val('').prop("disabled", true).prop("required", false);
+            $("#setTwoGuest").val('').prop("disabled", true).prop("required", false);
+            $("#btnRemoveSet").prop("disabled", true);
+         } else if($("#setFourHost").prop("disabled")){
+            $("#setTwoHost").prop("readonly", false);
+            $("#setTwoGuest").prop("readonly", false);
+            $("#setThreeHost").val('').prop("disabled", true).prop("required", false);
+            $("#setThreeGuest").val('').prop("disabled", true).prop("required", false);
+         } else if($("#setFiveHost").prop("disabled")){
+            $("#setThreeHost").prop("readonly", false);
+            $("#setThreeGuest").prop("readonly", false);
+            $("#setFourHost").val('').prop("disabled", true).prop("required", false);
+            $("#setFourGuest").val('').prop("disabled", true).prop("required", false);
+         } else {
+            $("#setFourHost").prop("readonly", false);
+            $("#setFourGuest").prop("readonly", false);
+            $("#setFiveHost").val('').prop("disabled", true).prop("required", false);
+            $("#setFiveGuest").val('').prop("disabled", true).prop("required", false);
+            $("#btnAddSet").prop("disabled", false);
+         }
+      })
+   });
+</script>

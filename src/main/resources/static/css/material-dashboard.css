@@ -2356,7 +2356,6 @@ pre code {
 
 .form-control:disabled,
 .form-control[readonly] {
-  background-color: #e9ecef;
   opacity: 1;
 }
 
@@ -14485,7 +14484,9 @@ fieldset[disabled] .form-control,
 fieldset[disabled] .form-group .form-control {
   background-color: transparent;
   cursor: not-allowed;
-  border-bottom: 1px dotted #d2d2d2;
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+  border-bottom-color: #d22824;
   background-repeat: no-repeat;
 }
 
@@ -24872,5 +24873,16 @@ fieldset[disabled][disabled] .dark-edition .has-error .form-control,
 }
 .gruzini-navbar-active {
   transform: translateX(0%);
+}
+
+@media(max-width: 1300px){
+  .gruzini-table-collapsing-first{
+    display: none;
+  }
+}
+@media(max-width: 1150px){
+  .gruzini-table-collapsing-second{
+    display: none;
+  }
 }
 /* end of navbar styling */
