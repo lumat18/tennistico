@@ -24873,4 +24873,15 @@ fieldset[disabled][disabled] .dark-edition .has-error .form-control,
 .gruzini-navbar-active {
   transform: translateX(0%);
 }
+
+@media(max-width: 1300px){
+  .gruzini-table-collapsing-first{
+    display: none;
+  }
+}
+@media(max-width: 1150px){
+  .gruzini-table-collapsing-second{
+    display: none;
+  }
+}
 /* end of navbar styling */
