@@ -6,10 +6,8 @@ import com.gruzini.tennistico.mappers.CreatedMatchMapper;
 import com.gruzini.tennistico.models.dto.CreatedMatchDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional
 @Slf4j
 public class MatchCreationService {
 
@@ -25,15 +23,15 @@ public class MatchCreationService {
         this.userService = userService;
     }
 
-    public void create(final CreatedMatchDto createdMatchDto, final String username) {
+    public Match create(final CreatedMatchDto createdMatchDto, final String username) {
         final Player player = userService.getByEmail(username).getPlayer();
         final Match createdMatch = saveCreatedMatch(createdMatchDto);
         playerService.add(player, createdMatch);
+        return createdMatch;
     }
 
-    private Match saveCreatedMatch(CreatedMatchDto createdMatchDto) {
+    private Match saveCreatedMatch(final CreatedMatchDto createdMatchDto) {
         final Match createdMatch = createdMatchMapper.toMatch(createdMatchDto);
-        matchService.save(createdMatch);
-        return createdMatch;
+        return matchService.save(createdMatch);
     }
 }

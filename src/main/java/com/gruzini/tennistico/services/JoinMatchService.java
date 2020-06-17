@@ -33,14 +33,14 @@ public class JoinMatchService {
         return match;
     }
 
-    private void validateMatchStatus(Match match) {
+    private void validateMatchStatus(final Match match) {
         final MatchStatus matchStatus = match.getMatchStatus();
         if (!matchStatus.equals(MatchStatus.HOSTED)) {
             throw new WrongMatchStatusException();
         }
     }
 
-    private void addMatchToPlayer(Player guest, Match match) {
+    private void addMatchToPlayer(final Player guest, final Match match) {
         guest.addMatch(match);
         playerService.save(guest);
     }

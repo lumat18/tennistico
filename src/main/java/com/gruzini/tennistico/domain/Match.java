@@ -16,6 +16,7 @@ import java.util.Optional;
 public class Match {
 
     private static final int HOST_INDEX = 0;
+    private static final int GUEST_INDEX = 1;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,7 +39,6 @@ public class Match {
     private Court court;
 
     @ManyToMany(mappedBy = "matches", fetch = FetchType.EAGER)
-    @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private List<Player> players;
 
@@ -47,6 +47,6 @@ public class Match {
     }
 
     public Optional<Player> getGuest() {
-        return Optional.ofNullable(players.get(1));
+        return Optional.ofNullable(players.get(GUEST_INDEX));
     }
 }
