@@ -3,6 +3,8 @@ package com.gruzini.tennistico.services;
 import com.gruzini.tennistico.domain.Match;
 import com.gruzini.tennistico.domain.Player;
 import com.gruzini.tennistico.domain.enums.MatchStatus;
+import com.gruzini.tennistico.events.ChangeMatchStatusByEndingDateTimeEvent;
+import com.gruzini.tennistico.events.ChangeMatchStatusByStartingDateTimeEvent;
 import com.gruzini.tennistico.exceptions.MatchNotFoundException;
 import com.gruzini.tennistico.repositories.MatchRepository;
 import com.gruzini.tennistico.repositories.PlayerRepository;
@@ -29,17 +31,26 @@ public class MatchService {
         return matchRepository.saveAndFlush(match);
     }
 
-    public void updateExpiredMatchesStatus(final LocalDateTime expirationDateTime, final MatchStatus currentStatus, final MatchStatus newStatus) {
-        final List<Match> matchesToUpdate = getAllExpiredByStatus(expirationDateTime, currentStatus);
-        updateMatchStatus(matchesToUpdate, newStatus);
+    public void updateExpiredMatchesStatusByStartingDateTime(final ChangeMatchStatusByStartingDateTimeEvent event) {
+        List<Match> matchesToUpdate = getAllExpiredByStatusAndStartingDateTime(event.getCurrentMatchStatus());
+        updateMatchStatus(matchesToUpdate, event.getDesiredMatchStatus());
     }
 
-    private List<Match> getAllExpiredByStatus(final LocalDateTime expirationDateTime, final MatchStatus matchStatus) {
-        return matchRepository.findByStartingAtBeforeAndMatchStatus(expirationDateTime, matchStatus);
+    private List<Match> getAllExpiredByStatusAndStartingDateTime(final MatchStatus matchStatus) {
+        return matchRepository.findByStartingAtBeforeAndMatchStatus(LocalDateTime.now(), matchStatus);
     }
 
     public void updateMatchStatus(final List<Match> matches, final MatchStatus matchStatus) {
         matches.forEach(match -> updateMatchStatus(match, matchStatus));
+    }
+
+    public void updateExpiredMatchesStatusByEndingDateTime(final ChangeMatchStatusByEndingDateTimeEvent event) {
+        List<Match> matchesToUpdate = getAllExpiredByStatusAndEndingDateTime(event.getCurrentMatchStatus());
+        updateMatchStatus(matchesToUpdate, event.getDesiredMatchStatus());
+    }
+
+    private List<Match> getAllExpiredByStatusAndEndingDateTime(final MatchStatus matchStatus) {
+        return matchRepository.findByEndingAtBeforeAndMatchStatus(LocalDateTime.now().minusDays(7), matchStatus);
     }
 
     public void updateMatchStatus(final Match match, final MatchStatus matchStatus) {
