@@ -2356,7 +2356,6 @@ pre code {
 
 .form-control:disabled,
 .form-control[readonly] {
-  background-color: #e9ecef;
   opacity: 1;
 }
 
@@ -14485,7 +14484,7 @@ fieldset[disabled] .form-control,
 fieldset[disabled] .form-group .form-control {
   background-color: transparent;
   cursor: not-allowed;
-  border-bottom-width: 1px;
+  border-bottom-width: 2px;
   border-bottom-style: solid;
   border-bottom-color: #d22824;
   background-repeat: no-repeat;
