@@ -34,7 +34,7 @@
                                  <th class="gruzini-text-card-content"
                                      th:text="${match.getHost().getFirstName() + ' ' + match.getHost().getLastName()}">
                                  </th>
-                                 <th class="gruzini-text-card-content"> .vs</th>
+                                 <th class="gruzini-text-card-content">vs.</th>
                                  <th class="gruzini-text-card-content"
                                      th:text="${match.getGuest().get().getFirstName() + ' ' + match.getGuest().get().getLastName()}">
                                  </th>
@@ -194,7 +194,7 @@
                               <div class="d-flex justify-content-center">
                                  <button type="button" id="btnRemoveSet" class="btn btn-danger gruzini-btn-success" disabled>
                                     Remove Set</button>
-                                 <button type="button" id="btnAddSet" class="btn btn-success gruzini-btn-success">
+                                 <button type="button" id="btnAddSet" class="btn btn-success gruzini-btn-success" disabled>
                                     Add Set</button>
                               </div>
                               <button id="hiddenSubmitButton" type="submit" hidden></button>
@@ -232,22 +232,28 @@
 
 <script>
    $(document).ready(function () {
-      // if(checkIfAllRequiredFilled()){
-      //    $(document).ready(function () {
-      //       $("#btnAddSet").prop("disabled", false);
-      //    })
-      // } else {
-      //    $(document).ready(function () {
-      //       $("#btnAddSet").prop("disabled", true);
-      //    })
-      // }
-      //
-      // function checkIfAllRequiredFilled(){
-      //    let required = $('.gruzini-input-check').filter('[required]:visible');
-      //    required.each(function(){
-      //       return $(this).val() !== '';
-      //    });
-      // }
+      $(document).change(function () {
+         if(checkIfAllRequiredFilled()){
+            $(document).ready(function () {
+               $("#btnAddSet").prop("disabled", false);
+            })
+         } else {
+            $(document).ready(function () {
+               $("#btnAddSet").prop("disabled", true);
+            })
+         }
+      })
+
+      function checkIfAllRequiredFilled(){
+         let required = $('.gruzini-input-check').filter('[required]:visible');
+         let isValid = true;
+         required.each(function(){
+            if(!$(this).val()){
+               isValid = false;
+            }
+         });
+         return isValid;
+      }
 
       //function for adding sets with button
       $("#btnAddSet").click(function () {
@@ -281,24 +287,24 @@
          if($("#setThreeHost").prop("disabled")){
             $("#setOneHost").prop("readonly", false);
             $("#setOneGuest").prop("readonly", false);
-            $("#setTwoHost").prop("disabled", true).prop("required", false);
-            $("#setTwoGuest").prop("disabled", true).prop("required", false);
+            $("#setTwoHost").val('').prop("disabled", true).prop("required", false);
+            $("#setTwoGuest").val('').prop("disabled", true).prop("required", false);
             $("#btnRemoveSet").prop("disabled", true);
          } else if($("#setFourHost").prop("disabled")){
             $("#setTwoHost").prop("readonly", false);
             $("#setTwoGuest").prop("readonly", false);
-            $("#setThreeHost").prop("disabled", true).prop("required", false);
-            $("#setThreeGuest").prop("disabled", true).prop("required", false);
+            $("#setThreeHost").val('').prop("disabled", true).prop("required", false);
+            $("#setThreeGuest").val('').prop("disabled", true).prop("required", false);
          } else if($("#setFiveHost").prop("disabled")){
             $("#setThreeHost").prop("readonly", false);
             $("#setThreeGuest").prop("readonly", false);
-            $("#setFourHost").prop("disabled", true).prop("required", false);
-            $("#setFourGuest").prop("disabled", true).prop("required", false);
+            $("#setFourHost").val('').prop("disabled", true).prop("required", false);
+            $("#setFourGuest").val('').prop("disabled", true).prop("required", false);
          } else {
             $("#setFourHost").prop("readonly", false);
             $("#setFourGuest").prop("readonly", false);
-            $("#setFiveHost").prop("disabled", true).prop("required", false);
-            $("#setFiveGuest").prop("disabled", true).prop("required", false);
+            $("#setFiveHost").val('').prop("disabled", true).prop("required", false);
+            $("#setFiveGuest").val('').prop("disabled", true).prop("required", false);
             $("#btnAddSet").prop("disabled", false);
          }
       })
