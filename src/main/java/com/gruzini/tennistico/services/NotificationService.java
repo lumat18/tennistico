@@ -43,7 +43,7 @@ public class NotificationService {
     }
 
     public List<NotificationDto> getByUser(String username) {
-        return notificationRepository.findAllByRecipientContaining(username).stream()
+        return notificationRepository.findAllByRecipient(username).stream()
                 .map(notificationMapper::toNotificationDto)
                 .collect(Collectors.toList());
     }

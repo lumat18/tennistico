@@ -7,6 +7,7 @@ import com.gruzini.tennistico.exceptions.MatchNotFoundException;
 import com.gruzini.tennistico.repositories.MatchRepository;
 import com.gruzini.tennistico.repositories.PlayerRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
@@ -47,7 +48,7 @@ public class MatchService {
         matchRepository.save(match);
         match.getPlayers().forEach(playerRepository::save);
     }
-
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public Match getById(final Long id) {
         return matchRepository.findById(id).orElseThrow(MatchNotFoundException::new);
     }

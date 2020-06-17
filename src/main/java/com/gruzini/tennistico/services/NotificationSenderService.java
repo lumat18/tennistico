@@ -5,6 +5,7 @@ import com.gruzini.tennistico.domain.Player;
 import com.gruzini.tennistico.domain.enums.NotificationType;
 import com.gruzini.tennistico.exceptions.PlayerNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service

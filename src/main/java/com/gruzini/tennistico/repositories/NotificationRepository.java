@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface NotificationRepository extends JpaRepository<Notification, Long> {
     @Query("SELECT n FROM  notifications n WHERE n.recipient.email = :username")
-    List<Notification> findAllByRecipientContaining(@Param("username") final String username);
+    List<Notification> findAllByRecipient(@Param("username") final String username);
 }
