@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -75,5 +76,9 @@ public class MatchService {
 
     public List<Match> getByPlayerAndStatus(final Player player, final MatchStatus matchStatus) {
         return matchRepository.getAllByPlayersAndMatchStatus(player, matchStatus);
+    }
+
+    public List<Match> getByMatchStatusAndHostedBy(final MatchStatus matchStatus, final Player player) {
+        return matchRepository.findAllByMatchStatusAndPlayersContainsAndStartingAtIsAfter(matchStatus, player, LocalDateTime.now());
     }
 }
