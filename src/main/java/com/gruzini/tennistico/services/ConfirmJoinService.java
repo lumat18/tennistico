@@ -6,23 +6,20 @@ import com.gruzini.tennistico.domain.enums.MatchStatus;
 import com.gruzini.tennistico.domain.enums.NotificationType;
 import com.gruzini.tennistico.exceptions.MatchPlayersException;
 import com.gruzini.tennistico.exceptions.PlayerIsNotAMatchHostException;
-import com.gruzini.tennistico.exceptions.PlayerNotFoundException;
 import com.gruzini.tennistico.exceptions.WrongMatchStatusException;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class ConfirmJoinService {
 
     private final PlayerService playerService;
     private final MatchService matchService;
-    private final NotificationService notificationService;
+    private final NotificationSenderService notificationSender;
 
-    public ConfirmJoinService(PlayerService playerService, MatchService matchService, NotificationService notificationService) {
+    public ConfirmJoinService(PlayerService playerService, MatchService matchService, NotificationSenderService notificationSender) {
         this.playerService = playerService;
         this.matchService = matchService;
-        this.notificationService = notificationService;
+        this.notificationSender = notificationSender;
     }
 
     public void confirmJoin(final Long matchId, final String username) {
@@ -30,7 +27,7 @@ public class ConfirmJoinService {
         final Match match = matchService.getById(matchId);
         validateMatchAndPlayer(match, player);
         matchService.updateMatchStatus(match, MatchStatus.UPCOMING);
-        sendNotificationToMatchGuest(matchId);
+        notificationSender.sendToGuest(matchId, NotificationType.JOIN_CONFIRMED);
     }
 
     private void validateMatchAndPlayer(final Match match, final Player player) {
@@ -55,10 +52,5 @@ public class ConfirmJoinService {
         if (!match.getHost().equals(player)) {
             throw new PlayerIsNotAMatchHostException();
         }
-    }
-
-    private void sendNotificationToMatchGuest(final Long matchId) {
-        final Player guest = matchService.getById(matchId).getGuest().orElseThrow(PlayerNotFoundException::new);
-        notificationService.createNotificationFor(guest, matchId,  NotificationType.JOIN_CONFIRMED);
     }
 }

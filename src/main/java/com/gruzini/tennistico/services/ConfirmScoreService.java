@@ -6,7 +6,6 @@ import com.gruzini.tennistico.domain.enums.MatchStatus;
 import com.gruzini.tennistico.domain.enums.NotificationType;
 import com.gruzini.tennistico.exceptions.NoGuestInMatchException;
 import com.gruzini.tennistico.exceptions.PlayerIsNotMatchGuestException;
-import com.gruzini.tennistico.exceptions.PlayerNotFoundException;
 import com.gruzini.tennistico.exceptions.WrongMatchStatusException;
 import org.springframework.stereotype.Service;
 
@@ -14,13 +13,13 @@ import org.springframework.stereotype.Service;
 public class ConfirmScoreService {
     private final PlayerService playerService;
     private final MatchService matchService;
-    private final NotificationService notificationService;
+    private final NotificationSenderService notificationSender;
 
     public ConfirmScoreService(final PlayerService playerService,
-                               final MatchService matchService, NotificationService notificationService) {
+                               final MatchService matchService, NotificationSenderService notificationSender) {
         this.playerService = playerService;
         this.matchService = matchService;
-        this.notificationService = notificationService;
+        this.notificationSender = notificationSender;
     }
 
     public void confirmScore(final Long matchId, final String username) {
@@ -28,7 +27,7 @@ public class ConfirmScoreService {
         final Match match = matchService.getById(matchId);
         validateMatchAndPlayer(match, player);
         matchService.updateMatchStatus(match, MatchStatus.ARCHIVED);
-        sendNotificationToMatchGuest(matchId);
+        notificationSender.sendToGuest(matchId, NotificationType.SCORE_TO_SUBMIT);
     }
 
     private void validateMatchAndPlayer(final Match match, final Player player) {
@@ -47,10 +46,5 @@ public class ConfirmScoreService {
         if (!guest.equals(player)) {
             throw new PlayerIsNotMatchGuestException();
         }
-    }
-
-    private void sendNotificationToMatchGuest(final Long matchId) {
-        final Player guest = matchService.getById(matchId).getGuest().orElseThrow(PlayerNotFoundException::new);
-        notificationService.createNotificationFor(guest, matchId, NotificationType.SCORE_TO_CONFIRM);
     }
 }

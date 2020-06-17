@@ -1,5 +1,6 @@
 package com.gruzini.tennistico.services;
 
+import com.google.common.collect.Iterables;
 import com.gruzini.tennistico.domain.Match;
 import com.gruzini.tennistico.domain.Player;
 import com.gruzini.tennistico.domain.enums.NotificationType;
@@ -10,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional
 @Slf4j
 public class MatchCreationService {
 
@@ -18,30 +18,26 @@ public class MatchCreationService {
     private final MatchService matchService;
     private final PlayerService playerService;
     private final UserService userService;
-    private final NotificationService notificationService;
+    private final NotificationSenderService notificationSender;
 
-    public MatchCreationService(CreatedMatchMapper createdMatchMapper, MatchService matchService, PlayerService playerService, UserService userService, NotificationService notificationService) {
+    public MatchCreationService(CreatedMatchMapper createdMatchMapper, MatchService matchService, PlayerService playerService, UserService userService, NotificationSenderService notificationSender) {
         this.createdMatchMapper = createdMatchMapper;
         this.matchService = matchService;
         this.playerService = playerService;
         this.userService = userService;
-        this.notificationService = notificationService;
+        this.notificationSender = notificationSender;
     }
 
     public void create(final CreatedMatchDto createdMatchDto, final String username) {
         final Player player = userService.getByEmail(username).getPlayer();
         final Match createdMatch = saveCreatedMatch(createdMatchDto);
         playerService.add(player, createdMatch);
-        sendNotificationToMatchHost(username, createdMatch.getId());
+
+        notificationSender.sendToHost(createdMatch.getId(), NotificationType.MATCH_CREATED);
     }
 
     private Match saveCreatedMatch(final CreatedMatchDto createdMatchDto) {
         final Match createdMatch = createdMatchMapper.toMatch(createdMatchDto);
         return matchService.save(createdMatch);
-    }
-
-    private void sendNotificationToMatchHost(final String username, final Long matchId) {
-        final Player host = userService.getByEmail(username).getPlayer();
-        notificationService.createNotificationFor(host, matchId, NotificationType.MATCH_CREATED);
     }
 }

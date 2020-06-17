@@ -26,7 +26,7 @@ public class MatchService {
     }
 
     public Match save(final Match match) {
-        return matchRepository.save(match);
+        return matchRepository.saveAndFlush(match);
     }
 
     public void updateExpiredMatchesStatus(final LocalDateTime expirationDateTime, final MatchStatus currentStatus, final MatchStatus newStatus) {
