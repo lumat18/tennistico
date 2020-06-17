@@ -3,6 +3,7 @@ package com.gruzini.tennistico.controllers;
 import com.gruzini.tennistico.domain.enums.NotificationType;
 import com.gruzini.tennistico.exceptions.MatchNotFoundException;
 import com.gruzini.tennistico.exceptions.PlayerNotFoundException;
+import com.gruzini.tennistico.exceptions.WrongMatchStatusException;
 import com.gruzini.tennistico.services.JoinMatchService;
 import com.gruzini.tennistico.services.NotificationSenderService;
 import org.springframework.http.HttpStatus;
@@ -42,7 +43,14 @@ public class JoinMatchController {
 
     @ExceptionHandler(PlayerNotFoundException.class)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public String handlePlayerNotFoundException(final Exception exception, final Model model){
+    public String handlePlayerNotFoundException(final Exception exception, final Model model) {
+        model.addAttribute("expMessage", exception.getMessage());
+        return "error-information";
+    }
+
+    @ExceptionHandler(WrongMatchStatusException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public String handleWrongMatchStatusException(final Exception exception, final Model model) {
         model.addAttribute("expMessage", exception.getMessage());
         return "error-information";
     }

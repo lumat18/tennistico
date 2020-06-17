@@ -3,7 +3,7 @@ package com.gruzini.tennistico.services;
 import com.gruzini.tennistico.domain.Match;
 import com.gruzini.tennistico.domain.Player;
 import com.gruzini.tennistico.domain.enums.MatchStatus;
-import com.gruzini.tennistico.domain.enums.NotificationType;
+import com.gruzini.tennistico.exceptions.WrongMatchStatusException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -20,16 +20,24 @@ public class JoinMatchService {
     }
 
     public void joinGuestToMatch(final String guestUsername, final Long matchId) {
-        final Match match = changeMatchStatus(matchId);
+        final Match matchToJoin = matchService.getById(matchId);
+        final Match match = changeMatchStatus(matchToJoin);
         final Player guest = playerService.getByUsername(guestUsername);
         addMatchToPlayer(guest, match);
     }
 
-    private Match changeMatchStatus(final Long matchId) {
-        final Match match = matchService.getById(matchId);
+    private synchronized Match changeMatchStatus(final Match match) {
+        validateMatchStatus(match);
         match.setMatchStatus(MatchStatus.JOIN_REQUEST);
         matchService.save(match);
         return match;
+    }
+
+    private void validateMatchStatus(final Match match) {
+        final MatchStatus matchStatus = match.getMatchStatus();
+        if (!matchStatus.equals(MatchStatus.HOSTED)) {
+            throw new WrongMatchStatusException();
+        }
     }
 
     private void addMatchToPlayer(final Player guest, final Match match) {
