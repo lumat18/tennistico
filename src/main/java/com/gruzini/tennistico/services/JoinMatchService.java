@@ -21,13 +21,13 @@ public class JoinMatchService {
 
     public void joinGuestToMatch(final String guestUsername, final Long matchId) {
         final Match matchToJoin = matchService.getById(matchId);
-        validateMatchStatus(matchToJoin);
         final Match match = changeMatchStatus(matchToJoin);
         final Player guest = playerService.getByUsername(guestUsername);
         addMatchToPlayer(guest, match);
     }
 
-    private Match changeMatchStatus(final Match match) {
+    private synchronized Match changeMatchStatus(final Match match) {
+        validateMatchStatus(match);
         match.setMatchStatus(MatchStatus.JOIN_REQUEST);
         matchService.save(match);
         return match;
