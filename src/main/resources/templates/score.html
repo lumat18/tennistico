@@ -252,6 +252,9 @@
                isValid = false;
             }
          });
+         if(!$("#setFiveHost").prop("disabled")){
+            isValid = false;
+         }
          return isValid;
       }
 
