@@ -27,9 +27,9 @@ public class PlayerService {
         return playerRepository.save(player);
     }
 
-    public void add(Player player, Match match) {
+    public Player add(Player player, Match match) {
         final List<Match> matches = player.getMatches();
         matches.add(match);
-        playerRepository.save(player);
+        return playerRepository.saveAndFlush(player);
     }
 }

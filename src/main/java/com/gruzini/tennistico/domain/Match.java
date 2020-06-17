@@ -38,7 +38,6 @@ public class Match {
     private Court court;
 
     @ManyToMany(mappedBy = "matches", fetch = FetchType.EAGER)
-    @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private List<Player> players;
 

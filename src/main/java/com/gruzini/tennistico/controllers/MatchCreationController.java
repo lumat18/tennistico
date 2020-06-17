@@ -1,9 +1,11 @@
 package com.gruzini.tennistico.controllers;
 
-import com.gruzini.tennistico.exceptions.IllegalActionException;
+import com.gruzini.tennistico.domain.Match;
+import com.gruzini.tennistico.domain.enums.NotificationType;
 import com.gruzini.tennistico.models.dto.CreatedMatchDto;
 import com.gruzini.tennistico.services.CourtService;
 import com.gruzini.tennistico.services.MatchCreationService;
+import com.gruzini.tennistico.services.NotificationSenderService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -15,18 +17,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.validation.Valid;
 import java.security.Principal;
 
-import static java.util.Objects.isNull;
-
 @Controller
 @RequestMapping("/dashboard/create")
 public class MatchCreationController {
 
     private final MatchCreationService matchCreationService;
     private final CourtService courtService;
+    private final NotificationSenderService notificationSender;
 
-    public MatchCreationController(MatchCreationService matchCreationService, CourtService courtService) {
+    public MatchCreationController(MatchCreationService matchCreationService, CourtService courtService, NotificationSenderService notificationSender) {
         this.matchCreationService = matchCreationService;
         this.courtService = courtService;
+        this.notificationSender = notificationSender;
     }
 
     @PostMapping("/begin")
@@ -43,7 +45,8 @@ public class MatchCreationController {
             model.addAttribute("chosenCourt", courtService.getById(createdMatchDto.getCourtId()));
             return "create";
         }
-        matchCreationService.create(createdMatchDto, principal.getName());
+        final Match match = matchCreationService.create(createdMatchDto, principal.getName());
+        notificationSender.sendToHost(match.getId(), NotificationType.MATCH_CREATED);
         return "dashboard";
     }
 }
