@@ -13,13 +13,10 @@ import org.springframework.stereotype.Service;
 public class ConfirmScoreService {
     private final PlayerService playerService;
     private final MatchService matchService;
-    private final NotificationSenderService notificationSender;
 
-    public ConfirmScoreService(final PlayerService playerService,
-                               final MatchService matchService, NotificationSenderService notificationSender) {
+    public ConfirmScoreService(PlayerService playerService, MatchService matchService) {
         this.playerService = playerService;
         this.matchService = matchService;
-        this.notificationSender = notificationSender;
     }
 
     public void confirmScore(final Long matchId, final String username) {
@@ -27,7 +24,6 @@ public class ConfirmScoreService {
         final Match match = matchService.getById(matchId);
         validateMatchAndPlayer(match, player);
         matchService.updateMatchStatus(match, MatchStatus.ARCHIVED);
-        notificationSender.sendToGuest(matchId, NotificationType.SCORE_TO_SUBMIT);
     }
 
     private void validateMatchAndPlayer(final Match match, final Player player) {
