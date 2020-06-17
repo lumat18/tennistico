@@ -20,7 +20,6 @@ public class MatchService {
     private final MatchRepository matchRepository;
     private final PlayerRepository playerRepository;
 
-
     public MatchService(MatchRepository matchRepository, PlayerRepository playerRepository) {
         this.matchRepository = matchRepository;
         this.playerRepository = playerRepository;
@@ -48,6 +47,12 @@ public class MatchService {
         matchRepository.save(match);
         match.getPlayers().forEach(playerRepository::save);
     }
+
+    public void updateMatchScore(final Match match, final String score) {
+        match.setScore(score);
+        save(match);
+    }
+
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public Match getById(final Long id) {
         return matchRepository.findById(id).orElseThrow(MatchNotFoundException::new);
