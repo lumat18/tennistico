@@ -3,7 +3,7 @@ package com.gruzini.tennistico.services;
 import com.gruzini.tennistico.domain.Match;
 import com.gruzini.tennistico.domain.Player;
 import com.gruzini.tennistico.mappers.CreatedMatchMapper;
-import com.gruzini.tennistico.models.dto.CreatedMatchDto;
+import com.gruzini.tennistico.models.dto.matchDto.CreatedMatchDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
