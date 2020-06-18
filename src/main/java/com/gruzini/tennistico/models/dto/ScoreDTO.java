@@ -18,7 +18,7 @@ public class ScoreDTO {
 
     //Validation of number of sets
     //One player can have max 3 sets won - the match is finished then
-    @AssertTrue
+    @AssertTrue(message = "Invalid score")
     public boolean isScoreValid() {
 
         final List<SetDTO> hostSetDTOS = setDtoList.stream()
