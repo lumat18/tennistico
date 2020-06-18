@@ -58,7 +58,7 @@
                                              </span>
                                           </div>
                                           <input class="form-control gruzini-input-check" type="number" id="setOneHost"
-                                                 th:field=""
+                                                 th:field="*{setDtoList[0].hostScore}"
                                                  aria-label="set-one-host"
                                                  aria-describedby="setOneHostAddon" required>
                                        </div>
@@ -67,7 +67,7 @@
                                     <td>
                                        <div class="input-group mb-3">
                                           <input class="form-control gruzini-input-check" type="number" id="setOneGuest"
-                                                 th:field=""
+                                                 th:field="*{setDtoList[0].guestScore}"
                                                  aria-label="set-one-guest"
                                                  aria-describedby="setOneGuestAddon" required>
                                           <div class="input-group-append">
@@ -90,7 +90,7 @@
                                              </span>
                                           </div>
                                           <input class="form-control gruzini-input-check" type="number" id="setTwoHost"
-                                                 th:field=""
+                                                 th:field="*{setDtoList[1].hostScore}"
                                                  aria-label="set-two-host"
                                                  aria-describedby="setTwoHostAddon" disabled>
                                        </div>
@@ -99,7 +99,7 @@
                                     <td>
                                        <div class="input-group mb-3">
                                           <input class="form-control gruzini-input-check" type="number" id="setTwoGuest"
-                                                 th:field=""
+                                                 th:field="*{setDtoList[1].guestScore}"
                                                  aria-label="set-two-guest"
                                                  aria-describedby="setTwoGuestAddon" disabled>
                                           <div class="input-group-append">
@@ -122,7 +122,7 @@
                                              </span>
                                           </div>
                                           <input class="form-control gruzini-input-check" type="number" id="setThreeHost"
-                                                 th:field=""
+                                                 th:field="*{setDtoList[2].hostScore}"
                                                  aria-label="set-three-host"
                                                  aria-describedby="setThreeHostAddon" disabled>
                                        </div>
@@ -131,7 +131,7 @@
                                     <td>
                                        <div class="input-group mb-3">
                                           <input class="form-control gruzini-input-check" type="number" id="setThreeGuest"
-                                                 th:field=""
+                                                 th:field="*{setDtoList[2].guestScore}"
                                                  aria-label="set-three-guest"
                                                  aria-describedby="setThreeGuestAddon" disabled>
                                           <div class="input-group-append">
@@ -154,7 +154,7 @@
                                              </span>
                                           </div>
                                           <input class="form-control gruzini-input-check" type="number" id="setFourHost"
-                                                 th:field=""
+                                                 th:field="*{setDtoList[3].hostScore}"
                                                  aria-label="set-four-host"
                                                  aria-describedby="setFourHostAddon" disabled>
                                        </div>
@@ -163,7 +163,7 @@
                                     <td>
                                        <div class="input-group mb-3">
                                           <input class="form-control gruzini-input-check" type="number" id="setFourGuest"
-                                                 th:field=""
+                                                 th:field="*{setDtoList[3].guestScore}"
                                                  aria-label="set-four-guest"
                                                  aria-describedby="setFourGuestAddon" disabled>
                                           <div class="input-group-append">
@@ -186,7 +186,7 @@
                                              </span>
                                           </div>
                                           <input class="form-control gruzini-input-check" type="number" id="setFiveHost"
-                                                 th:field=""
+                                                 th:field="*{setDtoList[4].hostScore}"
                                                  aria-label="set-five-host"
                                                  aria-describedby="setFiveHostAddon" disabled>
                                        </div>
@@ -195,7 +195,7 @@
                                     <td>
                                        <div class="input-group mb-3">
                                           <input class="form-control gruzini-input-check" type="number" id="setFiveGuest"
-                                                 th:field=""
+                                                 th:field="*{setDtoList[4].guestScore}"
                                                  aria-label="set-five-guest"
                                                  aria-describedby="setFiveGuestAddon" disabled>
                                           <div class="input-group-append">

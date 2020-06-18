@@ -1,7 +1,9 @@
 package com.gruzini.tennistico.models.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.AssertTrue;
@@ -10,6 +12,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Validated
 public class ScoreDTO {

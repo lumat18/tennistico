@@ -18,45 +18,47 @@ import java.util.List;
 @RequestMapping("/input-score")
 public class InputScoreController {
 
-    private final InputScoreService inputScoreService;
-    private final MatchService matchService;
-    private final ScoreMapper scoreMapper;
+   private final InputScoreService inputScoreService;
+   private final MatchService matchService;
+   private final ScoreMapper scoreMapper;
 
-    public InputScoreController(final InputScoreService inputScoreService,
-                                final MatchService matchService,
-                                final ScoreMapper scoreMapper) {
-        this.inputScoreService = inputScoreService;
-        this.matchService = matchService;
-        this.scoreMapper = scoreMapper;
-    }
+   public InputScoreController(final InputScoreService inputScoreService,
+                               final MatchService matchService,
+                               final ScoreMapper scoreMapper) {
+      this.inputScoreService = inputScoreService;
+      this.matchService = matchService;
+      this.scoreMapper = scoreMapper;
+   }
 
-//    @PostMapping("/begin")
-    @GetMapping("/{match_id}")
-    public String beginSubmittingScore(/*@RequestParam(name = "matchId")*/ @PathVariable(name = "match_id") final Long matchId, final Model model) {
-        model.addAttribute("match", matchService.getById(matchId));
-        model.addAttribute("score", ScoreDTO.builder().setDtoList(prepareListOfFiveNewSetDto()).build());
-        return "score";
-    }
+   //    @PostMapping("/begin")
+   @GetMapping("/{match_id}")
+   public String beginSubmittingScore(/*@RequestParam(name = "matchId")*/ @PathVariable(name = "match_id") final Long matchId, final Model model) {
+      model.addAttribute("match", matchService.getById(matchId));
+      model.addAttribute("score", ScoreDTO.builder().setDtoList(prepareListOfFiveNewSetDto()).build());
+      return "score";
+   }
 
-    @PostMapping("/process")
-    public String processSubmittedScore(@ModelAttribute final Long matchId,
-                             @Valid @ModelAttribute(name = "score") final ScoreDTO scoreDTO,
-                             final Errors errors) {
-        if (errors.hasErrors()) {
-            return "score";
-        }
+   @PostMapping("/process")
+   public String processSubmittedScore(@ModelAttribute(name = "match_id") final Long matchId,
+                                       @Valid @ModelAttribute(name = "score") final ScoreDTO scoreDTO,
+                                       final Errors errors,
+                                       final Model model) {
+      if (errors.hasErrors()) {
+         model.addAttribute("match", matchService.getById(matchId));
+         return "score";
+      }
 
-        final String score = scoreMapper.mapScoreToString(scoreDTO);
-        inputScoreService.inputScore(matchId, score);
+      final String score = scoreMapper.mapScoreToString(scoreDTO);
+      inputScoreService.inputScore(matchId, score);
 
-        return "redirect:/dashboard";
-    }
+      return "redirect:/dashboard";
+   }
 
-    private List<SetDTO> prepareListOfFiveNewSetDto(){
-        List<SetDTO> setList = new ArrayList<>();
-        for(int num = 0; num < 5; num++){
-            setList.add(new SetDTO());
-        }
-        return setList;
-    }
+   private List<SetDTO> prepareListOfFiveNewSetDto() {
+      List<SetDTO> setList = new ArrayList<>();
+      for (int num = 0; num < 5; num++) {
+         setList.add(new SetDTO());
+      }
+      return setList;
+   }
 }
