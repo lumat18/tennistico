@@ -3,8 +3,6 @@ package com.gruzini.tennistico.controllers;
 import com.gruzini.tennistico.events.CreateMatchEvent;
 import com.gruzini.tennistico.models.dto.CreatedMatchDto;
 import com.gruzini.tennistico.services.CourtService;
-import com.gruzini.tennistico.services.MatchCreationService;
-import com.gruzini.tennistico.services.NotificationSenderService;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,16 +19,11 @@ import java.security.Principal;
 @RequestMapping("/dashboard/create")
 public class MatchCreationController {
 
-    private final MatchCreationService matchCreationService;
     private final CourtService courtService;
-    private final NotificationSenderService notificationSender;
-
     private final ApplicationEventPublisher applicationEventPublisher;
 
-    public MatchCreationController(MatchCreationService matchCreationService, CourtService courtService, NotificationSenderService notificationSender, ApplicationEventPublisher applicationEventPublisher) {
-        this.matchCreationService = matchCreationService;
+    public MatchCreationController(CourtService courtService, ApplicationEventPublisher applicationEventPublisher) {
         this.courtService = courtService;
-        this.notificationSender = notificationSender;
         this.applicationEventPublisher = applicationEventPublisher;
     }
 

@@ -3,8 +3,10 @@ package com.gruzini.tennistico.services;
 import com.gruzini.tennistico.domain.Match;
 import com.gruzini.tennistico.domain.Player;
 import com.gruzini.tennistico.domain.enums.MatchStatus;
+import com.gruzini.tennistico.events.JoinMatchEvent;
 import com.gruzini.tennistico.exceptions.WrongMatchStatusException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,7 +21,12 @@ public class JoinMatchService {
         this.playerService = playerService;
     }
 
-    public void joinGuestToMatch(final String guestUsername, final Long matchId) {
+    @EventListener
+    public void handleJoinMatchEvent(final JoinMatchEvent event) {
+        joinGuestToMatch(event.getUsername(), event.getMatchId());
+    }
+
+    private void joinGuestToMatch(final String guestUsername, final Long matchId) {
         final Match matchToJoin = matchService.getById(matchId);
         final Match match = changeMatchStatus(matchToJoin);
         final Player guest = playerService.getByUsername(guestUsername);

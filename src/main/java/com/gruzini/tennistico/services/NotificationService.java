@@ -36,17 +36,22 @@ public class NotificationService {
                 .notificationType(notificationType)
                 .createdAt(LocalDateTime.now())
                 .build();
-//        log.info("Notification of type " + notificationType.toString() + " for user " + recipient.getEmail() + " created");
         return notificationRepository.save(notification);
     }
 
-    public Notification createNotification(final User user, final NotificationType notificationType) {
+    public Notification createNotification(final User sender, final User recipient, final Long matchId, final NotificationType notificationType) {
         final Notification notification = Notification.builder()
                 .notificationType(notificationType)
                 .createdAt(LocalDateTime.now())
-                .recipient(user)
+                .sender(sender)
+                .recipient(recipient)
+                .matchId(matchId)
                 .build();
         return notificationRepository.save(notification);
+    }
+
+    public Notification createNotification(final User recipient, final NotificationType notificationType) {
+        return createNotification(null, recipient, null, notificationType);
     }
 
     public List<NotificationDto> getByUser(String username) {
