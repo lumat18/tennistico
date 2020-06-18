@@ -2,7 +2,7 @@ package com.gruzini.tennistico.services;
 
 import com.gruzini.tennistico.domain.Court;
 import com.gruzini.tennistico.exceptions.CourtNotFoundException;
-import com.gruzini.tennistico.mappers.CourtInfoMapper;
+import com.gruzini.tennistico.mappers.CourtMapper;
 import com.gruzini.tennistico.models.dto.CourtDto;
 import com.gruzini.tennistico.repositories.CourtRepository;
 import org.junit.jupiter.api.Test;
@@ -26,7 +26,7 @@ class CourtServiceTest {
     @MockBean
     private CourtRepository courtRepository;
     @MockBean
-    private CourtInfoMapper courtInfoMapper;
+    private CourtMapper courtMapper;
 
     @Autowired
     private CourtService courtService;
@@ -55,7 +55,7 @@ class CourtServiceTest {
         Court court = Court.builder().city(EXISTING_CITY).build();
         CourtDto courtDto = CourtDto.builder().city(EXISTING_CITY).build();
         when(courtRepository.getByCity(EXISTING_CITY)).thenReturn(List.of(court));
-        when(courtInfoMapper.toCourtInfoDto(court)).thenReturn(courtDto);
+        when(courtMapper.toCourtInfoDto(court)).thenReturn(courtDto);
         //when
         final List<CourtDto> result = courtService.getByCity(EXISTING_CITY);
         //then
@@ -69,7 +69,7 @@ class CourtServiceTest {
         Court court = Court.builder().city(EXISTING_CITY).build();
         CourtDto courtDto = CourtDto.builder().city(EXISTING_CITY).build();
         when(courtRepository.getByCity(EXISTING_CITY)).thenReturn(List.of(court));
-        when(courtInfoMapper.toCourtInfoDto(court)).thenReturn(courtDto);
+        when(courtMapper.toCourtInfoDto(court)).thenReturn(courtDto);
         //when
         final List<CourtDto> result = courtService.getByCity(NON_EXISTING_CITY);
         //then

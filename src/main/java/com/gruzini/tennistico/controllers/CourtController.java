@@ -1,6 +1,6 @@
 package com.gruzini.tennistico.controllers;
 
-import com.gruzini.tennistico.models.dto.CourtInfoDto;
+import com.gruzini.tennistico.models.dto.CourtDto;
 import com.gruzini.tennistico.services.CourtService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -25,7 +25,7 @@ public class CourtController {
 
     @GetMapping
     public String showCourtsPage(final Model model) {
-        List<CourtInfoDto> allCourts = courtService.getAll();
+        List<CourtDto> allCourts = courtService.getAll();
         List<String> cities = courtService.getCities();
         model.addAttribute("cities", cities);
         model.addAttribute("foundCourts", allCourts);
@@ -34,7 +34,7 @@ public class CourtController {
     @PostMapping
     public String processCourtSearch(@RequestParam("selectedCity") final String city, final Model model){
         List<String> cities = courtService.getCities();
-        List<CourtInfoDto> foundCourts = courtService.getByCity(city);
+        List<CourtDto> foundCourts = courtService.getByCity(city);
         model.addAttribute("cities", cities);
         model.addAttribute("foundCourts", foundCourts);
         return "courts";
