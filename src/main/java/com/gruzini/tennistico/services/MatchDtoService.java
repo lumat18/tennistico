@@ -52,18 +52,8 @@ public class MatchDtoService {
 
     public List<FutureMatchDto> getAllFutureMatchesPlayerIsInvolvedIn(final String username) {
         final User user = userService.getByEmail(username);
-        return prepareFutureGamesList(user).stream()
+        return matchService.getByMatchStatusesAndHostedBy(List.of(MatchStatus.HOSTED, MatchStatus.JOIN_REQUEST, MatchStatus.UPCOMING), user.getPlayer()).stream()
                 .map(futureMatchMapper::toFutureMatchDto)
-                .collect(Collectors.toList());
-    }
-
-    private List<Match> prepareFutureGamesList(final User user){
-        List<Match> allFutureGames = new ArrayList<>();
-        allFutureGames.addAll(matchService.getByMatchStatusAndHostedBy(MatchStatus.HOSTED, user.getPlayer()));
-        allFutureGames.addAll(matchService.getByMatchStatusAndHostedBy(MatchStatus.JOIN_REQUEST, user.getPlayer()));
-        allFutureGames.addAll(matchService.getByPlayerAndStatus(user.getPlayer(), MatchStatus.UPCOMING));
-        return allFutureGames.stream()
-                .sorted(Comparator.comparing(Match::getStartingAt))
                 .collect(Collectors.toList());
     }
 }

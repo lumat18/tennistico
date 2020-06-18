@@ -78,7 +78,7 @@ public class MatchService {
         return matchRepository.getAllByPlayersAndMatchStatus(player, matchStatus);
     }
 
-    public List<Match> getByMatchStatusAndHostedBy(final MatchStatus matchStatus, final Player player) {
-        return matchRepository.findAllByMatchStatusAndPlayersContainsAndStartingAtIsAfter(matchStatus, player, LocalDateTime.now());
+    public List<Match> getByMatchStatusesAndHostedBy(final List<MatchStatus> matchStatusList, final Player player) {
+        return matchRepository.findAllByPlayersContainsAndStartingAtIsAfterAndMatchStatusInOrderByStartingAt(player, LocalDateTime.now(), matchStatusList);
     }
 }

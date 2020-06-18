@@ -66,8 +66,8 @@ public class ArchivedMatchesInitializer implements CommandLineRunner {
               .build();
 
       final Match match2 = Match.builder()
-              .startingAt(LocalDateTime.of(2020, Month.JUNE, 18, 10, 10))
-              .endingAt(LocalDateTime.of(2020, Month.JUNE, 18, 12, 10))
+              .startingAt(LocalDateTime.of(2020, Month.JUNE, 21, 10, 10))
+              .endingAt(LocalDateTime.of(2020, Month.JUNE, 21, 12, 10))
               .court(court)
               .matchStatus(MatchStatus.UPCOMING)
               .score("3-2")
