@@ -25,13 +25,8 @@ public class MatchCreationService {
 
     public Match create(final CreatedMatchDto createdMatchDto, final String username) {
         final Player player = userService.getByEmail(username).getPlayer();
-        final Match createdMatch = saveCreatedMatch(createdMatchDto);
-        playerService.add(player, createdMatch);
-        return createdMatch;
-    }
-
-    private Match saveCreatedMatch(final CreatedMatchDto createdMatchDto) {
         final Match createdMatch = createdMatchMapper.toMatch(createdMatchDto);
+        createdMatch.setHost(player);
         return matchService.save(createdMatch);
     }
 }
