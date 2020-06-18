@@ -7,6 +7,7 @@ import com.gruzini.tennistico.domain.User;
 import com.gruzini.tennistico.domain.enums.NotificationType;
 import com.gruzini.tennistico.events.ConfirmJoinEvent;
 import com.gruzini.tennistico.events.CreateMatchEvent;
+import com.gruzini.tennistico.events.InputScoreEvent;
 import com.gruzini.tennistico.events.JoinMatchEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
@@ -52,6 +53,16 @@ public class NotificationSenderService {
         final Player guest = match.getGuest();
         final User recipient = userService.getByPlayer(guest);
         final Notification notification = notificationService.createNotification(sender, recipient, event.getMatchId(), NotificationType.JOIN_CONFIRMED);
+        log.info("Notification of type " + notification.getNotificationType().toString() + " for user " + recipient.getEmail() + " created");
+    }
+
+    @EventListener
+    public void handleSendNotificationEvent(final InputScoreEvent event) {
+        final User sender = userService.getByEmail(event.getUsername());
+        final Match match = matchService.getById(event.getMatchId());
+        final Player guest = match.getGuest();
+        final User recipient = userService.getByPlayer(guest);
+        final Notification notification = notificationService.createNotification(sender, recipient, match.getId(), NotificationType.SCORE_TO_CONFIRM);
         log.info("Notification of type " + notification.getNotificationType().toString() + " for user " + recipient.getEmail() + " created");
     }
 

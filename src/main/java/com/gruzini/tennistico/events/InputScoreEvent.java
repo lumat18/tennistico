@@ -8,11 +8,13 @@ import org.springframework.context.ApplicationEvent;
 public class InputScoreEvent extends ApplicationEvent {
 
     private final Long matchId;
+    private final String username;
     private final ScoreDto scoreDto;
 
-    public InputScoreEvent(Object source, Long matchId, ScoreDto scoreDto) {
+    public InputScoreEvent(Object source, Long matchId, String username, ScoreDto scoreDto) {
         super(source);
         this.matchId = matchId;
+        this.username = username;
         this.scoreDto = scoreDto;
     }
 }
