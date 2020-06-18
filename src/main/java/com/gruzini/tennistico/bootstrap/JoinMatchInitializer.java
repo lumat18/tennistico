@@ -19,7 +19,6 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Component
 @Profile("dev")
@@ -56,7 +55,6 @@ public class JoinMatchInitializer implements CommandLineRunner {
                 .startingAt(LocalDateTime.of(2020, 6, 12, 8, 30))
                 .endingAt(LocalDateTime.of(2020, 6, 12, 11, 30))
                 .matchStatus(MatchStatus.HOSTED)
-                .isOpen(true)
                 .build();
         matchRepository.save(match1);
 
@@ -67,7 +65,6 @@ public class JoinMatchInitializer implements CommandLineRunner {
                 .gender(Gender.MALE)
                 .playerSkill(PlayerSkill.PROFESSIONAL)
                 .yearsOfExperience(32)
-                .matches(List.of(match1))
                 .build();
         playerRepository.save(host);
 
@@ -87,7 +84,6 @@ public class JoinMatchInitializer implements CommandLineRunner {
                 .gender(Gender.MALE)
                 .playerSkill(PlayerSkill.PROFESSIONAL)
                 .yearsOfExperience(32)
-                .matches(List.of())
                 .build();
         playerRepository.save(guest);
 
