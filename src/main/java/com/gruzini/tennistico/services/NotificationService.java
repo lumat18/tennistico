@@ -7,7 +7,6 @@ import com.gruzini.tennistico.domain.enums.NotificationType;
 import com.gruzini.tennistico.mappers.NotificationMapper;
 import com.gruzini.tennistico.models.dto.NotificationDto;
 import com.gruzini.tennistico.repositories.NotificationRepository;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,7 +16,6 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional
-@Slf4j
 public class NotificationService {
 
     private final NotificationRepository notificationRepository;
@@ -30,7 +28,7 @@ public class NotificationService {
         this.userService = userService;
     }
 
-    public Notification createNotificationFor(final Player player, final Long matchId, final NotificationType notificationType) {
+    public Notification createNotification(final Player player, final Long matchId, final NotificationType notificationType) {
         final User recipient = userService.getByPlayer(player);
         final Notification notification = Notification.builder()
                 .recipient(recipient)
@@ -38,7 +36,16 @@ public class NotificationService {
                 .notificationType(notificationType)
                 .createdAt(LocalDateTime.now())
                 .build();
-        log.info("Notification of type " + notificationType.toString() + " for user " + recipient.getEmail() + " created");
+//        log.info("Notification of type " + notificationType.toString() + " for user " + recipient.getEmail() + " created");
+        return notificationRepository.save(notification);
+    }
+
+    public Notification createNotification(final User user, final NotificationType notificationType) {
+        final Notification notification = Notification.builder()
+                .notificationType(notificationType)
+                .createdAt(LocalDateTime.now())
+                .recipient(user)
+                .build();
         return notificationRepository.save(notification);
     }
 

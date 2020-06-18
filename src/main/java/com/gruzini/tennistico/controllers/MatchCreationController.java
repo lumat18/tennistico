@@ -1,11 +1,11 @@
 package com.gruzini.tennistico.controllers;
 
-import com.gruzini.tennistico.domain.Match;
-import com.gruzini.tennistico.domain.enums.NotificationType;
+import com.gruzini.tennistico.events.CreateMatchEvent;
 import com.gruzini.tennistico.models.dto.CreatedMatchDto;
 import com.gruzini.tennistico.services.CourtService;
 import com.gruzini.tennistico.services.MatchCreationService;
 import com.gruzini.tennistico.services.NotificationSenderService;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -25,10 +25,13 @@ public class MatchCreationController {
     private final CourtService courtService;
     private final NotificationSenderService notificationSender;
 
-    public MatchCreationController(MatchCreationService matchCreationService, CourtService courtService, NotificationSenderService notificationSender) {
+    private final ApplicationEventPublisher applicationEventPublisher;
+
+    public MatchCreationController(MatchCreationService matchCreationService, CourtService courtService, NotificationSenderService notificationSender, ApplicationEventPublisher applicationEventPublisher) {
         this.matchCreationService = matchCreationService;
         this.courtService = courtService;
         this.notificationSender = notificationSender;
+        this.applicationEventPublisher = applicationEventPublisher;
     }
 
     @PostMapping("/begin")
@@ -45,8 +48,11 @@ public class MatchCreationController {
             model.addAttribute("chosenCourt", courtService.getById(createdMatchDto.getCourtId()));
             return "create";
         }
-        final Match match = matchCreationService.create(createdMatchDto, principal.getName());
-        notificationSender.sendToHost(match.getId(), NotificationType.MATCH_CREATED);
+
+        applicationEventPublisher.publishEvent(new CreateMatchEvent(this, createdMatchDto, principal.getName()));
+
+//        final Match match = matchCreationService.create(createdMatchDto, principal.getName());
+//        notificationSender.sendToHost(match.getId(), NotificationType.MATCH_CREATED);
         return "dashboard";
     }
 }
