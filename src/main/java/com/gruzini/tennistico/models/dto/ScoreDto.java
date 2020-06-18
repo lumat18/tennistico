@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 @Data
 @Builder
 @Validated
-public class ScoreDTO {
+public class ScoreDto {
     @NotEmpty
     private List<SetDTO> setDtoList;
 
