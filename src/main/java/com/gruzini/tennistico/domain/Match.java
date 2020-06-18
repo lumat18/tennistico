@@ -15,21 +15,14 @@ import java.util.Optional;
 @Builder
 public class Match {
 
-    private static final int HOST_INDEX = 0;
-    private static final int GUEST_INDEX = 1;
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "match_id")
     private Long id;
-
-    private boolean isOpen;
 
     private LocalDateTime startingAt;
 
     private LocalDateTime endingAt;
-
-    private String score;
 
     @Enumerated(EnumType.STRING)
     private MatchStatus matchStatus;
@@ -38,15 +31,17 @@ public class Match {
     @JoinColumn(name = "court_id")
     private Court court;
 
-    @ManyToMany(mappedBy = "matches", fetch = FetchType.EAGER)
-    @EqualsAndHashCode.Exclude
-    private List<Player> players;
+    @ManyToOne
+    private Player host;
 
-    public Player getHost() {
-        return players.get(HOST_INDEX);
-    }
+    @ManyToOne
+    private Player guest;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "score_id")
+    private Score score;
 
     public Optional<Player> getGuest() {
-        return Optional.ofNullable(players.get(GUEST_INDEX));
+        return Optional.ofNullable(guest);
     }
 }

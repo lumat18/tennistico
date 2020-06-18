@@ -1,7 +1,6 @@
 package com.gruzini.tennistico.services;
 
 import com.gruzini.tennistico.domain.Player;
-import com.gruzini.tennistico.domain.Ranking;
 import com.gruzini.tennistico.services.score.RankingPointCounter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
