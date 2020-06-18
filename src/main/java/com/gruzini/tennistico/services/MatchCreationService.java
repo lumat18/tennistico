@@ -13,13 +13,11 @@ public class MatchCreationService {
 
     private final CreatedMatchMapper createdMatchMapper;
     private final MatchService matchService;
-    private final PlayerService playerService;
     private final UserService userService;
 
-    public MatchCreationService(CreatedMatchMapper createdMatchMapper, MatchService matchService, PlayerService playerService, UserService userService) {
+    public MatchCreationService(CreatedMatchMapper createdMatchMapper, MatchService matchService, UserService userService) {
         this.createdMatchMapper = createdMatchMapper;
         this.matchService = matchService;
-        this.playerService = playerService;
         this.userService = userService;
     }
 
