@@ -33,6 +33,7 @@ public class MatchCreationService {
     public Match create(final CreatedMatchDto createdMatchDto, final String username) {
         final Player player = userService.getByEmail(username).getPlayer();
         final Match createdMatch = saveCreatedMatch(createdMatchDto);
+        log.info("Match with id = " + createdMatch.getId() + " was created by " + username);
         playerService.add(player, createdMatch);
         return createdMatch;
     }

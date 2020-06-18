@@ -35,17 +35,13 @@ public class MatchCreationController {
     }
 
     @PostMapping("/process")
-    public String processMatchCreation(@Valid @ModelAttribute("match") final CreatedMatchDto createdMatchDto, final Errors errors, final Model model, final Principal principal) {
-
+    public String processMatchCreation(@Valid @ModelAttribute("match") final CreatedMatchDto createdMatchDto,
+                                       final Errors errors, final Model model, final Principal principal) {
         if (errors.hasErrors()) {
             model.addAttribute("chosenCourt", courtService.getById(createdMatchDto.getCourtId()));
             return "create";
         }
-
         applicationEventPublisher.publishEvent(new CreateMatchEvent(this, createdMatchDto, principal.getName()));
-
-//        final Match match = matchCreationService.create(createdMatchDto, principal.getName());
-//        notificationSender.sendToHost(match.getId(), NotificationType.MATCH_CREATED);
         return "dashboard";
     }
 }
