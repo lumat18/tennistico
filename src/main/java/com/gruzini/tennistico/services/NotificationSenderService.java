@@ -5,6 +5,7 @@ import com.gruzini.tennistico.domain.Notification;
 import com.gruzini.tennistico.domain.Player;
 import com.gruzini.tennistico.domain.User;
 import com.gruzini.tennistico.domain.enums.NotificationType;
+import com.gruzini.tennistico.events.ConfirmJoinEvent;
 import com.gruzini.tennistico.events.CreateMatchEvent;
 import com.gruzini.tennistico.events.JoinMatchEvent;
 import com.gruzini.tennistico.exceptions.PlayerNotFoundException;
@@ -42,7 +43,17 @@ public class NotificationSenderService {
         final Player host = match.getHost();
         final User recipient = userService.getByPlayer(host);
         final Notification notification = notificationService.createNotification(sender, recipient, event.getMatchId(), NotificationType.JOIN_REQUEST);
-        log.info("Notification of type " + notification.getNotificationType().toString() + " for user " + recipient.getEmail() + "created");
+        log.info("Notification of type " + notification.getNotificationType().toString() + " for user " + recipient.getEmail() + " created");
+    }
+
+    @EventListener
+    public void handleSendNotificationEvent(final ConfirmJoinEvent event) {
+        final User sender = userService.getByEmail(event.getUsername());
+        final Match match = matchService.getById(event.getMatchId());
+        final Player guest = match.getGuest().orElseThrow(PlayerNotFoundException::new);
+        final User recipient = userService.getByPlayer(guest);
+        final Notification notification = notificationService.createNotification(sender, recipient, event.getMatchId(), NotificationType.JOIN_CONFIRMED);
+        log.info("Notification of type " + notification.getNotificationType().toString() + " for user " + recipient.getEmail() + " created");
     }
 
     public Notification sendToHost(final Long matchId, final NotificationType type) {

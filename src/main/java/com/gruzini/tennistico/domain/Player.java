@@ -19,18 +19,18 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class Player {
-   @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
-   private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-   @NotNull
-   private String firstName;
+    @NotNull
+    private String firstName;
 
-   @NotNull
-   private String lastName;
+    @NotNull
+    private String lastName;
 
-   @Enumerated(EnumType.STRING)
-   private Gender gender;
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
 
     private LocalDate birthday;
 
@@ -54,6 +54,10 @@ public class Player {
 
     public Integer getAge() {
         return Period.between(getBirthday(), LocalDate.now()).getYears();
+    }
+
+    public String getFullName() {
+        return firstName + " " + lastName;
     }
 
     public void addMatch(Match match) {

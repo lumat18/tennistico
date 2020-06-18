@@ -24,6 +24,7 @@ public class JoinMatchService {
     @EventListener
     public void handleJoinMatchEvent(final JoinMatchEvent event) {
         joinGuestToMatch(event.getUsername(), event.getMatchId());
+
     }
 
     private void joinGuestToMatch(final String guestUsername, final Long matchId) {
@@ -31,6 +32,7 @@ public class JoinMatchService {
         final Match match = changeMatchStatus(matchToJoin);
         final Player guest = playerService.getByUsername(guestUsername);
         addMatchToPlayer(guest, match);
+        log.info("Player " + guest.getFullName() + " joined the match with id = " + matchId);
     }
 
     private synchronized Match changeMatchStatus(final Match match) {

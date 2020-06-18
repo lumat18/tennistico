@@ -25,9 +25,6 @@ public class JoinMatchController {
     @PostMapping
     public String joinMatch(@RequestParam(name = "match_id") final Long matchId, final Principal principal) {
         applicationEventPublisher.publishEvent(new JoinMatchEvent(this, matchId, principal.getName()));
-
-//        joinMatchService.joinGuestToMatch(principal.getName(), matchId);
-//        notificationSender.sendToHost(matchId, NotificationType.JOIN_REQUEST);
         return "dashboard";
     }
 

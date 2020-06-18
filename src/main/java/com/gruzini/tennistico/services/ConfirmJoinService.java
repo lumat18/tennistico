@@ -3,9 +3,11 @@ package com.gruzini.tennistico.services;
 import com.gruzini.tennistico.domain.Match;
 import com.gruzini.tennistico.domain.Player;
 import com.gruzini.tennistico.domain.enums.MatchStatus;
+import com.gruzini.tennistico.events.ConfirmJoinEvent;
 import com.gruzini.tennistico.exceptions.MatchPlayersException;
 import com.gruzini.tennistico.exceptions.PlayerIsNotAMatchHostException;
 import com.gruzini.tennistico.exceptions.WrongMatchStatusException;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,7 +21,12 @@ public class ConfirmJoinService {
         this.matchService = matchService;
     }
 
-    public void confirmJoin(final Long matchId, final String username) {
+    @EventListener
+    public void handleConfirmJoinEvent(final ConfirmJoinEvent event) {
+        confirmJoin(event.getMatchId(), event.getUsername());
+    }
+
+    private synchronized void confirmJoin(final Long matchId, final String username) {
         final Player player = playerService.getByUsername(username);
         final Match match = matchService.getById(matchId);
         validateMatchAndPlayer(match, player);
