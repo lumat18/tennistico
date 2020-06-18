@@ -2,7 +2,6 @@ package com.gruzini.tennistico.services.score;
 
 import com.gruzini.tennistico.domain.Match;
 import com.gruzini.tennistico.domain.Player;
-import com.gruzini.tennistico.exceptions.MatchPlayersException;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -18,7 +17,7 @@ public class WinDecider {
         if (hostWins(match)) {
             return match.getHost();
         } else {
-            return match.getGuest().orElseThrow(MatchPlayersException::new);
+            return match.getGuest();
         }
     }
 
@@ -46,7 +45,7 @@ public class WinDecider {
             return null;
         }
         if (hostWins(match)) {
-            return match.getGuest().orElseThrow(MatchPlayersException::new);
+            return match.getGuest();
         } else {
             return match.getHost();
         }

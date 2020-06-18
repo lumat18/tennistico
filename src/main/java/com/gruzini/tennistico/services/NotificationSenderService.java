@@ -8,7 +8,6 @@ import com.gruzini.tennistico.domain.enums.NotificationType;
 import com.gruzini.tennistico.events.ConfirmJoinEvent;
 import com.gruzini.tennistico.events.CreateMatchEvent;
 import com.gruzini.tennistico.events.JoinMatchEvent;
-import com.gruzini.tennistico.exceptions.PlayerNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
@@ -50,7 +49,7 @@ public class NotificationSenderService {
     public void handleSendNotificationEvent(final ConfirmJoinEvent event) {
         final User sender = userService.getByEmail(event.getUsername());
         final Match match = matchService.getById(event.getMatchId());
-        final Player guest = match.getGuest().orElseThrow(PlayerNotFoundException::new);
+        final Player guest = match.getGuest();
         final User recipient = userService.getByPlayer(guest);
         final Notification notification = notificationService.createNotification(sender, recipient, event.getMatchId(), NotificationType.JOIN_CONFIRMED);
         log.info("Notification of type " + notification.getNotificationType().toString() + " for user " + recipient.getEmail() + " created");
@@ -62,7 +61,7 @@ public class NotificationSenderService {
     }
 
     public Notification sendToGuest(final Long matchId, final NotificationType type) {
-        final Player guest = matchService.getById(matchId).getGuest().orElseThrow(PlayerNotFoundException::new);
+        final Player guest = matchService.getById(matchId).getGuest();
         return notificationService.createNotification(guest, matchId, type);
     }
 }

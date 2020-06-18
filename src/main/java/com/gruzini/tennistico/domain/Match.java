@@ -1,12 +1,12 @@
 package com.gruzini.tennistico.domain;
 
 import com.gruzini.tennistico.domain.enums.MatchStatus;
+import com.gruzini.tennistico.exceptions.PlayerNotFoundException;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 @Entity(name = "matches")
 @Data
@@ -46,7 +46,11 @@ public class Match {
         return players.get(HOST_INDEX);
     }
 
-    public Optional<Player> getGuest() {
-        return Optional.ofNullable(players.get(GUEST_INDEX));
+    public Player getGuest() {
+        if (players.get(GUEST_INDEX) != null) {
+            return players.get(GUEST_INDEX);
+        } else {
+            throw new PlayerNotFoundException();
+        }
     }
 }

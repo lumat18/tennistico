@@ -7,10 +7,12 @@ import com.gruzini.tennistico.events.ConfirmJoinEvent;
 import com.gruzini.tennistico.exceptions.MatchPlayersException;
 import com.gruzini.tennistico.exceptions.PlayerIsNotAMatchHostException;
 import com.gruzini.tennistico.exceptions.WrongMatchStatusException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 public class ConfirmJoinService {
 
     private final PlayerService playerService;
@@ -24,6 +26,7 @@ public class ConfirmJoinService {
     @EventListener
     public void handleConfirmJoinEvent(final ConfirmJoinEvent event) {
         confirmJoin(event.getMatchId(), event.getUsername());
+
     }
 
     private synchronized void confirmJoin(final Long matchId, final String username) {
@@ -31,6 +34,7 @@ public class ConfirmJoinService {
         final Match match = matchService.getById(matchId);
         validateMatchAndPlayer(match, player);
         matchService.updateMatchStatus(match, MatchStatus.UPCOMING);
+        log.info(player.getFullName() + " confirmed " + match.getGuest().getFullName() + " as his opponent in match with id = " + matchId);
     }
 
     private void validateMatchAndPlayer(final Match match, final Player player) {

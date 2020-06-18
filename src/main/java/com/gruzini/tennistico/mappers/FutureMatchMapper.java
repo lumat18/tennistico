@@ -4,6 +4,8 @@ import com.gruzini.tennistico.domain.Match;
 import com.gruzini.tennistico.models.dto.FutureMatchDto;
 import org.springframework.stereotype.Component;
 
+import static java.util.Objects.isNull;
+
 @Component
 public class FutureMatchMapper {
 
@@ -19,9 +21,9 @@ public class FutureMatchMapper {
    }
 
    private String prepareGuestName(final Match match){
-      if(match.getPlayers().size() < 2 || match.getGuest().isEmpty()){
+      if (match.getPlayers().size() < 2 || isNull(match.getGuest())) {
          return "";
       }
-      return match.getGuest().get().getFirstName() + " " + match.getGuest().get().getLastName();
+      return match.getGuest().getFirstName() + " " + match.getGuest().getLastName();
    }
 }
