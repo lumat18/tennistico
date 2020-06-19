@@ -1,7 +1,6 @@
 package com.gruzini.tennistico.services;
 
 import com.gruzini.tennistico.domain.Notification;
-import com.gruzini.tennistico.domain.Player;
 import com.gruzini.tennistico.domain.User;
 import com.gruzini.tennistico.domain.enums.NotificationType;
 import com.gruzini.tennistico.mappers.NotificationMapper;
@@ -20,23 +19,10 @@ public class NotificationService {
 
     private final NotificationRepository notificationRepository;
     private final NotificationMapper notificationMapper;
-    private final UserService userService;
 
-    public NotificationService(NotificationRepository notificationRepository, NotificationMapper notificationMapper, UserService userService) {
+    public NotificationService(NotificationRepository notificationRepository, NotificationMapper notificationMapper) {
         this.notificationRepository = notificationRepository;
         this.notificationMapper = notificationMapper;
-        this.userService = userService;
-    }
-
-    public Notification createNotification(final Player player, final Long matchId, final NotificationType notificationType) {
-        final User recipient = userService.getByPlayer(player);
-        final Notification notification = Notification.builder()
-                .recipient(recipient)
-                .matchId(matchId)
-                .notificationType(notificationType)
-                .createdAt(LocalDateTime.now())
-                .build();
-        return notificationRepository.save(notification);
     }
 
     public Notification createNotification(final User sender, final User recipient, final Long matchId, final NotificationType notificationType) {

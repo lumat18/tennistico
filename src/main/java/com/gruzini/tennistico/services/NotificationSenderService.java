@@ -5,10 +5,7 @@ import com.gruzini.tennistico.domain.Notification;
 import com.gruzini.tennistico.domain.Player;
 import com.gruzini.tennistico.domain.User;
 import com.gruzini.tennistico.domain.enums.NotificationType;
-import com.gruzini.tennistico.events.ConfirmJoinEvent;
-import com.gruzini.tennistico.events.CreateMatchEvent;
-import com.gruzini.tennistico.events.InputScoreEvent;
-import com.gruzini.tennistico.events.JoinMatchEvent;
+import com.gruzini.tennistico.events.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
@@ -30,14 +27,14 @@ public class NotificationSenderService {
     }
 
     @EventListener
-    public void handleSendNotificationEvent(final CreateMatchEvent event) {
+    public void handleEvent(final CreateMatchEvent event) {
         final User user = userService.getByEmail(event.getUsername());
         final Notification notification = notificationService.createNotification(user, NotificationType.MATCH_CREATED);
         log.info("Notification of type " + notification.getNotificationType().toString() + " for user " + user.getEmail() + " created");
     }
 
     @EventListener
-    public void handleSendNotificationEvent(final JoinMatchEvent event) {
+    public void handleEvent(final JoinMatchEvent event) {
         final User sender = userService.getByEmail(event.getUsername());
         final Match match = matchService.getById(event.getMatchId());
         final Player host = match.getHost();
@@ -47,7 +44,7 @@ public class NotificationSenderService {
     }
 
     @EventListener
-    public void handleSendNotificationEvent(final ConfirmJoinEvent event) {
+    public void handleEvent(final ConfirmJoinEvent event) {
         final User sender = userService.getByEmail(event.getUsername());
         final Match match = matchService.getById(event.getMatchId());
         final Player guest = match.getGuest();
@@ -57,7 +54,7 @@ public class NotificationSenderService {
     }
 
     @EventListener
-    public void handleSendNotificationEvent(final InputScoreEvent event) {
+    public void handleEvent(final InputScoreEvent event) {
         final User sender = userService.getByEmail(event.getUsername());
         final Match match = matchService.getById(event.getMatchId());
         final Player guest = match.getGuest();
@@ -66,13 +63,15 @@ public class NotificationSenderService {
         log.info("Notification of type " + notification.getNotificationType().toString() + " for user " + recipient.getEmail() + " created");
     }
 
-    public Notification sendToHost(final Long matchId, final NotificationType type) {
-        final Player host = matchService.getById(matchId).getHost();
-        return notificationService.createNotification(host, matchId, type);
-    }
-
-    public Notification sendToGuest(final Long matchId, final NotificationType type) {
-        final Player guest = matchService.getById(matchId).getGuest();
-        return notificationService.createNotification(guest, matchId, type);
+    @EventListener
+    public void handleEvent(final ConfirmScoreEvent event) {
+        final User guest = userService.getByEmail(event.getUsername());
+        final Match match = matchService.getById(event.getMatchId());
+        final Player hostPlayer = match.getHost();
+        final User host = userService.getByPlayer(hostPlayer);
+        final Notification notificationForHost = notificationService.createNotification(guest, NotificationType.MATCH_ARCHIVED);
+        final Notification notificationForGuest = notificationService.createNotification(host, NotificationType.MATCH_ARCHIVED);
+        log.info("Notification of type " + notificationForHost.getNotificationType().toString() + " for user " + host.getEmail() + " created");
+        log.info("Notification of type " + notificationForGuest.getNotificationType().toString() + " for user " + guest.getEmail() + " created");
     }
 }
