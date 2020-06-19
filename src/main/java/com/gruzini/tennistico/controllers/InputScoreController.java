@@ -17,12 +17,9 @@ import javax.validation.Valid;
 public class InputScoreController {
 
     private final InputScoreService inputScoreService;
-    private final ScoreMapper scoreMapper;
 
-    public InputScoreController(InputScoreService inputScoreService, ScoreMapper scoreMapper) {
+    public InputScoreController(final InputScoreService inputScoreService) {
         this.inputScoreService = inputScoreService;
-
-        this.scoreMapper = scoreMapper;
     }
 
     @PostMapping
@@ -35,9 +32,7 @@ public class InputScoreController {
             return "dashboard";
         }
 
-        final String score = scoreMapper.mapScoreToString(scoreDTO);
-        inputScoreService.inputScore(matchId, score);
-
+        inputScoreService.inputScore(matchId, scoreDTO);
         return "dashboard";
     }
 }
