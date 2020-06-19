@@ -1,9 +1,11 @@
-package com.gruzini.tennistico.services;
+package com.gruzini.tennistico.services.dtos;
 
 import com.gruzini.tennistico.domain.Match;
 import com.gruzini.tennistico.domain.Player;
 import com.gruzini.tennistico.domain.enums.MatchStatus;
 import com.gruzini.tennistico.exceptions.WrongMatchStatusException;
+import com.gruzini.tennistico.services.entities.MatchService;
+import com.gruzini.tennistico.services.entities.PlayerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

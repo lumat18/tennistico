@@ -1,14 +1,8 @@
 package com.gruzini.tennistico.controllers;
 
-import com.gruzini.tennistico.domain.Player;
-import com.gruzini.tennistico.domain.User;
 import com.gruzini.tennistico.models.forms.PlayerRegistrationForm;
 import com.gruzini.tennistico.models.forms.UserRegistrationForm;
-import com.gruzini.tennistico.mappers.PlayerMapper;
-import com.gruzini.tennistico.mappers.UserMapper;
-import com.gruzini.tennistico.models.forms.PlayerRegistrationForm;
-import com.gruzini.tennistico.models.forms.UserRegistrationForm;
-import com.gruzini.tennistico.services.RegistrationService;
+import com.gruzini.tennistico.services.dtos.RegistrationService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -17,20 +11,15 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.util.Objects;
 
 @Controller
 @RequestMapping("/registration")
 @SessionAttributes("userRegistrationForm")
 public class RegistrationController {
 
-    private final UserMapper userMapper;
-    private final PlayerMapper playerMapper;
     private final RegistrationService registrationService;
 
-    public RegistrationController(UserMapper userMapper, PlayerMapper playerMapper, RegistrationService registrationService) {
-        this.userMapper = userMapper;
-        this.playerMapper = playerMapper;
+    public RegistrationController(final RegistrationService registrationService) {
         this.registrationService = registrationService;
     }
 
@@ -71,11 +60,8 @@ public class RegistrationController {
             System.out.println("errors in player registration form");
             return "registration2";
         }
-        User user = userMapper.toUser(userRegistrationForm);
-        Player player = playerMapper.toPlayer(playerRegistrationForm);
-        user.setPlayer(player);
 
-        registrationService.register(user);
+        registrationService.register(userRegistrationForm, playerRegistrationForm);
         sessionStatus.setComplete();
         attributes.addFlashAttribute("stepThreePermit", "permit");
         return  "redirect:/registration/step-three";

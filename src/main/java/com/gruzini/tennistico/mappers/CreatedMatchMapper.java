@@ -3,7 +3,7 @@ package com.gruzini.tennistico.mappers;
 import com.gruzini.tennistico.domain.Match;
 import com.gruzini.tennistico.domain.enums.MatchStatus;
 import com.gruzini.tennistico.models.dto.matchDto.CreatedMatchDto;
-import com.gruzini.tennistico.services.CourtService;
+import com.gruzini.tennistico.services.entities.CourtService;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;

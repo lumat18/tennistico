@@ -1,4 +1,4 @@
-package com.gruzini.tennistico.services;
+package com.gruzini.tennistico.services.entities;
 
 import com.gruzini.tennistico.domain.Player;
 import com.gruzini.tennistico.exceptions.PlayerNotFoundException;

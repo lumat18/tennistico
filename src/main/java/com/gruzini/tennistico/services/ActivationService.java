@@ -3,6 +3,7 @@ package com.gruzini.tennistico.services;
 import com.gruzini.tennistico.domain.ActivationToken;
 import com.gruzini.tennistico.domain.User;
 import com.gruzini.tennistico.emails.MessageType;
+import com.gruzini.tennistico.services.entities.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

@@ -2,7 +2,7 @@ package com.gruzini.tennistico.listeners;
 
 import com.gruzini.tennistico.events.ChangeMatchStatusByEndingDateTimeEvent;
 import com.gruzini.tennistico.events.ChangeMatchStatusByStartingDateTimeEvent;
-import com.gruzini.tennistico.services.MatchService;
+import com.gruzini.tennistico.services.entities.MatchService;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;

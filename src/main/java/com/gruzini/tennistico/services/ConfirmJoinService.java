@@ -6,6 +6,8 @@ import com.gruzini.tennistico.domain.enums.MatchStatus;
 import com.gruzini.tennistico.exceptions.MatchPlayersException;
 import com.gruzini.tennistico.exceptions.PlayerIsNotAMatchHostException;
 import com.gruzini.tennistico.exceptions.WrongMatchStatusException;
+import com.gruzini.tennistico.services.entities.MatchService;
+import com.gruzini.tennistico.services.entities.PlayerService;
 import org.springframework.stereotype.Service;
 
 import static java.util.Objects.isNull;

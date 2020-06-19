@@ -7,6 +7,7 @@ import com.gruzini.tennistico.domain.enums.NotificationType;
 import com.gruzini.tennistico.mappers.NotificationMapper;
 import com.gruzini.tennistico.models.dto.NotificationDto;
 import com.gruzini.tennistico.repositories.NotificationRepository;
+import com.gruzini.tennistico.services.entities.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

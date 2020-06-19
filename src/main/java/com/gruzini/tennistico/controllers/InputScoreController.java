@@ -1,9 +1,7 @@
 package com.gruzini.tennistico.controllers;
 
-import com.gruzini.tennistico.domain.Score;
-import com.gruzini.tennistico.mappers.ScoreMapper;
 import com.gruzini.tennistico.models.dto.ScoreDto;
-import com.gruzini.tennistico.services.InputScoreService;
+import com.gruzini.tennistico.services.dtos.InputScoreService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -18,12 +16,9 @@ import javax.validation.Valid;
 public class InputScoreController {
 
     private final InputScoreService inputScoreService;
-    private final ScoreMapper scoreMapper;
 
-    public InputScoreController(InputScoreService inputScoreService, ScoreMapper scoreMapper) {
+    public InputScoreController(final InputScoreService inputScoreService) {
         this.inputScoreService = inputScoreService;
-
-        this.scoreMapper = scoreMapper;
     }
 
     @PostMapping
@@ -36,9 +31,7 @@ public class InputScoreController {
             return "dashboard";
         }
 
-        final Score score = scoreMapper.toScore(scoreDTO);
-        inputScoreService.inputScore(matchId, score);
-
+        inputScoreService.inputScore(matchId, scoreDTO);
         return "dashboard";
     }
 }
