@@ -33,11 +33,9 @@ class JoinMatchServiceTest {
     void setup() {
         match = Match.builder()
                 .id(1L)
-                .players(new ArrayList<>())
                 .build();
         player = Player.builder()
                 .id(99L)
-                .matches(new ArrayList<>())
                 .build();
         when(matchService.getById(match.getId())).thenReturn(match);
         when(matchService.save(any())).thenReturn(match);
@@ -53,8 +51,7 @@ class JoinMatchServiceTest {
         //then
         verify(matchService, times(1)).getById(match.getId());
         verify(playerService, times(1)).getByUsername("username");
-        assertEquals(1, player.getMatches().size());
-        assertTrue(player.getMatches().contains(match));
+        assertEquals(player, match.getGuest());
         verifyNoMoreInteractions(matchService, playerService);
     }
 

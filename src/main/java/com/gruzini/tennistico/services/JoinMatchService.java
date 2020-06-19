@@ -20,10 +20,11 @@ public class JoinMatchService {
     }
 
     public void joinGuestToMatch(final String guestUsername, final Long matchId) {
-        final Match matchToJoin = matchService.getById(matchId);
-        final Match match = changeMatchStatus(matchToJoin);
+        final Match foundMatch = matchService.getById(matchId);
+        final Match matchToJoin = changeMatchStatus(foundMatch);
         final Player guest = playerService.getByUsername(guestUsername);
-        addMatchToPlayer(guest, match);
+        matchToJoin.setGuest(guest);
+        matchService.save(matchToJoin);
     }
 
     private synchronized Match changeMatchStatus(final Match match) {
@@ -38,10 +39,5 @@ public class JoinMatchService {
         if (!matchStatus.equals(MatchStatus.HOSTED)) {
             throw new WrongMatchStatusException();
         }
-    }
-
-    private void addMatchToPlayer(final Player guest, final Match match) {
-        guest.addMatch(match);
-        playerService.save(guest);
     }
 }

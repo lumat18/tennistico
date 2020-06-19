@@ -1,4 +1,4 @@
-package com.gruzini.tennistico.models.dto;
+package com.gruzini.tennistico.models.dto.matchDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,8 +12,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 public class ArchivedMatchDto {
-   private String opponentName;
-   private String score;
-   private String courtName;
-   private LocalDate date;
+    private String opponentName;
+    private String score;
+    private String courtName;
+    private LocalDate date;
 }

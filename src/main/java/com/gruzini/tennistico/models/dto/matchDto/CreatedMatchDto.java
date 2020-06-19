@@ -1,4 +1,4 @@
-package com.gruzini.tennistico.models.dto;
+package com.gruzini.tennistico.models.dto.matchDto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gruzini.tennistico.domain.enums.MatchStatus;

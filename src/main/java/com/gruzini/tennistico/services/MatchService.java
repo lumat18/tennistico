@@ -2,18 +2,17 @@ package com.gruzini.tennistico.services;
 
 import com.gruzini.tennistico.domain.Match;
 import com.gruzini.tennistico.domain.Player;
+import com.gruzini.tennistico.domain.Score;
 import com.gruzini.tennistico.domain.enums.MatchStatus;
 import com.gruzini.tennistico.events.ChangeMatchStatusByEndingDateTimeEvent;
 import com.gruzini.tennistico.events.ChangeMatchStatusByStartingDateTimeEvent;
 import com.gruzini.tennistico.exceptions.MatchNotFoundException;
 import com.gruzini.tennistico.repositories.MatchRepository;
-import com.gruzini.tennistico.repositories.PlayerRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -21,11 +20,9 @@ import java.util.List;
 public class MatchService {
 
     private final MatchRepository matchRepository;
-    private final PlayerRepository playerRepository;
 
-    public MatchService(MatchRepository matchRepository, PlayerRepository playerRepository) {
+    public MatchService(MatchRepository matchRepository) {
         this.matchRepository = matchRepository;
-        this.playerRepository = playerRepository;
     }
 
     public Match save(final Match match) {
@@ -57,10 +54,9 @@ public class MatchService {
     public void updateMatchStatus(final Match match, final MatchStatus matchStatus) {
         match.setMatchStatus(matchStatus);
         matchRepository.save(match);
-        match.getPlayers().forEach(playerRepository::save);
     }
 
-    public void updateMatchScore(final Match match, final String score) {
+    public void updateMatchScore(final Match match, final Score score) {
         match.setScore(score);
         save(match);
     }
@@ -75,7 +71,7 @@ public class MatchService {
     }
 
     public List<Match> getByPlayerAndStatus(final Player player, final MatchStatus matchStatus) {
-        return matchRepository.getAllByPlayersAndMatchStatus(player, matchStatus);
+        return matchRepository.getAllByPlayersContainsAndMatchStatus(player, matchStatus);
     }
 
     public List<Match> getByMatchStatusesAndHostedBy(final List<MatchStatus> matchStatusList, final Player player) {

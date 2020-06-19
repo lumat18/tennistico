@@ -1,4 +1,4 @@
-package com.gruzini.tennistico.models.dto;
+package com.gruzini.tennistico.models.dto.matchDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,17 +8,14 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
-public class HostedMatchDto {
-    private Long id;
+public class FutureMatchDto {
     private String hostName;
-    private String hostGender;
-    private Integer hostAge;
-    private String hostLevel;
-    private Integer hostExp;
-    private String address;
+    private String guestName;
+    private String court;
     private LocalDateTime start;
     private LocalDateTime end;
+    private String matchStatus;
 }

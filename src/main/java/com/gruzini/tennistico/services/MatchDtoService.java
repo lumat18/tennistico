@@ -6,14 +6,12 @@ import com.gruzini.tennistico.domain.enums.MatchStatus;
 import com.gruzini.tennistico.mappers.ArchivedMatchMapper;
 import com.gruzini.tennistico.mappers.FutureMatchMapper;
 import com.gruzini.tennistico.mappers.HostedMatchMapper;
-import com.gruzini.tennistico.models.dto.ArchivedMatchDto;
-import com.gruzini.tennistico.models.dto.FutureMatchDto;
-import com.gruzini.tennistico.models.dto.HostedMatchDto;
+import com.gruzini.tennistico.models.dto.matchDto.ArchivedMatchDto;
+import com.gruzini.tennistico.models.dto.matchDto.FutureMatchDto;
+import com.gruzini.tennistico.models.dto.matchDto.HostedMatchDto;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 

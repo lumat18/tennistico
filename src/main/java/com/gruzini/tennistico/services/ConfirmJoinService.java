@@ -8,6 +8,8 @@ import com.gruzini.tennistico.exceptions.PlayerIsNotAMatchHostException;
 import com.gruzini.tennistico.exceptions.WrongMatchStatusException;
 import org.springframework.stereotype.Service;
 
+import static java.util.Objects.isNull;
+
 @Service
 public class ConfirmJoinService {
 
@@ -33,7 +35,7 @@ public class ConfirmJoinService {
     }
 
     private void validateMatchPlayers(final Match match) {
-        if (match.getPlayers().size() != 2) {
+        if (isNull(match.getHost()) || isNull(match.getGuest())) {
             throw new MatchPlayersException();
         }
     }

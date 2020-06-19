@@ -1,6 +1,8 @@
 package com.gruzini.tennistico.domain;
 
 import com.gruzini.tennistico.domain.enums.MatchStatus;
+import com.gruzini.tennistico.exceptions.MatchAlreadyHasHostException;
+import com.gruzini.tennistico.exceptions.MatchPlayersException;
 import lombok.*;
 
 import javax.persistence.*;
@@ -19,17 +21,13 @@ public class Match {
     private static final int GUEST_INDEX = 1;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "match_id")
     private Long id;
-
-    private boolean isOpen;
 
     private LocalDateTime startingAt;
 
     private LocalDateTime endingAt;
-
-    private String score;
 
     @Enumerated(EnumType.STRING)
     private MatchStatus matchStatus;
@@ -38,15 +36,34 @@ public class Match {
     @JoinColumn(name = "court_id")
     private Court court;
 
-    @ManyToMany(mappedBy = "matches", fetch = FetchType.EAGER)
-    @EqualsAndHashCode.Exclude
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Getter(AccessLevel.PRIVATE)
+    @Setter(AccessLevel.PRIVATE)
     private List<Player> players;
 
+    @OneToOne
+    @JoinColumn(name = "score_id")
+    private Score score;
+
     public Player getHost() {
-        return players.get(HOST_INDEX);
+        return this.players.get(HOST_INDEX);
     }
 
     public Optional<Player> getGuest() {
-        return Optional.ofNullable(players.get(GUEST_INDEX));
+        return Optional.ofNullable(this.players.get(GUEST_INDEX));
+    }
+
+    public void setHost(final Player player) {
+        if (!this.players.isEmpty()) {
+            throw new MatchAlreadyHasHostException();
+        }
+        players.add(player);
+    }
+
+    public void setGuest(final Player player) {
+        if (this.players.size() != 1) {
+            throw new MatchPlayersException();
+        }
+        players.add(player);
     }
 }

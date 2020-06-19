@@ -1,6 +1,7 @@
 package com.gruzini.tennistico.services;
 
 import com.gruzini.tennistico.domain.Match;
+import com.gruzini.tennistico.domain.Score;
 import com.gruzini.tennistico.domain.enums.MatchStatus;
 import com.gruzini.tennistico.services.score.WinDecider;
 import org.springframework.stereotype.Service;
@@ -18,13 +19,13 @@ public class InputScoreService {
         this.winDecider = winDecider;
     }
 
-    public void inputScore(final Long matchId, final String score) {
+    public void inputScore(final Long matchId, final Score score) {
         final Match match = matchService.getById(matchId);
 
         matchService.updateMatchScore(match, score);
 
-        rankingService.updateWinner(winDecider.decideWinner(match));
-        rankingService.updateLoser(winDecider.decideLoser(match));
+//        rankingService.updateWinner(winDecider.decideWinner(match));
+//        rankingService.updateLoser(winDecider.decideLoser(match));
 
         matchService.updateMatchStatus(match, MatchStatus.SCORE_TO_BE_CONFIRMED);
     }

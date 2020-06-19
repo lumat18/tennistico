@@ -1,7 +1,8 @@
 package com.gruzini.tennistico.controllers;
 
+import com.gruzini.tennistico.domain.Score;
 import com.gruzini.tennistico.mappers.ScoreMapper;
-import com.gruzini.tennistico.models.dto.ScoreDTO;
+import com.gruzini.tennistico.models.dto.ScoreDto;
 import com.gruzini.tennistico.services.InputScoreService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,7 +28,7 @@ public class InputScoreController {
 
     @PostMapping
     public String inputScore(final Long matchId,
-                             @Valid @ModelAttribute(name = "score") final ScoreDTO scoreDTO,
+                             @Valid @ModelAttribute(name = "score") final ScoreDto scoreDTO,
                              final Errors errors,
                              final Model model) {
         if (errors.hasErrors()) {
@@ -35,7 +36,7 @@ public class InputScoreController {
             return "dashboard";
         }
 
-        final String score = scoreMapper.mapScoreToString(scoreDTO);
+        final Score score = scoreMapper.toScore(scoreDTO);
         inputScoreService.inputScore(matchId, score);
 
         return "dashboard";

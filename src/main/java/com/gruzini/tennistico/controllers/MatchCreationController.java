@@ -2,7 +2,7 @@ package com.gruzini.tennistico.controllers;
 
 import com.gruzini.tennistico.domain.Match;
 import com.gruzini.tennistico.domain.enums.NotificationType;
-import com.gruzini.tennistico.models.dto.CreatedMatchDto;
+import com.gruzini.tennistico.models.dto.matchDto.CreatedMatchDto;
 import com.gruzini.tennistico.services.CourtService;
 import com.gruzini.tennistico.services.MatchCreationService;
 import com.gruzini.tennistico.services.NotificationSenderService;

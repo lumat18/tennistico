@@ -1,7 +1,6 @@
 package com.gruzini.tennistico.controllers;
 
-import com.gruzini.tennistico.models.dto.FutureMatchDto;
-import com.gruzini.tennistico.models.dto.HostedMatchDto;
+import com.gruzini.tennistico.models.dto.matchDto.FutureMatchDto;
 import com.gruzini.tennistico.services.MatchDtoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

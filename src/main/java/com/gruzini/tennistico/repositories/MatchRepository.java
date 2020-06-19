@@ -19,7 +19,7 @@ public interface MatchRepository extends JpaRepository<Match, Long> {
 
     List<Match> findAllByPlayersContainsAndStartingAtIsAfterAndMatchStatusInOrderByStartingAt(Player player, LocalDateTime now, List<MatchStatus> matchStatusList);
 
-    List<Match> getAllByPlayersAndMatchStatus(Player player, MatchStatus matchStatus);
+    List<Match> getAllByPlayersContainsAndMatchStatus(Player player, MatchStatus matchStatus);
 
     Optional<Match> findById(Long id);
 }

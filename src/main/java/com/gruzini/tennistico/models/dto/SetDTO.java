@@ -10,7 +10,7 @@ import javax.validation.constraints.Min;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SetDTO {
+public class SetDto {
     @Min(0)
     private int hostScore;
     @Min(0)

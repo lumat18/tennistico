@@ -2,8 +2,8 @@ package com.gruzini.tennistico.services;
 
 import com.gruzini.tennistico.domain.Court;
 import com.gruzini.tennistico.exceptions.CourtNotFoundException;
-import com.gruzini.tennistico.mappers.CourtInfoMapper;
-import com.gruzini.tennistico.models.dto.CourtInfoDto;
+import com.gruzini.tennistico.mappers.CourtMapper;
+import com.gruzini.tennistico.models.dto.CourtDto;
 import com.gruzini.tennistico.repositories.CourtRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -19,15 +19,15 @@ import static java.util.Objects.isNull;
 @Slf4j
 public class CourtService {
     private final CourtRepository courtRepository;
-    private final CourtInfoMapper courtInfoMapper;
+    private final CourtMapper courtMapper;
 
-    public CourtService(CourtRepository courtRepository, CourtInfoMapper courtInfoMapper) {
+    public CourtService(CourtRepository courtRepository, CourtMapper courtMapper) {
         this.courtRepository = courtRepository;
-        this.courtInfoMapper = courtInfoMapper;
+        this.courtMapper = courtMapper;
     }
-    public List<CourtInfoDto> getAll(){
+    public List<CourtDto> getAll(){
         return courtRepository.findAll().stream()
-                .map(courtInfoMapper::toCourtInfoDto)
+                .map(courtMapper::toCourtInfoDto)
                 .collect(Collectors.toList());
     }
 
@@ -39,10 +39,10 @@ public class CourtService {
         return courtRepository.getCities();
     }
 
-    public List<CourtInfoDto> getByCity(final String city) {
+    public List<CourtDto> getByCity(final String city) {
         if (isNull(city)) throw new CourtNotFoundException();
         return courtRepository.getByCity(city).stream()
-                .map(courtInfoMapper::toCourtInfoDto)
+                .map(courtMapper::toCourtInfoDto)
                 .collect(Collectors.toList());
     }
 }
