@@ -33,10 +33,14 @@ public class NotificationService {
 
     public Notification createNotificationForHost(final String senderUsername, final Long matchId, final NotificationType type) {
         final User sender = userService.getByEmail(senderUsername);
+        final User recipient = getHost(matchId);
+        return createNotification(sender, recipient, matchId, type);
+    }
+
+    private User getHost(final Long matchId) {
         final Match match = matchService.getById(matchId);
         final Player host = match.getHost();
-        final User recipient = userService.getByPlayer(host);
-        return createNotification(sender, recipient, matchId, type);
+        return userService.getByPlayer(host);
     }
 
     private Notification createNotification(final User sender, final User recipient, final Long matchId, final NotificationType notificationType) {
@@ -52,10 +56,14 @@ public class NotificationService {
 
     public Notification createNotificationForGuest(final String senderUsername, final Long matchId, final NotificationType type) {
         final User sender = userService.getByEmail(senderUsername);
+        final User recipient = getGuest(matchId);
+        return createNotification(sender, recipient, matchId, type);
+    }
+
+    private User getGuest(final Long matchId) {
         final Match match = matchService.getById(matchId);
         final Player guest = match.getGuest();
-        final User recipient = userService.getByPlayer(guest);
-        return createNotification(sender, recipient, matchId, type);
+        return userService.getByPlayer(guest);
     }
 
     public Notification createNotification(final String recipientName, final NotificationType notificationType) {
