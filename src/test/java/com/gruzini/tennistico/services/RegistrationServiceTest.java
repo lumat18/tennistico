@@ -1,21 +1,6 @@
 package com.gruzini.tennistico.services;
 
-import com.gruzini.tennistico.domain.Player;
-import com.gruzini.tennistico.domain.User;
-import com.gruzini.tennistico.exceptions.EmailAlreadyExistsException;
-import com.gruzini.tennistico.repositories.PlayerRepository;
-import com.gruzini.tennistico.repositories.UserRepository;
-import com.gruzini.tennistico.services.dtos.RegistrationService;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-
-import java.util.Optional;
-
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.mockito.Mockito.*;
 
 @SpringBootTest
 class RegistrationServiceTest {

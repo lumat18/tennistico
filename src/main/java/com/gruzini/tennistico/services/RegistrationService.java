@@ -1,12 +1,12 @@
-package com.gruzini.tennistico.services.dtos;
+package com.gruzini.tennistico.services;
 
 import com.gruzini.tennistico.domain.Player;
 import com.gruzini.tennistico.domain.User;
+import com.gruzini.tennistico.exceptions.EmailAlreadyExistsException;
 import com.gruzini.tennistico.mappers.PlayerMapper;
 import com.gruzini.tennistico.mappers.UserMapper;
 import com.gruzini.tennistico.models.forms.PlayerRegistrationForm;
 import com.gruzini.tennistico.models.forms.UserRegistrationForm;
-import com.gruzini.tennistico.services.ActivationService;
 import com.gruzini.tennistico.services.entities.PlayerService;
 import com.gruzini.tennistico.services.entities.UserService;
 import org.springframework.stereotype.Service;
@@ -52,6 +52,8 @@ public class RegistrationService {
     }
 
     public void validateEmailExistence(final String email) {
-        userService.validateEmailExistence(email);
+        if(userService.existsByEmail(email)){
+            throw new EmailAlreadyExistsException();
+        }
     }
 }

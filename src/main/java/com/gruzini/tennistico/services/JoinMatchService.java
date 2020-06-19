@@ -1,4 +1,4 @@
-package com.gruzini.tennistico.services.dtos;
+package com.gruzini.tennistico.services;
 
 import com.gruzini.tennistico.domain.Match;
 import com.gruzini.tennistico.domain.Player;

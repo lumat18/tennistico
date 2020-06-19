@@ -36,9 +36,7 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public void validateEmailExistence(final String email) {
-        if (userRepository.findByEmail(email).isPresent()) {
-            throw new EmailAlreadyExistsException("Email already exists");
-        }
+    public boolean existsByEmail(final String email) {
+        return userRepository.existsByEmail(email);
     }
 }

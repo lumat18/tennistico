@@ -2,7 +2,7 @@ package com.gruzini.tennistico.controllers;
 
 import com.gruzini.tennistico.models.forms.PlayerRegistrationForm;
 import com.gruzini.tennistico.models.forms.UserRegistrationForm;
-import com.gruzini.tennistico.services.dtos.RegistrationService;
+import com.gruzini.tennistico.services.RegistrationService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;

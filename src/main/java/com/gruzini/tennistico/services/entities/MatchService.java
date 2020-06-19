@@ -29,38 +29,6 @@ public class MatchService {
         return matchRepository.saveAndFlush(match);
     }
 
-    public void updateExpiredMatchesStatusByStartingDateTime(final ChangeMatchStatusByStartingDateTimeEvent event) {
-        List<Match> matchesToUpdate = getAllExpiredByStatusAndStartingDateTime(event.getCurrentMatchStatus());
-        updateMatchStatus(matchesToUpdate, event.getDesiredMatchStatus());
-    }
-
-    private List<Match> getAllExpiredByStatusAndStartingDateTime(final MatchStatus matchStatus) {
-        return matchRepository.findByStartingAtBeforeAndMatchStatus(LocalDateTime.now(), matchStatus);
-    }
-
-    public void updateMatchStatus(final List<Match> matches, final MatchStatus matchStatus) {
-        matches.forEach(match -> updateMatchStatus(match, matchStatus));
-    }
-
-    public void updateExpiredMatchesStatusByEndingDateTime(final ChangeMatchStatusByEndingDateTimeEvent event) {
-        List<Match> matchesToUpdate = getAllExpiredByStatusAndEndingDateTime(event.getCurrentMatchStatus());
-        updateMatchStatus(matchesToUpdate, event.getDesiredMatchStatus());
-    }
-
-    private List<Match> getAllExpiredByStatusAndEndingDateTime(final MatchStatus matchStatus) {
-        return matchRepository.findByEndingAtBeforeAndMatchStatus(LocalDateTime.now().minusDays(7), matchStatus);
-    }
-
-    public void updateMatchStatus(final Match match, final MatchStatus matchStatus) {
-        match.setMatchStatus(matchStatus);
-        matchRepository.save(match);
-    }
-
-    public void updateMatchScore(final Match match, final Score score) {
-        match.setScore(score);
-        save(match);
-    }
-
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public Match getById(final Long id) {
         return matchRepository.findById(id).orElseThrow(MatchNotFoundException::new);
@@ -76,5 +44,37 @@ public class MatchService {
 
     public List<Match> getByMatchStatusesAndHostedBy(final List<MatchStatus> matchStatusList, final Player player) {
         return matchRepository.findAllByPlayersContainsAndStartingAtIsAfterAndMatchStatusInOrderByStartingAt(player, LocalDateTime.now(), matchStatusList);
+    }
+
+    public void updateExpiredMatchesStatusByStartingDateTime(final ChangeMatchStatusByStartingDateTimeEvent event) {
+        List<Match> matchesToUpdate = getAllExpiredByStatusAndStartingDateTime(event.getCurrentMatchStatus());
+        updateMatchStatus(matchesToUpdate, event.getDesiredMatchStatus());
+    }
+
+    private List<Match> getAllExpiredByStatusAndStartingDateTime(final MatchStatus matchStatus) {
+        return matchRepository.findByStartingAtBeforeAndMatchStatus(LocalDateTime.now(), matchStatus);
+    }
+
+    public void updateMatchStatus(final List<Match> matches, final MatchStatus matchStatus) {
+        matches.forEach(match -> updateMatchStatus(match, matchStatus));
+    }
+
+    public void updateMatchStatus(final Match match, final MatchStatus matchStatus) {
+        match.setMatchStatus(matchStatus);
+        matchRepository.save(match);
+    }
+
+    public void updateExpiredMatchesStatusByEndingDateTime(final ChangeMatchStatusByEndingDateTimeEvent event) {
+        List<Match> matchesToUpdate = getAllExpiredByStatusAndEndingDateTime(event.getCurrentMatchStatus());
+        updateMatchStatus(matchesToUpdate, event.getDesiredMatchStatus());
+    }
+
+    private List<Match> getAllExpiredByStatusAndEndingDateTime(final MatchStatus matchStatus) {
+        return matchRepository.findByEndingAtBeforeAndMatchStatus(LocalDateTime.now().minusDays(7), matchStatus);
+    }
+
+    public void updateMatchScore(final Match match, final Score score) {
+        match.setScore(score);
+        save(match);
     }
 }
