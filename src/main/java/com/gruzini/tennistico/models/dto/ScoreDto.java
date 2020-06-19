@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.util.Objects.isNull;
+
 @Data
 @AllArgsConstructor
 @Builder
@@ -35,11 +37,21 @@ public class ScoreDto {
     public boolean isScoreValid() {
 
         final List<SetDto> hostSetDtos = setDtoList.stream()
-                .filter(setDto -> setDto.getHostScore() > setDto.getGuestScore())
+                .filter(setDto -> {
+                    if(!isNull(setDto.getHostScore())){
+                        return setDto.getHostScore() > setDto.getGuestScore();
+                    }
+                    return false;
+                })
                 .collect(Collectors.toList());
 
         final List<SetDto> guestSetDtos = setDtoList.stream()
-                .filter(setDto -> setDto.getHostScore() < setDto.getGuestScore())
+                .filter(setDto -> {
+                    if(!isNull(setDto.getHostScore())){
+                        return setDto.getHostScore() < setDto.getGuestScore();
+                    }
+                    return false;
+                })
                 .collect(Collectors.toList());
 
         return hostSetDtos.size() <= 3 && guestSetDtos.size() <= 3;
