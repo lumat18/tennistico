@@ -11,11 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 @Slf4j
-public class NotificationSenderService {
+public class NotificationEventListener {
 
     private final NotificationService notificationService;
 
-    public NotificationSenderService(NotificationService notificationService) {
+    public NotificationEventListener(NotificationService notificationService) {
         this.notificationService = notificationService;
     }
 
