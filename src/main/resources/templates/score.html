@@ -32,10 +32,9 @@
                               <input hidden type="text" th:name="match_id" th:id="match_id"
                                      th:value="${match.getId()}">
 
-<!--                              <div class="d-flex justify-content-between">-->
-<!--                                 <span class="gruzini-registration-error" th:if="${#fields.hasErrors('scoreValid')}"-->
-<!--                                       th:errors="*{scoreValid}"></span>-->
-<!--                              </div>-->
+                              <div class="d-flex justify-content-between">
+                                 <span class="gruzini-registration-error" th:if="${msg != null}" th:text="${msg}"></span>
+                              </div>
 
                               <table class="table table-hover">
                                  <thead class="d-flex justify-content-center">
@@ -59,6 +58,7 @@
                                           </div>
                                           <input class="form-control gruzini-input-check" type="number" id="setOneHost"
                                                  th:field="*{setDtoList[0].hostScore}"
+                                                 placeholder="Input score"
                                                  aria-label="set-one-host"
                                                  aria-describedby="setOneHostAddon" required>
                                        </div>
@@ -68,6 +68,7 @@
                                        <div class="input-group mb-3">
                                           <input class="form-control gruzini-input-check" type="number" id="setOneGuest"
                                                  th:field="*{setDtoList[0].guestScore}"
+                                                 placeholder="Input score"
                                                  aria-label="set-one-guest"
                                                  aria-describedby="setOneGuestAddon" required>
                                           <div class="input-group-append">
@@ -285,24 +286,24 @@
          if ($("#setTwoHost").prop("disabled")) {
             $("#setOneHost").prop("readonly", true);
             $("#setOneGuest").prop("readonly", true);
-            $("#setTwoHost").prop("disabled", false).prop("required", true);
-            $("#setTwoGuest").prop("disabled", false).prop("required", true);
+            $("#setTwoHost").prop("disabled", false).prop("required", true).prop("placeholder", "Input score");
+            $("#setTwoGuest").prop("disabled", false).prop("required", true).prop("placeholder", "Input score");
             $("#btnRemoveSet").prop("disabled", false);
          } else if ($("#setThreeHost").prop("disabled")) {
             $("#setTwoHost").prop("readonly", true);
             $("#setTwoGuest").prop("readonly", true);
-            $("#setThreeHost").prop("disabled", false).prop("required", true);
-            $("#setThreeGuest").prop("disabled", false).prop("required", true);
+            $("#setThreeHost").prop("disabled", false).prop("required", true).prop("placeholder", "Input score");
+            $("#setThreeGuest").prop("disabled", false).prop("required", true).prop("placeholder", "Input score");
          } else if ($("#setFourHost").prop("disabled")) {
             $("#setThreeHost").prop("readonly", true);
             $("#setThreeGuest").prop("readonly", true);
-            $("#setFourHost").prop("disabled", false).prop("required", true);
-            $("#setFourGuest").prop("disabled", false).prop("required", true);
+            $("#setFourHost").prop("disabled", false).prop("required", true).prop("placeholder", "Input score");
+            $("#setFourGuest").prop("disabled", false).prop("required", true).prop("placeholder", "Input score");
          } else {
             $("#setFourHost").prop("readonly", true);
             $("#setFourGuest").prop("readonly", true);
-            $("#setFiveHost").prop("disabled", false).prop("required", true);
-            $("#setFiveGuest").prop("disabled", false).prop("required", true);
+            $("#setFiveHost").prop("disabled", false).prop("required", true).prop("placeholder", "Input score");
+            $("#setFiveGuest").prop("disabled", false).prop("required", true).prop("placeholder", "Input score");
             $("#btnAddSet").prop("disabled", true);
          }
       });
@@ -312,24 +313,24 @@
          if ($("#setThreeHost").prop("disabled")) {
             $("#setOneHost").prop("readonly", false);
             $("#setOneGuest").prop("readonly", false);
-            $("#setTwoHost").val('').prop("disabled", true).prop("required", false);
-            $("#setTwoGuest").val('').prop("disabled", true).prop("required", false);
+            $("#setTwoHost").val('').prop("disabled", true).prop("required", false).prop("placeholder", "");
+            $("#setTwoGuest").val('').prop("disabled", true).prop("required", false).prop("placeholder", "");
             $("#btnRemoveSet").prop("disabled", true);
          } else if ($("#setFourHost").prop("disabled")) {
             $("#setTwoHost").prop("readonly", false);
             $("#setTwoGuest").prop("readonly", false);
-            $("#setThreeHost").val('').prop("disabled", true).prop("required", false);
-            $("#setThreeGuest").val('').prop("disabled", true).prop("required", false);
+            $("#setThreeHost").val('').prop("disabled", true).prop("required", false).prop("placeholder", "");
+            $("#setThreeGuest").val('').prop("disabled", true).prop("required", false).prop("placeholder", "");
          } else if ($("#setFiveHost").prop("disabled")) {
             $("#setThreeHost").prop("readonly", false);
             $("#setThreeGuest").prop("readonly", false);
-            $("#setFourHost").val('').prop("disabled", true).prop("required", false);
-            $("#setFourGuest").val('').prop("disabled", true).prop("required", false);
+            $("#setFourHost").val('').prop("disabled", true).prop("required", false).prop("placeholder", "");
+            $("#setFourGuest").val('').prop("disabled", true).prop("required", false).prop("placeholder", "");
          } else {
             $("#setFourHost").prop("readonly", false);
             $("#setFourGuest").prop("readonly", false);
-            $("#setFiveHost").val('').prop("disabled", true).prop("required", false);
-            $("#setFiveGuest").val('').prop("disabled", true).prop("required", false);
+            $("#setFiveHost").val('').prop("disabled", true).prop("required", false).prop("placeholder", "");
+            $("#setFiveGuest").val('').prop("disabled", true).prop("required", false).prop("placeholder", "");
             $("#btnAddSet").prop("disabled", false);
          }
       })

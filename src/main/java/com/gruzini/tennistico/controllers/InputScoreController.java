@@ -43,6 +43,7 @@ public class InputScoreController {
       if (errors.hasErrors()) {
          model.addAttribute("match", matchService.getById(matchId));
          model.addAttribute("score", new ScoreDto());
+         model.addAttribute("msg", "Invalid score input");
          return "score";
       }
 

@@ -24627,7 +24627,7 @@ fieldset[disabled][disabled] .dark-edition .has-error .form-control,
 }
 .gruzini-input-group-text {
   color: #8b92a9;
-  font-size: 24px;
+  font-size: 22px;
 }
 .gruzini-select {
   background-color: initial;
@@ -24884,5 +24884,10 @@ fieldset[disabled][disabled] .dark-edition .has-error .form-control,
   .gruzini-table-collapsing-second{
     display: none;
   }
+}
+
+.gruzini-input-check{
+  text-align: center;
+  font-size: 22px;
 }
 /* end of navbar styling */
