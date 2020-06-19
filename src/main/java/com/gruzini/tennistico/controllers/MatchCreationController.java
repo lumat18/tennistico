@@ -4,7 +4,6 @@ import com.gruzini.tennistico.domain.Match;
 import com.gruzini.tennistico.domain.enums.NotificationType;
 import com.gruzini.tennistico.models.dto.matchDto.CreatedMatchDto;
 import com.gruzini.tennistico.services.dtos.CourtDtoService;
-import com.gruzini.tennistico.services.dtos.MatchCreationService;
 import com.gruzini.tennistico.services.NotificationSenderService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

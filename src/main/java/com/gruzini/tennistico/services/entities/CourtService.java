@@ -3,7 +3,6 @@ package com.gruzini.tennistico.services.entities;
 import com.gruzini.tennistico.domain.Court;
 import com.gruzini.tennistico.exceptions.CourtNotFoundException;
 import com.gruzini.tennistico.repositories.CourtRepository;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,7 +12,6 @@ import static java.util.Objects.isNull;
 
 @Service
 @Transactional
-@Slf4j
 public class CourtService {
     private final CourtRepository courtRepository;
 
