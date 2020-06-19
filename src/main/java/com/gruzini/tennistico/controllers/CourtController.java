@@ -1,7 +1,7 @@
 package com.gruzini.tennistico.controllers;
 
-import com.gruzini.tennistico.models.dto.CourtInfoDto;
-import com.gruzini.tennistico.services.dtos.CourtInfoDtoService;
+import com.gruzini.tennistico.models.dto.CourtDto;
+import com.gruzini.tennistico.services.dtos.CourtDtoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,24 +17,24 @@ import java.util.List;
 @Slf4j
 public class CourtController {
 
-    private final CourtInfoDtoService courtInfoDtoService;
+    private final CourtDtoService courtDtoService;
 
-    public CourtController(final CourtInfoDtoService courtInfoDtoService) {
-        this.courtInfoDtoService = courtInfoDtoService;
+    public CourtController(final CourtDtoService courtDtoService) {
+        this.courtDtoService = courtDtoService;
     }
 
     @GetMapping
     public String showCourtsPage(final Model model) {
-        List<CourtInfoDto> allCourts = courtInfoDtoService.getAllCourtDto();
-        List<String> cities = courtInfoDtoService.getCities();
+        List<CourtDto> allCourts = courtDtoService.getAllCourtDto();
+        List<String> cities = courtDtoService.getCities();
         model.addAttribute("cities", cities);
         model.addAttribute("foundCourts", allCourts);
         return "courts";
     }
     @PostMapping
     public String processCourtSearch(@RequestParam("selectedCity") final String city, final Model model){
-        List<String> cities = courtInfoDtoService.getCities();
-        List<CourtInfoDto> foundCourts = courtInfoDtoService.getCourtInfoDtoByCity(city);
+        List<String> cities = courtDtoService.getCities();
+        List<CourtDto> foundCourts = courtDtoService.getCourtInfoDtoByCity(city);
         model.addAttribute("cities", cities);
         model.addAttribute("foundCourts", foundCourts);
         return "courts";

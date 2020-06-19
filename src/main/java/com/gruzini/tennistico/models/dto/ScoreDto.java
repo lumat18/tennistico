@@ -12,23 +12,23 @@ import java.util.stream.Collectors;
 @Data
 @Builder
 @Validated
-public class ScoreDTO {
+public class ScoreDto {
     @NotEmpty
-    private List<SetDTO> setDtoList;
+    private List<SetDto> setDtoList;
 
     //Validation of number of sets
     //One player can have max 3 sets won - the match is finished then
     @AssertTrue
     public boolean isScoreValid() {
 
-        final List<SetDTO> hostSetDTOS = setDtoList.stream()
-                .filter(setDTO -> setDTO.getHostScore() > setDTO.getGuestScore())
+        final List<SetDto> hostSetDtos = setDtoList.stream()
+                .filter(setDto -> setDto.getHostScore() > setDto.getGuestScore())
                 .collect(Collectors.toList());
 
-        final List<SetDTO> guestSetDTOS = setDtoList.stream()
-                .filter(setDTO -> setDTO.getHostScore() < setDTO.getGuestScore())
+        final List<SetDto> guestSetDtos = setDtoList.stream()
+                .filter(setDto -> setDto.getHostScore() < setDto.getGuestScore())
                 .collect(Collectors.toList());
 
-        return hostSetDTOS.size() <= 3 && guestSetDTOS.size() <= 3;
+        return hostSetDtos.size() <= 3 && guestSetDtos.size() <= 3;
     }
 }

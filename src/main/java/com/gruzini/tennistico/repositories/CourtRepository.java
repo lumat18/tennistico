@@ -1,7 +1,6 @@
 package com.gruzini.tennistico.repositories;
 
 import com.gruzini.tennistico.domain.Court;
-import com.gruzini.tennistico.models.dto.CourtInfoDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

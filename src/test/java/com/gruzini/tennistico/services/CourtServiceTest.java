@@ -1,21 +1,8 @@
 package com.gruzini.tennistico.services;
 
-import com.gruzini.tennistico.domain.Court;
-import com.gruzini.tennistico.exceptions.CourtNotFoundException;
-import com.gruzini.tennistico.mappers.CourtInfoMapper;
-import com.gruzini.tennistico.models.dto.CourtInfoDto;
-import com.gruzini.tennistico.repositories.CourtRepository;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-
-import java.util.List;
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.mockito.Mockito.when;
 
 @SpringBootTest
 class CourtServiceTest {

@@ -3,7 +3,7 @@ package com.gruzini.tennistico.services.dtos;
 import com.gruzini.tennistico.domain.Match;
 import com.gruzini.tennistico.domain.enums.MatchStatus;
 import com.gruzini.tennistico.mappers.ScoreMapper;
-import com.gruzini.tennistico.models.dto.ScoreDTO;
+import com.gruzini.tennistico.models.dto.ScoreDto;
 import com.gruzini.tennistico.services.RankingService;
 import com.gruzini.tennistico.services.entities.MatchService;
 import com.gruzini.tennistico.services.score.WinDecider;
@@ -27,7 +27,7 @@ public class InputScoreService {
         this.scoreMapper = scoreMapper;
     }
 
-    public void inputScore(final Long matchId, final ScoreDTO scoreDTO) {
+    public void inputScore(final Long matchId, final ScoreDto scoreDTO) {
         final Match match = matchService.getById(matchId);
         final String score = scoreMapper.mapScoreToString(scoreDTO);
         updateMatchAndRanking(match, score);

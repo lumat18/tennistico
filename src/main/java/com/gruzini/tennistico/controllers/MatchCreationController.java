@@ -3,7 +3,7 @@ package com.gruzini.tennistico.controllers;
 import com.gruzini.tennistico.domain.Match;
 import com.gruzini.tennistico.domain.enums.NotificationType;
 import com.gruzini.tennistico.models.dto.CreatedMatchDto;
-import com.gruzini.tennistico.services.dtos.CourtInfoDtoService;
+import com.gruzini.tennistico.services.dtos.CourtDtoService;
 import com.gruzini.tennistico.services.dtos.MatchCreationService;
 import com.gruzini.tennistico.services.NotificationSenderService;
 import org.springframework.stereotype.Controller;
@@ -22,20 +22,20 @@ import java.security.Principal;
 public class MatchCreationController {
 
     private final MatchCreationService matchCreationService;
-    private final CourtInfoDtoService courtInfoDtoService;
+    private final CourtDtoService courtDtoService;
     private final NotificationSenderService notificationSender;
 
     public MatchCreationController(final MatchCreationService matchCreationService,
-                                   final CourtInfoDtoService courtInfoDtoService,
+                                   final CourtDtoService courtDtoService,
                                    final NotificationSenderService notificationSender) {
         this.matchCreationService = matchCreationService;
-        this.courtInfoDtoService = courtInfoDtoService;
+        this.courtDtoService = courtDtoService;
         this.notificationSender = notificationSender;
     }
 
     @PostMapping("/begin")
     public String beginMatchCreation(@RequestParam(name = "courtId") final Long courtId, final Model model) {
-        model.addAttribute("chosenCourt", courtInfoDtoService.getCourtInfoById(courtId));
+        model.addAttribute("chosenCourt", courtDtoService.getCourtInfoById(courtId));
         model.addAttribute("match", new CreatedMatchDto());
         return "create";
     }
@@ -44,7 +44,7 @@ public class MatchCreationController {
     public String processMatchCreation(@Valid @ModelAttribute("match") final CreatedMatchDto createdMatchDto, final Errors errors, final Model model, final Principal principal) {
 
         if (errors.hasErrors()) {
-            model.addAttribute("chosenCourt", courtInfoDtoService.getCourtInfoById(createdMatchDto.getCourtId()));
+            model.addAttribute("chosenCourt", courtDtoService.getCourtInfoById(createdMatchDto.getCourtId()));
             return "create";
         }
         final Match match = matchCreationService.create(createdMatchDto, principal.getName());
