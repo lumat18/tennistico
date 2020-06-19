@@ -24,6 +24,6 @@ public class DashboardController {
     public String showDashboard(final Model model, final Principal principal){
         final List<NotificationDto> notifications = notificationService.getByUser(principal.getName());
         model.addAttribute("notifications", notifications);
-        return "redirect:/dashboard";
+        return "dashboard";
     }
 }
