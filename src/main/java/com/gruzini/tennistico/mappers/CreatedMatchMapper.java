@@ -7,6 +7,7 @@ import com.gruzini.tennistico.services.CourtService;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 @Component
 public class CreatedMatchMapper {
@@ -20,6 +21,7 @@ public class CreatedMatchMapper {
         return Match.builder()
                 .matchStatus(MatchStatus.HOSTED)
                 .court(courtService.getById(createdMatchDto.getCourtId()))
+                .players(new ArrayList<>())
                 .startingAt(LocalDateTime.of(createdMatchDto.getDate(), createdMatchDto.getStart()))
                 .endingAt(LocalDateTime.of(createdMatchDto.getDate(), createdMatchDto.getEnd()))
                 .build();

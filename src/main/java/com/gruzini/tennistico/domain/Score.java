@@ -1,6 +1,9 @@
 package com.gruzini.tennistico.domain;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
@@ -18,10 +21,10 @@ public class Score {
     @OneToMany
     private List<Set> sets;
 
-    @ManyToOne
+    @OneToOne
     private Player winner;
 
-    @ManyToOne
+    @OneToOne
     private Player loser;
 
 }

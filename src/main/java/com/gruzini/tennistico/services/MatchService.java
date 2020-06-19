@@ -8,7 +8,6 @@ import com.gruzini.tennistico.events.ChangeMatchStatusByEndingDateTimeEvent;
 import com.gruzini.tennistico.events.ChangeMatchStatusByStartingDateTimeEvent;
 import com.gruzini.tennistico.exceptions.MatchNotFoundException;
 import com.gruzini.tennistico.repositories.MatchRepository;
-import com.gruzini.tennistico.repositories.PlayerRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,11 +20,9 @@ import java.util.List;
 public class MatchService {
 
     private final MatchRepository matchRepository;
-    private final PlayerRepository playerRepository;
 
-    public MatchService(MatchRepository matchRepository, PlayerRepository playerRepository) {
+    public MatchService(MatchRepository matchRepository) {
         this.matchRepository = matchRepository;
-        this.playerRepository = playerRepository;
     }
 
     public Match save(final Match match) {
@@ -70,14 +67,14 @@ public class MatchService {
     }
 
     public List<Match> getHostedMatchesExceptHostedBy(final Player player) {
-        return matchRepository.findAllByMatchStatusAndAndHostNotAndStartingAtAfterOrderByStartingAt(MatchStatus.HOSTED, player, LocalDateTime.now());
+        return matchRepository.findAllByMatchStatusAndPlayersNotContainsAndStartingAtIsAfterOrderByStartingAt(MatchStatus.HOSTED, player, LocalDateTime.now());
     }
 
     public List<Match> getByPlayerAndStatus(final Player player, final MatchStatus matchStatus) {
-        return matchRepository.getAllByPlayerAndMatchStatus(player, matchStatus);
+        return matchRepository.getAllByPlayersContainsAndMatchStatus(player, matchStatus);
     }
 
     public List<Match> getByMatchStatusesAndHostedBy(final List<MatchStatus> matchStatusList, final Player player) {
-        return matchRepository.findAllByHostOrGuestAndStartingAtAfterAndMatchStatusInOrderByStartingAt(player, player, LocalDateTime.now(), matchStatusList);
+        return matchRepository.findAllByPlayersContainsAndStartingAtIsAfterAndMatchStatusInOrderByStartingAt(player, LocalDateTime.now(), matchStatusList);
     }
 }
