@@ -1,7 +1,7 @@
 package com.gruzini.tennistico.controllers;
 
 import com.gruzini.tennistico.models.dto.CourtDto;
-import com.gruzini.tennistico.services.dtos.CourtDtoService;
+import com.gruzini.tennistico.services.dto_related.CourtDtoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

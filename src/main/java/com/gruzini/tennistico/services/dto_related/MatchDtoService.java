@@ -1,4 +1,4 @@
-package com.gruzini.tennistico.services.dtos;
+package com.gruzini.tennistico.services.dto_related;
 
 import com.gruzini.tennistico.domain.Match;
 import com.gruzini.tennistico.domain.User;
@@ -9,8 +9,8 @@ import com.gruzini.tennistico.mappers.HostedMatchMapper;
 import com.gruzini.tennistico.models.dto.matchDto.ArchivedMatchDto;
 import com.gruzini.tennistico.models.dto.matchDto.FutureMatchDto;
 import com.gruzini.tennistico.models.dto.matchDto.HostedMatchDto;
-import com.gruzini.tennistico.services.entities.MatchService;
-import com.gruzini.tennistico.services.entities.UserService;
+import com.gruzini.tennistico.services.entity_related.MatchService;
+import com.gruzini.tennistico.services.entity_related.UserService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

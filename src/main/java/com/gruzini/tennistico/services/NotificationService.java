@@ -5,10 +5,12 @@ import com.gruzini.tennistico.domain.Notification;
 import com.gruzini.tennistico.domain.Player;
 import com.gruzini.tennistico.domain.User;
 import com.gruzini.tennistico.domain.enums.NotificationType;
+import com.gruzini.tennistico.exceptions.NoGuestInMatchException;
 import com.gruzini.tennistico.mappers.NotificationMapper;
 import com.gruzini.tennistico.models.dto.NotificationDto;
 import com.gruzini.tennistico.repositories.NotificationRepository;
-import com.gruzini.tennistico.services.entities.UserService;
+import com.gruzini.tennistico.services.entity_related.MatchService;
+import com.gruzini.tennistico.services.entity_related.UserService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -63,7 +65,7 @@ public class NotificationService {
 
     private User getGuest(final Long matchId) {
         final Match match = matchService.getById(matchId);
-        final Player guest = match.getGuest();
+        final Player guest = match.getGuest().orElseThrow(NoGuestInMatchException::new);
         return userService.getByPlayer(guest);
     }
 

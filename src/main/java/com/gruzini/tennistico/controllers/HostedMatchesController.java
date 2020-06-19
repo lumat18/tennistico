@@ -1,7 +1,7 @@
 package com.gruzini.tennistico.controllers;
 
 import com.gruzini.tennistico.models.dto.matchDto.HostedMatchDto;
-import com.gruzini.tennistico.services.dtos.MatchDtoService;
+import com.gruzini.tennistico.services.dto_related.MatchDtoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

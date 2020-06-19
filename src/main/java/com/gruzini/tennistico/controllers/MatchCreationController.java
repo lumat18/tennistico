@@ -2,7 +2,7 @@ package com.gruzini.tennistico.controllers;
 
 import com.gruzini.tennistico.events.CreateMatchEvent;
 import com.gruzini.tennistico.models.dto.matchDto.CreatedMatchDto;
-import com.gruzini.tennistico.services.dtos.CourtDtoService;
+import com.gruzini.tennistico.services.dto_related.CourtDtoService;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,9 +22,9 @@ public class MatchCreationController {
     private final ApplicationEventPublisher applicationEventPublisher;
     private final CourtDtoService courtDtoService;
 
-    public MatchCreationController(CourtService courtService, ApplicationEventPublisher applicationEventPublisher) {
-        this.courtService = courtService;
+    public MatchCreationController(ApplicationEventPublisher applicationEventPublisher, CourtDtoService courtDtoService) {
         this.applicationEventPublisher = applicationEventPublisher;
+        this.courtDtoService = courtDtoService;
     }
 
     @PostMapping("/begin")
@@ -42,6 +42,6 @@ public class MatchCreationController {
             return "create";
         }
         applicationEventPublisher.publishEvent(new CreateMatchEvent(this, createdMatchDto, principal.getName()));
-        return "dashboard";
+        return "redirect:/dashboard";
     }
 }

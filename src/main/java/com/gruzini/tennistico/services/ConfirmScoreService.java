@@ -7,9 +7,9 @@ import com.gruzini.tennistico.events.ConfirmScoreEvent;
 import com.gruzini.tennistico.exceptions.NoGuestInMatchException;
 import com.gruzini.tennistico.exceptions.PlayerIsNotMatchGuestException;
 import com.gruzini.tennistico.exceptions.WrongMatchStatusException;
+import com.gruzini.tennistico.services.entity_related.MatchService;
+import com.gruzini.tennistico.services.entity_related.PlayerService;
 import org.springframework.context.event.EventListener;
-import com.gruzini.tennistico.services.entities.MatchService;
-import com.gruzini.tennistico.services.entities.PlayerService;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -46,7 +46,7 @@ public class ConfirmScoreService {
     }
 
     private void validateMatchGuest(final Match match, final Player player) {
-        final Player guest = match.getGuest();
+        final Player guest = match.getGuest().orElseThrow(NoGuestInMatchException::new);
         if (!guest.equals(player)) {
             throw new PlayerIsNotMatchGuestException();
         }

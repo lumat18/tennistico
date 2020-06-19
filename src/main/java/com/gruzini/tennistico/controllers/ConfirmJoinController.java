@@ -22,6 +22,6 @@ public class ConfirmJoinController {
     @PostMapping
     public String confirmGuestJoiningMatch(@RequestParam(name = "match_id") final Long matchId, final Principal principal) {
         applicationEventPublisher.publishEvent(new ConfirmJoinEvent(this, matchId, principal.getName()));
-        return "dashboard";
+        return "redirect:/dashboard";
     }
 }

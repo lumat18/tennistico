@@ -1,6 +1,6 @@
 package com.gruzini.tennistico.events;
 
-import com.gruzini.tennistico.models.dto.CreatedMatchDto;
+import com.gruzini.tennistico.models.dto.matchDto.CreatedMatchDto;
 import lombok.Getter;
 import org.springframework.context.ApplicationEvent;
 

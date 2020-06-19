@@ -23,6 +23,6 @@ public class ConfirmScoreController {
     public String confirmScoreSetByHost(@PathVariable(name = "match_id") final Long matchId,
                                         final Principal principal) {
         applicationEventPublisher.publishEvent(new ConfirmScoreEvent(this, matchId, principal.getName()));
-        return "dashboard";
+        return "redirect:/dashboard";
     }
 }

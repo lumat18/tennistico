@@ -25,7 +25,7 @@ public class JoinMatchController {
     @PostMapping
     public String joinMatch(@RequestParam(name = "match_id") final Long matchId, final Principal principal) {
         applicationEventPublisher.publishEvent(new JoinMatchEvent(this, matchId, principal.getName()));
-        return "dashboard";
+        return "redirect:/dashboard";
     }
 
     //TODO modify handlers according to general decision

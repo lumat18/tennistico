@@ -1,4 +1,4 @@
-package com.gruzini.tennistico.services.entities;
+package com.gruzini.tennistico.services.entity_related;
 
 import com.gruzini.tennistico.domain.Court;
 import com.gruzini.tennistico.exceptions.CourtNotFoundException;

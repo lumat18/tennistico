@@ -1,9 +1,9 @@
-package com.gruzini.tennistico.services.dtos;
+package com.gruzini.tennistico.services.dto_related;
 
 import com.gruzini.tennistico.domain.Court;
 import com.gruzini.tennistico.mappers.CourtMapper;
 import com.gruzini.tennistico.models.dto.CourtDto;
-import com.gruzini.tennistico.services.entities.CourtService;
+import com.gruzini.tennistico.services.entity_related.CourtService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

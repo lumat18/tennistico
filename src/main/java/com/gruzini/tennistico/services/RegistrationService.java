@@ -7,8 +7,8 @@ import com.gruzini.tennistico.mappers.PlayerMapper;
 import com.gruzini.tennistico.mappers.UserMapper;
 import com.gruzini.tennistico.models.forms.PlayerRegistrationForm;
 import com.gruzini.tennistico.models.forms.UserRegistrationForm;
-import com.gruzini.tennistico.services.entities.PlayerService;
-import com.gruzini.tennistico.services.entities.UserService;
+import com.gruzini.tennistico.services.entity_related.PlayerService;
+import com.gruzini.tennistico.services.entity_related.UserService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
