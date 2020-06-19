@@ -1,6 +1,6 @@
 package com.gruzini.tennistico.security;
 
-import com.gruzini.tennistico.services.UserService;
+import com.gruzini.tennistico.services.entities.UserService;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
