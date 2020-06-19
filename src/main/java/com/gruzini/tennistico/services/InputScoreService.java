@@ -2,6 +2,7 @@ package com.gruzini.tennistico.services;
 
 import com.gruzini.tennistico.domain.Match;
 import com.gruzini.tennistico.domain.enums.MatchStatus;
+import com.gruzini.tennistico.services.entities.MatchService;
 import com.gruzini.tennistico.services.score.WinDecider;
 import org.springframework.stereotype.Service;
 
