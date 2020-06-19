@@ -22,6 +22,14 @@ public class ScoreDto {
     @NotEmpty
     private List<SetDto> setDtoList;
 
+    public ScoreDto(){
+        List<SetDto> setDtoList = new ArrayList<>();
+        for(int num = 0; num < 5; num++){
+            setDtoList.add(new SetDto());
+        }
+        this.setDtoList = setDtoList;
+    }
+
     //Validation of number of sets
     //One player can have max 3 sets won - the match is finished then
     @AssertTrue(message = "Invalid score")

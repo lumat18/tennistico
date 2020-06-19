@@ -33,6 +33,6 @@ public class SetDto {
       //advantage scenario
       return hostScore == 7 && guestScore == 5 || hostScore == 5 && guestScore == 7;
       //other scenarios are invalid
-        
+
    }
 }
