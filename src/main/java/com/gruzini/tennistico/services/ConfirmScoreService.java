@@ -3,9 +3,11 @@ package com.gruzini.tennistico.services;
 import com.gruzini.tennistico.domain.Match;
 import com.gruzini.tennistico.domain.Player;
 import com.gruzini.tennistico.domain.enums.MatchStatus;
+import com.gruzini.tennistico.events.ConfirmScoreEvent;
 import com.gruzini.tennistico.exceptions.NoGuestInMatchException;
 import com.gruzini.tennistico.exceptions.PlayerIsNotMatchGuestException;
 import com.gruzini.tennistico.exceptions.WrongMatchStatusException;
+import org.springframework.context.event.EventListener;
 import com.gruzini.tennistico.services.entities.MatchService;
 import com.gruzini.tennistico.services.entities.PlayerService;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,11 @@ public class ConfirmScoreService {
     public ConfirmScoreService(PlayerService playerService, MatchService matchService) {
         this.playerService = playerService;
         this.matchService = matchService;
+    }
+
+    @EventListener
+    public void handleConfirmScoreEvent(final ConfirmScoreEvent event) {
+        confirmScore(event.getMatchId(), event.getUsername());
     }
 
     public void confirmScore(final Long matchId, final String username) {
@@ -39,7 +46,7 @@ public class ConfirmScoreService {
     }
 
     private void validateMatchGuest(final Match match, final Player player) {
-        final Player guest = match.getGuest().orElseThrow(NoGuestInMatchException::new);
+        final Player guest = match.getGuest();
         if (!guest.equals(player)) {
             throw new PlayerIsNotMatchGuestException();
         }

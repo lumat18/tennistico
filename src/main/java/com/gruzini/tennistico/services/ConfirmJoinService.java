@@ -3,16 +3,20 @@ package com.gruzini.tennistico.services;
 import com.gruzini.tennistico.domain.Match;
 import com.gruzini.tennistico.domain.Player;
 import com.gruzini.tennistico.domain.enums.MatchStatus;
+import com.gruzini.tennistico.events.ConfirmJoinEvent;
 import com.gruzini.tennistico.exceptions.MatchPlayersException;
 import com.gruzini.tennistico.exceptions.PlayerIsNotAMatchHostException;
 import com.gruzini.tennistico.exceptions.WrongMatchStatusException;
 import com.gruzini.tennistico.services.entities.MatchService;
 import com.gruzini.tennistico.services.entities.PlayerService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
 import static java.util.Objects.isNull;
 
 @Service
+@Slf4j
 public class ConfirmJoinService {
 
     private final PlayerService playerService;
@@ -23,11 +27,18 @@ public class ConfirmJoinService {
         this.matchService = matchService;
     }
 
-    public void confirmJoin(final Long matchId, final String username) {
+    @EventListener
+    public void handleConfirmJoinEvent(final ConfirmJoinEvent event) {
+        confirmJoin(event.getMatchId(), event.getUsername());
+
+    }
+
+    private synchronized void confirmJoin(final Long matchId, final String username) {
         final Player player = playerService.getByUsername(username);
         final Match match = matchService.getById(matchId);
         validateMatchAndPlayer(match, player);
         matchService.updateMatchStatus(match, MatchStatus.UPCOMING);
+        log.info(player.getFullName() + " confirmed " + match.getGuest().getFullName() + " as his opponent in match with id = " + matchId);
     }
 
     private void validateMatchAndPlayer(final Match match, final Player player) {

@@ -44,4 +44,7 @@ public class Player {
     public Integer getAge() {
         return Period.between(getBirthday(), LocalDate.now()).getYears();
     }
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
 }

@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Entity(name = "notifications")
@@ -21,7 +20,11 @@ public class Notification {
     private Long id;
 
     @ManyToOne
-    @NotNull
+    @JoinColumn(name = "sender_id")
+    private User sender;
+
+    @ManyToOne
+    @JoinColumn(name = "recipient_id")
     private User recipient;
 
     @Column(name = "match_id")

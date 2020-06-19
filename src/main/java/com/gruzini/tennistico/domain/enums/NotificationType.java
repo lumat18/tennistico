@@ -71,6 +71,7 @@ public enum NotificationType {
         public String getEndpoint() {
             return "/confirm-score";
         }
+
         @Override
         public String getMessage() {
             return NotificationMessages.SCORE_TO_CONFIRM;
@@ -80,9 +81,27 @@ public enum NotificationType {
         public String getButtonName() {
             return "CONFIRM";
         }
+    },
+    MATCH_ARCHIVED {
+        @Override
+        public String getEndpoint() {
+            return null;
+        }
+
+        @Override
+        public String getMessage() {
+            return NotificationMessages.MATCH_ARCHIVED;
+        }
+
+        @Override
+        public String getButtonName() {
+            return null;
+        }
     };
 
     public abstract String getEndpoint();
+
     public abstract String getMessage();
+
     public abstract String getButtonName();
 }

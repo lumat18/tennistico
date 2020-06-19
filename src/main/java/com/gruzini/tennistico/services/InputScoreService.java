@@ -3,8 +3,9 @@ package com.gruzini.tennistico.services;
 import com.gruzini.tennistico.domain.Match;
 import com.gruzini.tennistico.domain.Score;
 import com.gruzini.tennistico.domain.enums.MatchStatus;
+import com.gruzini.tennistico.events.InputScoreEvent;
 import com.gruzini.tennistico.mappers.ScoreMapper;
-import com.gruzini.tennistico.models.dto.ScoreDto;
+import org.springframework.context.event.EventListener;
 import com.gruzini.tennistico.services.entities.MatchService;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,11 @@ public class InputScoreService {
                              final ScoreMapper scoreMapper) {
         this.matchService = matchService;
         this.scoreMapper = scoreMapper;
+    }
+
+    @EventListener
+    public void handleInputScoreEvent(final InputScoreEvent event) {
+        inputScore(event.getMatchId(), score);
     }
 
     public void inputScore(final Long matchId, final ScoreDto scoreDto) {

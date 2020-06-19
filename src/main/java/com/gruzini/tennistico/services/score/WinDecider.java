@@ -2,7 +2,6 @@ package com.gruzini.tennistico.services.score;
 
 import com.gruzini.tennistico.domain.Match;
 import com.gruzini.tennistico.domain.Player;
-import com.gruzini.tennistico.exceptions.MatchPlayersException;
 import org.springframework.stereotype.Component;
 
 @Component

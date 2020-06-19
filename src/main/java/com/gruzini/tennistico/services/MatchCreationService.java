@@ -2,11 +2,13 @@ package com.gruzini.tennistico.services;
 
 import com.gruzini.tennistico.domain.Match;
 import com.gruzini.tennistico.domain.Player;
+import com.gruzini.tennistico.events.CreateMatchEvent;
 import com.gruzini.tennistico.mappers.CreatedMatchMapper;
 import com.gruzini.tennistico.models.dto.matchDto.CreatedMatchDto;
 import com.gruzini.tennistico.services.entities.MatchService;
 import com.gruzini.tennistico.services.entities.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -23,6 +25,11 @@ public class MatchCreationService {
         this.createdMatchMapper = createdMatchMapper;
         this.matchService = matchService;
         this.userService = userService;
+    }
+
+    @EventListener
+    public void handleMatchCreation(final CreateMatchEvent event) {
+        create(event.getMatchDto(), event.getUsername());
     }
 
     public Match create(final CreatedMatchDto createdMatchDto, final String username) {
