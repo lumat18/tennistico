@@ -2,10 +2,10 @@ package com.gruzini.tennistico.services;
 
 import com.gruzini.tennistico.domain.Match;
 import com.gruzini.tennistico.domain.Player;
-import com.gruzini.tennistico.events.InputScoreEvent;
+import com.gruzini.tennistico.events.ConfirmScoreEvent;
+import com.gruzini.tennistico.services.entities.MatchService;
 import com.gruzini.tennistico.services.entities.PlayerService;
 import com.gruzini.tennistico.services.score.RankingPointCounter;
-import com.gruzini.tennistico.services.score.WinDecider;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
@@ -16,14 +16,13 @@ public class RankingService {
     private final PlayerService playerService;
     private final MatchService matchService;
     private final RankingPointCounter rankingPointCounter;
-    private final WinDecider winDecider;
 
     public RankingService(PlayerService playerService,
-                          MatchService matchService, @Qualifier("simple") RankingPointCounter rankingPointCounter, WinDecider winDecider) {
+                          MatchService matchService,
+                          @Qualifier("simple") RankingPointCounter rankingPointCounter) {
         this.playerService = playerService;
         this.matchService = matchService;
         this.rankingPointCounter = rankingPointCounter;
-        this.winDecider = winDecider;
     }
 
     /* TODO
@@ -35,10 +34,10 @@ public class RankingService {
      */
 
     @EventListener
-    public void handleInputScoreEvent(final InputScoreEvent event) {
+    public void handleEvent(final ConfirmScoreEvent event) {
         final Match match = matchService.getById(event.getMatchId());
-        updateWinner(winDecider.decideWinner(match));
-        updateLoser(winDecider.decideLoser(match));
+        updateWinner(match.getScore().getWinner());
+        updateLoser(match.getScore().getLoser());
     }
 
     public void updateWinner(final Player player) {
