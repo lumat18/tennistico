@@ -1,5 +1,6 @@
 package com.gruzini.tennistico.controllers;
 
+import com.gruzini.tennistico.domain.Score;
 import com.gruzini.tennistico.mappers.ScoreMapper;
 import com.gruzini.tennistico.models.dto.ScoreDto;
 import com.gruzini.tennistico.services.InputScoreService;
@@ -35,7 +36,7 @@ public class InputScoreController {
             return "dashboard";
         }
 
-        final String score = scoreMapper.mapScoreToString(scoreDTO);
+        final Score score = scoreMapper.toScore(scoreDTO);
         inputScoreService.inputScore(matchId, score);
 
         return "dashboard";

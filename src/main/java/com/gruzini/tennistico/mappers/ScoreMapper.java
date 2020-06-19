@@ -19,7 +19,7 @@ public class ScoreMapper {
         this.setMapper = setMapper;
     }
 
-    public Score mapScoreToString(final ScoreDto scoreDTO) {
+    public Score toScore(final ScoreDto scoreDTO) {
         return Score.builder()
                 .sets(mapSets(scoreDTO.getSetDtoList()))
                 .winner(setWinner(scoreDTO))
