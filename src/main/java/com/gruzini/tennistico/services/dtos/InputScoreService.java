@@ -1,9 +1,10 @@
-package com.gruzini.tennistico.services;
+package com.gruzini.tennistico.services.dtos;
 
 import com.gruzini.tennistico.domain.Match;
 import com.gruzini.tennistico.domain.enums.MatchStatus;
 import com.gruzini.tennistico.mappers.ScoreMapper;
 import com.gruzini.tennistico.models.dto.ScoreDTO;
+import com.gruzini.tennistico.services.RankingService;
 import com.gruzini.tennistico.services.entities.MatchService;
 import com.gruzini.tennistico.services.score.WinDecider;
 import org.springframework.stereotype.Service;

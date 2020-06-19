@@ -1,8 +1,7 @@
 package com.gruzini.tennistico.controllers;
 
-import com.gruzini.tennistico.mappers.ScoreMapper;
 import com.gruzini.tennistico.models.dto.ScoreDTO;
-import com.gruzini.tennistico.services.InputScoreService;
+import com.gruzini.tennistico.services.dtos.InputScoreService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;

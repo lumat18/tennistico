@@ -6,7 +6,6 @@ import com.gruzini.tennistico.domain.enums.UserStatus;
 import com.gruzini.tennistico.exceptions.EmailAlreadyExistsException;
 import com.gruzini.tennistico.exceptions.UserNotFoundException;
 import com.gruzini.tennistico.repositories.UserRepository;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

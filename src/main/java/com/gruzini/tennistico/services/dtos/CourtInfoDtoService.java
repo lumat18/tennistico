@@ -6,6 +6,9 @@ import com.gruzini.tennistico.models.dto.CourtInfoDto;
 import com.gruzini.tennistico.services.entities.CourtService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class CourtInfoDtoService {
    private final CourtInfoMapper courtInfoMapper;
@@ -22,5 +25,21 @@ public class CourtInfoDtoService {
 
    private CourtInfoDto mapToCourtInfoDto(final Court court){
       return courtInfoMapper.toCourtInfoDto(court);
+   }
+
+   public List<CourtInfoDto> getAllCourtDto(){
+      return courtService.getAll().stream()
+              .map(courtInfoMapper::toCourtInfoDto)
+              .collect(Collectors.toList());
+   }
+
+   public List<String> getCities(){
+      return courtService.getCities();
+   }
+
+   public List<CourtInfoDto> getCourtInfoDtoByCity(final String city){
+      return courtService.getByCity(city).stream()
+              .map(courtInfoMapper::toCourtInfoDto)
+              .collect(Collectors.toList());
    }
 }
