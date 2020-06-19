@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.AssertTrue;
-import javax.validation.constraints.Future;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Data
@@ -24,7 +24,6 @@ public class CreatedMatchDto {
     private Long courtId;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Future(message = "Match has to take place in the future")
     private LocalDate date;
 
     private LocalTime start;
@@ -33,10 +32,15 @@ public class CreatedMatchDto {
 
     @AssertTrue(message = "Match has to start before it ends!")
     @JsonIgnore
-    public boolean isStartAndEndingTimeValid(){
-        if(start == null || end == null){
+    public boolean isStartAndEndingTimeValid() {
+        if (start == null || end == null) {
             return false;
         }
         return start.isBefore(end);
+    }
+
+    @AssertTrue(message = "Match has to take place in the future")
+    public boolean isDate() {
+        return LocalDateTime.of(date, start).isAfter(LocalDateTime.now());
     }
 }
