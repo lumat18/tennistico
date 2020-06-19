@@ -17,24 +17,24 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class RankingServiceTest {
 
-    @Mock
-    private PlayerService playerService;
-    @Mock
-    private RankingPointCounter rankingPointCounter;
-
-    @InjectMocks
-    private RankingService rankingService;
-
-    private Player player;
-
-    @BeforeEach
-    void setup() {
-        player = Player.builder()
-                .rankingPoints(0)
-                .build();
-
-        when(playerService.save(any())).thenReturn(player);
-    }
+//    @Mock
+//    private PlayerService playerService;
+//    @Mock
+//    private RankingPointCounter rankingPointCounter;
+//
+//    @InjectMocks
+//    private RankingService rankingService;
+//
+//    private Player player;
+//
+//    @BeforeEach
+//    void setup() {
+//        player = Player.builder()
+//                .rankingPoints(0)
+//                .build();
+//
+//        when(playerService.save(any())).thenReturn(player);
+//    }
 
 //    @Test
 //    void shouldIncreaseWinnerWins() {

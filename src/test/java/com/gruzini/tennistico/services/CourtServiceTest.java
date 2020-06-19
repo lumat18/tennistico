@@ -70,57 +70,57 @@ class CourtServiceTest {
 //        assertThat(result.size()).isEqualTo(0);
 //    }
 
-    @MockBean
-    private CourtRepository courtRepository;
-    @MockBean
-    private CourtMapper courtMapper;
-
-    @Autowired
-    private CourtService courtService;
-
-    @Test
-    void shouldfindCourtById(){
-        Court court = new Court();
-        //given
-        when(courtRepository.findById(EXISTING_ID)).thenReturn(Optional.of(court));
-        //when
-        final Court result = courtService.getById(EXISTING_ID);
-        //then
-        assertThat(result).isNotNull();
-    }
-    @Test
-    void shouldThrowIfIdDoesNotExist(){
-        //given
-        when(courtRepository.findById(EXISTING_ID)).thenReturn(Optional.empty());
-        //when
-        //then
-        assertThatExceptionOfType(CourtNotFoundException.class).isThrownBy(()->courtService.getById(EXISTING_ID));    }
-
-    @Test
-    void shouldfindCourtByCity() {
-        //given
-        Court court = Court.builder().city(EXISTING_CITY).build();
-        CourtDto courtDto = CourtDto.builder().city(EXISTING_CITY).build();
-        when(courtRepository.getByCity(EXISTING_CITY)).thenReturn(List.of(court));
-        when(courtMapper.toCourtInfoDto(court)).thenReturn(courtDto);
-        //when
-        final List<CourtDto> result = courtService.getByCity(EXISTING_CITY);
-        //then
-        assertThat(result.size()).isEqualTo(1);
-        assertThat(result.get(0).getCity()).isEqualTo(EXISTING_CITY);
-    }
-
-    @Test
-    void shouldNotfindCourtByCity() {
-        //given
-        Court court = Court.builder().city(EXISTING_CITY).build();
-        CourtDto courtDto = CourtDto.builder().city(EXISTING_CITY).build();
-        when(courtRepository.getByCity(EXISTING_CITY)).thenReturn(List.of(court));
-        when(courtMapper.toCourtInfoDto(court)).thenReturn(courtDto);
-        //when
-        final List<CourtDto> result = courtService.getByCity(NON_EXISTING_CITY);
-        //then
-        assertThat(result.size()).isEqualTo(0);
-    }
+//    @MockBean
+//    private CourtRepository courtRepository;
+//    @MockBean
+//    private CourtMapper courtMapper;
+//
+//    @Autowired
+//    private CourtService courtService;
+//
+//    @Test
+//    void shouldfindCourtById(){
+//        Court court = new Court();
+//        //given
+//        when(courtRepository.findById(EXISTING_ID)).thenReturn(Optional.of(court));
+//        //when
+//        final Court result = courtService.getById(EXISTING_ID);
+//        //then
+//        assertThat(result).isNotNull();
+//    }
+//    @Test
+//    void shouldThrowIfIdDoesNotExist(){
+//        //given
+//        when(courtRepository.findById(EXISTING_ID)).thenReturn(Optional.empty());
+//        //when
+//        //then
+//        assertThatExceptionOfType(CourtNotFoundException.class).isThrownBy(()->courtService.getById(EXISTING_ID));    }
+//
+//    @Test
+//    void shouldfindCourtByCity() {
+//        //given
+//        Court court = Court.builder().city(EXISTING_CITY).build();
+//        CourtDto courtDto = CourtDto.builder().city(EXISTING_CITY).build();
+//        when(courtRepository.getByCity(EXISTING_CITY)).thenReturn(List.of(court));
+//        when(courtMapper.toCourtInfoDto(court)).thenReturn(courtDto);
+//        //when
+//        final List<CourtDto> result = courtService.getByCity(EXISTING_CITY);
+//        //then
+//        assertThat(result.size()).isEqualTo(1);
+//        assertThat(result.get(0).getCity()).isEqualTo(EXISTING_CITY);
+//    }
+//
+//    @Test
+//    void shouldNotfindCourtByCity() {
+//        //given
+//        Court court = Court.builder().city(EXISTING_CITY).build();
+//        CourtDto courtDto = CourtDto.builder().city(EXISTING_CITY).build();
+//        when(courtRepository.getByCity(EXISTING_CITY)).thenReturn(List.of(court));
+//        when(courtMapper.toCourtInfoDto(court)).thenReturn(courtDto);
+//        //when
+//        final List<CourtDto> result = courtService.getByCity(NON_EXISTING_CITY);
+//        //then
+//        assertThat(result.size()).isEqualTo(0);
+//    }
 
 }
