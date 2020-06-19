@@ -17,10 +17,12 @@ public class ScoreMapper {
         int guestScore = 0;
         for (SetDto setDTO : setDtoList) {
             if (nonNull(setDTO)) {
-                if (setDTO.getHostScore() > setDTO.getGuestScore()) {
-                    hostScore++;
-                } else {
-                    guestScore++;
+                if(nonNull(setDTO.getHostScore()) && nonNull(setDTO.getGuestScore())){
+                    if (setDTO.getHostScore() > setDTO.getGuestScore()) {
+                        hostScore++;
+                    } else {
+                        guestScore++;
+                    }
                 }
             }
         }
