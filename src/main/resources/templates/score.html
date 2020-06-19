@@ -28,7 +28,14 @@
                            <p class="gruzini-title">Submit Score</p>
                         </div>
                         <div class="card-body">
-                           <form method="post" th:action="@{/submit-score}" th:object="${match}">
+                           <form method="post" th:action="@{/input-score/process}" th:object="${score}">
+                              <input hidden type="text" th:name="match_id" th:id="match_id"
+                                     th:value="${match.getId()}">
+
+                              <div class="d-flex justify-content-between">
+                                 <span class="gruzini-registration-error" th:if="${msg != null}" th:text="${msg}"></span>
+                              </div>
+
                               <table class="table table-hover">
                                  <thead class="d-flex justify-content-center">
                                  <th class="gruzini-text-card-content"
@@ -50,6 +57,9 @@
                                              </span>
                                           </div>
                                           <input class="form-control gruzini-input-check" type="number" id="setOneHost"
+                                                 th:field="*{setDtoList[0].hostScore}"
+                                                 placeholder="Input score"
+                                                 style="width: 100px"
                                                  aria-label="set-one-host"
                                                  aria-describedby="setOneHostAddon" required>
                                        </div>
@@ -58,6 +68,9 @@
                                     <td>
                                        <div class="input-group mb-3">
                                           <input class="form-control gruzini-input-check" type="number" id="setOneGuest"
+                                                 th:field="*{setDtoList[0].guestScore}"
+                                                 placeholder="Input score"
+                                                 style="width: 100px"
                                                  aria-label="set-one-guest"
                                                  aria-describedby="setOneGuestAddon" required>
                                           <div class="input-group-append">
@@ -80,6 +93,8 @@
                                              </span>
                                           </div>
                                           <input class="form-control gruzini-input-check" type="number" id="setTwoHost"
+                                                 th:field="*{setDtoList[1].hostScore}"
+                                                 style="width: 100px"
                                                  aria-label="set-two-host"
                                                  aria-describedby="setTwoHostAddon" disabled>
                                        </div>
@@ -88,6 +103,8 @@
                                     <td>
                                        <div class="input-group mb-3">
                                           <input class="form-control gruzini-input-check" type="number" id="setTwoGuest"
+                                                 th:field="*{setDtoList[1].guestScore}"
+                                                 style="width: 100px"
                                                  aria-label="set-two-guest"
                                                  aria-describedby="setTwoGuestAddon" disabled>
                                           <div class="input-group-append">
@@ -110,6 +127,8 @@
                                              </span>
                                           </div>
                                           <input class="form-control gruzini-input-check" type="number" id="setThreeHost"
+                                                 th:field="*{setDtoList[2].hostScore}"
+                                                 style="width: 100px"
                                                  aria-label="set-three-host"
                                                  aria-describedby="setThreeHostAddon" disabled>
                                        </div>
@@ -118,6 +137,8 @@
                                     <td>
                                        <div class="input-group mb-3">
                                           <input class="form-control gruzini-input-check" type="number" id="setThreeGuest"
+                                                 th:field="*{setDtoList[2].guestScore}"
+                                                 style="width: 100px"
                                                  aria-label="set-three-guest"
                                                  aria-describedby="setThreeGuestAddon" disabled>
                                           <div class="input-group-append">
@@ -140,6 +161,8 @@
                                              </span>
                                           </div>
                                           <input class="form-control gruzini-input-check" type="number" id="setFourHost"
+                                                 th:field="*{setDtoList[3].hostScore}"
+                                                 style="width: 100px"
                                                  aria-label="set-four-host"
                                                  aria-describedby="setFourHostAddon" disabled>
                                        </div>
@@ -148,6 +171,8 @@
                                     <td>
                                        <div class="input-group mb-3">
                                           <input class="form-control gruzini-input-check" type="number" id="setFourGuest"
+                                                 th:field="*{setDtoList[3].guestScore}"
+                                                 style="width: 100px"
                                                  aria-label="set-four-guest"
                                                  aria-describedby="setFourGuestAddon" disabled>
                                           <div class="input-group-append">
@@ -170,6 +195,8 @@
                                              </span>
                                           </div>
                                           <input class="form-control gruzini-input-check" type="number" id="setFiveHost"
+                                                 th:field="*{setDtoList[4].hostScore}"
+                                                 style="width: 100px"
                                                  aria-label="set-five-host"
                                                  aria-describedby="setFiveHostAddon" disabled>
                                        </div>
@@ -178,6 +205,8 @@
                                     <td>
                                        <div class="input-group mb-3">
                                           <input class="form-control gruzini-input-check" type="number" id="setFiveGuest"
+                                                 th:field="*{setDtoList[4].guestScore}"
+                                                 style="width: 100px"
                                                  aria-label="set-five-guest"
                                                  aria-describedby="setFiveGuestAddon" disabled>
                                           <div class="input-group-append">
@@ -192,10 +221,14 @@
                                  </tbody>
                               </table>
                               <div class="d-flex justify-content-center">
-                                 <button type="button" id="btnRemoveSet" class="btn btn-danger gruzini-btn-success" disabled>
-                                    Remove Set</button>
-                                 <button type="button" id="btnAddSet" class="btn btn-success gruzini-btn-success" disabled>
-                                    Add Set</button>
+                                 <button type="button" id="btnRemoveSet"
+                                         class="btn btn-danger gruzini-btn-success gruzini-button-small" disabled>
+                                    Remove Set
+                                 </button>
+                                 <button type="button" id="btnAddSet"
+                                         class="btn btn-success gruzini-btn-success gruzini-button-small" disabled>
+                                    Add Set
+                                 </button>
                               </div>
                               <button id="hiddenSubmitButton" type="submit" hidden></button>
                            </form>
@@ -233,7 +266,7 @@
 <script>
    $(document).ready(function () {
       $(document).change(function () {
-         if(checkIfAllRequiredFilled()){
+         if (checkIfAllRequiredFilled()) {
             $(document).ready(function () {
                $("#btnAddSet").prop("disabled", false);
             })
@@ -244,15 +277,15 @@
          }
       })
 
-      function checkIfAllRequiredFilled(){
+      function checkIfAllRequiredFilled() {
          let required = $('.gruzini-input-check').filter('[required]:visible');
          let isValid = true;
-         required.each(function(){
-            if(!$(this).val()){
+         required.each(function () {
+            if (!$(this).val()) {
                isValid = false;
             }
          });
-         if(!$("#setFiveHost").prop("disabled")){
+         if (!$("#setFiveHost").prop("disabled")) {
             isValid = false;
          }
          return isValid;
@@ -260,54 +293,54 @@
 
       //function for adding sets with button
       $("#btnAddSet").click(function () {
-         if($("#setTwoHost").prop("disabled")){
+         if ($("#setTwoHost").prop("disabled")) {
             $("#setOneHost").prop("readonly", true);
             $("#setOneGuest").prop("readonly", true);
-            $("#setTwoHost").prop("disabled", false).prop("required", true);
-            $("#setTwoGuest").prop("disabled", false).prop("required", true);
+            $("#setTwoHost").prop("disabled", false).prop("required", true).prop("placeholder", "Input score");
+            $("#setTwoGuest").prop("disabled", false).prop("required", true).prop("placeholder", "Input score");
             $("#btnRemoveSet").prop("disabled", false);
-         } else if($("#setThreeHost").prop("disabled")){
+         } else if ($("#setThreeHost").prop("disabled")) {
             $("#setTwoHost").prop("readonly", true);
             $("#setTwoGuest").prop("readonly", true);
-            $("#setThreeHost").prop("disabled", false).prop("required", true);
-            $("#setThreeGuest").prop("disabled", false).prop("required", true);
-         } else if($("#setFourHost").prop("disabled")){
+            $("#setThreeHost").prop("disabled", false).prop("required", true).prop("placeholder", "Input score");
+            $("#setThreeGuest").prop("disabled", false).prop("required", true).prop("placeholder", "Input score");
+         } else if ($("#setFourHost").prop("disabled")) {
             $("#setThreeHost").prop("readonly", true);
             $("#setThreeGuest").prop("readonly", true);
-            $("#setFourHost").prop("disabled", false).prop("required", true);
-            $("#setFourGuest").prop("disabled", false).prop("required", true);
+            $("#setFourHost").prop("disabled", false).prop("required", true).prop("placeholder", "Input score");
+            $("#setFourGuest").prop("disabled", false).prop("required", true).prop("placeholder", "Input score");
          } else {
             $("#setFourHost").prop("readonly", true);
             $("#setFourGuest").prop("readonly", true);
-            $("#setFiveHost").prop("disabled", false).prop("required", true);
-            $("#setFiveGuest").prop("disabled", false).prop("required", true);
+            $("#setFiveHost").prop("disabled", false).prop("required", true).prop("placeholder", "Input score");
+            $("#setFiveGuest").prop("disabled", false).prop("required", true).prop("placeholder", "Input score");
             $("#btnAddSet").prop("disabled", true);
          }
       });
 
       //function for removing sets with button
       $("#btnRemoveSet").click(function () {
-         if($("#setThreeHost").prop("disabled")){
+         if ($("#setThreeHost").prop("disabled")) {
             $("#setOneHost").prop("readonly", false);
             $("#setOneGuest").prop("readonly", false);
-            $("#setTwoHost").val('').prop("disabled", true).prop("required", false);
-            $("#setTwoGuest").val('').prop("disabled", true).prop("required", false);
+            $("#setTwoHost").val('').prop("disabled", true).prop("required", false).prop("placeholder", "");
+            $("#setTwoGuest").val('').prop("disabled", true).prop("required", false).prop("placeholder", "");
             $("#btnRemoveSet").prop("disabled", true);
-         } else if($("#setFourHost").prop("disabled")){
+         } else if ($("#setFourHost").prop("disabled")) {
             $("#setTwoHost").prop("readonly", false);
             $("#setTwoGuest").prop("readonly", false);
-            $("#setThreeHost").val('').prop("disabled", true).prop("required", false);
-            $("#setThreeGuest").val('').prop("disabled", true).prop("required", false);
-         } else if($("#setFiveHost").prop("disabled")){
+            $("#setThreeHost").val('').prop("disabled", true).prop("required", false).prop("placeholder", "");
+            $("#setThreeGuest").val('').prop("disabled", true).prop("required", false).prop("placeholder", "");
+         } else if ($("#setFiveHost").prop("disabled")) {
             $("#setThreeHost").prop("readonly", false);
             $("#setThreeGuest").prop("readonly", false);
-            $("#setFourHost").val('').prop("disabled", true).prop("required", false);
-            $("#setFourGuest").val('').prop("disabled", true).prop("required", false);
+            $("#setFourHost").val('').prop("disabled", true).prop("required", false).prop("placeholder", "");
+            $("#setFourGuest").val('').prop("disabled", true).prop("required", false).prop("placeholder", "");
          } else {
             $("#setFourHost").prop("readonly", false);
             $("#setFourGuest").prop("readonly", false);
-            $("#setFiveHost").val('').prop("disabled", true).prop("required", false);
-            $("#setFiveGuest").val('').prop("disabled", true).prop("required", false);
+            $("#setFiveHost").val('').prop("disabled", true).prop("required", false).prop("placeholder", "");
+            $("#setFiveGuest").val('').prop("disabled", true).prop("required", false).prop("placeholder", "");
             $("#btnAddSet").prop("disabled", false);
          }
       })

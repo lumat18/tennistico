@@ -54,7 +54,7 @@ public enum NotificationType {
     SCORE_TO_SUBMIT{
         @Override
         public String getEndpoint() {
-            return "/input-score";
+            return "/input-score/begin";
         }
         @Override
         public String getMessage() {
