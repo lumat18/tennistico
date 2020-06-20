@@ -22,6 +22,9 @@ public class FutureMatchMapper {
     }
 
     private String prepareGuestName(final Optional<Player> guest) {
-        return guest.map(player -> player.getFirstName() + " " + player.getLastName()).orElse("");
+        if (guest.isEmpty()){
+            return "";
+        }
+        return guest.get().getFirstName() + " " + guest.get().getLastName();
     }
 }

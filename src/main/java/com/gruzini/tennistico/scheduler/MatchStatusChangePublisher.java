@@ -3,6 +3,7 @@ package com.gruzini.tennistico.scheduler;
 import com.gruzini.tennistico.domain.enums.MatchStatus;
 import com.gruzini.tennistico.events.ChangeMatchStatusByEndingDateTimeEvent;
 import com.gruzini.tennistico.events.ChangeMatchStatusByStartingDateTimeEvent;
+import com.gruzini.tennistico.events.HeldMatchEvent;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -17,10 +18,8 @@ public class MatchStatusChangePublisher {
     }
 
     @Scheduled(cron = "0 0/15 * * * *")
-    public void changeStatusFromUpcomingToPending() {
-        final ChangeMatchStatusByStartingDateTimeEvent event =
-                new ChangeMatchStatusByStartingDateTimeEvent(this, MatchStatus.UPCOMING, MatchStatus.PENDING);
-        applicationEventPublisher.publishEvent(event);
+    public void publishHeldGameEvent() {
+        applicationEventPublisher.publishEvent(new HeldMatchEvent(this));
     }
 
     @Scheduled(cron = "0 0/15 * * * *")

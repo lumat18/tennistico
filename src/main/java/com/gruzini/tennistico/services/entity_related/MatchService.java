@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -46,12 +47,12 @@ public class MatchService {
         return matchRepository.findAllByPlayersContainsAndStartingAtIsAfterAndMatchStatusInOrderByStartingAt(player, LocalDateTime.now(), matchStatusList);
     }
 
-    public void updateExpiredMatchesStatusByStartingDateTime(final ChangeMatchStatusByStartingDateTimeEvent event) {
-        List<Match> matchesToUpdate = getAllExpiredByStatusAndStartingDateTime(event.getCurrentMatchStatus());
-        updateMatchStatus(matchesToUpdate, event.getDesiredMatchStatus());
+    public void updateExpiredMatchesStatusByStartingDateTime(final MatchStatus previousStatus, final MatchStatus desiredStatus) {
+        List<Match> matchesToUpdate = getAllExpiredByStatus(previousStatus);
+        updateMatchStatus(matchesToUpdate, desiredStatus);
     }
 
-    private List<Match> getAllExpiredByStatusAndStartingDateTime(final MatchStatus matchStatus) {
+    private List<Match> getAllExpiredByStatus(final MatchStatus matchStatus) {
         return matchRepository.findByStartingAtBeforeAndMatchStatus(LocalDateTime.now(), matchStatus);
     }
 
@@ -76,5 +77,11 @@ public class MatchService {
     public void updateMatchScore(final Match match, final Score score) {
         match.setScore(score);
         save(match);
+    }
+
+    public List<Player> getAllHostsByMatchStatus(final MatchStatus status){
+        return getAllExpiredByStatus(status).stream()
+                .map(Match::getHost)
+                .collect(Collectors.toList());
     }
 }

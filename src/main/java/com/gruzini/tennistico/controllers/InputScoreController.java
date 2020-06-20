@@ -25,9 +25,8 @@ public class InputScoreController {
         this.matchService = matchService;
     }
 
-    //    @PostMapping("/begin")
-    @GetMapping("/{match_id}")
-    public String beginSubmittingScore(/*@RequestParam(name = "matchId")*/ @PathVariable(name = "match_id") final Long matchId, final Model model) {
+    @PostMapping("/begin")
+    public String beginSubmittingScore(@RequestParam(name = "matchId") final Long matchId, final Model model) {
         model.addAttribute("match", matchService.getById(matchId));
         model.addAttribute("score", new ScoreDto());
         return "score";
