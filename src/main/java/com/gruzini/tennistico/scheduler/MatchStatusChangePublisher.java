@@ -1,4 +1,4 @@
-package com.gruzini.tennistico.publishers;
+package com.gruzini.tennistico.scheduler;
 
 import com.gruzini.tennistico.domain.enums.MatchStatus;
 import com.gruzini.tennistico.events.ChangeMatchStatusByEndingDateTimeEvent;

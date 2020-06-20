@@ -40,7 +40,10 @@ public class CreatedMatchDto {
     }
 
     @AssertTrue(message = "Match has to take place in the future")
-    public boolean isDate() {
+    public boolean isDateTimeValid() {
+        if (date == null || start == null) {
+            return false;
+        }
         return LocalDateTime.of(date, start).isAfter(LocalDateTime.now());
     }
 }

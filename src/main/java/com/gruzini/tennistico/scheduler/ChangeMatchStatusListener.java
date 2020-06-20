@@ -1,4 +1,4 @@
-package com.gruzini.tennistico.listeners;
+package com.gruzini.tennistico.scheduler;
 
 import com.gruzini.tennistico.events.ChangeMatchStatusByEndingDateTimeEvent;
 import com.gruzini.tennistico.events.ChangeMatchStatusByStartingDateTimeEvent;
