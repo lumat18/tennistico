@@ -1,4 +1,4 @@
-package com.gruzini.tennistico.services.score;
+package com.gruzini.tennistico.services.point_counter;
 
 import org.springframework.stereotype.Component;
 

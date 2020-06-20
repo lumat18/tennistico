@@ -1,4 +1,4 @@
-package com.gruzini.tennistico.controllers.handlers;
+package com.gruzini.tennistico.exception_handlers;
 
 import com.gruzini.tennistico.messages.ErrorMessages;
 import org.springframework.boot.web.servlet.error.ErrorController;

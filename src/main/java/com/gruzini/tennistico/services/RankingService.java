@@ -5,7 +5,7 @@ import com.gruzini.tennistico.domain.Player;
 import com.gruzini.tennistico.events.ConfirmScoreEvent;
 import com.gruzini.tennistico.services.entity_related.MatchService;
 import com.gruzini.tennistico.services.entity_related.PlayerService;
-import com.gruzini.tennistico.services.score.RankingPointCounter;
+import com.gruzini.tennistico.services.point_counter.RankingPointCounter;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;

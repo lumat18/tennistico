@@ -1,11 +1,9 @@
-package com.gruzini.tennistico.services.score;
+package com.gruzini.tennistico.services;
 
-import com.gruzini.tennistico.domain.Match;
-import com.gruzini.tennistico.domain.Player;
 import org.springframework.stereotype.Component;
 
 @Component
-public class WinDecider {
+public class WinDecidingService {
     private static final int HOST_INDEX = 0;
     private static final int GUEST_INDEX = 1;
     private static final String SEPARATOR = "-";

@@ -1,4 +1,4 @@
-package com.gruzini.tennistico.controllers.handlers;
+package com.gruzini.tennistico.exception_handlers;
 
 import com.gruzini.tennistico.exceptions.ActivationTokenNotFoundException;
 import lombok.extern.slf4j.Slf4j;
