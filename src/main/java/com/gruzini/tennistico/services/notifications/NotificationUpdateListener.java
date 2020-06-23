@@ -1,5 +1,6 @@
 package com.gruzini.tennistico.services.notifications;
 
+import com.gruzini.tennistico.events.ConfirmEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

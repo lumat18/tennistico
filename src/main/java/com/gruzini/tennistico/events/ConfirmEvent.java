@@ -1,4 +1,4 @@
-package com.gruzini.tennistico.services.notifications;
+package com.gruzini.tennistico.events;
 
 public interface ConfirmEvent {
     Long getTriggerNotificationId();

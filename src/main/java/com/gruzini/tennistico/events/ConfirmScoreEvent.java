@@ -1,6 +1,5 @@
 package com.gruzini.tennistico.events;
 
-import com.gruzini.tennistico.services.notifications.ConfirmEvent;
 import lombok.Getter;
 import org.springframework.context.ApplicationEvent;
 
