@@ -1,10 +1,11 @@
 package com.gruzini.tennistico.events;
 
+import com.gruzini.tennistico.services.notifications.ConfirmEvent;
 import lombok.Getter;
 import org.springframework.context.ApplicationEvent;
 
 @Getter
-public class ConfirmJoinEvent extends ApplicationEvent implements NotificationActionEvent {
+public class ConfirmJoinEvent extends ApplicationEvent implements ConfirmEvent {
 
     private final Long matchId;
     private final Long triggerNotificationId;

@@ -52,7 +52,7 @@ public class MatchService {
         updateMatchStatus(matchesToUpdate, desiredStatus);
     }
 
-    private List<Match> getAllExpiredByStatus(final MatchStatus matchStatus) {
+    public List<Match> getAllExpiredByStatus(final MatchStatus matchStatus) {
         return matchRepository.findByStartingAtBeforeAndMatchStatus(LocalDateTime.now(), matchStatus);
     }
 
