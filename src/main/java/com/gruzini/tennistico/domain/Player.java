@@ -23,9 +23,11 @@ public class Player {
     private Long id;
 
     @NotNull
+    @Column(name = "first_name")
     private String firstName;
 
     @NotNull
+    @Column(name = "last_name")
     private String lastName;
 
     @Enumerated(EnumType.STRING)
@@ -33,9 +35,11 @@ public class Player {
 
     private LocalDate birthday;
 
+    @Column(name = "years_of_experience")
     private Integer yearsOfExperience;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "player_skill")
     private PlayerSkill playerSkill;
 
     @Column(name = "ranking_points")

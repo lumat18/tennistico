@@ -25,11 +25,14 @@ public class Match {
     @Column(name = "match_id")
     private Long id;
 
+    @Column(name = "starting_at")
     private LocalDateTime startingAt;
 
+    @Column(name = "ending_at")
     private LocalDateTime endingAt;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "match_status")
     private MatchStatus matchStatus;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)

@@ -33,5 +33,6 @@ public class Court {
 
    private String zipCode;
 
+   @Column(name = "phone_number")
    private String phoneNumber;
 }

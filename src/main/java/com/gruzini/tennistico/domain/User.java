@@ -29,9 +29,11 @@ public class User {
    private String password;
 
    @CreationTimestamp
+   @Column(name = "created_at")
    private LocalDateTime createdAt;
 
    @Enumerated(EnumType.STRING)
+   @Column(name = "user_status")
    private UserStatus userStatus;
 
    @OneToOne(fetch = FetchType.LAZY)
