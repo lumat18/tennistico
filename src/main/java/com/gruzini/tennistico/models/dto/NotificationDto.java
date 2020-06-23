@@ -12,9 +12,11 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 public class NotificationDto {
+    private Long id;
     private String message;
     private String endpoint;
     private LocalDateTime createdAt;
     private Long matchId;
     private String buttonName;
+    private Boolean clicked;
 }

@@ -196,7 +196,7 @@
                     <div class="col-lg-6 col-md-12">
                         <div class="card">
                             <div class="card-header card-header-success">
-                                <h4 class="card-title">Activity</h4>
+                                <h4 class="card-title">Notifications</h4>
                                 <p class="card-category">Current date 6th June, 2020</p>
                             </div>
                             <div class="card-body table-responsive">
@@ -211,12 +211,11 @@
                                             <td th:text="${notification.getCreatedAt()}"></td>
                                             <td th:text="${notification.getMessage()}"></td>
                                             <td class="td-actions text-right">
-                                                <div th:if="${notification.getButtonName() != null}">
+                                                <div th:if="${notification.getButtonName() != null && !notification.getClicked()}">
                                                     <form method="post" th:action="@{__${notification.getEndpoint()}__}">
                                                         <input hidden type="text" name="match_id" th:value="${notification.getMatchId()}"/>
-                                                        <input hidden id="hiddenSubmitButton" type="submit" value="${notification.getButtonName()}">
-                                                        <button class="btn btn-success gruzini-btn-success gruzini-button-small" th:text="${notification.getButtonName()}" id="buttonSubmit"
-                                                                onclick="submitByHiddenButton()"></button>
+                                                        <input hidden type="text" name="trigger_id" th:value="${notification.getId()}"/>
+                                                        <button class="btn btn-success gruzini-btn-success gruzini-button-small" th:text="${notification.getButtonName()}" type="submit"></button>
                                                     </form>
                                                 </div>
                                             </td>

@@ -1,4 +1,4 @@
-package com.gruzini.tennistico.services;
+package com.gruzini.tennistico.services.notifications;
 
 import com.gruzini.tennistico.domain.Notification;
 import com.gruzini.tennistico.domain.Player;

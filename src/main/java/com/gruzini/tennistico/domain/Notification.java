@@ -36,4 +36,6 @@ public class Notification {
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
+
+    private boolean clicked;
 }

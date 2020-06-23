@@ -1,4 +1,4 @@
-package com.gruzini.tennistico.services;
+package com.gruzini.tennistico.services.notifications;
 
 import com.gruzini.tennistico.domain.Match;
 import com.gruzini.tennistico.domain.Notification;
@@ -6,6 +6,7 @@ import com.gruzini.tennistico.domain.Player;
 import com.gruzini.tennistico.domain.User;
 import com.gruzini.tennistico.domain.enums.NotificationType;
 import com.gruzini.tennistico.exceptions.NoGuestInMatchException;
+import com.gruzini.tennistico.exceptions.NotificationNotFoundException;
 import com.gruzini.tennistico.mappers.NotificationMapper;
 import com.gruzini.tennistico.models.dto.NotificationDto;
 import com.gruzini.tennistico.repositories.NotificationRepository;
@@ -53,6 +54,7 @@ public class NotificationService {
                 .sender(sender)
                 .recipient(recipient)
                 .matchId(matchId)
+                .clicked(false)
                 .build();
         return notificationRepository.save(notification);
     }
@@ -78,5 +80,11 @@ public class NotificationService {
         return notificationRepository.findAllByRecipient(username).stream()
                 .map(notificationMapper::toNotificationDto)
                 .collect(Collectors.toList());
+    }
+
+    public void markAsClicked(Long triggerNotificationId) {
+        final Notification notification = notificationRepository.findById(triggerNotificationId).orElseThrow(NotificationNotFoundException::new);
+        notification.setClicked(true);
+        notificationRepository.save(notification);
     }
 }

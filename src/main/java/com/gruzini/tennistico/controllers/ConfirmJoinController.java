@@ -20,8 +20,10 @@ public class ConfirmJoinController {
     }
 
     @PostMapping
-    public String confirmGuestJoiningMatch(@RequestParam(name = "match_id") final Long matchId, final Principal principal) {
-        applicationEventPublisher.publishEvent(new ConfirmJoinEvent(this, matchId, principal.getName()));
+    public String confirmGuestJoiningMatch(@RequestParam(name = "match_id") final Long matchId,
+                                           @RequestParam(name = "trigger_id") final Long triggerNotificationId,
+                                           final Principal principal) {
+        applicationEventPublisher.publishEvent(new ConfirmJoinEvent(this, matchId, triggerNotificationId, principal.getName()));
         return "redirect:/dashboard";
     }
 }
