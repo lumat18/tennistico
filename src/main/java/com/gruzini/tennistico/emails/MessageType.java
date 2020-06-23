@@ -1,30 +1,17 @@
 package com.gruzini.tennistico.emails;
 
+import lombok.Getter;
+
+@Getter
 public enum MessageType {
-    ACTIVATION {
-        @Override
-        public String getComponentName() {
-            return "activation";
-        }
+    ACTIVATION("activation", ActivationMessageCreator.class),
+    RESET("reset", null);
 
-        @Override
-        public Class<ActivationMessageCreator> getComponentClass() {
-            return ActivationMessageCreator.class;
-        }
-    },
-    RESET {
-        @Override
-        public String getComponentName() {
-            return "reset";
-        }
+    private final String componentName;
+    private final Class<? extends MessageCreator> componentClass;
 
-        @Override
-        public Class<? extends MessageCreator> getComponentClass() {
-            return null;
-        }
-    };
-
-    public abstract String getComponentName();
-
-    public abstract Class<? extends MessageCreator> getComponentClass();
+    MessageType(final String componentName, final Class<? extends MessageCreator> componentClass) {
+        this.componentName = componentName;
+        this.componentClass = componentClass;
+    }
 }

@@ -1,107 +1,25 @@
 package com.gruzini.tennistico.domain.enums;
 
 import com.gruzini.tennistico.messages.NotificationMessages;
+import lombok.Getter;
 
+@Getter
 public enum NotificationType {
 
-    MATCH_CREATED{
-        @Override
-        public String getEndpoint() {
-            return null;
-        }
+    MATCH_CREATED(null, NotificationMessages.MATCH_CREATED, null),
+    JOIN_REQUEST("/confirm-join", NotificationMessages.JOIN_REQUEST, "CONFIRM"),
+    JOIN_CONFIRMED(null, NotificationMessages.JOIN_CONFIRMED, null),
+    SCORE_TO_SUBMIT("/input-score/begin", NotificationMessages.SCORE_TO_SUBMIT, "FILL IN"),
+    SCORE_TO_CONFIRM("/confirm-score", NotificationMessages.SCORE_TO_CONFIRM, "CONFIRM"),
+    MATCH_ARCHIVED(null, NotificationMessages.MATCH_ARCHIVED, null);
 
-        @Override
-        public String getMessage() {
-            return NotificationMessages.MATCH_CREATED;
-        }
+    private final String endpoint;
+    private final String message;
+    private final String buttonName;
 
-        @Override
-        public String getButtonName() {
-            return null;
-        }
-    },
-    JOIN_REQUEST{
-        @Override
-        public String getEndpoint() {
-            return "/confirm-join";
-        }
-        @Override
-        public String getMessage() {
-            return NotificationMessages.JOIN_REQUEST;
-        }
-
-        @Override
-        public String getButtonName() {
-            return "CONFIRM";
-        }
-    },
-    JOIN_CONFIRMED{
-        @Override
-        public String getEndpoint() {
-            return null;
-        }
-        @Override
-        public String getMessage() {
-            return NotificationMessages.JOIN_CONFIRMED;
-        }
-
-        @Override
-        public String getButtonName() {
-            return null;
-        }
-    },
-
-    SCORE_TO_SUBMIT{
-        @Override
-        public String getEndpoint() {
-            return "/input-score/begin";
-        }
-        @Override
-        public String getMessage() {
-            return NotificationMessages.SCORE_TO_SUBMIT;
-        }
-
-        @Override
-        public String getButtonName() {
-            return "FILL IN";
-        }
-    },
-    SCORE_TO_CONFIRM{
-        @Override
-        public String getEndpoint() {
-            return "/confirm-score";
-        }
-
-        @Override
-        public String getMessage() {
-            return NotificationMessages.SCORE_TO_CONFIRM;
-        }
-
-        @Override
-        public String getButtonName() {
-            return "CONFIRM";
-        }
-    },
-    MATCH_ARCHIVED {
-        @Override
-        public String getEndpoint() {
-            return null;
-        }
-
-        @Override
-        public String getMessage() {
-            return NotificationMessages.MATCH_ARCHIVED;
-        }
-
-        @Override
-        public String getButtonName() {
-            return null;
-        }
-    };
-
-    public abstract String getEndpoint();
-
-    public abstract String getMessage();
-
-    public abstract String getButtonName();
+    NotificationType(final String endpoint, final String message, final String buttonName) {
+        this.endpoint = endpoint;
+        this.message = message;
+        this.buttonName = buttonName;
+    }
 }
