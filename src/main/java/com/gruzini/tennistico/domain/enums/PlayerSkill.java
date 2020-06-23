@@ -1,5 +1,8 @@
 package com.gruzini.tennistico.domain.enums;
 
+import lombok.Getter;
+
+@Getter
 public enum PlayerSkill {
    BEGINNER(1000),
    AMATEUR(1200),
@@ -10,9 +13,5 @@ public enum PlayerSkill {
 
    PlayerSkill(final Integer rankingPoints) {
       this.rankingPoints = rankingPoints;
-   }
-
-   public Integer getPoints() {
-      return rankingPoints;
    }
 }
