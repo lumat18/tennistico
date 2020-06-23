@@ -24890,4 +24890,15 @@ fieldset[disabled][disabled] .dark-edition .has-error .form-control,
   text-align: center;
   font-size: 22px;
 }
+
+.gruzini-navbar-text{
+  color: #8b92a9;
+  font-size: 22px;
+}
+
+.gruzini-navbar-ranking{
+  color: #ff9800;
+  font-size: 22px;
+  padding-left: 10px;
+}
 /* end of navbar styling */
