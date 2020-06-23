@@ -24894,11 +24894,15 @@ fieldset[disabled][disabled] .dark-edition .has-error .form-control,
 .gruzini-navbar-text{
   color: #8b92a9;
   font-size: 22px;
+  padding-right: 5px;
 }
 
 .gruzini-navbar-ranking{
-  color: #ff9800;
+  background: linear-gradient(60deg, #f5700c, #ff9800);
+  color: #ffffff;
   font-size: 22px;
-  padding-left: 10px;
+  padding-left: 5px;
+  padding-right: 10px;
+  border-radius: 16px;
 }
 /* end of navbar styling */
