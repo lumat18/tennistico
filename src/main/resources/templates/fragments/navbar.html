@@ -17,6 +17,9 @@
             <span class="navbar-toggler-icon icon-bar"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end">
+            <div class="gruzini-navbar-text">
+                <span th:if="${actionMessage != null}" th:text="${actionMessage}" style="color: #d22824;"></span>
+            </div>
             <form class="navbar-form">
                 <div class="input-group no-border">
                     <div class="ripple-container"></div>
