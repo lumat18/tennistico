@@ -13,6 +13,7 @@ public class HostedMatchMapper {
                 .hostName(match.getHost().getFirstName() + " " + match.getHost().getLastName())
                 .hostGender(match.getHost().getGender().toString())
                 .hostAge(match.getHost().getAge())
+                .rankingPoints(match.getHost().getRankingPoints())
                 .hostLevel(match.getHost().getPlayerSkill().name())
                 .hostExp(match.getHost().getYearsOfExperience())
                 .address(match.getCourt().getStreet() + ", " + match.getCourt().getCity())

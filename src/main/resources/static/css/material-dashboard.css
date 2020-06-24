@@ -24875,12 +24875,12 @@ fieldset[disabled][disabled] .dark-edition .has-error .form-control,
   transform: translateX(0%);
 }
 
-@media(max-width: 1300px){
+@media(max-width: 1400px){
   .gruzini-table-collapsing-first{
     display: none;
   }
 }
-@media(max-width: 1150px){
+@media(max-width: 1250px){
   .gruzini-table-collapsing-second{
     display: none;
   }
