@@ -4,15 +4,19 @@ import com.gruzini.tennistico.models.dto.matchDto.HostedMatchDto;
 import com.gruzini.tennistico.services.dto_related.MatchDtoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
 import java.util.List;
 
+import static java.util.Objects.isNull;
+
 @Controller
 @RequestMapping("/dashboard/hosted")
 public class HostedMatchesController {
+    private static final String INITIAL_FILTER = "lvl";
+
     private final MatchDtoService matchDtoService;
 
     public HostedMatchesController(MatchDtoService matchDtoService) {
@@ -20,9 +24,19 @@ public class HostedMatchesController {
     }
 
     @GetMapping
-    public String showUpcomingMatchesPage(final Model model, final Principal principal) {
-        final List<HostedMatchDto> allHostedMatches = matchDtoService.getHostedMatchesDtoExceptHostedBy(principal.getName());
+    public String showUpcomingMatchesPage(@ModelAttribute(name = "filter") String filter, final Model model, final Principal principal) {
+        if (isNull(filter) || filter.isBlank()){
+            filter = INITIAL_FILTER;
+        }
+        System.out.println("filter = " + filter);
+        final List<HostedMatchDto> allHostedMatches = matchDtoService.getHostedMatchesDtoExceptHostedBy(filter, principal.getName());
         model.addAttribute("hostedMatches", allHostedMatches);
         return "hosted";
+    }
+
+    @PostMapping
+    public String processMatchFilter(@RequestParam(name = "filter") final String filter, final RedirectAttributes attributes, final Principal principal){
+        attributes.addFlashAttribute("filter", filter);
+        return "redirect:/dashboard/hosted";
     }
 }

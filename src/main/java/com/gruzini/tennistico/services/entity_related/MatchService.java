@@ -16,6 +16,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.lang.Math.abs;
+
 @Service
 @Transactional
 public class MatchService {
@@ -35,8 +37,14 @@ public class MatchService {
         return matchRepository.findById(id).orElseThrow(MatchNotFoundException::new);
     }
 
-    public List<Match> getHostedMatchesExceptHostedBy(final Player player) {
-        return matchRepository.findAllByMatchStatusAndPlayersNotContainsAndStartingAtIsAfterOrderByStartingAt(MatchStatus.HOSTED, player, LocalDateTime.now());
+    public List<Match> getFilteredHostedMatchesExceptHostedBy(final String filter, final Player player) {
+        final List<Match> results = matchRepository.findAllByMatchStatusAndPlayersNotContainsAndStartingAtIsAfterOrderByStartingAt(MatchStatus.HOSTED, player, LocalDateTime.now());
+        if (filter.equals("lvl")){
+         return results.stream()
+         .filter(match -> abs(match.getHost().getRankingPoints() - player.getRankingPoints()) > 500)
+                 .collect(Collectors.toList());
+        }
+        return results;
     }
 
     public List<Match> getByPlayerAndStatus(final Player player, final MatchStatus matchStatus) {
