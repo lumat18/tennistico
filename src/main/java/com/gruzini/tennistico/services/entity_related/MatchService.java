@@ -74,11 +74,6 @@ public class MatchService {
         return matchRepository.findByEndingAtBeforeAndMatchStatus(LocalDateTime.now().minusDays(7), matchStatus);
     }
 
-    public void updateMatchScore(final Match match, final Score score) {
-        match.setScore(score);
-        save(match);
-    }
-
     public List<Player> getAllHostsByMatchStatus(final MatchStatus status){
         return getAllExpiredByStatus(status).stream()
                 .map(Match::getHost)
