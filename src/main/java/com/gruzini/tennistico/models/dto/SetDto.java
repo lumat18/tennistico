@@ -12,9 +12,9 @@ import javax.validation.constraints.Min;
 @NoArgsConstructor
 public class SetDto {
    @Min(0)
-   private int hostScore;
+   private Integer hostScore;
    @Min(0)
-   private int guestScore;
+   private Integer guestScore;
 
    @AssertTrue
    public boolean isSetValid() {
