@@ -11,7 +11,7 @@
             <span class="gruzini-navbar-text"
                     th:text="${session.loggedUser.firstName + ' ' + session.loggedUser.lastName}"></span>
             <div class="gruzini-navbar-ranking">
-                <img th:src="@{/img/cup-icon.png}" style="height: 22px">
+                <i class="material-icons" style="height: 22px;">emoji_events</i>
                 <span th:text="${session.loggedUser.rankingPoints}"></span>
             </div>
         </div>
