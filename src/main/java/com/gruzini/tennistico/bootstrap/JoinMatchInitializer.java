@@ -14,6 +14,7 @@ import com.gruzini.tennistico.repositories.PlayerRepository;
 import com.gruzini.tennistico.repositories.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -22,6 +23,7 @@ import java.time.LocalDateTime;
 
 @Component
 @Profile("dev")
+@Order(2)
 public class JoinMatchInitializer implements CommandLineRunner {
     private final PlayerRepository playerRepository;
     private final UserRepository userRepository;
@@ -65,6 +67,7 @@ public class JoinMatchInitializer implements CommandLineRunner {
                 .gender(Gender.MALE)
                 .playerSkill(PlayerSkill.PROFESSIONAL)
                 .yearsOfExperience(32)
+                .rankingPoints(1600)
                 .build();
         playerRepository.save(host);
 
@@ -84,6 +87,7 @@ public class JoinMatchInitializer implements CommandLineRunner {
                 .gender(Gender.MALE)
                 .playerSkill(PlayerSkill.PROFESSIONAL)
                 .yearsOfExperience(32)
+                .rankingPoints(1600)
                 .build();
         playerRepository.save(guest);
 
