@@ -16,6 +16,7 @@ public class HostedMatchDto {
     private String hostName;
     private String hostGender;
     private Integer hostAge;
+    private Integer rankingPoints;
     private String hostLevel;
     private Integer hostExp;
     private String address;
