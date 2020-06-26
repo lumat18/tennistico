@@ -9,6 +9,7 @@ import com.gruzini.tennistico.repositories.PlayerRepository;
 import com.gruzini.tennistico.repositories.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -17,6 +18,7 @@ import java.time.LocalDateTime;
 
 @Component
 @Profile("dev")
+@Order(1)
 public class UserInitialization implements CommandLineRunner {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
@@ -37,6 +39,7 @@ public class UserInitialization implements CommandLineRunner {
                 .birthday(LocalDate.of(1970, 2, 3))
                 .firstName("Pete")
                 .lastName("Sampras")
+                .rankingPoints(1200)
                 .build();
         playerRepository.save(player);
         final User user = User.builder()

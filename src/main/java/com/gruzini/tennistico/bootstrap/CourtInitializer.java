@@ -4,11 +4,13 @@ import com.gruzini.tennistico.domain.Court;
 import com.gruzini.tennistico.repositories.CourtRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 
 @Component
 @Profile("dev")
+@Order(3)
 public class CourtInitializer implements CommandLineRunner {
 
     private final CourtRepository courtRepository;
