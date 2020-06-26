@@ -27,6 +27,7 @@ public class DashboardController {
     @GetMapping
     public String showDashboard(final Model model, final Principal principal, final HttpSession session){
         final List<NotificationDto> notifications = notificationService.getByUser(principal.getName());
+        model.addAttribute("actionMessage", "Welcome to tennistico!");
         model.addAttribute("notifications", notifications);
         session.setAttribute("loggedUser", playerDtoService.getPlayerDtoByEmail(principal.getName()));
         return "dashboard";
