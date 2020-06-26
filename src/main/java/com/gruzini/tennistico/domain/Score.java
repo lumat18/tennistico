@@ -18,7 +18,7 @@ public class Score {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.PERSIST)
     private List<Set> sets;
 
     @OneToOne
