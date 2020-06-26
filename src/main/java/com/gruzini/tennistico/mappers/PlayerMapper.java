@@ -17,7 +17,7 @@ public class PlayerMapper {
                 .gender(Gender.valueOf(registrationForm.getGender()))
                 .playerSkill(PlayerSkill.valueOf(registrationForm.getPlayerSkill()))
                 .yearsOfExperience(registrationForm.getYearsOfExperience())
-                .rankingPoints(PlayerSkill.valueOf(registrationForm.getPlayerSkill()).getPoints())
+                .rankingPoints(PlayerSkill.valueOf(registrationForm.getPlayerSkill()).getRankingPoints())
                 .build();
     }
 }

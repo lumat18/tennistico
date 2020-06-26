@@ -50,7 +50,10 @@ public class Match {
     }
 
     public Optional<Player> getGuest() {
-        return Optional.ofNullable(this.players.get(GUEST_INDEX));
+        if (this.players.size() < 2){
+            return Optional.empty();
+        }
+        return Optional.of(this.players.get(GUEST_INDEX));
     }
 
     public void setHost(final Player player) {
