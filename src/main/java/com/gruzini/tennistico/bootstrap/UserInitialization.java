@@ -34,6 +34,7 @@ public class UserInitialization implements CommandLineRunner {
     public void run(String... args) throws Exception {
         final Player player = Player.builder()
                 .playerSkill(PlayerSkill.AMATEUR)
+                .rankingPoints(1200)
                 .yearsOfExperience(3)
                 .gender(Gender.MALE)
                 .birthday(LocalDate.of(1970, 2, 3))

@@ -35,9 +35,9 @@ public class MatchDtoService {
         this.futureMatchMapper = futureMatchMapper;
     }
 
-    public List<HostedMatchDto> getHostedMatchesDtoExceptHostedBy(final String username) {
+    public List<HostedMatchDto> getHostedMatchesDtoExceptHostedBy(String filter, final String username) {
         final User user = userService.getByEmail(username);
-        final List<Match> hostedNotByPlayer = matchService.getHostedMatchesExceptHostedBy(user.getPlayer());
+        final List<Match> hostedNotByPlayer = matchService.getFilteredHostedMatchesExceptHostedBy(filter, user.getPlayer());
         return hostedNotByPlayer.stream()
                 .map(hostedMatchMapper::toMatchInfoDto)
                 .collect(Collectors.toList());
