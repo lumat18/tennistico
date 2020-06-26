@@ -65,6 +65,7 @@ public class JoinMatchInitializer implements CommandLineRunner {
                 .gender(Gender.MALE)
                 .playerSkill(PlayerSkill.PROFESSIONAL)
                 .yearsOfExperience(32)
+                .rankingPoints(1600)
                 .build();
         playerRepository.save(host);
 
@@ -84,6 +85,7 @@ public class JoinMatchInitializer implements CommandLineRunner {
                 .gender(Gender.MALE)
                 .playerSkill(PlayerSkill.PROFESSIONAL)
                 .yearsOfExperience(32)
+                .rankingPoints(1600)
                 .build();
         playerRepository.save(guest);
 
