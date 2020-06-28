@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 
+import javax.validation.Valid;
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ import static java.util.Objects.isNull;
 @Validated
 public class ScoreDto {
     @NotEmpty
-    private List<SetDto> setDtoList;
+    private List<@Valid SetDto> setDtoList;
 
     public ScoreDto(){
         List<SetDto> setDtoList = new ArrayList<>();
