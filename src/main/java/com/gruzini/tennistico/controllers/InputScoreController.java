@@ -7,7 +7,10 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -27,14 +30,17 @@ public class InputScoreController {
 
     @PostMapping("/begin")
     public String beginSubmittingScore(@RequestParam(name = "match_id") final Long matchId,
+                                       @RequestParam(name = "trigger_id") final Long triggerNotificationId,
                                        final Model model) {
         model.addAttribute("match", matchService.getById(matchId));
+        model.addAttribute("trigger_id", triggerNotificationId);
         model.addAttribute("score", new ScoreDto());
         return "score";
     }
 
     @PostMapping("/process")
-    public String processSubmittedScore(@ModelAttribute(name = "match_id") final Long matchId,
+    public String processSubmittedScore(@RequestParam(name = "match_id") final Long matchId,
+                                        @RequestParam(name = "trigger_id") final Long triggerNotificationId,
                                         @Valid @ModelAttribute(name = "score") final ScoreDto scoreDto,
                                         final Errors errors,
                                         final Model model,
@@ -45,7 +51,7 @@ public class InputScoreController {
             model.addAttribute("msg", "Invalid score input");
             return "score";
         }
-        applicationEventPublisher.publishEvent(new InputScoreEvent(this, matchId, principal.getName(), scoreDto));
+        applicationEventPublisher.publishEvent(new InputScoreEvent(this, matchId, triggerNotificationId, principal.getName(), scoreDto));
         return "redirect:/dashboard";
     }
 }

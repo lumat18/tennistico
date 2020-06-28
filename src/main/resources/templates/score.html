@@ -31,6 +31,8 @@
                            <form method="post" th:action="@{/input-score/process}" th:object="${score}">
                               <input hidden type="text" th:name="match_id" th:id="match_id"
                                      th:value="${match.getId()}">
+                              <input hidden type="text" th:name="trigger_id" th:id="trigger_id"
+                                     th:value="${trigger_id}">
 
                               <div class="d-flex justify-content-between">
                                  <span class="gruzini-registration-error" th:if="${msg != null}" th:text="${msg}"></span>
