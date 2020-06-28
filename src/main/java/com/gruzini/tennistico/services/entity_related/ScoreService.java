@@ -1,6 +1,7 @@
 package com.gruzini.tennistico.services.entity_related;
 
 import com.gruzini.tennistico.domain.Score;
+import com.gruzini.tennistico.exceptions.ScoreNotFoundException;
 import com.gruzini.tennistico.repositories.ScoreRepository;
 import org.springframework.stereotype.Service;
 
@@ -14,5 +15,9 @@ public class ScoreService {
 
    public Score save(final Score score){
       return scoreRepository.save(score);
+   }
+
+   public Score getById(final Long id){
+      return scoreRepository.getById(id).orElseThrow(ScoreNotFoundException:: new);
    }
 }
