@@ -6,6 +6,7 @@ import com.gruzini.tennistico.domain.Score;
 import com.gruzini.tennistico.events.ConfirmScoreEvent;
 import com.gruzini.tennistico.services.entity_related.MatchService;
 import com.gruzini.tennistico.services.entity_related.PlayerService;
+import com.gruzini.tennistico.services.entity_related.ScoreService;
 import com.gruzini.tennistico.services.point_counter.RankingPointCounter;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.event.EventListener;
@@ -14,16 +15,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class RankingService {
 
-    private final PlayerService playerService;
     private final MatchService matchService;
+    private final ScoreService scoreService;
     private final RankingPointCounter rankingPointCounter;
     private final WinDecidingService winDecidingService;
 
-    public RankingService(final PlayerService playerService,
-                          final MatchService matchService,
+    public RankingService(final MatchService matchService,
+                          final ScoreService scoreService,
                           @Qualifier("elo") final RankingPointCounter rankingPointCounter,
                           final WinDecidingService winDecidingService) {
-        this.playerService = playerService;
+        this.scoreService = scoreService;
         this.matchService = matchService;
         this.rankingPointCounter = rankingPointCounter;
         this.winDecidingService = winDecidingService;
@@ -34,6 +35,7 @@ public class RankingService {
         final Match match = matchService.getById(event.getMatchId());
         match.setScore(winDecidingService.updateWinnerAndLoser(match));
         updateStandings(match.getScore());
+        matchService.save(match);
     }
 
     public void updateStandings(final Score score) {
@@ -47,8 +49,6 @@ public class RankingService {
             winner.setRankingPoints(rankingPointCounter.calculateWinPoints(winner.getRankingPoints(), loser.getRankingPoints()));
             loser.setRankingPoints(rankingPointCounter.calculateLossPoints(loser.getRankingPoints(), winner.getRankingPoints()));
         }
-
-        playerService.save(winner);
-        playerService.save(loser);
+        scoreService.save(score);
     }
 }
