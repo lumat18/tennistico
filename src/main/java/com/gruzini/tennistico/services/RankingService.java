@@ -17,15 +17,18 @@ public class RankingService {
 
     private final MatchService matchService;
     private final ScoreService scoreService;
+    private final PlayerService playerService;
     private final RankingPointCounter rankingPointCounter;
     private final WinDecidingService winDecidingService;
 
     public RankingService(final MatchService matchService,
                           final ScoreService scoreService,
+                          final PlayerService playerService,
                           @Qualifier("elo") final RankingPointCounter rankingPointCounter,
                           final WinDecidingService winDecidingService) {
         this.scoreService = scoreService;
         this.matchService = matchService;
+        this.playerService = playerService;
         this.rankingPointCounter = rankingPointCounter;
         this.winDecidingService = winDecidingService;
     }
@@ -49,6 +52,8 @@ public class RankingService {
             winner.setRankingPoints(rankingPointCounter.calculateWinPoints(winner.getRankingPoints(), loser.getRankingPoints()));
             loser.setRankingPoints(rankingPointCounter.calculateLossPoints(loser.getRankingPoints(), winner.getRankingPoints()));
         }
+        playerService.save(winner);
+        playerService.save(loser);
         scoreService.save(score);
     }
 }

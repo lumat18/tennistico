@@ -37,7 +37,7 @@ public class WinDecidingService {
                 guestScore += 1;
             }
         }
-        
+
         if(hostScore > guestScore){
             return "host";
         } else if (hostScore < guestScore){
