@@ -1,51 +1,36 @@
 package com.gruzini.tennistico.services;
 
+import com.gruzini.tennistico.domain.Match;
+import com.gruzini.tennistico.domain.Score;
+import com.gruzini.tennistico.domain.Set;
+import com.gruzini.tennistico.exceptions.NoGuestInMatchException;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class WinDecidingService {
-    private static final int HOST_INDEX = 0;
-    private static final int GUEST_INDEX = 1;
-    private static final String SEPARATOR = "-";
-
-//    public Player decideWinner(final Match match) {
-//        if (isDraw(match)) {
-//            return null;
-//        }
-//        if (hostWins(match)) {
-//            return match.getHost();
-//        } else {
-//            return match.getGuest().orElseThrow(MatchPlayersException::new);
-//        }
-//    }
-
-//    private boolean isDraw(final Match match) {
-//        final String score = match.getScore();
-//        final int hostScore = getPlayerScore(score, HOST_INDEX);
-//        final int guestScore = getPlayerScore(score, GUEST_INDEX);
-//        return hostScore == guestScore;
-//    }
-//
-//    private boolean hostWins(final Match match) {
-//        final String score = match.getScore();
-//        final int hostScore = getPlayerScore(score, HOST_INDEX);
-//        final int guestScore = getPlayerScore(score, GUEST_INDEX);
-//        return hostScore > guestScore;
-//    }
-
-//    private int getPlayerScore(final String score, final int playerIndex) {
-//        final String[] split = score.split(SEPARATOR);
-//        return Integer.parseInt(split[playerIndex]);
-//    }
-//
-//    public Player decideLoser(final Match match) {
-//        if (isDraw(match)) {
-//            return null;
-//        }
-//        if (hostWins(match)) {
-//            return match.getGuest().orElseThrow(MatchPlayersException::new);
-//        } else {
-//            return match.getHost();
-//        }
-//    }
+    public Score updateWinnerAndLoser(final Match match){
+        int hostScore = 0;
+        int guestScore = 0;
+        final Score score = match.getScore();
+        List<Set> setList = score.getSets();
+        for (Set set : setList) {
+            if (set.getHostScore() > set.getGuestScore()) {
+                hostScore += 1;
+            } else {
+                guestScore += 1;
+            }
+        }
+        if(hostScore >= guestScore){
+            score.setWinner(match.getHost());
+            score.setLoser(match.getGuest().orElseThrow(NoGuestInMatchException::new));
+            score.setDraw(hostScore == guestScore);
+        } else {
+            score.setWinner(match.getGuest().orElseThrow(NoGuestInMatchException::new));
+            score.setLoser(match.getHost());
+            score.setDraw(false);
+        }
+        return score;
+    }
 }

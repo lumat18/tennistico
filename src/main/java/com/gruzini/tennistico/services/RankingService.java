@@ -17,26 +17,22 @@ public class RankingService {
     private final PlayerService playerService;
     private final MatchService matchService;
     private final RankingPointCounter rankingPointCounter;
+    private final WinDecidingService winDecidingService;
 
-    public RankingService(PlayerService playerService,
-                          MatchService matchService,
-                          @Qualifier("elo") RankingPointCounter rankingPointCounter) {
+    public RankingService(final PlayerService playerService,
+                          final MatchService matchService,
+                          @Qualifier("elo") final RankingPointCounter rankingPointCounter,
+                          final WinDecidingService winDecidingService) {
         this.playerService = playerService;
         this.matchService = matchService;
         this.rankingPointCounter = rankingPointCounter;
+        this.winDecidingService = winDecidingService;
     }
-
-    /* TODO
-     * determine the winner and loser
-     * update players win/loss - in their rankings
-     * calculate the to be added ranking points - STRATEGY
-     * update player rankingPoints -> in their ranking
-     * save players to db
-     */
 
     @EventListener
     public void handleEvent(final ConfirmScoreEvent event) {
         final Match match = matchService.getById(event.getMatchId());
+        match.setScore(winDecidingService.updateWinnerAndLoser(match));
         updateStandings(match.getScore());
     }
 
