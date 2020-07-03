@@ -11,9 +11,24 @@ import java.util.List;
 @Component
 public class WinDecidingService {
     public Score updateWinnerAndLoser(final Match match){
+        final Score score = match.getScore();
+        final String result = calculateMatchResult(score);
+
+        if (result.equals("guest")){
+            score.setWinner(match.getGuest().orElseThrow(NoGuestInMatchException::new));
+            score.setLoser(match.getHost());
+            score.setDraw(false);
+        } else {
+            score.setWinner(match.getHost());
+            score.setLoser(match.getGuest().orElseThrow(NoGuestInMatchException::new));
+            score.setDraw(result.equals("draw"));
+        }
+        return score;
+    }
+
+    private String calculateMatchResult(final Score score){
         int hostScore = 0;
         int guestScore = 0;
-        final Score score = match.getScore();
         List<Set> setList = score.getSets();
         for (Set set : setList) {
             if (set.getHostScore() > set.getGuestScore()) {
@@ -22,15 +37,13 @@ public class WinDecidingService {
                 guestScore += 1;
             }
         }
-        if(hostScore >= guestScore){
-            score.setWinner(match.getHost());
-            score.setLoser(match.getGuest().orElseThrow(NoGuestInMatchException::new));
-            score.setDraw(hostScore == guestScore);
+        
+        if(hostScore > guestScore){
+            return "host";
+        } else if (hostScore < guestScore){
+            return "guest";
         } else {
-            score.setWinner(match.getGuest().orElseThrow(NoGuestInMatchException::new));
-            score.setLoser(match.getHost());
-            score.setDraw(false);
+            return "draw";
         }
-        return score;
     }
 }
