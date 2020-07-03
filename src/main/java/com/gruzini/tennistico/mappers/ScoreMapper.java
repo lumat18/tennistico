@@ -27,8 +27,11 @@ public class ScoreMapper {
               .sets(mapSets(prepareSetDtoList(scoreDTO.getSetDtoList())))
               .winner(setWinner(scoreDTO))
               .loser(setLoser(scoreDTO))
+              .draw(checkIfDraw())
               .build();
    }
+
+
 
    private List<SetDto> prepareSetDtoList(final List<SetDto> setDtoList) {
       List<SetDto> preparedSetDtoList = new ArrayList<>();
@@ -40,14 +43,19 @@ public class ScoreMapper {
       return preparedSetDtoList;
    }
 
-   //TODO: implement windDecider here
+   //TODO: implement winDecider here
    private Player setLoser(ScoreDto scoreDTO) {
       return null;
    }
 
-   //TODO: implement windDecider here
+   //TODO: implement winDecider here
    private Player setWinner(ScoreDto scoreDTO) {
       return null;
+   }
+
+   //TODO: implement winDecider here
+   private boolean checkIfDraw() {
+      return false;
    }
 
    private List<Set> mapSets(List<SetDto> setDtoList) {

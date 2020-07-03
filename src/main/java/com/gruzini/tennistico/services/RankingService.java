@@ -2,6 +2,7 @@ package com.gruzini.tennistico.services;
 
 import com.gruzini.tennistico.domain.Match;
 import com.gruzini.tennistico.domain.Player;
+import com.gruzini.tennistico.domain.Score;
 import com.gruzini.tennistico.events.ConfirmScoreEvent;
 import com.gruzini.tennistico.services.entity_related.MatchService;
 import com.gruzini.tennistico.services.entity_related.PlayerService;
@@ -36,17 +37,22 @@ public class RankingService {
     @EventListener
     public void handleEvent(final ConfirmScoreEvent event) {
         final Match match = matchService.getById(event.getMatchId());
-        updateWinner(match.getScore().getWinner());
-        updateLoser(match.getScore().getLoser());
+        updateStandings(match.getScore());
     }
 
-    public void updateWinner(final Player player) {
-        player.setRankingPoints(player.getRankingPoints() + rankingPointCounter.calculateWinPoints());
-        playerService.save(player);
-    }
+    public void updateStandings(final Score score) {
+        final Player winner = score.getWinner();
+        final Player loser = score.getLoser();
 
-    public void updateLoser(final Player player) {
-        player.setRankingPoints(player.getRankingPoints() + rankingPointCounter.calculateLossPoints());
-        playerService.save(player);
+        if (score.isDraw()){
+            winner.setRankingPoints(rankingPointCounter.calculateDrawPoints(winner.getRankingPoints(), loser.getRankingPoints()));
+            loser.setRankingPoints(rankingPointCounter.calculateDrawPoints(loser.getRankingPoints(), winner.getRankingPoints()));
+        } else {
+            winner.setRankingPoints(rankingPointCounter.calculateWinPoints(winner.getRankingPoints(), loser.getRankingPoints()));
+            loser.setRankingPoints(rankingPointCounter.calculateLossPoints(loser.getRankingPoints(), winner.getRankingPoints()));
+        }
+
+        playerService.save(winner);
+        playerService.save(loser);
     }
 }
