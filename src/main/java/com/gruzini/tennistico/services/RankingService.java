@@ -20,7 +20,7 @@ public class RankingService {
 
     public RankingService(PlayerService playerService,
                           MatchService matchService,
-                          @Qualifier("simple") RankingPointCounter rankingPointCounter) {
+                          @Qualifier("elo") RankingPointCounter rankingPointCounter) {
         this.playerService = playerService;
         this.matchService = matchService;
         this.rankingPointCounter = rankingPointCounter;
