@@ -4,10 +4,10 @@ import lombok.Getter;
 
 @Getter
 public enum PlayerSkill {
-   BEGINNER(1000),
-   AMATEUR(1200),
-   ADVANCED(1400),
-   PROFESSIONAL(1600);
+   BEGINNER(1500),
+   AMATEUR(1800),
+   ADVANCED(2100),
+   PROFESSIONAL(2400);
 
    private final Integer rankingPoints;
 

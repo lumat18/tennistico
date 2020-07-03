@@ -67,9 +67,8 @@ public class JoinMatchInitializer implements CommandLineRunner {
                 .birthday(LocalDate.of(1981, 8, 8))
                 .gender(Gender.MALE)
                 .playerSkill(PlayerSkill.PROFESSIONAL)
-                .rankingPoints(1900)
+                .rankingPoints(2400)
                 .yearsOfExperience(32)
-                .rankingPoints(1600)
                 .build();
         playerRepository.save(host);
 
@@ -89,9 +88,8 @@ public class JoinMatchInitializer implements CommandLineRunner {
                 .birthday(LocalDate.of(1982, 4, 21))
                 .gender(Gender.MALE)
                 .playerSkill(PlayerSkill.PROFESSIONAL)
-                .rankingPoints(1500)
+                .rankingPoints(2400)
                 .yearsOfExperience(32)
-                .rankingPoints(1600)
                 .build();
         playerRepository.save(guest);
 
