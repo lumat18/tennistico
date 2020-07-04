@@ -49,4 +49,5 @@ public class RankingService {
         player.setRankingPoints(player.getRankingPoints() + rankingPointCounter.calculateLossPoints());
         playerService.save(player);
     }
+    
 }
