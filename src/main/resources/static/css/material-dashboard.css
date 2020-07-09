@@ -24903,4 +24903,10 @@ fieldset[disabled][disabled] .dark-edition .has-error .form-control,
   padding-right: 10px;
   border-radius: 16px;
 }
+
+.gruzini-logout{
+  background: linear-gradient(60deg, #f5700c, #ff9800);
+  color: #ffffff;
+  border-radius: 4px;
+}
 /* end of navbar styling */
