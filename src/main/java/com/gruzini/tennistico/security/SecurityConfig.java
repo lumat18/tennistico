@@ -29,7 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 .usernameParameter("username")
                 .passwordParameter("password")
-                .defaultSuccessUrl("/dashboard")
+                .defaultSuccessUrl("/dashboard", true)
                 .failureUrl("/login-error");
 
         http.logout();
