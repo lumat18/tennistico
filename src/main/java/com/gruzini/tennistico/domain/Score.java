@@ -27,4 +27,5 @@ public class Score {
     @OneToOne
     private Player loser;
 
+    private boolean draw;
 }

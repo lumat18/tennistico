@@ -25,10 +25,10 @@ public class ScoreMapper {
    public Score toScore(final ScoreDto scoreDTO) {
       return Score.builder()
               .sets(mapSets(prepareSetDtoList(scoreDTO.getSetDtoList())))
-              .winner(setWinner(scoreDTO))
-              .loser(setLoser(scoreDTO))
               .build();
    }
+
+
 
    private List<SetDto> prepareSetDtoList(final List<SetDto> setDtoList) {
       List<SetDto> preparedSetDtoList = new ArrayList<>();
@@ -38,16 +38,6 @@ public class ScoreMapper {
                  }
               });
       return preparedSetDtoList;
-   }
-
-   //TODO: implement windDecider here
-   private Player setLoser(ScoreDto scoreDTO) {
-      return null;
-   }
-
-   //TODO: implement windDecider here
-   private Player setWinner(ScoreDto scoreDTO) {
-      return null;
    }
 
    private List<Set> mapSets(List<SetDto> setDtoList) {

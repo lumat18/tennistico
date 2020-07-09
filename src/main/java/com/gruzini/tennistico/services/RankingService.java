@@ -2,9 +2,11 @@ package com.gruzini.tennistico.services;
 
 import com.gruzini.tennistico.domain.Match;
 import com.gruzini.tennistico.domain.Player;
+import com.gruzini.tennistico.domain.Score;
 import com.gruzini.tennistico.events.ConfirmScoreEvent;
 import com.gruzini.tennistico.services.entity_related.MatchService;
 import com.gruzini.tennistico.services.entity_related.PlayerService;
+import com.gruzini.tennistico.services.entity_related.ScoreService;
 import com.gruzini.tennistico.services.point_counter.RankingPointCounter;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.event.EventListener;
@@ -13,40 +15,45 @@ import org.springframework.stereotype.Service;
 @Service
 public class RankingService {
 
-    private final PlayerService playerService;
     private final MatchService matchService;
+    private final ScoreService scoreService;
+    private final PlayerService playerService;
     private final RankingPointCounter rankingPointCounter;
+    private final WinDecidingService winDecidingService;
 
-    public RankingService(PlayerService playerService,
-                          MatchService matchService,
-                          @Qualifier("simple") RankingPointCounter rankingPointCounter) {
-        this.playerService = playerService;
+    public RankingService(final MatchService matchService,
+                          final ScoreService scoreService,
+                          final PlayerService playerService,
+                          @Qualifier("elo") final RankingPointCounter rankingPointCounter,
+                          final WinDecidingService winDecidingService) {
+        this.scoreService = scoreService;
         this.matchService = matchService;
+        this.playerService = playerService;
         this.rankingPointCounter = rankingPointCounter;
+        this.winDecidingService = winDecidingService;
     }
-
-    /* TODO
-     * determine the winner and loser
-     * update players win/loss - in their rankings
-     * calculate the to be added ranking points - STRATEGY
-     * update player rankingPoints -> in their ranking
-     * save players to db
-     */
 
     @EventListener
     public void handleEvent(final ConfirmScoreEvent event) {
         final Match match = matchService.getById(event.getMatchId());
-        updateWinner(match.getScore().getWinner());
-        updateLoser(match.getScore().getLoser());
+        match.setScore(winDecidingService.updateWinnerAndLoser(match));
+        updateStandings(match.getScore());
+        matchService.save(match);
     }
 
-    public void updateWinner(final Player player) {
-        player.setRankingPoints(player.getRankingPoints() + rankingPointCounter.calculateWinPoints());
-        playerService.save(player);
-    }
+    public void updateStandings(final Score score) {
+        final Player winner = score.getWinner();
+        final Player loser = score.getLoser();
 
-    public void updateLoser(final Player player) {
-        player.setRankingPoints(player.getRankingPoints() + rankingPointCounter.calculateLossPoints());
-        playerService.save(player);
+        if (score.isDraw()){
+            winner.setRankingPoints(rankingPointCounter.calculateDrawPoints(winner.getRankingPoints(), loser.getRankingPoints()));
+            loser.setRankingPoints(rankingPointCounter.calculateDrawPoints(loser.getRankingPoints(), winner.getRankingPoints()));
+        } else {
+            winner.setRankingPoints(rankingPointCounter.calculateWinPoints(winner.getRankingPoints(), loser.getRankingPoints()));
+            loser.setRankingPoints(rankingPointCounter.calculateLossPoints(loser.getRankingPoints(), winner.getRankingPoints()));
+        }
+        playerService.save(winner);
+        playerService.save(loser);
+        scoreService.save(score);
     }
 }
