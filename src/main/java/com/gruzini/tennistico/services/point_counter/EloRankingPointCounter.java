@@ -9,21 +9,21 @@ public class EloRankingPointCounter implements RankingPointCounter{
    @Override
    public int calculateWinPoints(Integer winnerRanking, Integer loserRanking) {
       final Double E1 = calculateExpectedRanking(winnerRanking, loserRanking);
-      final Integer S1E1 = (int) Double.doubleToLongBits(K_FACTOR*(1D - E1));
+      final Integer S1E1 = (int) Math.round(K_FACTOR*(1D - E1));
       return winnerRanking + S1E1;
    }
 
    @Override
    public int calculateDrawPoints(Integer player1Ranking, Integer player2Ranking) {
       final Double E1 = calculateExpectedRanking(player1Ranking, player2Ranking);
-      final Integer S1E1 = (int) Double.doubleToLongBits(K_FACTOR*(0.5 - E1));
+      final Integer S1E1 = (int) Math.round(K_FACTOR*(0.5 - E1));
       return player1Ranking + S1E1;
    }
 
    @Override
    public int calculateLossPoints(Integer loserRanking, Integer winnerRanking) {
       final Double E1 = calculateExpectedRanking(loserRanking, winnerRanking);
-      final Integer S1E1 = (int) Double.doubleToLongBits(K_FACTOR*(0D - E1));
+      final Integer S1E1 = (int) Math.round(K_FACTOR*(0D - E1));
       return loserRanking + S1E1;
    }
 
@@ -34,6 +34,7 @@ public class EloRankingPointCounter implements RankingPointCounter{
    }
 
    private Long calculateTransformedRanking(final Integer ranking){
-      return Double.doubleToLongBits(Math.pow(10, (double)ranking/400));
+      double exponent = ranking / 400;
+      return Math.round(Math.pow(10, exponent));
    }
 }
