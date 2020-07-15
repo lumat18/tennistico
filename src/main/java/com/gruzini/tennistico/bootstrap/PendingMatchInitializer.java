@@ -45,9 +45,9 @@ public class PendingMatchInitializer implements CommandLineRunner {
       final Player player2 = playerService.getByUsername(user2.getEmail());
       final Match match = Match.builder()
               .court(court)
-              .startingAt(LocalDateTime.of(2020, 6, 25, 8, 30))
-              .endingAt(LocalDateTime.of(2020, 6, 25, 11, 30))
-              .matchStatus(MatchStatus.PENDING)
+              .startingAt(LocalDateTime.of(2020, 7, 15, 11, 45))
+              .endingAt(LocalDateTime.of(2020, 7, 15, 12, 30))
+              .matchStatus(MatchStatus.UPCOMING)
               .players(List.of(player1,player2))
               .build();
       matchService.save(match);

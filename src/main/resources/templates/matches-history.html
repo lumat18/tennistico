@@ -24,13 +24,16 @@
                      </div>
                      <div class="card-body table-responsive">
                         <table class="table table-hover">
+<!--                           TODO: add modal here for opponent -->
                            <thead class="text-warning">
-                           <th class="gruzini-text-card-content">ID</th>
-                           <th class="gruzini-text-card-content">Opponent</th>
-                           <th class="gruzini-text-card-content">Court</th>
-                           <th class="gruzini-text-card-content">Date</th>
-                           <th class="gruzini-text-card-content">Score</th>
-                           <th class="gruzini-text-card-content">Win / Loss</th>
+                           <tr>
+                              <th class="gruzini-text-card-content">ID</th>
+                              <th class="gruzini-text-card-content">Opponent</th>
+                              <th class="gruzini-text-card-content">Court</th>
+                              <th class="gruzini-text-card-content">Date</th>
+                              <th class="gruzini-text-card-content">Score</th>
+                              <th class="gruzini-text-card-content">Win / Loss</th>
+                           </tr>
                            </thead>
                            <tbody>
                            <tr th:each="match, iter : ${archivedMatches}">
