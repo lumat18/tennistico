@@ -13,4 +13,6 @@ public class PlayerDto {
    private String firstName;
    private String lastName;
    private Integer rankingPoints;
+   private Integer age;
+   private String gender;
 }

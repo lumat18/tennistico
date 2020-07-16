@@ -38,7 +38,11 @@
                            <tbody>
                            <tr th:each="match, iter : ${archivedMatches}">
                               <td class="gruzini-text-card-content" th:text="${iter.index+1}"></td>
-                              <td class="gruzini-text-card-content" th:text="${match.opponentName}"></td>
+                              <td class="gruzini-text-card-content">
+                                 <span class="player-modal" style="cursor: pointer" onclick="showModal()"
+                                       th:text="${match.opponent.firstName + ' ' + match.opponent.lastName}">
+                                 </span>
+                              </td>
                               <td class="gruzini-text-card-content" th:text="${match.courtName}"></td>
                               <td class="gruzini-text-card-content" th:text="${match.date}"></td>
                               <td class="gruzini-text-card-content" th:text="${match.score}"></td>
@@ -50,21 +54,53 @@
                   </div>
                </div>
             </div>
+            <div id="playerModal" class="modal">
+               <div class="modal-content card">
+                  <div class="card-header card-header-success">
+                     <span class="gruzini-title">Modal header</span>
+                     <span class="close">&times;</span>
+                  </div>
+                  <div class="card-body table-responsive">
+                     <p>Modal body</p>
+                  </div>
+               </div>
+            </div>
          </div>
       </div>
+
       <!--FOOTER-->
       <footer th:insert="/fragments/footer :: footer"></footer>
       <!--END FOOTER-->
-      <script>
-         const currentDate = new Date();
-         let shownFullDate = document.getElementById('fullDate');
-         shownFullDate.innerHTML = shownFullDate.innerHTML + dateFormatter(currentDate);
-      </script>
    </div>
 </div>
 <!--JAVASCRIPT IMPORTS-->
 <div th:replace="/fragments/js-imports :: js-imports"></div>
 <!--END JAVASCRIPT IMPORTS-->
+
+<script>
+   // Get the modal
+   let modal = document.getElementById("playerModal");
+
+   // Get the <span> element that closes the modal
+   let span = document.getElementsByClassName("close")[0];
+
+   function showModal(){
+      modal.style.display = "block";
+   }
+
+   // When the user clicks on <span> (x), close the modal
+   span.onclick = function() {
+      modal.style.display = "none";
+   }
+
+   // When the user clicks anywhere outside of the modal, close it
+   window.onclick = function(event) {
+      if (event.target === modal) {
+         modal.style.display = "none";
+      }
+   }
+</script>
+
 </body>
 
 </html>
