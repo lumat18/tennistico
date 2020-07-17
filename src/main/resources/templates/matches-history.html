@@ -39,7 +39,9 @@
                            <tr th:each="match, iter : ${archivedMatches}">
                               <td class="gruzini-text-card-content" th:text="${iter.index+1}"></td>
                               <td class="gruzini-text-card-content">
-                                 <span class="player-modal" style="cursor: pointer" onclick="showModal()"
+                                 <span class="player-modal" style="cursor: pointer"
+                                       th:attr="data-first=${match.opponent.firstName},data-last=${match.opponent.lastName}"
+                                       onclick="showModal(this.getAttribute('data-first'), this.getAttribute('data-last'))"
                                        th:text="${match.opponent.firstName + ' ' + match.opponent.lastName}">
                                  </span>
                               </td>
@@ -57,7 +59,7 @@
             <div id="playerModal" class="modal">
                <div class="modal-content card">
                   <div class="card-header card-header-success">
-                     <span class="gruzini-title">Modal header</span>
+                     <span id="modalTitle" class="gruzini-title"></span>
                      <span class="close">&times;</span>
                   </div>
                   <div class="card-body table-responsive">
@@ -84,7 +86,10 @@
    // Get the <span> element that closes the modal
    let span = document.getElementsByClassName("close")[0];
 
-   function showModal(){
+   let modalTitle = document.getElementById("modalTitle");
+
+   function showModal(firstName, lastName) {
+      modalTitle.textContent = firstName + " " + lastName;
       modal.style.display = "block";
    }
 
