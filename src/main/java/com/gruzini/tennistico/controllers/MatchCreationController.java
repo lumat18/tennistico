@@ -16,7 +16,7 @@ import javax.validation.Valid;
 import java.security.Principal;
 
 @Controller
-@RequestMapping("/dashboard/create")
+@RequestMapping("/create")
 public class MatchCreationController {
 
     private final ApplicationEventPublisher applicationEventPublisher;

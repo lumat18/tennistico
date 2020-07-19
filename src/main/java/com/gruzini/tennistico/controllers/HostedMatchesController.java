@@ -13,7 +13,7 @@ import java.util.List;
 import static java.util.Objects.isNull;
 
 @Controller
-@RequestMapping("/dashboard/hosted")
+@RequestMapping("/hosted")
 public class HostedMatchesController {
     private static final String INITIAL_FILTER = "lvl";
 
@@ -36,6 +36,6 @@ public class HostedMatchesController {
     @PostMapping
     public String processMatchFilter(@RequestParam(name = "filter") final String filter, final RedirectAttributes attributes, final Principal principal){
         attributes.addFlashAttribute("filter", filter);
-        return "redirect:/dashboard/hosted";
+        return "redirect:/hosted";
     }
 }

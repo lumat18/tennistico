@@ -11,7 +11,7 @@ import java.security.Principal;
 import java.util.List;
 
 @Controller
-@RequestMapping("/dashboard/my-matches")
+@RequestMapping("/my-matches")
 public class MyMatchesController {
    private final MatchDtoService matchDtoService;
 
