@@ -39,7 +39,8 @@
                            <tr th:each="match, iter : ${archivedMatches}">
                               <td class="gruzini-text-card-content" th:text="${iter.index+1}"></td>
                               <td class="gruzini-text-card-content">
-                                 <span class="player-modal" style="cursor: pointer"
+                                 <span class="player-modal"
+                                       
                                        th:attr="data-name=${match.opponent.getFullName()}"
                                        onclick="showModal(this.getAttribute('data-name'))"
                                        th:text="${match.opponent.getFullName()}">
