@@ -24,7 +24,7 @@
                      </div>
                      <div class="card-body table-responsive">
                         <table class="table table-hover">
-<!--                           TODO: add modal here for opponent -->
+                           <!--                           TODO: add modal here for opponent -->
                            <thead class="text-warning">
                            <tr>
                               <th class="gruzini-text-card-content">ID</th>
@@ -40,9 +40,12 @@
                               <td class="gruzini-text-card-content" th:text="${iter.index+1}"></td>
                               <td class="gruzini-text-card-content">
                                  <span class="player-modal"
-                                       
-                                       th:attr="data-name=${match.opponent.getFullName()}"
-                                       onclick="showModal(this.getAttribute('data-name'))"
+                                       th:attr="data-name=${match.opponent.getFullName()}, data-points=${match.opponent.rankingPoints},
+                                                data-age=${match.opponent.age}, data-gender=${match.opponent.gender},
+                                                data-photo=${match.opponent.photoUrl}"
+                                       onclick="showModal(this.getAttribute('data-name'), this.getAttribute('data-points'),
+                                                           this.getAttribute('data-age'), this.getAttribute('data-gender'),
+                                                           this.getAttribute('data-photo'))"
                                        th:text="${match.opponent.getFullName()}">
                                  </span>
                               </td>
@@ -60,11 +63,23 @@
             <div id="playerModal" class="modal">
                <div class="modal-content card">
                   <div class="card-header card-header-success">
-                     <span id="modalTitle" class="gruzini-title"></span>
-                     <span class="close">&times;</span>
+                     <span id="modalTitle" class="gruzini-title" style="display: inline;"></span>
+                     <span class="close" style="display: inline;">&times;</span>
                   </div>
                   <div class="card-body table-responsive">
-                     <p>Modal body</p>
+                     <img id="modalPhoto" class="gruzini-player-photo"><br />
+                     <div style="float:left;">
+                        <span class="gruzini-input-group-text" style="display: inline;">Age: </span>
+                        <span id="modalAge" class="gruzini-input-group-text" style="display: inline;"></span>
+                     </div><br />
+                     <div style="float:left;">
+                        <span class="gruzini-input-group-text" style="display: inline;">Gender: </span>
+                        <span id="modalGender" class="gruzini-input-group-text" style="display: inline;"></span>
+                     </div><br />
+                     <div style="float:left;">
+                        <span class="gruzini-input-group-text" style="display: inline;">Ranking points: </span>
+                        <span id="modalPoints" class="gruzini-input-group-text" style="display: inline;"></span>
+                     </div>
                   </div>
                </div>
             </div>
@@ -88,19 +103,37 @@
    let span = document.getElementsByClassName("close")[0];
 
    let modalTitle = document.getElementById("modalTitle");
+   let modalAge = document.getElementById("modalAge");
+   let modalGender = document.getElementById("modalGender");
+   let modalPoints = document.getElementById("modalPoints");
+   let modalPhoto = document.getElementById("modalPhoto");
 
-   function showModal(fullName) {
+   function showModal(fullName, points, age, gender, photo) {
       modalTitle.textContent = fullName;
+      modalAge.textContent = age;
+      modalGender.textContent = gender;
+      modalPoints.textContent = points;
+      if(photo == null || photo === ''){
+         if(gender === 'MALE'){
+            modalPhoto.setAttribute('src', "/img/silhouette-male.png")
+         }
+         if(gender === 'FEMALE'){
+            modalPhoto.setAttribute('src', "/img/silhouette-female.png")
+         }
+      } else {
+         modalPhoto.setAttribute('src', photo);
+      }
+
       modal.style.display = "block";
    }
 
    // When the user clicks on <span> (x), close the modal
-   span.onclick = function() {
+   span.onclick = function () {
       modal.style.display = "none";
    }
 
    // When the user clicks anywhere outside of the modal, close it
-   window.onclick = function(event) {
+   window.onclick = function (event) {
       if (event.target === modal) {
          modal.style.display = "none";
       }
