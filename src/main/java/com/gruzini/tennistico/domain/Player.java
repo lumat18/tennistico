@@ -41,6 +41,8 @@ public class Player {
     @Column(name = "ranking_points")
     private Integer rankingPoints;
 
+    private String photoUrl;
+
     public Integer getAge() {
         return Period.between(getBirthday(), LocalDate.now()).getYears();
     }

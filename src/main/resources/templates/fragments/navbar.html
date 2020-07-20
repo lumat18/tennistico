@@ -9,7 +9,7 @@
         <div class="navbar-wrapper">
 <!--            <a class="navbar-brand" href="javascript:void(0)">Dashboard</a>-->
             <span class="gruzini-navbar-text"
-                    th:text="${session.loggedUser.firstName + ' ' + session.loggedUser.lastName}"></span>
+                    th:text="${session.loggedUser.getFullName()}"></span>
             <div class="gruzini-navbar-ranking">
                 <i class="material-icons" style="height: 22px;">emoji_events</i>
                 <span th:text="${session.loggedUser.rankingPoints}"></span>

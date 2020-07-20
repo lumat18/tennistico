@@ -13,6 +13,7 @@ public class PlayerDtoMapper {
               .rankingPoints(player.getRankingPoints())
               .gender(player.getGender().toString())
               .age(player.getAge())
+              .photoUrl(player.getPhotoUrl())
               .build();
    }
 }

@@ -40,9 +40,9 @@
                               <td class="gruzini-text-card-content" th:text="${iter.index+1}"></td>
                               <td class="gruzini-text-card-content">
                                  <span class="player-modal" style="cursor: pointer"
-                                       th:attr="data-first=${match.opponent.firstName},data-last=${match.opponent.lastName}"
-                                       onclick="showModal(this.getAttribute('data-first'), this.getAttribute('data-last'))"
-                                       th:text="${match.opponent.firstName + ' ' + match.opponent.lastName}">
+                                       th:attr="data-name=${match.opponent.getFullName()}"
+                                       onclick="showModal(this.getAttribute('name'))"
+                                       th:text="${match.opponent.getFullName()}">
                                  </span>
                               </td>
                               <td class="gruzini-text-card-content" th:text="${match.courtName}"></td>
@@ -88,8 +88,8 @@
 
    let modalTitle = document.getElementById("modalTitle");
 
-   function showModal(firstName, lastName) {
-      modalTitle.textContent = firstName + " " + lastName;
+   function showModal(fullName) {
+      modalTitle.textContent = fullName;
       modal.style.display = "block";
    }
 
