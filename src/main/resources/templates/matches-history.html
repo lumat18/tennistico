@@ -41,7 +41,7 @@
                               <td class="gruzini-text-card-content">
                                  <span class="player-modal" style="cursor: pointer"
                                        th:attr="data-name=${match.opponent.getFullName()}"
-                                       onclick="showModal(this.getAttribute('name'))"
+                                       onclick="showModal(this.getAttribute('data-name'))"
                                        th:text="${match.opponent.getFullName()}">
                                  </span>
                               </td>
