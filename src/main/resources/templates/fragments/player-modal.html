@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="player-modal" id="playerModal" class="modal">
+   <div class="modal-content card">
+      <div class="card-header card-header-success">
+         <span id="modalTitle" class="gruzini-title" style="display: inline;"></span>
+         <span class="close" style="display: inline;">&times;</span>
+      </div>
+      <div class="card-body table-responsive">
+         <img id="modalPhoto" class="gruzini-player-photo"><br />
+         <div style="float:left;">
+            <span class="gruzini-input-group-text" style="display: inline;">Age: </span>
+            <span id="modalAge" class="gruzini-input-group-text" style="display: inline;"></span>
+         </div><br />
+         <div style="float:left;">
+            <span class="gruzini-input-group-text" style="display: inline;">Gender: </span>
+            <span id="modalGender" class="gruzini-input-group-text" style="display: inline;"></span>
+         </div><br />
+         <div style="float:left;">
+            <span class="gruzini-input-group-text" style="display: inline;">Ranking points: </span>
+            <span id="modalPoints" class="gruzini-input-group-text" style="display: inline;"></span>
+         </div>
+      </div>
+   </div>
+</div>
+</html>
