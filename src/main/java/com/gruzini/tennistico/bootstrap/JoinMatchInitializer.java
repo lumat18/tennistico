@@ -52,13 +52,13 @@ public class JoinMatchInitializer implements CommandLineRunner {
                 .build();
         courtRepository.save(court);
 
-        final Match match1 = Match.builder()
-                .court(court)
-                .startingAt(LocalDateTime.of(2020, 6, 12, 8, 30))
-                .endingAt(LocalDateTime.of(2020, 6, 12, 11, 30))
-                .matchStatus(MatchStatus.HOSTED)
-                .build();
-        matchRepository.save(match1);
+//        final Match match1 = Match.builder()
+//                .court(court)
+//                .startingAt(LocalDateTime.now().plusHours(24))
+//                .endingAt(LocalDateTime.now().plusHours(26))
+//                .matchStatus(MatchStatus.HOSTED)
+//                .build();
+//        matchRepository.save(match1);
 
         final Player host = Player.builder()
                 .firstName("Roger")

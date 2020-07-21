@@ -6,16 +6,14 @@ import com.gruzini.tennistico.domain.Score;
 import com.gruzini.tennistico.exceptions.PlayerNotFoundException;
 import com.gruzini.tennistico.models.dto.PlayerDto;
 import com.gruzini.tennistico.models.dto.matchDto.ArchivedMatchDto;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class ArchivedMatchMapper {
 
     private final PlayerDtoMapper playerDtoMapper;
-
-    public ArchivedMatchMapper(final PlayerDtoMapper playerDtoMapper) {
-        this.playerDtoMapper = playerDtoMapper;
-    }
 
     public ArchivedMatchDto toArchivedMatchDTO(final Match match, final Player player) {
         return ArchivedMatchDto.builder()

@@ -2,20 +2,19 @@ package com.gruzini.tennistico.mappers;
 
 import com.gruzini.tennistico.domain.Match;
 import com.gruzini.tennistico.models.dto.matchDto.HostedMatchDto;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class HostedMatchMapper {
+
+    private final PlayerDtoMapper playerDtoMapper;
 
     public HostedMatchDto toMatchInfoDto(final Match match) {
         return HostedMatchDto.builder()
                 .id(match.getId())
-                .hostName(match.getHost().getFirstName() + " " + match.getHost().getLastName())
-                .hostGender(match.getHost().getGender().toString())
-                .hostAge(match.getHost().getAge())
-                .rankingPoints(match.getHost().getRankingPoints())
-                .hostLevel(match.getHost().getPlayerSkill().name())
-                .hostExp(match.getHost().getYearsOfExperience())
+                .host(playerDtoMapper.toPlayerDto(match.getHost()))
                 .address(match.getCourt().getStreet() + ", " + match.getCourt().getCity())
                 .start(match.getStartingAt())
                 .end(match.getEndingAt())
