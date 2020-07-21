@@ -47,7 +47,37 @@
 
                                     <tr th:each="match, iter : ${myMatches}">
                                        <td th:text="${iter.index+1}"></td>
-                                       <td th:text="${match.getHostName()} + ' vs. ' + ${match.getGuestName()}"></td>
+                                       <td>
+                                          <span th:if="${match.involvedPlayerHost}">
+                                             <span class="player-modal"
+                                                   th:attr="data-name=${match.host.getFullName()}, data-points=${match.host.rankingPoints},
+                                                data-age=${match.host.age}, data-gender=${match.host.gender},
+                                                data-photo=${match.host.photoUrl}"
+                                                   onclick="showModal(this.getAttribute('data-name'), this.getAttribute('data-points'),
+                                                           this.getAttribute('data-age'), this.getAttribute('data-gender'),
+                                                           this.getAttribute('data-photo'))"
+                                                   th:text="${match.host.getFullName()}">
+                                             </span>
+                                          </span>
+                                          <span th:unless="${match.involvedPlayerHost}">
+                                             <span th:text="${match.host.getFullName()}"></span>
+                                          </span>
+                                          <span> vs. </span>
+                                          <span th:if="${match.involvedPlayerHost and match.guest != null}">
+                                             <span th:text="${match.guest.getFullName()}"></span>
+                                          </span>
+                                          <span th:unless="${match.involvedPlayerHost}">
+                                             <span class="player-modal"
+                                                   th:attr="data-name=${match.guest.getFullName()}, data-points=${match.guest.rankingPoints},
+                                                data-age=${match.guest.age}, data-gender=${match.guest.gender},
+                                                data-photo=${match.guest.photoUrl}"
+                                                   onclick="showModal(this.getAttribute('data-name'), this.getAttribute('data-points'),
+                                                           this.getAttribute('data-age'), this.getAttribute('data-gender'),
+                                                           this.getAttribute('data-photo'))"
+                                                   th:text="${match.guest.getFullName()}">
+                                             </span>
+                                          </span>
+                                       </td>
                                        <td th:text="${match.getCourt()}"></td>
                                        <td>
                                           <span th:text="${#temporals.format(match.getStart(),'yyyy-MM-dd')}"></span>
@@ -96,6 +126,7 @@
                      </div>
                   </div>
                </div>
+               <div th:insert="fragments/player-modal :: player-modal"></div>
             </div>
          </div>
          <!--FOOTER-->
