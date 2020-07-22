@@ -38,3 +38,18 @@
     text-decoration: none;
     cursor: pointer;
 }
+
+.gruzini-player-photo{
+    max-height: 200px;
+    max-width: 300px;
+}
+
+.modal-div-content{
+    display: flex;
+    justify-content: center;
+}
+
+.modal-header-content{
+    display: flex;
+    justify-content: space-between;
+}
