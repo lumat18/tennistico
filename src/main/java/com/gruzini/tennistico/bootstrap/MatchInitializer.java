@@ -19,17 +19,17 @@ import java.util.List;
 
 @Component
 @Profile("dev")
-@Order(4)
-public class PendingMatchInitializer implements CommandLineRunner {
+@Order(3)
+public class MatchInitializer implements CommandLineRunner {
    private final UserService userService;
    private final MatchService matchService;
    private final CourtService courtService;
    private final PlayerService playerService;
 
-   public PendingMatchInitializer(final UserService userService,
-                                  final MatchService matchService,
-                                  final CourtService courtService,
-                                  final PlayerService playerService) {
+   public MatchInitializer(final UserService userService,
+                           final MatchService matchService,
+                           final CourtService courtService,
+                           final PlayerService playerService) {
       this.userService = userService;
       this.matchService = matchService;
       this.courtService = courtService;
@@ -38,28 +38,54 @@ public class PendingMatchInitializer implements CommandLineRunner {
 
    @Override
    public void run(final String... args) throws Exception {
-      final Court court = courtService.getById(1L);
+      final Court court1 = courtService.getById(1L);
       final User user1 = userService.getByEmail("roger@user.pl");
       final User user2 = userService.getByEmail("nadal@user.pl");
       final User user3 = userService.getByEmail("user@user.pl");
       final Player player1 = playerService.getByUsername(user1.getEmail());
       final Player player2 = playerService.getByUsername(user2.getEmail());
       final Player player3 = playerService.getByUsername(user3.getEmail());
+
       final Match match1 = Match.builder()
-              .court(court)
+              .court(court1)
               .startingAt(LocalDateTime.now())
               .endingAt(LocalDateTime.now().plusHours(2))
               .matchStatus(MatchStatus.UPCOMING)
-              .players(List.of(player1,player2))
-              .build();
-      final Match match2 = Match.builder()
-              .court(court)
-              .startingAt(LocalDateTime.now())
-              .endingAt(LocalDateTime.now().plusHours(2))
-              .matchStatus(MatchStatus.UPCOMING)
-              .players(List.of(player1,player3))
+              .players(List.of(player1, player2))
               .build();
       matchService.save(match1);
+      final Match match2 = Match.builder()
+              .court(court1)
+              .startingAt(LocalDateTime.now())
+              .endingAt(LocalDateTime.now().plusHours(2))
+              .matchStatus(MatchStatus.UPCOMING)
+              .players(List.of(player1, player3))
+              .build();
       matchService.save(match2);
+      final Match match3 = Match.builder()
+              .court(court1)
+              .startingAt(LocalDateTime.now().plusHours(24))
+              .endingAt(LocalDateTime.now().plusHours(26))
+              .matchStatus(MatchStatus.HOSTED)
+              .players(List.of(player1))
+              .build();
+      matchService.save(match3);
+      final Match match4 = Match.builder()
+              .court(court1)
+              .startingAt(LocalDateTime.now().plusHours(48))
+              .endingAt(LocalDateTime.now().plusHours(50))
+              .matchStatus(MatchStatus.UPCOMING)
+              .players(List.of(player1, player2))
+              .build();
+      matchService.save(match4);
+      final Match match5 = Match.builder()
+              .court(court1)
+              .startingAt(LocalDateTime.now().plusHours(72))
+              .endingAt(LocalDateTime.now().plusHours(74))
+              .matchStatus(MatchStatus.UPCOMING)
+              .players(List.of(player2,player1))
+              .build();
+      matchService.save(match5);
+
    }
 }
