@@ -36,7 +36,7 @@
                                         </div>
                                         <div class="gruzini-card-desc gruzini-search">
                                             <form class="gruzini-search-form"
-                                                  method="post" th:action="@{/dashboard/courts}">
+                                                  method="post" th:action="@{/courts}">
                                                 <div class="input-group mb-3">
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text gruzini-input-group-text gruzini-search-title"
@@ -73,7 +73,7 @@
                                                     <td th:text="${court.getCity()}"></td>
                                                     <td th:text="${court.getPhoneNumber()}"></td>
                                                     <td style="width: 110px !important;">
-                                                        <form method="post" th:action="@{/dashboard/create/begin}">
+                                                        <form method="post" th:action="@{/create/begin}">
                                                             <input hidden type="text" name="courtId" th:value="${court.getCourtId()}"/>
                                                             <input type="submit" class="btn btn-success gruzini-btn-success gruzini-button-small" value="Play here!">
                                                         </form>
