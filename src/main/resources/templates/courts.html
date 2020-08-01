@@ -57,16 +57,17 @@
                                         </div>
                                         <table class="table table-hover">
                                             <thead>
-                                            <th class="gruzini-text-card-content">ID</th>
-                                            <th class="gruzini-text-card-content">Name</th>
-                                            <th class="gruzini-text-card-content">Address</th>
-                                            <th class="gruzini-text-card-content">City</th>
-                                            <th class="gruzini-text-card-content">Phone Number</th>
-                                            <th class="gruzini-text-card-content"></th>
+                                            <tr>
+                                                <th class="gruzini-text-card-content">ID</th>
+                                                <th class="gruzini-text-card-content">Name</th>
+                                                <th class="gruzini-text-card-content">Address</th>
+                                                <th class="gruzini-text-card-content">City</th>
+                                                <th class="gruzini-text-card-content">Phone Number</th>
+                                                <th class="gruzini-text-card-content"></th>
+                                            </tr>
                                             </thead>
                                             <tbody>
-                                            <div th:each="court, iter : ${foundCourts}" >
-                                                <tr>
+                                                <tr th:each="court, iter : ${foundCourts}">
                                                     <td th:text="${iter.index+1}"></td>
                                                     <td th:text="${court.getName()}"></td>
                                                     <td th:text="${court.getAddress()}"></td>
@@ -79,7 +80,6 @@
                                                         </form>
                                                     </td>
                                                 </tr>
-                                            </div>
                                             </tbody>
                                         </table>
                                     </div>
