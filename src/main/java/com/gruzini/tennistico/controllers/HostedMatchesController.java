@@ -28,7 +28,7 @@ public class HostedMatchesController {
         if (isNull(filter) || filter.isBlank()){
             filter = INITIAL_FILTER;
         }
-        final List<HostedMatchDto> allHostedMatches = matchDtoService.getHostedMatchesDtoExceptHostedBy(filter, principal.getName());
+        final List<HostedMatchDto> allHostedMatches = matchDtoService.getHostedMatchDtosExceptHostedBy(filter, principal.getName());
         model.addAttribute("hostedMatches", allHostedMatches);
         return "hosted";
     }

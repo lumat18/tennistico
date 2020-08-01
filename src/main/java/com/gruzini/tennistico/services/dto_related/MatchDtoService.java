@@ -36,7 +36,7 @@ public class MatchDtoService {
         this.futureMatchMapper = futureMatchMapper;
     }
 
-    public List<HostedMatchDto> getHostedMatchesDtoExceptHostedBy(String filter, final String username) {
+    public List<HostedMatchDto> getHostedMatchDtosExceptHostedBy(String filter, final String username) {
         final User user = userService.getByEmail(username);
         final List<Match> hostedNotByPlayer = matchService.getFilteredHostedMatchesExceptHostedBy(filter, user.getPlayer());
         return hostedNotByPlayer.stream()
@@ -44,7 +44,7 @@ public class MatchDtoService {
                 .collect(Collectors.toList());
     }
 
-    public List<ArchivedMatchDto> getArchiveMatchesDtoBy(final String username) {
+    public List<ArchivedMatchDto> getArchiveMatchDtosBy(final String username) {
         final User user = userService.getByEmail(username);
         return matchService.getByPlayerAndStatus(user.getPlayer(), MatchStatus.ARCHIVED).stream()
                 .map(match -> archivedMatchMapper.toArchivedMatchDTO(match, user.getPlayer()))
@@ -61,7 +61,7 @@ public class MatchDtoService {
         }
     }
 
-    public List<FutureMatchDto> getAllFutureMatchesPlayerIsInvolvedIn(final String username) {
+    public List<FutureMatchDto> getAllFutureMatchDtosPlayerIsInvolvedIn(final String username) {
         final User user = userService.getByEmail(username);
         return matchService.getByMatchStatusesAndHostedBy(List.of(MatchStatus.HOSTED, MatchStatus.JOIN_REQUEST, MatchStatus.UPCOMING), user.getPlayer()).stream()
                 .map(futureMatchMapper::toFutureMatchDto)

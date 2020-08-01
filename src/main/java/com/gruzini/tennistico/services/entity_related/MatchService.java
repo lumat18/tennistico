@@ -89,7 +89,6 @@ public class MatchService {
     }
 
     public Optional<Match> getLastByPlayerAndStatus(Player player, MatchStatus status) {
-        return getByPlayerAndStatus(player, status).stream()
-                .max(Comparator.comparing(Match::getStartingAt));
+        return matchRepository.getTopByPlayersContainsAndMatchStatusOrderByStartingAtDesc(player,status);
     }
 }
