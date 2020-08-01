@@ -22,4 +22,6 @@ public interface MatchRepository extends JpaRepository<Match, Long> {
     List<Match> getAllByPlayersContainsAndMatchStatus(Player player, MatchStatus matchStatus);
 
     Optional<Match> findById(Long id);
+
+    Optional<Match> getTopByPlayersContainsAndMatchStatusOrderByStartingAtDesc(Player player, MatchStatus matchStatus);
 }

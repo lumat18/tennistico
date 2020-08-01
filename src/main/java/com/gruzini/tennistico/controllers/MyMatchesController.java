@@ -21,7 +21,7 @@ public class MyMatchesController {
 
    @GetMapping
    public String showAllFutureMatchesPlayerIsInvolvedIn(final Model model, final Principal principal){
-      final List<FutureMatchDto> allFutureMatches = matchDtoService.getAllFutureMatchesPlayerIsInvolvedIn(principal.getName());
+      final List<FutureMatchDto> allFutureMatches = matchDtoService.getAllFutureMatchDtosPlayerIsInvolvedIn(principal.getName());
       model.addAttribute("myMatches", allFutureMatches);
       return "my-matches";
    }

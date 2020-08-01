@@ -2,10 +2,8 @@ package com.gruzini.tennistico.services.entity_related;
 
 import com.gruzini.tennistico.domain.Match;
 import com.gruzini.tennistico.domain.Player;
-import com.gruzini.tennistico.domain.Score;
 import com.gruzini.tennistico.domain.enums.MatchStatus;
 import com.gruzini.tennistico.events.ChangeMatchStatusByEndingDateTimeEvent;
-import com.gruzini.tennistico.events.ChangeMatchStatusByStartingDateTimeEvent;
 import com.gruzini.tennistico.exceptions.MatchNotFoundException;
 import com.gruzini.tennistico.repositories.MatchRepository;
 import org.springframework.stereotype.Service;
@@ -13,7 +11,9 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static java.lang.Math.abs;
@@ -86,5 +86,9 @@ public class MatchService {
         return getAllExpiredByStatus(status).stream()
                 .map(Match::getHost)
                 .collect(Collectors.toList());
+    }
+
+    public Optional<Match> getLastByPlayerAndStatus(Player player, MatchStatus status) {
+        return matchRepository.getTopByPlayersContainsAndMatchStatusOrderByStartingAtDesc(player,status);
     }
 }
