@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -43,11 +44,21 @@ public class MatchDtoService {
                 .collect(Collectors.toList());
     }
 
-    public List<ArchivedMatchDto> getArchiveMatchDtoBy(final String username) {
+    public List<ArchivedMatchDto> getArchiveMatchesDtoBy(final String username) {
         final User user = userService.getByEmail(username);
         return matchService.getByPlayerAndStatus(user.getPlayer(), MatchStatus.ARCHIVED).stream()
                 .map(match -> archivedMatchMapper.toArchivedMatchDTO(match, user.getPlayer()))
                 .collect(Collectors.toList());
+    }
+
+    public ArchivedMatchDto getLastArchivedMatchDtoBy(final String username) {
+        final User user = userService.getByEmail(username);
+        final Optional<Match> last = matchService.getLastByPlayerAndStatus(user.getPlayer(), MatchStatus.ARCHIVED);
+        if (last.isPresent()){
+            return archivedMatchMapper.toArchivedMatchDTO(last.get(), user.getPlayer());
+        }else {
+            return ArchivedMatchDto.builder().build();
+        }
     }
 
     public List<FutureMatchDto> getAllFutureMatchesPlayerIsInvolvedIn(final String username) {

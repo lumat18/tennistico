@@ -20,7 +20,7 @@ public class MatchesHistoryController {
    @GetMapping
    public String showMatchesHistoryPage(final Model model,
                                         final Principal principal) {
-      model.addAttribute("archivedMatches", matchDtoService.getArchiveMatchDtoBy(principal.getName()));
+      model.addAttribute("archivedMatches", matchDtoService.getArchiveMatchesDtoBy(principal.getName()));
       return "matches-history";
    }
 }

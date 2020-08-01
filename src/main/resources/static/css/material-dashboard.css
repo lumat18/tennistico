@@ -16145,7 +16145,7 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
 .sidebar .nav p {
   margin: 0;
   line-height: 30px;
-  font-size: 14px;
+  font-size: 1.5rem;
   position: relative;
   display: block;
   height: auto;
@@ -18170,7 +18170,7 @@ label {
 }
 
 .card .card-footer .stats {
-  color: #999999;
+  color: #606477 !important;
 }
 
 .card .card-footer .stats .material-icons {
@@ -18178,7 +18178,7 @@ label {
   top: -10px;
   margin-right: 3px;
   margin-left: 3px;
-  font-size: 18px;
+  font-size: 1.5rem;
 }
 
 .card.bmd-card-raised {
@@ -18577,7 +18577,7 @@ label {
 .card .card-body + .card-footer .stats,
 .card .card-footer .stats {
   color: #999999;
-  font-size: 12px;
+  font-size: 1.5rem;
   line-height: 22px;
 }
 
@@ -18806,7 +18806,7 @@ label {
 
 .card-stats .card-header .card-category:not([class*="text-"]) {
   color: #999999;
-  font-size: 14px;
+  font-size: 1.5rem;
 }
 
 .card-stats .card-header + .card-footer {
@@ -20546,7 +20546,7 @@ Copyright (c) 2015 Daniel Eden
   }
 
   .navbar-collapse .nav p {
-    font-size: 1rem;
+    font-size: 1.5rem;
     margin: 0;
   }
 }

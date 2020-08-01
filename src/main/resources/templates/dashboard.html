@@ -37,15 +37,13 @@
                                 <p class="gruzini-title">Create New</p>
                             </div>
                             <div class="card-body">
-                                <h4 class="card-title">New Match</h4>
-                                <p class="card-category">
-                                <p class="card-category">Set up date and location, let other people join you</p>
+                                <h3 class="card-title">Set Time and Location</h3>
                             </div>
                             <a href="/dashboard/hosted">
                                 <div class="card-footer">
-                                    <div class="stats">
-                                        <i class="material-icons">access_time</i> Go and see all open matches
-                                    </div>
+                                    <h4 class="stats">
+                                        <i class="material-icons">access_time</i> All available matches
+                                    </h4>
                                 </div>
                             </a>
                         </div>
@@ -56,45 +54,71 @@
                                 <p style="font-size: 40px; text-align: center; padding-top: 10px">0 - 0</p>
                             </div>
                             <div class="card-body">
-                                <h4 class="card-title">Your Next Match</h4>
-                                <p class="card-category">Upcoming Campaign Performance</p>
+                                <h3 class="card-title">Your Next Match</h3>
                             </div>
                             <div class="card-footer">
-                                <div class="stats">
+                                <h4 class="stats">
                                     <i class="material-icons">access_time</i> 24/06/2020, Sopot 2 days remaining
-                                </div>
+                                </h4>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-12">
                         <div class="card card-chart">
                             <div class="card-header card-header-success  card-title-content">
-                                <p style="font-size: 40px; text-align: center; padding-top: 10px">6-4 4-6 6-2</p>
+                                <p style="font-size: 40px; text-align: center; padding-top: 10px" th:text="${lastMatch.getScore()} ? ${lastMatch.getScore()} : '- - -'"></p>
                             </div>
                             <div class="card-body">
-                                <h4 class="card-title">Your Last Match Score</h4>
-                                <p class="card-category">Last Campaign Performance</p>
+                                <h3 class="card-title" th:text="${lastMatch.getOpponentName()} ? 'Last Match - vs. ' + ${lastMatch.getOpponentName()} : 'No matches played yet'"></h3>
                             </div>
-                            <div class="card-footer" data-link="/dashboard/matches-history" style="cursor: pointer">
-                                <div class="stats">
-                                    View your playing history
-                                </div>
+                            <div class="card-footer" data-link="matches-history" style="cursor: pointer">
+                                <h4 class="stats">
+                                    Playing History
+                                </h4>
                             </div>
                         </div>
                     </div>
 
                 </div>
                 <div class="row">
-                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+
+                    <div class="col-lg-12 col-md-12">
+                        <div class="card">
+                            <div class="card-header card-header-success">
+                                <h3 class="gruzini-title">Your Activity</h3>
+                            </div>
+                            <div class="card-body table-responsive">
+                                <table class="table table-hover">
+                                    <tbody>
+                                    <tr th:each="notification : ${notifications}">
+                                        <td th:text="${notification.getCreatedAt()}"></td>
+                                        <td th:text="${notification.getMessage()}"></td>
+                                        <td class="td-actions text-right">
+                                            <div th:if="${notification.getButtonName() != null && !notification.getClicked()}">
+                                                <form method="post" th:action="@{__${notification.getEndpoint()}__}">
+                                                    <input hidden type="text" name="match_id" th:value="${notification.getMatchId()}"/>
+                                                    <input hidden type="text" name="trigger_id" th:value="${notification.getId()}"/>
+                                                    <button class="btn btn-success gruzini-btn-success gruzini-button-small" th:text="${notification.getButtonName()}" type="submit"></button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
                         <div class="card card-stats">
                             <div class="card-header card-header-success card-header-icon">
                                 <div class="card-icon">
                                     <i class="material-icons">emoji_events</i>
                                 </div>
-                                <p class="card-category">Your position in the rankings</p>
-                                <h3 class="card-title">1
-                                    <small>st</small>
-                                </h3>
+                                <h3 class="card-category">Win/Loss Record 0 - 0</h3>
+                                <h3 class="card-title">Position in the ranking 300<small>th</small></h3>
                             </div>
                             <div class="card-footer">
                                 <div class="stats">
@@ -103,129 +127,22 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
-                        <div class="card card-stats">
-                            <div class="card-header card-header-success card-header-icon">
-                                <div class="card-icon">
-                                    <i class="material-icons">sports_tennis</i>
-                                </div>
-                                <p class="card-category">Wins / Loses</p>
-                                <h3 class="card-title">12-2</h3>
-                            </div>
-                            <div class="card-footer">
-                                <div class="stats">
-                                    <i class="material-icons">date_range</i> 3 wins in a row
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
-                        <div class="card card-stats">
-                            <div class="card-header card-header-success card-header-icon">
-                                <div class="card-icon">
-                                    <i class="material-icons">home</i>
-                                </div>
-                                <p class="card-category">Favourite Court</p>
-                                <h3 class="card-title">Arthur Ashe Stadium</h3>
-                            </div>
-                            <div class="card-footer">
-                                <div class="stats">
-                                    7 matches
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
                         <div class="card card-stats">
                             <div class="card-header card-header-success card-header-icon">
                                 <div class="card-icon">
                                     <i class="fa fa-twitter"></i>
                                 </div>
-                                <p class="card-category">Followers</p>
-                                <h3 class="card-title">+245</h3>
+                                <h3 class="card-category">Invite your friends</h3>
+                                <h3 class="card-title">Help to build the tennistico community</h3>
                             </div>
                             <div class="card-footer">
                                 <div class="stats">
-                                    <i class="material-icons">update</i> Just Updated
+                                    <a href="#pablo" class="warning-link">Click here to let them know about this app!</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6 col-md-12">
-                        <div class="card">
-                            <div class="card-header card-header-success">
-                                <h4 class="card-title">Activity</h4>
-                                <p class="card-category">Current date 6th June, 2020</p>
-                            </div>
-                            <div class="card-body table-responsive">
-                                <table class="table table-hover">
-                                    <thead class="text-warning">
-                                    <th>ID</th>
-                                    <th>Type</th>
-                                    <th>Date</th>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Won match against Grzegorz Wanta</td>
-                                        <td>24.05.2020</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Won match against Lukasz Matuszewski</td>
-                                        <td>22.05.2020</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Won match against Sage Rodriguez</td>
-                                        <td>14.05.2020</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>Lost match against Philip Chaney</td>
-                                        <td>04.05.2020</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6 col-md-12">
-                        <div class="card">
-                            <div class="card-header card-header-success">
-                                <h4 class="card-title">Notifications</h4>
-                                <p class="card-category">Current date 6th June, 2020</p>
-                            </div>
-                            <div class="card-body table-responsive">
-                                <table class="table table-hover">
-<!--                                    <thead class="text-warning">-->
-<!--                                    <th>ID</th>-->
-<!--                                    <th>Type</th>-->
-<!--                                    <th>Date</th>-->
-<!--                                    </thead>-->
-                                    <tbody>
-                                        <tr th:each="notification : ${notifications}">
-                                            <td th:text="${notification.getCreatedAt()}"></td>
-                                            <td th:text="${notification.getMessage()}"></td>
-                                            <td class="td-actions text-right">
-                                                <div th:if="${notification.getButtonName() != null && !notification.getClicked()}">
-                                                    <form method="post" th:action="@{__${notification.getEndpoint()}__}">
-                                                        <input hidden type="text" name="match_id" th:value="${notification.getMatchId()}"/>
-                                                        <input hidden type="text" name="trigger_id" th:value="${notification.getId()}"/>
-                                                        <button class="btn btn-success gruzini-btn-success gruzini-button-small" th:text="${notification.getButtonName()}" type="submit"></button>
-                                                    </form>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>
