@@ -206,7 +206,7 @@
 <!--                                    TODO: should find a way to define what player comes in notification message and create modal for him -->
                                     <tbody>
                                         <tr th:each="notification : ${notifications}">
-                                            <td th:text="${notification.getCreatedAt()}"></td>
+                                            <td th:text="${#temporals.format(notification.getCreatedAt(), 'dd.MM.yyyy, HH:mm')}"></td>
                                             <td th:text="${notification.getMessage()}"></td>
                                             <td class="td-actions text-right">
                                                 <div th:if="${notification.getButtonName() != null && !notification.getClicked()}">
