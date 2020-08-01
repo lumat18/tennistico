@@ -19,28 +19,27 @@
       <div class="main-panel gruzini-registration-main-panel">
          <div class="content">
             <div class="container-fluid">
-               <div class="row">
-                  <div class="col-lg-12">
-                     <div class="card card-chart">
-                        <div class="card-header card-header-success">
-                           <p class="gruzini-title">Open Matches</p>
-                        </div>
-                        <div class="card-body">
-                           <div class="card-body table-responsive gruzini-text-card-content">
-                              <div class="gruzini-card-desc">
-                                 Below you can see available matches that other users created. Check the details
-                                 and if you feel ready for the challenge - join them!
-                              </div>
-                              <div class="gruzini-card-desc gruzini-search">
-                                 <form class="form-inline mb-3" style="justify-content: center; align-items: center"
-                                       method="post" th:action="@{/dashboard/hosted}">
-                                    <div class="input-group">
-                                       <div class="form-check form-check-radio form-check-inline">
-                                          <label class="form-check-label" style="font-size: 20px">
-                                             <input class="form-check-input" type="radio" name="filter"
-                                                    id="exampleRadios1" value="lvl" checked>
-                                             Close to my lvl
-                                             <span class="circle">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card card-chart">
+                            <div class="card-header card-header-success">
+                                <p class="gruzini-title">Open Matches</p>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-body table-responsive gruzini-text-card-content">
+                                    <div class="gruzini-card-desc">
+                                        Below you can see available matches that other users created. Check the details
+                                        and if you feel ready for the challenge - join them!
+                                    </div>
+                                    <div class="gruzini-card-desc gruzini-search">
+                                        <form class="form-inline mb-3" style="justify-content: center; align-items: center"
+                                              method="post" th:action="@{/hosted}">
+                                                    <div class="input-group">
+                                                        <div class="form-check form-check-radio form-check-inline">
+                                                            <label class="form-check-label" style="font-size: 20px">
+                                                                <input class="form-check-input" type="radio" name="filter" id="exampleRadios1" value="lvl" checked>
+                                                                Close to my lvl
+                                                                <span class="circle">
                                                                 <span class="check"></span>
                                                             </span>
                                           </label>
@@ -125,7 +124,13 @@
                               </table>
                            </div>
 
-
+                            </div>
+                            <div class="card-footer d-flex justify-content-center">
+                                <a href="/courts" class="btn btn-success gruzini-btn-success" role="button"
+                                   aria-pressed="true">
+                                    No match seems right? Create a new one
+                                </a>
+                            </div>
                         </div>
                         <div class="card-footer d-flex justify-content-center">
                            <a href="/dashboard/create" class="btn btn-success gruzini-btn-success" role="button"

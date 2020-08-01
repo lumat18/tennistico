@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.security.Principal;
 
 @Controller
-@RequestMapping("/dashboard/matches-history")
+@RequestMapping("/matches-history")
 public class MatchesHistoryController {
    private final MatchDtoService matchDtoService;
 

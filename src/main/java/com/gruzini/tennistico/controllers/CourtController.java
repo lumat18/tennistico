@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Controller
-@RequestMapping("/dashboard/courts")
+@RequestMapping("/courts")
 @Slf4j
 public class CourtController {
 
