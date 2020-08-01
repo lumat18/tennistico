@@ -24910,3 +24910,8 @@ fieldset[disabled][disabled] .dark-edition .has-error .form-control,
   border-radius: 4px;
 }
 /* end of navbar styling */
+
+.player-modal:hover{
+  cursor: pointer;
+  color: #f5700c;
+}

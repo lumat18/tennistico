@@ -51,7 +51,7 @@ public class MatchService {
         return matchRepository.getAllByPlayersContainsAndMatchStatus(player, matchStatus);
     }
 
-    public List<Match> getByMatchStatusesAndHostedBy(final List<MatchStatus> matchStatusList, final Player player) {
+    public List<Match> getByMatchStatusesAndPlayer(final List<MatchStatus> matchStatusList, final Player player) {
         return matchRepository.findAllByPlayersContainsAndStartingAtIsAfterAndMatchStatusInOrderByStartingAt(player, LocalDateTime.now(), matchStatusList);
     }
 

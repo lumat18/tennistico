@@ -1,5 +1,6 @@
 package com.gruzini.tennistico.models.dto.matchDto;
 
+import com.gruzini.tennistico.models.dto.PlayerDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,7 +13,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 public class ArchivedMatchDto {
-    private String opponentName;
+    private PlayerDto opponent;
     private String score;
     private String courtName;
     private LocalDate date;

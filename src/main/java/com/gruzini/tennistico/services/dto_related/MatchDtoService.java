@@ -1,6 +1,7 @@
 package com.gruzini.tennistico.services.dto_related;
 
 import com.gruzini.tennistico.domain.Match;
+import com.gruzini.tennistico.domain.Player;
 import com.gruzini.tennistico.domain.User;
 import com.gruzini.tennistico.domain.enums.MatchStatus;
 import com.gruzini.tennistico.mappers.ArchivedMatchMapper;
@@ -51,9 +52,9 @@ public class MatchDtoService {
     }
 
     public List<FutureMatchDto> getAllFutureMatchesPlayerIsInvolvedIn(final String username) {
-        final User user = userService.getByEmail(username);
-        return matchService.getByMatchStatusesAndHostedBy(List.of(MatchStatus.HOSTED, MatchStatus.JOIN_REQUEST, MatchStatus.UPCOMING), user.getPlayer()).stream()
-                .map(futureMatchMapper::toFutureMatchDto)
+        final Player player = userService.getByEmail(username).getPlayer();
+        return matchService.getByMatchStatusesAndPlayer(List.of(MatchStatus.HOSTED, MatchStatus.JOIN_REQUEST, MatchStatus.UPCOMING), player).stream()
+                .map(match -> futureMatchMapper.toFutureMatchDto(match, player))
                 .collect(Collectors.toList());
     }
 }

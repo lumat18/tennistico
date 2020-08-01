@@ -32,19 +32,49 @@
                               </div>
                               <table class="table table-hover">
                                  <thead>
-                                 <th class="gruzini-text-card-content">ID</th>
-                                 <th class="gruzini-text-card-content">Players</th>
-                                 <th class="gruzini-text-card-content">Court</th>
-                                 <th class="gruzini-text-card-content">Day</th>
-                                 <th class="gruzini-text-card-content">Starts At</th>
-                                 <th class="gruzini-text-card-content gruzini-table-collapsing-first">Ends At</th>
-                                 <th class="gruzini-text-card-content" style="width: 110px !important;"></th>
+                                 <tr>
+                                    <th class="gruzini-text-card-content">ID</th>
+                                    <th class="gruzini-text-card-content">Players</th>
+                                    <th class="gruzini-text-card-content">Court</th>
+                                    <th class="gruzini-text-card-content">Day</th>
+                                    <th class="gruzini-text-card-content">Starts At</th>
+                                    <th class="gruzini-text-card-content gruzini-table-collapsing-first">Ends At</th>
+                                    <th class="gruzini-text-card-content" style="width: 110px !important;"></th>
+                                 </tr>
                                  </thead>
                                  <tbody>
-                                 <div th:each="match, iter : ${myMatches}">
-                                    <tr>
+                                    <tr th:each="match, iter : ${myMatches}">
                                        <td th:text="${iter.index+1}"></td>
-                                       <td th:text="${match.getHostName()} + ' vs. ' + ${match.getGuestName()}"></td>
+                                       <td>
+                                          <span th:if="${match.involvedPlayerHost}">
+                                             <span th:text="${match.host.getFullName()}"></span>
+                                             <span> vs. </span>
+                                             <span th:if="${match.guest != null}">
+                                                <span class="player-modal"
+                                                   th:attr="data-name=${match.guest.getFullName()}, data-points=${match.guest.rankingPoints},
+                                                            data-age=${match.guest.age}, data-gender=${match.guest.gender},
+                                                            data-photo=${match.guest.photoUrl}"
+                                                   onclick="showModal(this.getAttribute('data-name'), this.getAttribute('data-points'),
+                                                           this.getAttribute('data-age'), this.getAttribute('data-gender'),
+                                                           this.getAttribute('data-photo'))"
+                                                   th:text="${match.guest.getFullName()}">
+                                                </span>
+                                             </span>
+                                          </span>
+                                          <span th:unless="${match.involvedPlayerHost}">
+                                             <span th:text="${match.guest.getFullName()}"></span>
+                                             <span> vs. </span>
+                                             <span class="player-modal"
+                                                   th:attr="data-name=${match.host.getFullName()}, data-points=${match.host.rankingPoints},
+                                                            data-age=${match.host.age}, data-gender=${match.host.gender},
+                                                            data-photo=${match.host.photoUrl}"
+                                                   onclick="showModal(this.getAttribute('data-name'), this.getAttribute('data-points'),
+                                                           this.getAttribute('data-age'), this.getAttribute('data-gender'),
+                                                           this.getAttribute('data-photo'))"
+                                                   th:text="${match.host.getFullName()}">
+                                             </span>
+                                          </span>
+                                       </td>
                                        <td th:text="${match.getCourt()}"></td>
                                        <td>
                                           <span th:text="${#temporals.format(match.getStart(),'yyyy-MM-dd')}"></span>
@@ -57,12 +87,11 @@
                                           <span class="gruzini-today-sign"
                                                 th:if="${match.getStart().toLocalDate().isEqual(#temporals.createToday())}">
                                                         <span th:text="' - '+'today!'"></span>
-                                                    </span>
+                                          </span>
                                           <span th:if="${match.getStart().toLocalDate().isEqual(#temporals.createToday().plusDays(1))}"
                                                 class="gruzini-tomorrow-sign">
                                                         <span th:text="' - '+'tomorrow!'"></span>
-                                                    </span>
-
+                                          </span>
                                        </td>
                                        <td th:text="${#temporals.format(match.getStart(),'HH:mm')}"></td>
                                        <td th:text="${#temporals.format(match.getEnd(),'HH:mm')}"
@@ -80,19 +109,16 @@
                                           </a>
                                        </td>
                                     </tr>
-                                 </div>
                                  </tbody>
                               </table>
                            </div>
-
-
                         </div>
                         <div class="card-footer d-flex justify-content-center">
-
                         </div>
                      </div>
                   </div>
                </div>
+               <div th:insert="fragments/player-modal :: player-modal"></div>
             </div>
          </div>
          <!--FOOTER-->

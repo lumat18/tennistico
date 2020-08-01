@@ -25,17 +25,29 @@
                      <div class="card-body table-responsive">
                         <table class="table table-hover">
                            <thead class="text-warning">
-                           <th class="gruzini-text-card-content">ID</th>
-                           <th class="gruzini-text-card-content">Opponent</th>
-                           <th class="gruzini-text-card-content">Court</th>
-                           <th class="gruzini-text-card-content">Date</th>
-                           <th class="gruzini-text-card-content">Score</th>
-                           <th class="gruzini-text-card-content">Win / Loss</th>
+                           <tr>
+                              <th class="gruzini-text-card-content">ID</th>
+                              <th class="gruzini-text-card-content">Opponent</th>
+                              <th class="gruzini-text-card-content">Court</th>
+                              <th class="gruzini-text-card-content">Date</th>
+                              <th class="gruzini-text-card-content">Score</th>
+                              <th class="gruzini-text-card-content">Win / Loss</th>
+                           </tr>
                            </thead>
                            <tbody>
                            <tr th:each="match, iter : ${archivedMatches}">
                               <td class="gruzini-text-card-content" th:text="${iter.index+1}"></td>
-                              <td class="gruzini-text-card-content" th:text="${match.opponentName}"></td>
+                              <td class="gruzini-text-card-content">
+                                 <span class="player-modal"
+                                       th:attr="data-name=${match.opponent.getFullName()}, data-points=${match.opponent.rankingPoints},
+                                                data-age=${match.opponent.age}, data-gender=${match.opponent.gender},
+                                                data-photo=${match.opponent.photoUrl}"
+                                       onclick="showModal(this.getAttribute('data-name'), this.getAttribute('data-points'),
+                                                           this.getAttribute('data-age'), this.getAttribute('data-gender'),
+                                                           this.getAttribute('data-photo'))"
+                                       th:text="${match.opponent.getFullName()}">
+                                 </span>
+                              </td>
                               <td class="gruzini-text-card-content" th:text="${match.courtName}"></td>
                               <td class="gruzini-text-card-content" th:text="${match.date}"></td>
                               <td class="gruzini-text-card-content" th:text="${match.score}"></td>
@@ -47,21 +59,19 @@
                   </div>
                </div>
             </div>
+            <div th:insert="fragments/player-modal :: player-modal"></div>
          </div>
       </div>
+
       <!--FOOTER-->
       <footer th:insert="/fragments/footer :: footer"></footer>
       <!--END FOOTER-->
-      <script>
-         const currentDate = new Date();
-         let shownFullDate = document.getElementById('fullDate');
-         shownFullDate.innerHTML = shownFullDate.innerHTML + dateFormatter(currentDate);
-      </script>
    </div>
 </div>
 <!--JAVASCRIPT IMPORTS-->
 <div th:replace="/fragments/js-imports :: js-imports"></div>
 <!--END JAVASCRIPT IMPORTS-->
+
 </body>
 
 </html>

@@ -37,14 +37,16 @@
                               </div>
 
                               <table class="table table-hover">
-                                 <thead class="d-flex justify-content-center">
-                                 <th class="gruzini-text-card-content"
-                                     th:text="${match.getHost().getFirstName() + ' ' + match.getHost().getLastName()}">
-                                 </th>
-                                 <th class="gruzini-text-card-content">vs.</th>
-                                 <th class="gruzini-text-card-content"
-                                     th:text="${match.getGuest().get().getFirstName() + ' ' + match.getGuest().get().getLastName()}">
-                                 </th>
+                                 <thead>
+                                 <tr class="d-flex justify-content-center">
+                                    <th class="gruzini-text-card-content"
+                                        th:text="${match.getHost().getFirstName() + ' ' + match.getHost().getLastName()}">
+                                    </th>
+                                    <th class="gruzini-text-card-content">vs.</th>
+                                    <th class="gruzini-text-card-content"
+                                        th:text="${match.getGuest().get().getFirstName() + ' ' + match.getGuest().get().getLastName()}">
+                                    </th>
+                                 </tr>
                                  </thead>
                                  <tbody>
                                  <tr th:each="setDto, iter : ${score.setDtoList}" class="d-flex justify-content-center">

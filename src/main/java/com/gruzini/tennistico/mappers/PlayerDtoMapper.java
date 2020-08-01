@@ -11,6 +11,9 @@ public class PlayerDtoMapper {
               .firstName(player.getFirstName())
               .lastName(player.getLastName())
               .rankingPoints(player.getRankingPoints())
+              .gender(player.getGender().toString())
+              .age(player.getAge())
+              .photoUrl(player.getPhotoUrl())
               .build();
    }
 }

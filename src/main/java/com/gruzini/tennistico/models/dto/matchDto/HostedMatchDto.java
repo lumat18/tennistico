@@ -1,5 +1,6 @@
 package com.gruzini.tennistico.models.dto.matchDto;
 
+import com.gruzini.tennistico.models.dto.PlayerDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,12 +14,7 @@ import java.time.LocalDateTime;
 @Builder
 public class HostedMatchDto {
     private Long id;
-    private String hostName;
-    private String hostGender;
-    private Integer hostAge;
-    private Integer rankingPoints;
-    private String hostLevel;
-    private Integer hostExp;
+    private PlayerDto host;
     private String address;
     private LocalDateTime start;
     private LocalDateTime end;
