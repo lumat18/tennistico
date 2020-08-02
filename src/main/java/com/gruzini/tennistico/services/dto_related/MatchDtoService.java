@@ -62,7 +62,7 @@ public class MatchDtoService {
         }
     }
 
-    public List<FutureMatchDto> getAllFutureMatchesPlayerIsInvolvedIn(final String username) {
+    public List<FutureMatchDto> getAllFutureMatchDtosPlayerIsInvolvedIn(final String username) {
         final Player player = userService.getByEmail(username).getPlayer();
         return matchService.getByMatchStatusesAndPlayer(List.of(MatchStatus.HOSTED, MatchStatus.JOIN_REQUEST, MatchStatus.UPCOMING), player).stream()
                 .map(match -> futureMatchMapper.toFutureMatchDto(match, player))
