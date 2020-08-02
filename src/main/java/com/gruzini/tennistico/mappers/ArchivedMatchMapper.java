@@ -18,7 +18,7 @@ public class ArchivedMatchMapper {
     public ArchivedMatchDto toArchivedMatchDTO(final Match match, final Player player) {
         return ArchivedMatchDto.builder()
                 .opponent(getOpponent(match, player))
-                .score(getScoreToString(match, player))
+                .score(getScoreAsString(match, player))
                 .courtName(match.getCourt().getName() + ", " + match.getCourt().getCity())
                 .date(match.getEndingAt().toLocalDate())
                 .matchResult(getMatchResult(match, player))
@@ -35,25 +35,16 @@ public class ArchivedMatchMapper {
         return playerDtoMapper.toPlayerDto(opponent);
     }
 
-    private String getScoreToString(final Match match, final Player player) {
-        int firstDigit = 0;
-        int secondDigit = 0;
+    private String getScoreAsString(final Match match, final Player player) {
+        StringBuilder stringBuilder = new StringBuilder();
         for (Set set : match.getScore().getSets()) {
             if(match.getHost().equals(player)){
-                if(set.getHostScore() > set.getGuestScore()){
-                    firstDigit++;
-                } else {
-                    secondDigit++;
-                }
+                stringBuilder.append(set.getHostScore()).append(" - ").append(set.getGuestScore()).append("  ");
             } else {
-                if(set.getGuestScore() > set.getHostScore()){
-                    firstDigit++;
-                } else {
-                    secondDigit++;
-                }
+                stringBuilder.append(set.getGuestScore()).append(" - ").append(set.getHostScore()).append("  ");
             }
         }
-        return firstDigit + " - " + secondDigit;
+        return stringBuilder.toString();
     }
 
     private String getMatchResult(final Match match, final Player player) {
