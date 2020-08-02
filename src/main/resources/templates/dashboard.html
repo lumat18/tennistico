@@ -69,7 +69,7 @@
                                 <p style="font-size: 40px; text-align: center; padding-top: 10px" th:text="${lastMatch.getScore()} ? ${lastMatch.getScore()} : '- - -'"></p>
                             </div>
                             <div class="card-body">
-                                <h3 class="card-title" th:text="${lastMatch.getOpponentName()} ? 'Last Match - vs. ' + ${lastMatch.getOpponentName()} : 'No matches played yet'"></h3>
+                                <h3 class="card-title" th:text="${lastMatch.opponent} ? 'Last Match - vs. ' + ${lastMatch.opponent.getFullName()} : 'No matches played yet'"></h3>
                             </div>
                             <div class="card-footer" data-link="matches-history" style="cursor: pointer">
                                 <h4 class="stats">
