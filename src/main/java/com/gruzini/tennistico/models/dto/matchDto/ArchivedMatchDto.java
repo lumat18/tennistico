@@ -17,4 +17,5 @@ public class ArchivedMatchDto {
     private String score;
     private String courtName;
     private LocalDate date;
+    private String matchResult;
 }

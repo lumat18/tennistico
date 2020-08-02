@@ -21,6 +21,7 @@ public class ArchivedMatchMapper {
                 .score(getScoreToString(match, player))
                 .courtName(match.getCourt().getName() + ", " + match.getCourt().getCity())
                 .date(match.getEndingAt().toLocalDate())
+                .matchResult(getMatchResult(match, player))
                 .build();
     }
 
@@ -53,5 +54,17 @@ public class ArchivedMatchMapper {
             }
         }
         return firstDigit + " - " + secondDigit;
+    }
+
+    private String getMatchResult(final Match match, final Player player) {
+        if(match.getScore().isDraw()){
+            return "DRAW";
+        } else {
+            if(match.getScore().getWinner().equals(player)){
+                return "WIN";
+            } else {
+                return "LOSS";
+            }
+        }
     }
 }
