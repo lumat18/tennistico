@@ -34,7 +34,7 @@
                                  <thead>
                                  <tr>
                                     <th class="gruzini-text-card-content">ID</th>
-                                    <th class="gruzini-text-card-content">Players</th>
+                                    <th class="gruzini-text-card-content">Opponent</th>
                                     <th class="gruzini-text-card-content">Court</th>
                                     <th class="gruzini-text-card-content">Day</th>
                                     <th class="gruzini-text-card-content">Starts At</th>
@@ -47,8 +47,6 @@
                                        <td th:text="${iter.index+1}"></td>
                                        <td>
                                           <span th:if="${match.involvedPlayerHost}">
-                                             <span th:text="${match.host.getFullName()}"></span>
-                                             <span> vs. </span>
                                              <span th:if="${match.guest != null}">
                                                 <span class="player-modal"
                                                    th:attr="data-name=${match.guest.getFullName()}, data-points=${match.guest.rankingPoints},
@@ -60,10 +58,11 @@
                                                    th:text="${match.guest.getFullName()}">
                                                 </span>
                                              </span>
+                                             <span th:unless="${match.guest != null}">
+                                                - No opponent yet -
+                                             </span>
                                           </span>
                                           <span th:unless="${match.involvedPlayerHost}">
-                                             <span th:text="${match.guest.getFullName()}"></span>
-                                             <span> vs. </span>
                                              <span class="player-modal"
                                                    th:attr="data-name=${match.host.getFullName()}, data-points=${match.host.rankingPoints},
                                                             data-age=${match.host.age}, data-gender=${match.host.gender},
