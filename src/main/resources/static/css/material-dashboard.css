@@ -24915,3 +24915,7 @@ fieldset[disabled][disabled] .dark-edition .has-error .form-control,
   cursor: pointer;
   color: #f5700c;
 }
+
+.gruzini-score-text{
+  letter-spacing: 0.2em;
+}
