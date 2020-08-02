@@ -24890,9 +24890,11 @@ fieldset[disabled][disabled] .dark-edition .has-error .form-control,
 }
 
 .gruzini-navbar-text{
-  color: #8b92a9;
-  font-size: 22px;
-  padding-right: 5px;
+  color: transparent;
+  font-size: 1.675rem;
+  background-image: linear-gradient(60deg, #f5700c, #ff9800) !important;
+  background-color: transparent;
+  -webkit-background-clip: text;
 }
 
 .gruzini-navbar-ranking{
