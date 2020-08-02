@@ -39,9 +39,9 @@ public class ArchivedMatchMapper {
         StringBuilder stringBuilder = new StringBuilder();
         for (Set set : match.getScore().getSets()) {
             if(match.getHost().equals(player)){
-                stringBuilder.append(set.getHostScore()).append(" - ").append(set.getGuestScore()).append("  ");
+                stringBuilder.append(set.getHostScore()).append("-").append(set.getGuestScore()).append(" ");
             } else {
-                stringBuilder.append(set.getGuestScore()).append(" - ").append(set.getHostScore()).append("  ");
+                stringBuilder.append(set.getGuestScore()).append("-").append(set.getHostScore()).append(" ");
             }
         }
         return stringBuilder.toString();

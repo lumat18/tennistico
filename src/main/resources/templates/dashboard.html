@@ -66,7 +66,7 @@
                     <div class="col-xl-4 col-lg-12">
                         <div class="card card-chart">
                             <div class="card-header card-header-success  card-title-content">
-                                <p style="font-size: 40px; text-align: center; padding-top: 10px" th:text="${lastMatch.getScore()} ? ${lastMatch.getScore()} : '- - -'"></p>
+                                <p class="gruzini-score-text" style="font-size: 40px; text-align: center; padding-top: 10px" th:text="${lastMatch.getScore()} ? ${lastMatch.getScore()} : '---'"></p>
                             </div>
                             <div class="card-body">
                                 <h3 class="card-title" th:text="${lastMatch.opponent} ? 'Last Match - vs. ' + ${lastMatch.opponent.getFullName()} : 'No matches played yet'"></h3>
