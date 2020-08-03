@@ -12,5 +12,5 @@ public interface PlayerRepository extends JpaRepository<Player, Long> {
     @Query("SELECT p FROM players p JOIN users u ON u.player.id=p.id WHERE u.email=:username")
     Optional<Player> findByUsername(final String username);
 
-    Page<Player> findAll(Pageable pageable);
+    Page<Player> findAllByOrderByRankingPointsDesc(Pageable pageable);
 }

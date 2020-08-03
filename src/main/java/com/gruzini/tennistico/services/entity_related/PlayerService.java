@@ -27,6 +27,6 @@ public class PlayerService {
     }
 
     public Page<Player> getPlayersPage(final Pageable pageable){
-        return playerRepository.findAll(pageable);
+        return playerRepository.findAllByOrderByRankingPointsDesc(pageable);
     }
 }
