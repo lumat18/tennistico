@@ -2,8 +2,6 @@ package com.gruzini.tennistico.mappers;
 
 import com.gruzini.tennistico.domain.Match;
 import com.gruzini.tennistico.domain.Player;
-import com.gruzini.tennistico.domain.Score;
-import com.gruzini.tennistico.exceptions.PlayerNotFoundException;
 import com.gruzini.tennistico.models.dto.PlayerDto;
 import com.gruzini.tennistico.models.dto.matchDto.ArchivedMatchDto;
 import lombok.RequiredArgsConstructor;
@@ -13,32 +11,22 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class ArchivedMatchMapper {
 
+    private final MatchInfoParser matchInfoParser;
     private final PlayerDtoMapper playerDtoMapper;
 
     public ArchivedMatchDto toArchivedMatchDTO(final Match match, final Player player) {
         return ArchivedMatchDto.builder()
-                .opponent(getOpponent(match, player))
-                .score(getScore(match.getScore()))
+                .opponent(getOpponentDto(match, player))
+                .score(matchInfoParser.getScore(match.getId(), player))
                 .courtName(match.getCourt().getName() + ", " + match.getCourt().getCity())
                 .date(match.getEndingAt().toLocalDate())
                 .build();
     }
 
-    private PlayerDto getOpponent(final Match match, final Player player){
-        Player opponent;
-        if (match.getHost().equals(player)){
-            opponent = match.getGuest().orElseThrow(PlayerNotFoundException::new);
-        } else {
-            opponent = match.getHost();
-        }
-        return playerDtoMapper.toPlayerDto(opponent);
+    private PlayerDto getOpponentDto(Match match, Player player) {
+        return playerDtoMapper.toPlayerDto(matchInfoParser.getOpponent(match, player));
     }
 
-    private String getScore(final Score score) {
-        StringBuilder stringBuilder = new StringBuilder();
-        score.getSets().forEach(set -> {
-            stringBuilder.append(set.getHostScore()).append(" - ").append(set.getGuestScore()).append("  ");
-        });
-        return stringBuilder.toString();
-    }
+
 }
+
