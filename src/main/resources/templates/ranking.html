@@ -19,18 +19,19 @@
     <div class="main-panel gruzini-registration-main-panel">
       <div class="content">
         <div class="container-fluid">
+
           <div class="row">
             <div class="col-lg-12">
               <div class="card card-chart">
                 <div class="card-header card-header-success">
                   <p class="gruzini-title">Ranking</p>
                 </div>
-
                 <div class="card-body">
                   <div class="card-body table-responsive gruzini-text-card-content">
                     <div class="gruzini-card-desc">
                       Description of ranking page
                     </div>
+
                     <table class="table table-hover">
                       <thead>
                       <tr>
@@ -41,23 +42,36 @@
                       </tr>
                       </thead>
                       <tbody>
-                      <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                      <tr th:if="${playerList != null && !playerList.isEmpty()}" th:each="player, iter : ${playerList}">
+                        <td th:text="${iter.index+1}"></td>
+                        <td th:text="${player.getFullName()}"></td>
+                        <td th:text="${player.rankingPoints}" style="color: #f08f00;"></td>
+                        <td>W-I-P</td>
                       </tr>
                       </tbody>
                     </table>
+
                   </div>
                 </div>
-
                 <div class="card-footer d-flex justify-content-center">
-                  pagination here
+                  <span th:if="${currentPage == 1}">
+                    &lsaquo;
+                  </span>
+                  <a th:unless="${currentPage == 1}" th:href="@{/ranking/page/__${currentPage - 1}__}">
+                    &lsaquo;
+                  </a>
+                  <span th:text="${currentPage + ' / ' + numberOfPages}"></span>
+                  <span th:if="${currentPage == numberOfPages}">
+                    &rsaquo;
+                  </span>
+                  <a th:unless="${currentPage == numberOfPages}" th:href="@{/ranking/page/__${currentPage + 1}__}">
+                    &rsaquo;
+                  </a>
                 </div>
               </div>
             </div>
           </div>
+
           <div th:insert="fragments/player-modal :: player-modal"></div>
         </div>
       </div>

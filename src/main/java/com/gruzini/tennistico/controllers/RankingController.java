@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -15,6 +16,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Controller
+@RequestMapping("/ranking/page")
 @RequiredArgsConstructor
 public class RankingController {
 
@@ -23,17 +25,14 @@ public class RankingController {
 
   private final PlayerDtoService playerDtoService;
 
-  @RequestMapping(value = "/ranking/page/{page}")
+  @GetMapping(value = "/{page}")
   public String listPlayersPageByPage(@PathVariable("page") int page,
                                       final Model model){
     PageRequest pageable = PageRequest.of(page - 1, NUMBER_OF_PLAYERS_ON_PAGE);
     final Page<PlayerDto> playerDtosPage = playerDtoService.getPlayerDtosPage(pageable);
-    int totalPages = playerDtosPage.getTotalPages();
-    if(totalPages > 0){
-      List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
-      model.addAttribute("pageNumbers", pageNumbers);
-    }
-    model.addAttribute("activePlayerList", true);
+    int numberOfPages = playerDtosPage.getTotalPages();
+    model.addAttribute("numberOfPages", numberOfPages);
+    model.addAttribute("currentPage", page);
     model.addAttribute("playerList", playerDtosPage.getContent());
     return "ranking";
   }
