@@ -45,7 +45,7 @@ public class MatchInfoParser {
     }
 
     private void appendSet(StringBuilder stringBuilder, int recipientScore, int opponentScore) {
-        stringBuilder.append(recipientScore).append(" - ").append(opponentScore).append("  ");
+        stringBuilder.append(recipientScore).append("-").append(opponentScore).append(" ");
     }
 
     public Player getOpponent(final Match match, final Player player) {
