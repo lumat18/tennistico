@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+>
+
+<head th:insert="/fragments/head :: head"></head>
+
+<body class="dark-edition" style="background-image: url(/img/upcoming_background.jpg); background-size: cover">
+<div class="wrapper">
+
+  <!--Side Bar-->
+  <div th:insert="fragments/sidebar :: sidebar"></div>
+  <!--End Side Bar-->
+
+  <div class="main-panel">
+    <!-- Navbar -->
+    <nav th:insert="/fragments/navbar :: navbar"></nav>
+    <!-- End Navbar -->
+
+    <div class="main-panel gruzini-registration-main-panel">
+      <div class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="card card-chart">
+                <div class="card-header card-header-success">
+                  <p class="gruzini-title">Ranking</p>
+                </div>
+
+                <div class="card-body">
+                  <div class="card-body table-responsive gruzini-text-card-content">
+                    <div class="gruzini-card-desc">
+                      Description of ranking page
+                    </div>
+                    <table class="table table-hover">
+                      <thead>
+                      <tr>
+                        <th class="gruzini-text-card-content">ID</th>
+                        <th class="gruzini-text-card-content">Player</th>
+                        <th class="gruzini-text-card-content">Ranking</th>
+                        <th class="gruzini-text-card-content">W/D/L</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <div class="card-footer d-flex justify-content-center">
+                  pagination here
+                </div>
+              </div>
+            </div>
+          </div>
+          <div th:insert="fragments/player-modal :: player-modal"></div>
+        </div>
+      </div>
+      <!--FOOTER-->
+      <footer th:insert="/fragments/footer :: footer"></footer>
+      <!--END FOOTER-->
+    </div>
+  </div>
+</div>
+<!--JAVASCRIPT IMPORTS-->
+<div th:replace="/fragments/js-imports :: js-imports"></div>
+<!--END JAVASCRIPT IMPORTS-->
+</body>
+</html>
