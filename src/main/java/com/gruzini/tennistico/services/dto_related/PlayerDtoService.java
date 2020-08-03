@@ -36,13 +36,6 @@ public class PlayerDtoService {
 
    public Page<PlayerDto> getPlayerDtosPage(final Pageable pageable){
       final Page<Player> playersPage = playerService.getPlayersPage(pageable);
-      return playersPage.map(new Function<Player, PlayerDto> () {
-         @Override
-         public PlayerDto apply(Player player){
-            PlayerDto playerDto = new PlayerDto();
-            playerDto = playerDtoMapper.toPlayerDto(player);
-            return playerDto;
-         }
-      });
+      return playersPage.map(playerDtoMapper::toPlayerDto);
    }
 }
