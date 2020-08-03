@@ -40,7 +40,7 @@ public class UserAndPlayerInitializer implements CommandLineRunner {
                 .birthday(LocalDate.of(1970, 2, 3))
                 .yearsOfExperience(3)
                 .playerSkill(PlayerSkill.AMATEUR)
-                .rankingPoints(1200)
+                .rankingPoints(1800)
                 .build();
         final Player player2 = Player.builder()
                 .firstName("Roger")
@@ -60,7 +60,34 @@ public class UserAndPlayerInitializer implements CommandLineRunner {
                 .playerSkill(PlayerSkill.PROFESSIONAL)
                 .rankingPoints(2400)
                 .build();
-        playerRepository.saveAll(List.of(player1,player2,player3));
+        final Player player4 = Player.builder()
+                .firstName("Jimmy")
+                .lastName("Jimmy")
+                .gender(Gender.MALE)
+                .birthday(LocalDate.of(1984, 2, 21))
+                .yearsOfExperience(12)
+                .playerSkill(PlayerSkill.ADVANCED)
+                .rankingPoints(2100)
+                .build();
+        final Player player5 = Player.builder()
+                .firstName("Sarah")
+                .lastName("Sarah")
+                .gender(Gender.FEMALE)
+                .birthday(LocalDate.of(1992, 6, 21))
+                .yearsOfExperience(32)
+                .playerSkill(PlayerSkill.ADVANCED)
+                .rankingPoints(2100)
+                .build();
+        final Player player6 = Player.builder()
+                .firstName("Jacek")
+                .lastName("Jones")
+                .gender(Gender.MALE)
+                .birthday(LocalDate.of(2002, 4, 21))
+                .yearsOfExperience(1)
+                .playerSkill(PlayerSkill.BEGINNER)
+                .rankingPoints(1500)
+                .build();
+        playerRepository.saveAll(List.of(player1,player2,player3,player4,player5,player6));
 
         final User user1 = User.builder()
                 .email("user@user.pl")
@@ -83,6 +110,27 @@ public class UserAndPlayerInitializer implements CommandLineRunner {
                 .player(player3)
                 .userStatus(UserStatus.ACTIVE)
                 .build();
-        userRepository.saveAll(List.of(user1, user2, user3));
+        final User user4 = User.builder()
+                .email("jimmy@user.pl")
+                .createdAt(LocalDateTime.now())
+                .password(passwordEncoder.encode("pass"))
+                .player(player4)
+                .userStatus(UserStatus.ACTIVE)
+                .build();
+        final User user5 = User.builder()
+                .email("sarah@user.pl")
+                .createdAt(LocalDateTime.now())
+                .password(passwordEncoder.encode("pass"))
+                .player(player5)
+                .userStatus(UserStatus.ACTIVE)
+                .build();
+        final User user6 = User.builder()
+                .email("jacek@user.pl")
+                .createdAt(LocalDateTime.now())
+                .password(passwordEncoder.encode("pass"))
+                .player(player6)
+                .userStatus(UserStatus.ACTIVE)
+                .build();
+        userRepository.saveAll(List.of(user1, user2, user3, user4, user5, user6));
     }
 }

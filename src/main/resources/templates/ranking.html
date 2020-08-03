@@ -43,6 +43,7 @@
                       </thead>
                       <tbody>
                       <tr th:if="${playerList != null && !playerList.isEmpty()}" th:each="player, iter : ${playerList}">
+<!--                        TODO: for now it is showing index on current page, not player position in ranking -->
                         <td th:text="${iter.index+1}"></td>
                         <td>
                           <span th:unless="${player == session.loggedUser}" class="player-modal"
@@ -58,6 +59,7 @@
                                 th:text="${player.getFullName()}" style="color: #4caf50;"></span>
                         </td>
                         <td th:text="${player.rankingPoints}" style="color: #f08f00;"></td>
+<!--                        TODO: apply Win/Draw/Loss ratio -->
                         <td>W-I-P</td>
                       </tr>
                       </tbody>
