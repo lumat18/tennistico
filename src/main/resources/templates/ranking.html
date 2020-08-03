@@ -44,7 +44,19 @@
                       <tbody>
                       <tr th:if="${playerList != null && !playerList.isEmpty()}" th:each="player, iter : ${playerList}">
                         <td th:text="${iter.index+1}"></td>
-                        <td th:text="${player.getFullName()}"></td>
+                        <td>
+                          <span th:unless="${player == session.loggedUser}" class="player-modal"
+                                th:attr="data-name=${player.getFullName()}, data-points=${player.rankingPoints},
+                                                data-age=${player.age}, data-gender=${player.gender},
+                                                data-photo=${player.photoUrl}"
+                                onclick="showModal(this.getAttribute('data-name'), this.getAttribute('data-points'),
+                                                           this.getAttribute('data-age'), this.getAttribute('data-gender'),
+                                                           this.getAttribute('data-photo'))"
+                                th:text="${player.getFullName()}">
+                          </span>
+                          <span th:if="${player == session.loggedUser}" class="gruzini-text-card-content"
+                                th:text="${player.getFullName()}" style="color: #4caf50;"></span>
+                        </td>
                         <td th:text="${player.rankingPoints}" style="color: #f08f00;"></td>
                         <td>W-I-P</td>
                       </tr>
@@ -53,18 +65,20 @@
 
                   </div>
                 </div>
-                <div class="card-footer d-flex justify-content-center">
-                  <span th:if="${currentPage == 1}">
+                <div class="card-footer d-flex justify-content-center gruzini-score-text" style="color: #dddddd">
+                  <span th:if="${currentPage == 1}" class="gruzini-text-card-content">
                     &lsaquo;
                   </span>
-                  <a th:unless="${currentPage == 1}" th:href="@{/ranking/page/__${currentPage - 1}__}">
+                  <a th:unless="${currentPage == 1}" th:href="@{/ranking/page/__${currentPage - 1}__}"
+                     class="gruzini-text-card-content">
                     &lsaquo;
                   </a>
-                  <span th:text="${currentPage + ' / ' + numberOfPages}"></span>
-                  <span th:if="${currentPage == numberOfPages}">
+                  <span th:text="${currentPage + '/' + numberOfPages}" class="gruzini-text-card-content"></span>
+                  <span th:if="${currentPage == numberOfPages}" class="gruzini-text-card-content">
                     &rsaquo;
                   </span>
-                  <a th:unless="${currentPage == numberOfPages}" th:href="@{/ranking/page/__${currentPage + 1}__}">
+                  <a th:unless="${currentPage == numberOfPages}" th:href="@{/ranking/page/__${currentPage + 1}__}"
+                     class="gruzini-text-card-content">
                     &rsaquo;
                   </a>
                 </div>
