@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+>
+
+<head th:insert="/fragments/head :: head"></head>
+
+<body class="dark-edition" style="background-image: url(/img/upcoming_background.jpg); background-size: cover">
+<div class="wrapper">
+
+  <!--Side Bar-->
+  <div th:insert="fragments/sidebar :: sidebar"></div>
+  <!--End Side Bar-->
+
+  <div class="main-panel">
+    <!-- Navbar -->
+    <nav th:insert="/fragments/navbar :: navbar"></nav>
+    <!-- End Navbar -->
+
+    <div class="main-panel gruzini-registration-main-panel">
+      <div class="content">
+        <div class="container-fluid">
+
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="card card-chart">
+                <div class="card-header card-header-success">
+                  <p class="gruzini-title">Ranking</p>
+                </div>
+                <div class="card-body">
+                  <div class="card-body table-responsive gruzini-text-card-content">
+                    <div class="gruzini-card-desc">
+                      Description of ranking page
+                    </div>
+
+                    <table class="table table-hover">
+                      <thead>
+                      <tr>
+                        <th class="gruzini-text-card-content">ID</th>
+                        <th class="gruzini-text-card-content">Player</th>
+                        <th class="gruzini-text-card-content">Ranking</th>
+                        <th class="gruzini-text-card-content">W/D/L</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr th:if="${playerList != null && !playerList.isEmpty()}" th:each="player, iter : ${playerList}">
+<!--                        TODO: for now it is showing index on current page, not player position in ranking -->
+                        <td th:text="${iter.index+1}"></td>
+                        <td>
+                          <span th:unless="${player == session.loggedUser}" class="player-modal"
+                                th:attr="data-name=${player.getFullName()}, data-points=${player.rankingPoints},
+                                                data-age=${player.age}, data-gender=${player.gender},
+                                                data-photo=${player.photoUrl}"
+                                onclick="showModal(this.getAttribute('data-name'), this.getAttribute('data-points'),
+                                                           this.getAttribute('data-age'), this.getAttribute('data-gender'),
+                                                           this.getAttribute('data-photo'))"
+                                th:text="${player.getFullName()}">
+                          </span>
+                          <span th:if="${player == session.loggedUser}" class="gruzini-text-card-content"
+                                th:text="${player.getFullName()}" style="color: #4caf50;"></span>
+                        </td>
+                        <td th:text="${player.rankingPoints}" style="color: #f08f00;"></td>
+<!--                        TODO: apply Win/Draw/Loss ratio -->
+                        <td>W-I-P</td>
+                      </tr>
+                      </tbody>
+                    </table>
+
+                  </div>
+                </div>
+                <div class="card-footer d-flex justify-content-center gruzini-score-text" style="color: #8b92a9">
+                  <span th:if="${currentPage == 1}" class="gruzini-text-card-content">
+                    &lsaquo;
+                  </span>
+                  <a th:unless="${currentPage == 1}" th:href="@{/ranking/page/__${currentPage - 1}__}"
+                     class="gruzini-text-card-content">
+                    &lsaquo;
+                  </a>
+                  <span th:text="${currentPage + '/' + numberOfPages}" class="gruzini-text-card-content"></span>
+                  <span th:if="${currentPage == numberOfPages}" class="gruzini-text-card-content">
+                    &rsaquo;
+                  </span>
+                  <a th:unless="${currentPage == numberOfPages}" th:href="@{/ranking/page/__${currentPage + 1}__}"
+                     class="gruzini-text-card-content">
+                    &rsaquo;
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div th:insert="fragments/player-modal :: player-modal"></div>
+        </div>
+      </div>
+      <!--FOOTER-->
+      <footer th:insert="/fragments/footer :: footer"></footer>
+      <!--END FOOTER-->
+    </div>
+  </div>
+</div>
+<!--JAVASCRIPT IMPORTS-->
+<div th:replace="/fragments/js-imports :: js-imports"></div>
+<!--END JAVASCRIPT IMPORTS-->
+</body>
+</html>

@@ -3,6 +3,8 @@ package com.gruzini.tennistico.services.entity_related;
 import com.gruzini.tennistico.domain.Player;
 import com.gruzini.tennistico.exceptions.PlayerNotFoundException;
 import com.gruzini.tennistico.repositories.PlayerRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,5 +24,9 @@ public class PlayerService {
 
     public Player save(Player player) {
         return playerRepository.save(player);
+    }
+
+    public Page<Player> getPlayersPage(final Pageable pageable){
+        return playerRepository.findAllByOrderByRankingPointsDesc(pageable);
     }
 }
