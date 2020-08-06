@@ -2,7 +2,7 @@ package com.gruzini.tennistico.mappers;
 
 import com.gruzini.tennistico.domain.Match;
 import com.gruzini.tennistico.domain.Player;
-import com.gruzini.tennistico.domain.Score;
+import com.gruzini.tennistico.domain.Set;
 import com.gruzini.tennistico.exceptions.PlayerNotFoundException;
 import com.gruzini.tennistico.models.dto.PlayerDto;
 import com.gruzini.tennistico.models.dto.matchDto.ArchivedMatchDto;
@@ -18,9 +18,10 @@ public class ArchivedMatchMapper {
     public ArchivedMatchDto toArchivedMatchDTO(final Match match, final Player player) {
         return ArchivedMatchDto.builder()
                 .opponent(getOpponent(match, player))
-                .score(getScore(match.getScore()))
+                .score(getScoreAsString(match, player))
                 .courtName(match.getCourt().getName() + ", " + match.getCourt().getCity())
                 .date(match.getEndingAt().toLocalDate())
+                .matchResult(getMatchResult(match, player))
                 .build();
     }
 
@@ -34,11 +35,27 @@ public class ArchivedMatchMapper {
         return playerDtoMapper.toPlayerDto(opponent);
     }
 
-    private String getScore(final Score score) {
+    private String getScoreAsString(final Match match, final Player player) {
         StringBuilder stringBuilder = new StringBuilder();
-        score.getSets().forEach(set -> {
-            stringBuilder.append(set.getHostScore()).append(" - ").append(set.getGuestScore()).append("  ");
-        });
+        for (Set set : match.getScore().getSets()) {
+            if(match.getHost().equals(player)){
+                stringBuilder.append(set.getHostScore()).append("-").append(set.getGuestScore()).append(" ");
+            } else {
+                stringBuilder.append(set.getGuestScore()).append("-").append(set.getHostScore()).append(" ");
+            }
+        }
         return stringBuilder.toString();
+    }
+
+    private String getMatchResult(final Match match, final Player player) {
+        if(match.getScore().isDraw()){
+            return "DRAW";
+        } else {
+            if(match.getScore().getWinner().equals(player)){
+                return "WIN";
+            } else {
+                return "LOSS";
+            }
+        }
     }
 }

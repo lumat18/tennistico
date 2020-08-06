@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -48,7 +47,7 @@ public class MatchService {
     }
 
     public List<Match> getByPlayerAndStatus(final Player player, final MatchStatus matchStatus) {
-        return matchRepository.getAllByPlayersContainsAndMatchStatus(player, matchStatus);
+        return matchRepository.getAllByPlayersContainsAndMatchStatusOrderByStartingAtDesc(player, matchStatus);
     }
 
     public List<Match> getByMatchStatusesAndPlayer(final List<MatchStatus> matchStatusList, final Player player) {
@@ -82,6 +81,7 @@ public class MatchService {
         return matchRepository.findByEndingAtBeforeAndMatchStatus(LocalDateTime.now().minusDays(7), matchStatus);
     }
 
+    //TODO: check if this method is needed, checked few commits back and it was also unused
     public List<Player> getAllHostsByMatchStatus(final MatchStatus status){
         return getAllExpiredByStatus(status).stream()
                 .map(Match::getHost)
