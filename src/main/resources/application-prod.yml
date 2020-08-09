@@ -10,3 +10,6 @@ spring:
       ddl-auto: update
     database-platform: org.hibernate.dialect.MySQL57Dialect
     generate-ddl: true
+
+ranking:
+  pagination: 10

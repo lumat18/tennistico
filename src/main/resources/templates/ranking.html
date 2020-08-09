@@ -43,8 +43,7 @@
                       </thead>
                       <tbody>
                       <tr th:if="${playerList != null && !playerList.isEmpty()}" th:each="player, iter : ${playerList}">
-<!--                        TODO: for now it is showing index on current page, not player position in ranking -->
-                        <td th:text="${iter.index+1}"></td>
+                        <td th:text="${iter.index+1+(currentPage - 1)*(T(Integer).parseInt(@environment.getProperty('ranking.pagination')))}"></td>
                         <td>
                           <span th:unless="${player == session.loggedUser}" class="player-modal"
                                 th:attr="data-name=${player.getFullName()}, data-points=${player.rankingPoints},
