@@ -16,6 +16,7 @@ public class PlayerDto {
    private Integer age;
    private String gender;
    private String photoUrl;
+   private String rankingPosition;
 
    public String getFullName(){
       return firstName + " " + lastName;
