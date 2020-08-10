@@ -43,6 +43,9 @@ public class Player {
 
     private String photoUrl;
 
+    @Embedded
+    private PlayerMatchResults matchResults;
+
     public Integer getAge() {
         return Period.between(getBirthday(), LocalDate.now()).getYears();
     }
