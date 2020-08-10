@@ -1,6 +1,7 @@
 package com.gruzini.tennistico.mappers;
 
 import com.gruzini.tennistico.domain.Player;
+import com.gruzini.tennistico.domain.PlayerMatchResults;
 import com.gruzini.tennistico.domain.enums.Gender;
 import com.gruzini.tennistico.domain.enums.PlayerSkill;
 import com.gruzini.tennistico.models.forms.PlayerRegistrationForm;
@@ -18,6 +19,7 @@ public class PlayerMapper {
                 .playerSkill(PlayerSkill.valueOf(registrationForm.getPlayerSkill()))
                 .yearsOfExperience(registrationForm.getYearsOfExperience())
                 .rankingPoints(PlayerSkill.valueOf(registrationForm.getPlayerSkill()).getRankingPoints())
+                .matchResults(new PlayerMatchResults(0,0,0))
                 .build();
     }
 }
