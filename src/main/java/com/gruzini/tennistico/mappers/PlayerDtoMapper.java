@@ -21,6 +21,7 @@ public class PlayerDtoMapper {
               .age(player.getAge())
               .photoUrl(player.getPhotoUrl())
               .rankingPosition(getRankingPosition(player.getId()))
+              .matchResults(player.getMatchResults())
               .build();
    }
 

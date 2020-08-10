@@ -59,7 +59,7 @@
                         </td>
                         <td th:text="${player.rankingPoints}" style="color: #f08f00;"></td>
 <!--                        TODO: apply Win/Draw/Loss ratio -->
-                        <td>W-I-P</td>
+                        <td th:text="${player.getRatio()}"></td>
                       </tr>
                       </tbody>
                     </table>

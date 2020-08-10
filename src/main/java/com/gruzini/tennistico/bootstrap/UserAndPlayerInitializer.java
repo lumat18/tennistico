@@ -1,6 +1,7 @@
 package com.gruzini.tennistico.bootstrap;
 
 import com.gruzini.tennistico.domain.Player;
+import com.gruzini.tennistico.domain.PlayerMatchResults;
 import com.gruzini.tennistico.domain.User;
 import com.gruzini.tennistico.domain.enums.Gender;
 import com.gruzini.tennistico.domain.enums.PlayerSkill;
@@ -41,6 +42,7 @@ public class UserAndPlayerInitializer implements CommandLineRunner {
                 .yearsOfExperience(3)
                 .playerSkill(PlayerSkill.AMATEUR)
                 .rankingPoints(1800)
+                .matchResults(new PlayerMatchResults(0,0,0))
                 .build();
         final Player player2 = Player.builder()
                 .firstName("Roger")
@@ -50,6 +52,7 @@ public class UserAndPlayerInitializer implements CommandLineRunner {
                 .yearsOfExperience(32)
                 .playerSkill(PlayerSkill.PROFESSIONAL)
                 .rankingPoints(2400)
+                .matchResults(new PlayerMatchResults(0,0,0))
                 .build();
         final Player player3 = Player.builder()
                 .firstName("Rafael")
@@ -59,6 +62,7 @@ public class UserAndPlayerInitializer implements CommandLineRunner {
                 .yearsOfExperience(32)
                 .playerSkill(PlayerSkill.PROFESSIONAL)
                 .rankingPoints(2400)
+                .matchResults(new PlayerMatchResults(0,0,0))
                 .build();
         final Player player4 = Player.builder()
                 .firstName("Jimmy")
@@ -68,6 +72,7 @@ public class UserAndPlayerInitializer implements CommandLineRunner {
                 .yearsOfExperience(12)
                 .playerSkill(PlayerSkill.ADVANCED)
                 .rankingPoints(2100)
+                .matchResults(new PlayerMatchResults(0,0,0))
                 .build();
         final Player player5 = Player.builder()
                 .firstName("Sarah")
@@ -77,6 +82,7 @@ public class UserAndPlayerInitializer implements CommandLineRunner {
                 .yearsOfExperience(32)
                 .playerSkill(PlayerSkill.ADVANCED)
                 .rankingPoints(2100)
+                .matchResults(new PlayerMatchResults(0,0,0))
                 .build();
         final Player player6 = Player.builder()
                 .firstName("Jacek")
@@ -86,6 +92,7 @@ public class UserAndPlayerInitializer implements CommandLineRunner {
                 .yearsOfExperience(1)
                 .playerSkill(PlayerSkill.BEGINNER)
                 .rankingPoints(1500)
+                .matchResults(new PlayerMatchResults(0,0,0))
                 .build();
         playerRepository.saveAll(List.of(player1,player2,player3,player4,player5,player6));
 
