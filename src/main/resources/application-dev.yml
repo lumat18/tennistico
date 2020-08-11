@@ -5,3 +5,8 @@ spring:
 
   datasource:
     hikari.jdbc-url: jdbc:h2:mem:testdb
+
+scheduling:
+  cron:
+    upcoming: 0 * * * * *
+    pending: 0 * * * * *
