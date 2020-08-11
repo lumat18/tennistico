@@ -13,3 +13,8 @@ spring:
 
 ranking:
   pagination: 10
+
+scheduling:
+  cron:
+    upcoming: 0 0/15 * * * *
+    pending: 0 0 * * * *

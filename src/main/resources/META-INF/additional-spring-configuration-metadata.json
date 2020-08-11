@@ -5,4 +5,14 @@
       "type": "java.lang.Integer",
       "description": "Number of players shown on single page in ranking.html."
     }
+    {
+      "name": "scheduling.cron.upcoming",
+      "type": "java.lang.String",
+      "description": "Cron expression for scheduling games buster for games that hasn't been played yet."
+    },
+    {
+      "name": "scheduling.cron.pending",
+      "type": "java.lang.String",
+      "description": "Cron expression for scheduling games buster for games that has been already played."
+    }
   ] }
