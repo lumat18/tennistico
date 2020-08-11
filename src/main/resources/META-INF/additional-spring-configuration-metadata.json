@@ -3,6 +3,6 @@
     {
       "name": "ranking.pagination",
       "type": "java.lang.Integer",
-      "description": "Description for ranking.pagination."
-  }
-] }
+      "description": "Number of players shown on single page in ranking.html."
+    }
+  ] }
