@@ -13,6 +13,9 @@ let modalPhoto = document.getElementById("modalPhoto");
 function showPlayerModal(id){
    console.log("modal should open");
 }
+function showScoreModal(id){
+   console.log("modal should open");
+}
 function showModal(fullName, points, age, gender, photo) {
    modalTitle.textContent = fullName;
    modalAge.textContent = age;
