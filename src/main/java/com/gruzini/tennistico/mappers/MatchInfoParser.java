@@ -36,16 +36,15 @@ public class MatchInfoParser {
         final Score score = scoreService.getScoreWithSets(match.getScore().getId());
         score.getSets().forEach(set -> {
             if (player.equals(match.getHost())) {
-                appendSet(stringBuilder, set.getHostScore(), set.getGuestScore());
+                stringBuilder.append(appendSet(set.getHostScore(), set.getGuestScore()));
             } else {
-                appendSet(stringBuilder, set.getGuestScore(), set.getHostScore());
+                stringBuilder.append(appendSet(set.getGuestScore(), set.getHostScore()));
             }
         });
-        return stringBuilder.toString();
+        return stringBuilder.toString().trim();
     }
-
-    private void appendSet(StringBuilder stringBuilder, int recipientScore, int opponentScore) {
-        stringBuilder.append(recipientScore).append("-").append(opponentScore).append(" ");
+    private String appendSet(int recipientScore, int opponentScore) {
+        return recipientScore + "-" + opponentScore + " ";
     }
 
     public Player getOpponent(final Match match, final Player player) {
