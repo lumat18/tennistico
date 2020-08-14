@@ -10,6 +10,9 @@ let modalGender = document.getElementById("modalGender");
 let modalPoints = document.getElementById("modalPoints");
 let modalPhoto = document.getElementById("modalPhoto");
 
+function showPlayerModal(id){
+   console.log("modal should open");
+}
 function showModal(fullName, points, age, gender, photo) {
    modalTitle.textContent = fullName;
    modalAge.textContent = age;
