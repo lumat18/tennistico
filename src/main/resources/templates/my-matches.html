@@ -46,25 +46,14 @@
                                     <tr th:each="match, iter : ${myMatches}">
                                        <td th:text="${iter.index+1}"></td>
                                        <td>
-                                          <span th:if="${match.involvedPlayerHost}">
-                                             <span th:if="${match.guest != null}">
-                                                <span class="player-modal"
-                                                   th:attr="data-id=${match.guest.getId()}"
-                                                   onclick="showModal(this.getAttribute('data-id'))"
-                                                   th:text="${match.guest.getFullName()}">
-                                                </span>
-                                             </span>
-                                             <span th:unless="${match.guest != null}">
+                                         <span th:if="${match.opponentName != null}" class="player-modal"
+                                               th:attr="data-id=${match.opponentId}"
+                                               onclick="showModal(this.getAttribute('data-id'))"
+                                               th:text="${match.opponentName}">
+                                         </span>
+                                         <span th:unless="${match.opponentName != null}">
                                                 - No opponent yet -
-                                             </span>
-                                          </span>
-                                          <span th:unless="${match.involvedPlayerHost}">
-                                             <span class="player-modal"
-                                                   th:attr="data-name=${match.host.getId()}"
-                                                   onclick="showModal(this.getAttribute('data-id'))"
-                                                   th:text="${match.host.getFullName()}">
-                                             </span>
-                                          </span>
+                                         </span>
                                        </td>
                                        <td th:text="${match.getCourt()}"></td>
                                        <td>
