@@ -78,11 +78,10 @@
                                  <tr th:each="match, iter : ${hostedMatches}">
                                     <td th:text="${iter.index+1}"></td>
                                     <td>
-                                       <span>vs. </span>
                                        <span class="player-modal"
-                                             th:attr="data-id=${match.host.getId()}"
+                                             th:attr="data-id=${match.hostId}"
                                              onclick="showModal(this.getAttribute('data-id'))"
-                                             th:text="${match.host.getFullName()}">
+                                             th:text="${match.hostName}">
                                        </span>
                                     </td>
                                     <td th:text="${match.getAddress()}"></td>

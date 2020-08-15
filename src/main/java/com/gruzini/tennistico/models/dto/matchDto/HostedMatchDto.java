@@ -14,7 +14,8 @@ import java.time.LocalDateTime;
 @Builder
 public class HostedMatchDto {
     private Long id;
-    private PlayerDto host;
+    private String hostName;
+    private Long hostId;
     private String address;
     private LocalDateTime start;
     private LocalDateTime end;
