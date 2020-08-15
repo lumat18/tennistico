@@ -13,7 +13,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 public class ArchivedMatchDto {
-    private PlayerDto opponent;
+    private String opponentName;
+    private Long opponentId;
     private String score;
     private String courtName;
     private LocalDate date;
