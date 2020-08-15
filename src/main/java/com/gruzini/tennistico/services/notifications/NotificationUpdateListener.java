@@ -1,6 +1,7 @@
 package com.gruzini.tennistico.services.notifications;
 
 import com.gruzini.tennistico.events.ConfirmEvent;
+import com.gruzini.tennistico.events.ConfirmScoreEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +17,12 @@ public class NotificationUpdateListener {
 
     @EventListener
     public void handleEvent(final ConfirmEvent event) {
-        notificationService.markAsClicked(event.getTriggerNotificationId());
+        if (event instanceof ConfirmScoreEvent) {
+            notificationService.getByMatchId(((ConfirmScoreEvent) event).getMatchId())
+                    .forEach(notification -> notificationService.markAsClicked(notification.getId()));
+            //SHOULD BE OK - TO TEST
+        } else {
+            notificationService.markAsClicked(event.getTriggerNotificationId());
+        }
     }
 }
