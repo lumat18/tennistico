@@ -13,6 +13,7 @@ import com.gruzini.tennistico.repositories.NotificationRepository;
 import com.gruzini.tennistico.services.entity_related.MatchService;
 import com.gruzini.tennistico.services.entity_related.UserService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
@@ -90,5 +91,14 @@ public class NotificationService {
 
     public List<Notification> getByMatchId(final Long matchId) {
         return notificationRepository.findAllByMatchId(matchId);
+    }
+
+    public boolean existsNewerConfirmNotification(final Long matchId, final Long triggerNotificationId) {
+        final Notification notification = notificationRepository.findById(triggerNotificationId).orElseThrow();
+        return notificationRepository.existsByMatchIdAndNotificationTypeAndCreatedAtAfter(matchId, NotificationType.SCORE_TO_CONFIRM, notification.getCreatedAt());
+    }
+
+    public Long getIdOfNewestConfirmNotification(Long matchId) {
+        return notificationRepository.getTopByMatchIdAndAndNotificationTypeOrderByCreatedAtDesc(matchId, NotificationType.SCORE_TO_CONFIRM).getId();
     }
 }

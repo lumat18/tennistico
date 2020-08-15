@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+>
+
+<head th:insert="/fragments/head :: head"></head>
+
+<body class="dark-edition" style="background-image: url(/img/registration_2_background.jpg);
+background-size: cover">
+<div class="wrapper">
+    <div class="main-panel gruzini-registration-main-panel">
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <!--               placed here to put  form in center -->
+                    <div class="col-xl-1"></div>
+
+                    <div class="col-xl-10 col-lg-12">
+                        <div class="card card-chart">
+                            <div class="card-header card-header-success">
+                                <p class="gruzini-title">Confirm Score</p>
+                            </div>
+                            <div class="card-body">
+
+<!--                                <div class="d-flex justify-content-center">-->
+<!--                                    <img class="gruzini-registration-logo" th:src="@{/img/logo1.png}"/>-->
+<!--                                </div>-->
+
+                                <div style="font-size: 40px; text-align: center; margin: 30px" th:text="${message}"></div>
+                                <div style="font-size: 40px; text-align: center; margin: 30px" th:text="${newScore}"></div>
+                                <form method="post" th:action="@{/confirm-score}">
+                                    <input hidden type="text" name="match_id" th:value="${matchId}"/>
+                                    <input hidden type="text" name="trigger_id" th:value="${notificationId}"/>
+                                    <button id="hiddenSubmitButton" type="submit" hidden></button>
+                                </form>
+
+                            </div>
+                            <div class="card-footer d-flex justify-content-center">
+                                <a th:href="@{/dashboard}" class="btn btn-success gruzini-btn-success" role="button"
+                                   aria-pressed="true">
+                                    Go to dashboard
+                                </a>
+                                <button class="btn btn-success gruzini-btn-success" id="buttonSubmit"
+                                        onclick="submitByHiddenButton()">Next step
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--               placed here to put registration form in center -->
+                    <div class="col-xl-1"></div>
+
+                </div>
+            </div>
+        </div>
+        <!--FOOTER-->
+        <footer th:insert="/fragments/footer :: footer"></footer>
+        <!--END FOOTER-->
+    </div>
+</div>
+<script>
+    function submitByHiddenButton() {
+        document.getElementById("hiddenSubmitButton").click();
+    }
+</script>
+<!--JAVASCRIPT IMPORTS-->
+<div th:replace="/fragments/js-imports :: js-imports"></div>
+<!--END JAVASCRIPT IMPORTS-->
+
+</body>
+</html>

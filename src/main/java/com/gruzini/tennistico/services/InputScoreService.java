@@ -39,7 +39,9 @@ public class InputScoreService {
     }
 
     private void updateMatchScore(final Match match, final Score score){
-        match.setScore(score);
-        matchService.save(match);
+        if (match.getMatchStatus() == MatchStatus.PENDING){
+            match.setScore(score);
+            matchService.save(match);
+        }
     }
 }
