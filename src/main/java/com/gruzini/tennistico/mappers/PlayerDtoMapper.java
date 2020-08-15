@@ -14,6 +14,7 @@ public class PlayerDtoMapper {
 
    public PlayerDto toPlayerDto(final Player player){
       return PlayerDto.builder()
+              .id(player.getId())
               .firstName(player.getFirstName())
               .lastName(player.getLastName())
               .rankingPoints(player.getRankingPoints())

@@ -39,12 +39,8 @@
                               <td class="gruzini-text-card-content" th:text="${iter.index+1}"></td>
                               <td class="gruzini-text-card-content">
                                  <span class="player-modal"
-                                       th:attr="data-name=${match.opponent.getFullName()}, data-points=${match.opponent.rankingPoints},
-                                                data-age=${match.opponent.age}, data-gender=${match.opponent.gender},
-                                                data-photo=${match.opponent.photoUrl}"
-                                       onclick="showModal(this.getAttribute('data-name'), this.getAttribute('data-points'),
-                                                           this.getAttribute('data-age'), this.getAttribute('data-gender'),
-                                                           this.getAttribute('data-photo'))"
+                                       th:attr="data-id=${match.opponent.getId()}"
+                                       onclick="showModal(this.getAttribute('data-id'))"
                                        th:text="${match.opponent.getFullName()}">
                                  </span>
                               </td>

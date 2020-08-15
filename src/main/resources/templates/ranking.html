@@ -46,12 +46,8 @@
                         <td th:text="${player.rankingPosition}"></td>
                         <td>
                           <span th:unless="${player == session.loggedUser}" class="player-modal"
-                                th:attr="data-name=${player.getFullName()}, data-points=${player.rankingPoints},
-                                                data-age=${player.age}, data-gender=${player.gender},
-                                                data-photo=${player.photoUrl}"
-                                onclick="showModal(this.getAttribute('data-name'), this.getAttribute('data-points'),
-                                                           this.getAttribute('data-age'), this.getAttribute('data-gender'),
-                                                           this.getAttribute('data-photo'))"
+                                th:attr="data-id=${player.getId()}"
+                                onclick="showModal(this.getAttribute('data-id'))"
                                 th:text="${player.getFullName()}">
                           </span>
                           <span th:if="${player == session.loggedUser}" class="gruzini-text-card-content"

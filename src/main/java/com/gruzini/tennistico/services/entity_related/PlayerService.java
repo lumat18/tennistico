@@ -29,4 +29,8 @@ public class PlayerService {
     public Page<Player> getPlayersPage(final Pageable pageable){
         return playerRepository.findAllByOrderByRankingPointsDesc(pageable);
     }
+
+    public Player getById(final Long id) {
+        return playerRepository.findById(id).orElseThrow(PlayerNotFoundException::new);
+    }
 }

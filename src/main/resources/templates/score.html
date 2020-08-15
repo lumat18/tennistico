@@ -40,11 +40,11 @@
                                  <thead>
                                  <tr class="d-flex justify-content-center">
                                     <th class="gruzini-text-card-content"
-                                        th:text="${match.getHost().getFirstName() + ' ' + match.getHost().getLastName()}">
+                                        th:text="${match.getHost().getFullName()}">
                                     </th>
                                     <th class="gruzini-text-card-content">vs.</th>
                                     <th class="gruzini-text-card-content"
-                                        th:text="${match.getGuest().get().getFirstName() + ' ' + match.getGuest().get().getLastName()}">
+                                        th:text="${match.getGuest().get().getFullName()}">
                                     </th>
                                  </tr>
                                  </thead>
