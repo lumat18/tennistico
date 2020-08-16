@@ -17,7 +17,7 @@ public class NotificationMapper {
         return NotificationDto.builder()
                 .id(notification.getId())
                 .createdAt(notification.getCreatedAt())
-                .endpoint(notification.getNotificationType().getEndpoint())
+                .positiveEndpoint(notification.getNotificationType().getPositiveEndpoint())
                 .message(toStringMessage(notification))
                 .matchId(notification.getMatchId())
                 .buttonName(notification.getNotificationType().getButtonName())

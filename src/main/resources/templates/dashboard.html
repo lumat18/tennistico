@@ -95,7 +95,7 @@
                                         <td th:utext="${notification.getMessage()}"></td>
                                         <td class="td-actions text-right">
                                             <div th:if="${notification.getButtonName() != null && !notification.getClicked()}">
-                                                <form method="post" th:action="@{__${notification.getEndpoint()}__}">
+                                                <form method="post" th:action="@{__${notification.getPositiveEndpoint()}__}">
                                                     <input hidden type="text" name="match_id" th:value="${notification.getMatchId()}"/>
                                                     <input hidden type="text" name="trigger_id" th:value="${notification.getId()}"/>
                                                     <button class="btn btn-success gruzini-btn-success gruzini-button-small" th:text="${notification.getButtonName()}" type="submit"></button>

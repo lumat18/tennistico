@@ -12,6 +12,8 @@ public class NotificationMessages {
     public static final String SCORE_TO_SUBMIT = "Your match vs " + NAME_OPENING_TAG + "%s" + CLOSING_TAG + " took place recently. Please submit score. Click and fill in";
     public static final String SCORE_TO_CONFIRM = NAME_OPENING_TAG + "%s" + CLOSING_TAG + " have submitted the score of the match. Was it " + SCORE_OPENING_TAG + "%s" + CLOSING_TAG + " ? Please confirm";
     public static final String MATCH_ARCHIVED = "Match vs " + NAME_OPENING_TAG + "%s" + CLOSING_TAG + " has been archived. Saved score was " + SCORE_OPENING_TAG + "%s" + CLOSING_TAG + " Check your ranking points!";
+    public static final String JOIN_REQUEST_REJECTED = "Your join request was rejected by " + NAME_OPENING_TAG + "%s" + CLOSING_TAG + ". We are sorry.";
+    public static final String SCORE_REJECTED = "Score you submitted was rejected by " + NAME_OPENING_TAG + "%s" + CLOSING_TAG + ". Please fill it in again.";
 
     //TODO: expand match info - add place, date etc
 }
