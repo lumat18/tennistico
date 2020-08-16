@@ -9,12 +9,11 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class HostedMatchMapper {
 
-    private final PlayerDtoMapper playerDtoMapper;
-
     public HostedMatchDto toMatchInfoDto(final Match match) {
         return HostedMatchDto.builder()
                 .id(match.getId())
-                .host(playerDtoMapper.toPlayerDto(match.getHost()))
+                .hostName(match.getHost().getFullName())
+                .hostId(match.getHost().getId())
                 .address(match.getCourt().getStreet() + ", " + match.getCourt().getCity())
                 .start(match.getStartingAt())
                 .end(match.getEndingAt())

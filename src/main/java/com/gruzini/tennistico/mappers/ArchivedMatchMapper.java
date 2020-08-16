@@ -10,14 +10,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequiredArgsConstructor
 public class ArchivedMatchMapper {
-
-    private final PlayerDtoMapper playerDtoMapper;
 
     public ArchivedMatchDto toArchivedMatchDTO(final Match match, final Player player) {
         return ArchivedMatchDto.builder()
-                .opponent(getOpponent(match, player))
+                .opponentName(getOpponentFullName(match, player))
+                .opponentId(player.getId())
                 .score(getScoreAsString(match, player))
                 .courtName(match.getCourt().getName() + ", " + match.getCourt().getCity())
                 .date(match.getEndingAt().toLocalDate())
@@ -25,14 +23,14 @@ public class ArchivedMatchMapper {
                 .build();
     }
 
-    private PlayerDto getOpponent(final Match match, final Player player){
+    private String getOpponentFullName(final Match match, final Player player){
         Player opponent;
         if (match.getHost().equals(player)){
             opponent = match.getGuest().orElseThrow(PlayerNotFoundException::new);
         } else {
             opponent = match.getHost();
         }
-        return playerDtoMapper.toPlayerDto(opponent);
+        return opponent.getFullName();
     }
 
     private String getScoreAsString(final Match match, final Player player) {

@@ -78,15 +78,10 @@
                                  <tr th:each="match, iter : ${hostedMatches}">
                                     <td th:text="${iter.index+1}"></td>
                                     <td>
-                                       <span>vs. </span>
                                        <span class="player-modal"
-                                             th:attr="data-name=${match.host.getFullName()}, data-points=${match.host.rankingPoints},
-                                                data-age=${match.host.age}, data-gender=${match.host.gender},
-                                                data-photo=${match.host.photoUrl}"
-                                             onclick="showModal(this.getAttribute('data-name'), this.getAttribute('data-points'),
-                                                           this.getAttribute('data-age'), this.getAttribute('data-gender'),
-                                                           this.getAttribute('data-photo'))"
-                                             th:text="${match.host.getFullName()}">
+                                             th:attr="data-id=${match.hostId}"
+                                             onclick="showModal(this.getAttribute('data-id'))"
+                                             th:text="${match.hostName}">
                                        </span>
                                     </td>
                                     <td th:text="${match.getAddress()}"></td>

@@ -2,7 +2,6 @@ package com.gruzini.tennistico.mappers;
 
 import com.gruzini.tennistico.domain.Match;
 import com.gruzini.tennistico.domain.Player;
-import com.gruzini.tennistico.models.dto.PlayerDto;
 import com.gruzini.tennistico.models.dto.matchDto.FutureMatchDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -11,24 +10,34 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class FutureMatchMapper {
 
-    private final PlayerDtoMapper playerDtoMapper;
-
-    public FutureMatchDto toFutureMatchDto(final Match match, final Player involved) {
+    public FutureMatchDto toFutureMatchDto(final Match match, final Player involvedPlayer) {
         return FutureMatchDto.builder()
-                .host(playerDtoMapper.toPlayerDto(match.getHost()))
-                .guest(prepareGuest(match))
+                .opponentName(prepareOpponentName(match, involvedPlayer))
+                .opponentId(prepareOpponentId(match, involvedPlayer))
                 .court(match.getCourt().getName() + ", " + match.getCourt().getCity())
                 .start(match.getStartingAt())
                 .end(match.getEndingAt())
                 .matchStatus(match.getMatchStatus().toString())
-                .isInvolvedPlayerHost(match.getHost().equals(involved))
                 .build();
     }
 
-    private PlayerDto prepareGuest(final Match match) {
-        if (match.getGuest().isEmpty()){
-            return null;
+    private String prepareOpponentName(final Match match, final Player involvedPlayer) {
+        if(match.getHost().equals(involvedPlayer)){
+            if (match.getGuest().isEmpty()){
+                return null;
+            }
+            return match.getGuest().get().getFullName();
         }
-        return playerDtoMapper.toPlayerDto(match.getGuest().get());
+        return match.getHost().getFullName();
+    }
+
+    private Long prepareOpponentId(final Match match, final Player involvedPlayer) {
+        if(match.getHost().equals(involvedPlayer)){
+            if(match.getGuest().isEmpty()){
+                return null;
+            }
+            return match.getGuest().get().getId();
+        }
+        return match.getHost().getId();
     }
 }

@@ -38,4 +38,9 @@ public class PlayerDtoService {
       final Page<Player> playersPage = playerService.getPlayersPage(pageable);
       return playersPage.map(playerDtoMapper::toPlayerDto);
    }
+
+   public PlayerDto getPlayerDtoById(final Long id) {
+      final Player player = playerService.getById(id);
+      return playerDtoMapper.toPlayerDto(player);
+   }
 }
