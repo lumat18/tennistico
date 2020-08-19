@@ -14,9 +14,10 @@ import java.time.LocalDateTime;
 public class NotificationDto {
     private Long id;
     private String message;
-    private String endpoint;
-    private LocalDateTime createdAt;
-    private Long matchId;
+    private String positiveEndpoint;
+    private String negativeEndpoint;
     private String buttonName;
     private Boolean clicked;
+    private LocalDateTime createdAt;
+    private Long matchId;
 }

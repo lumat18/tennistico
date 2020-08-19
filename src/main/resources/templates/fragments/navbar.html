@@ -8,7 +8,7 @@
     <div class="container-fluid">
         <div class="navbar-wrapper">
 <!--            <a class="navbar-brand" href="javascript:void(0)">Dashboard</a>-->
-            <span class="gruzini-navbar-text"
+            <span class="gruzini-navbar-text" style="color: #8b92a9 !important; margin-right: 15px"
                     th:text="${session.loggedUser.getFullName()}"></span>
             <div class="gruzini-navbar-ranking">
                 <i class="material-icons" style="height: 22px;">emoji_events</i>
@@ -22,10 +22,11 @@
             <span class="navbar-toggler-icon icon-bar"></span>
             <span class="navbar-toggler-icon icon-bar"></span>
         </button>
+        <span class="gruzini-navbar-text" style="text-align: center; display: block; margin-left: 30%">
+                <span th:if="${actionMessage != null}" th:text="${actionMessage}"></span>
+            </span>
         <div class="collapse navbar-collapse justify-content-end">
-            <div class="gruzini-navbar-text">
-                <span th:if="${actionMessage != null}" th:text="${actionMessage}" style="color: #d22824;"></span>
-            </div>
+
             <form class="navbar-form">
                 <div class="input-group no-border">
                     <div class="ripple-container"></div>

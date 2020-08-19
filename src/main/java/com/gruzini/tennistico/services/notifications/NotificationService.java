@@ -87,4 +87,8 @@ public class NotificationService {
         notification.setClicked(true);
         notificationRepository.save(notification);
     }
+
+    public List<Notification> getByMatchId(final Long matchId) {
+        return notificationRepository.findAllByMatchId(matchId);
+    }
 }

@@ -1,6 +1,6 @@
 package com.gruzini.tennistico.services.notifications;
 
-import com.gruzini.tennistico.events.ConfirmEvent;
+import com.gruzini.tennistico.events.ConfirmableEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +15,7 @@ public class NotificationUpdateListener {
     }
 
     @EventListener
-    public void handleEvent(final ConfirmEvent event) {
+    public void handleEvent(final ConfirmableEvent event) {
         notificationService.markAsClicked(event.getTriggerNotificationId());
     }
 }

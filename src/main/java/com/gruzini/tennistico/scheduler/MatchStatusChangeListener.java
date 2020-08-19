@@ -12,11 +12,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-public class ChangeMatchStatusListener {
+public class MatchStatusChangeListener {
 
     private final MatchService matchService;
 
-    public ChangeMatchStatusListener(MatchService matchService) {
+    public MatchStatusChangeListener(MatchService matchService) {
         this.matchService = matchService;
     }
 

@@ -2,7 +2,7 @@ package com.gruzini.tennistico.mappers;
 
 import com.gruzini.tennistico.domain.Match;
 import com.gruzini.tennistico.domain.Player;
-import com.gruzini.tennistico.domain.Set;
+import com.gruzini.tennistico.domain.Score;
 import com.gruzini.tennistico.exceptions.PlayerNotFoundException;
 import com.gruzini.tennistico.models.dto.PlayerDto;
 import com.gruzini.tennistico.models.dto.matchDto.ArchivedMatchDto;
@@ -12,11 +12,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class ArchivedMatchMapper {
 
+    private final MatchInfoParser matchInfoParser;
     public ArchivedMatchDto toArchivedMatchDTO(final Match match, final Player player) {
         return ArchivedMatchDto.builder()
                 .opponentName(getOpponentFullName(match, player))
                 .opponentId(player.getId())
-                .score(getScoreAsString(match, player))
+                .score(matchInfoParser.getScore(match.getId(), player))
                 .courtName(match.getCourt().getName() + ", " + match.getCourt().getCity())
                 .date(match.getEndingAt().toLocalDate())
                 .matchResult(getMatchResult(match, player))
@@ -33,18 +34,6 @@ public class ArchivedMatchMapper {
         return opponent.getFullName();
     }
 
-    private String getScoreAsString(final Match match, final Player player) {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (Set set : match.getScore().getSets()) {
-            if(match.getHost().equals(player)){
-                stringBuilder.append(set.getHostScore()).append("-").append(set.getGuestScore()).append(" ");
-            } else {
-                stringBuilder.append(set.getGuestScore()).append("-").append(set.getHostScore()).append(" ");
-            }
-        }
-        return stringBuilder.toString();
-    }
-
     private String getMatchResult(final Match match, final Player player) {
         if(match.getScore().isDraw()){
             return "DRAW";
@@ -57,3 +46,4 @@ public class ArchivedMatchMapper {
         }
     }
 }
+

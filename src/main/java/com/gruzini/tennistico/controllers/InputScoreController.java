@@ -27,14 +27,17 @@ public class InputScoreController {
 
     @PostMapping("/begin")
     public String beginSubmittingScore(@RequestParam(name = "match_id") final Long matchId,
+                                       @RequestParam(name = "trigger_id") final Long triggerNotificationId,
                                        final Model model) {
         model.addAttribute("match", matchService.getById(matchId));
+        model.addAttribute("trigger_id", triggerNotificationId);
         model.addAttribute("score", new ScoreDto());
         return "score";
     }
 
     @PostMapping("/process")
     public String processSubmittedScore(@ModelAttribute(name = "match_id") final Long matchId,
+                                        @ModelAttribute(name = "trigger_id") final Long triggerNotificationId,
                                         @Valid @ModelAttribute(name = "score") final ScoreDto scoreDto,
                                         final Errors errors,
                                         final Model model,
@@ -45,7 +48,7 @@ public class InputScoreController {
             model.addAttribute("msg", "Invalid score input");
             return "score";
         }
-        applicationEventPublisher.publishEvent(new InputScoreEvent(this, matchId, principal.getName(), scoreDto));
+        applicationEventPublisher.publishEvent(new InputScoreEvent(this, matchId, principal.getName(), scoreDto, triggerNotificationId));
         return "redirect:/dashboard";
     }
 }

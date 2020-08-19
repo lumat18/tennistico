@@ -4,13 +4,13 @@ import lombok.Getter;
 import org.springframework.context.ApplicationEvent;
 
 @Getter
-public class ConfirmJoinEvent extends ApplicationEvent implements ConfirmableEvent {
+public class RejectJoinEvent extends ApplicationEvent implements ConfirmableEvent {
 
     private final Long matchId;
     private final Long triggerNotificationId;
     private final String username;
 
-    public ConfirmJoinEvent(Object source, Long matchId, Long triggerNotificationId, String username) {
+    public RejectJoinEvent(Object source, Long matchId, Long triggerNotificationId, String username) {
         super(source);
         this.matchId = matchId;
         this.triggerNotificationId = triggerNotificationId;

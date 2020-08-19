@@ -85,20 +85,26 @@
                     <div class="col-lg-12 col-md-12">
                         <div class="card">
                             <div class="card-header card-header-success">
-                                <h3 class="gruzini-title">Your Activity</h3>
+                                <h2 style="text-align: center; display: block">Your Activity</h2>
                             </div>
                             <div class="card-body table-responsive">
                                 <table class="table table-hover">
                                     <tbody>
                                     <tr th:each="notification : ${notifications}">
                                         <td th:text="${#temporals.format(notification.getCreatedAt(), 'dd.MM.yyyy, HH:mm')}"></td>
-                                        <td th:text="${notification.getMessage()}"></td>
+                                        <td th:utext="${notification.getMessage()}"></td>
                                         <td class="td-actions text-right">
                                             <div th:if="${notification.getButtonName() != null && !notification.getClicked()}">
-                                                <form method="post" th:action="@{__${notification.getEndpoint()}__}">
+                                                <form method="post" th:action="@{__${notification.getPositiveEndpoint()}__}">
                                                     <input hidden type="text" name="match_id" th:value="${notification.getMatchId()}"/>
                                                     <input hidden type="text" name="trigger_id" th:value="${notification.getId()}"/>
+                                                    <button th:if="${notification.getNegativeEndpoint() != null}" class="btn btn-warning gruzini-btn-success gruzini-button-small" id="buttonSubmit" onclick="submitByHiddenButton()">REJECT</button>
                                                     <button class="btn btn-success gruzini-btn-success gruzini-button-small" th:text="${notification.getButtonName()}" type="submit"></button>
+                                                </form>
+                                                <form hidden method="post" th:action="@{__${notification.getNegativeEndpoint()}__}">
+                                                    <input hidden type="text" name="match_id" th:value="${notification.getMatchId()}"/>
+                                                    <input hidden type="text" name="trigger_id" th:value="${notification.getId()}"/>
+                                                    <button id="hiddenSubmitButton" type="submit" hidden></button>
                                                 </form>
                                             </div>
                                         </td>
@@ -149,6 +155,11 @@
         <!--FOOTER-->
         <footer th:insert="/fragments/footer :: footer"></footer>
         <!--END FOOTER-->
+        <script>
+            function submitByHiddenButton() {
+                document.getElementById("hiddenSubmitButton").click();
+            }
+        </script>
     </div>
 </div>
 <!--JAVASCRIPT IMPORTS-->
