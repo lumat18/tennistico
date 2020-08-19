@@ -16,94 +16,6 @@
         <nav th:insert="/fragments/navbar :: navbar"></nav>
         <!-- End Navbar -->
 
-<<<<<<< Updated upstream
-      <div class="main-panel gruzini-registration-main-panel">
-         <div class="content">
-            <div class="container-fluid">
-               <div class="row">
-                  <div class="col-lg-12">
-                     <div class="card card-chart">
-                        <div class="card-header card-header-success">
-                           <p class="gruzini-title">Courts</p>
-                        </div>
-                        <div class="card-body">
-                           <div class="card-body table-responsive gruzini-text-card-content">
-                              <div class="gruzini-card-desc">
-                                 Below you can see all courts in our database. Select one and set a new match
-                                 there. Please remember to verify and book the specific hours using contact
-                                 information ex. phone number.
-                              </div>
-                              <div class="gruzini-card-desc gruzini-search">
-                                 <form class="gruzini-search-form"
-                                       method="post" th:action="@{/courts}">
-                                    <div class="input-group mb-3">
-                                       <div class="input-group-prepend">
-                                                        <span class="input-group-text gruzini-input-group-text gruzini-search-title"
-                                                              id="genderSelect">City:</span>
-                                       </div>
-                                       <select name="selectedCity"
-                                               class="custom-select gruzini-select gruzini-search-field"
-                                               aria-describedby="citySelect">
-                                          <option th:each="city : ${cities}"
-                                                  th:value="${city.toString()}"
-                                                  th:text="${city.toString()}">
-                                          </option>
-                                       </select>
-                                    </div>
-                                    <button id="hiddenSubmitButton" type="submit" hidden></button>
-                                 </form>
-                                 <button class="btn btn-success gruzini-btn-success gruzini-search-button"
-                                         id="buttonSubmit"
-                                         onclick="submitByHiddenButton()">Search
-                                 </button>
-                              </div>
-                              <table class="table table-hover">
-                                 <thead>
-                                 <tr>
-                                    <th class="gruzini-text-card-content">ID</th>
-                                    <th class="gruzini-text-card-content">Name</th>
-                                    <th class="gruzini-text-card-content">Address</th>
-                                    <th class="gruzini-text-card-content">City</th>
-                                    <th class="gruzini-text-card-content">Phone Number</th>
-                                    <th class="gruzini-text-card-content"></th>
-                                 </tr>
-                                 </thead>
-                                 <tbody>
-                                 <tr th:each="court, iter : ${foundCourts}">
-                                    <td th:text="${iter.index+1}"></td>
-                                    <td th:text="${court.getName()}"></td>
-                                    <td th:text="${court.getAddress()}"></td>
-                                    <td th:text="${court.getCity()}"></td>
-                                    <td th:text="${court.getPhoneNumber()}"></td>
-                                    <td style="width: 110px !important;">
-                                       <form method="post" th:action="@{/create/begin}">
-                                          <input hidden type="text" name="courtId" th:value="${court.getCourtId()}"/>
-                                          <input type="submit"
-                                                 class="btn btn-success gruzini-btn-success gruzini-button-small"
-                                                 value="Play here!">
-                                       </form>
-                                    </td>
-                                 </tr>
-                                 </tbody>
-                              </table>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
-   <!--FOOTER-->
-   <footer th:insert="/fragments/footer :: footer"></footer>
-   <!--END FOOTER-->
-   <script>
-      function submitByHiddenButton() {
-         document.getElementById("hiddenSubmitButton").click();
-      }
-   </script>
-=======
         <div class="main-panel gruzini-registration-main-panel">
             <div class="content">
                 <div class="container-fluid">
@@ -114,8 +26,6 @@
                                     <p class="gruzini-title">Courts</p>
                                 </div>
                                 <div class="card-body">
-
-
                                     <div class="card-body table-responsive gruzini-text-card-content">
                                         <div class="gruzini-card-desc">
                                             Below you can see all courts in our database. Select one and set a new match
@@ -166,8 +76,7 @@
                                                 <td th:text="${court.getPhoneNumber()}"></td>
                                                 <td style="width: 110px !important;">
                                                     <form method="post" th:action="@{/create/begin}">
-                                                        <input hidden type="text" name="courtId"
-                                                               th:value="${court.getCourtId()}"/>
+                                                        <input hidden type="text" name="courtId" th:value="${court.getCourtId()}"/>
                                                         <input type="submit"
                                                                class="btn btn-success gruzini-btn-success gruzini-button-small"
                                                                value="Play here!">
@@ -180,24 +89,19 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
-            <!--FOOTER-->
-            <footer th:insert="/fragments/footer :: footer"></footer>
-            <!--END FOOTER-->
-            <script>
-                function submitByHiddenButton() {
-                    document.getElementById("hiddenSubmitButton").click();
-                }
-            </script>
         </div>
     </div>
-    <!--JAVASCRIPT IMPORTS-->
-    <div th:replace="/fragments/js-imports :: js-imports"></div>
-    <!--END JAVASCRIPT IMPORTS-->
->>>>>>> Stashed changes
+    <!--FOOTER-->
+    <footer th:insert="/fragments/footer :: footer"></footer>
+    <!--END FOOTER-->
+    <script>
+        function submitByHiddenButton() {
+            document.getElementById("hiddenSubmitButton").click();
+        }
+    </script>
 </div>
 <!--JAVASCRIPT IMPORTS-->
 <div th:replace="/fragments/js-imports :: js-imports"></div>

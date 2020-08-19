@@ -9,35 +9,16 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class FutureMatchMapper {
+    private final MatchInfoParser matchInfoParser;
 
     public FutureMatchDto toFutureMatchDto(final Match match, final Player involvedPlayer) {
         return FutureMatchDto.builder()
-                .opponentName(prepareOpponentName(match, involvedPlayer))
-                .opponentId(prepareOpponentId(match, involvedPlayer))
+                .opponentName(matchInfoParser.getOpponentName(match.getId(), involvedPlayer))
+                .opponentId(matchInfoParser.getOpponentId(match.getId(), involvedPlayer))
                 .court(match.getCourt().getName() + ", " + match.getCourt().getCity())
                 .start(match.getStartingAt())
                 .end(match.getEndingAt())
                 .matchStatus(match.getMatchStatus().toString())
                 .build();
-    }
-
-    private String prepareOpponentName(final Match match, final Player involvedPlayer) {
-        if(match.getHost().equals(involvedPlayer)){
-            if (match.getGuest().isEmpty()){
-                return null;
-            }
-            return match.getGuest().get().getFullName();
-        }
-        return match.getHost().getFullName();
-    }
-
-    private Long prepareOpponentId(final Match match, final Player involvedPlayer) {
-        if(match.getHost().equals(involvedPlayer)){
-            if(match.getGuest().isEmpty()){
-                return null;
-            }
-            return match.getGuest().get().getId();
-        }
-        return match.getHost().getId();
     }
 }

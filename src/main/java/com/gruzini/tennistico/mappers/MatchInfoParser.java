@@ -3,7 +3,6 @@ package com.gruzini.tennistico.mappers;
 import com.gruzini.tennistico.domain.Match;
 import com.gruzini.tennistico.domain.Player;
 import com.gruzini.tennistico.domain.Score;
-import com.gruzini.tennistico.exceptions.PlayerNotFoundException;
 import com.gruzini.tennistico.services.entity_related.MatchService;
 import com.gruzini.tennistico.services.entity_related.ScoreService;
 import org.springframework.stereotype.Component;
@@ -21,7 +20,7 @@ public class MatchInfoParser {
     }
 
     public String getScore(final Long matchId, final Player player) {
-        if (isNull(matchId)){
+        if (isNull(matchId)) {
             return "";
         }
         final Match match = matchService.getById(matchId);
@@ -43,6 +42,7 @@ public class MatchInfoParser {
         });
         return stringBuilder.toString().trim();
     }
+
     private String appendSet(int recipientScore, int opponentScore) {
         return recipientScore + "-" + opponentScore + " ";
     }
@@ -50,7 +50,7 @@ public class MatchInfoParser {
     public Player getOpponent(final Match match, final Player player) {
         Player opponent;
         if (match.getHost().equals(player)) {
-            opponent = match.getGuest().orElseThrow(PlayerNotFoundException::new);
+            opponent = match.getGuest().orElse(null);
         } else {
             opponent = match.getHost();
         }
@@ -63,6 +63,33 @@ public class MatchInfoParser {
         }
         final Match match = matchService.getById(matchId);
         Player opponent = getOpponent(match, player);
-        return opponent.getFirstName() + " " + opponent.getLastName();
+        if (isNull(opponent)) {
+            return null;
+        }
+        return opponent.getFullName();
+    }
+
+    public Long getOpponentId(final Long matchId, final Player player) {
+        if (isNull(matchId)) {
+            return null;
+        }
+        final Match match = matchService.getById(matchId);
+        Player opponent = getOpponent(match, player);
+        if (isNull(opponent)) {
+            return null;
+        }
+        return opponent.getId();
+    }
+
+    public String getMatchResult(final Match match, final Player player) {
+        if (match.getScore().isDraw()) {
+            return "DRAW";
+        } else {
+            if (match.getScore().getWinner().equals(player)) {
+                return "WIN";
+            } else {
+                return "LOSS";
+            }
+        }
     }
 }
