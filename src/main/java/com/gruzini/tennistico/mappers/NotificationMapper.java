@@ -28,7 +28,9 @@ public class NotificationMapper {
 
     private String toStringMessage(Notification notification) {
         return String.format(notification.getNotificationType().getMessage(),
+                notification.getMatchId(),
                 matchInfoParser.getOpponentName(notification.getMatchId(), notification.getRecipient().getPlayer()),
+                notification.getMatchId(),
                 matchInfoParser.getScore(notification.getMatchId(), notification.getRecipient().getPlayer()));
     }
 
