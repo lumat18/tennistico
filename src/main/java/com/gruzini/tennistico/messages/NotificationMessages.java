@@ -2,7 +2,7 @@ package com.gruzini.tennistico.messages;
 
 public class NotificationMessages {
 
-    public static final String NAME_OPENING_TAG = "<span class='player-modal' th:attr='data-id=${notification.getMatchId}' onclick='showPlayerModal(this.getAttribute(&#39data-id&#39))'>";
+    public static final String NAME_OPENING_TAG = "<span class='player-modal' th:attr='data-id=${notification.getMatchId}' onclick='showPlayerModalByMatchId(this.getAttribute(&#39data-id&#39))'>";
     public static final String SCORE_OPENING_TAG = "<span class='player-modal' th:attr='data-id=${notification.getMatchId}' onclick='showScoreModal(this.getAttribute(&#39data-id&#39))'>";
     public static final String CLOSING_TAG = "</span>";
 

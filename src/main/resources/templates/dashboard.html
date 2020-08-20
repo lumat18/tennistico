@@ -74,7 +74,7 @@
                                         <span>Last Match - vs.&nbsp;</span>
                                         <span class="player-modal"
                                               th:attr="data-id=${lastMatch.opponentId}"
-                                              onclick="showModalByPlayerId(this.getAttribute('data-id'))"
+                                              onclick="showPlayerModalByPlayerId(this.getAttribute('data-id'))"
                                               th:text="${lastMatch.opponentName}"></span>
                                     </span>
                                     <span th:unless="${lastMatch.opponentName != null}">
