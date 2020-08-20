@@ -69,7 +69,18 @@
                                 <p class="gruzini-score-text" style="font-size: 40px; text-align: center; padding-top: 10px" th:text="${lastMatch.getScore()} ? ${lastMatch.getScore()} : '---'"></p>
                             </div>
                             <div class="card-body">
-                                <h3 class="card-title" th:text="${lastMatch.opponentName} ? 'Last Match - vs. ' + ${lastMatch.opponentName} : 'No matches played yet'"></h3>
+                                <h3 class="card-title">
+                                    <span th:if="${lastMatch.opponentName != null}">
+                                        <span>Last Match - vs.&nbsp;</span>
+                                        <span class="player-modal"
+                                              th:attr="data-id=${lastMatch.opponentId}"
+                                              onclick="showModalByPlayerId(this.getAttribute('data-id'))"
+                                              th:text="${lastMatch.opponentName}"></span>
+                                    </span>
+                                    <span th:unless="${lastMatch.opponentName != null}">
+                                        No matches played yet
+                                    </span>
+                                </h3>
                             </div>
                             <div class="card-footer" data-link="matches-history" style="cursor: pointer">
                                 <h4 class="stats">
@@ -150,6 +161,7 @@
                         </div>
                     </div>
                 </div>
+                <div th:insert="fragments/player-modal :: player-modal"></div>
             </div>
         </div>
         <!--FOOTER-->

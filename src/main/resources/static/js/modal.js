@@ -10,7 +10,7 @@ let modalGender = document.getElementById("modalGender");
 let modalPoints = document.getElementById("modalPoints");
 let modalPhoto = document.getElementById("modalPhoto");
 
-function showModal(id) {
+function showModalByPlayerId(id) {
    fetch('/getPlayerDto?id=' + id)
        .then(response => response.json())
        .then(function (json) {

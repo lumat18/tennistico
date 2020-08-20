@@ -47,7 +47,7 @@
                         <td>
                           <span th:unless="${player == session.loggedUser}" class="player-modal"
                                 th:attr="data-id=${player.getId()}"
-                                onclick="showModal(this.getAttribute('data-id'))"
+                                onclick="showModalByPlayerId(this.getAttribute('data-id'))"
                                 th:text="${player.getFullName()}">
                           </span>
                           <span th:if="${player == session.loggedUser}" class="gruzini-text-card-content"

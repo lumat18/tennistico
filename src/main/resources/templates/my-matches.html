@@ -48,7 +48,7 @@
                                        <td>
                                          <span th:if="${match.opponentName != null}" class="player-modal"
                                                th:attr="data-id=${match.opponentId}"
-                                               onclick="showModal(this.getAttribute('data-id'))"
+                                               onclick="showModalByPlayerId(this.getAttribute('data-id'))"
                                                th:text="${match.opponentName}">
                                          </span>
                                          <span th:unless="${match.opponentName != null}">

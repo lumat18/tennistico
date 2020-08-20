@@ -57,7 +57,7 @@ public class MatchDtoService {
         final Optional<Match> last = matchService.getLastByPlayerAndStatus(user.getPlayer(), MatchStatus.ARCHIVED);
         if (last.isPresent()){
             return archivedMatchMapper.toArchivedMatchDTO(last.get(), user.getPlayer());
-        }else {
+        } else {
             return ArchivedMatchDto.builder().build();
         }
     }
