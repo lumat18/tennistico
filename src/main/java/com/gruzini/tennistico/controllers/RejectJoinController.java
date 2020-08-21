@@ -24,6 +24,7 @@ public class RejectJoinController {
                                           @RequestParam(name = "trigger_id") final Long triggerNotificationId,
                                           final Principal principal) {
         applicationEventPublisher.publishEvent(new RejectJoinEvent(this, matchId, triggerNotificationId, principal.getName()));
+        System.out.println("reject join event published");
         return "redirect:/dashboard";
     }
 }

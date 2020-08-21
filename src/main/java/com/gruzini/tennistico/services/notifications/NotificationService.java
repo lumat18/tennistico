@@ -1,12 +1,10 @@
 package com.gruzini.tennistico.services.notifications;
 
-import com.gruzini.tennistico.domain.Match;
-import com.gruzini.tennistico.domain.Notification;
-import com.gruzini.tennistico.domain.Player;
-import com.gruzini.tennistico.domain.User;
+import com.gruzini.tennistico.domain.*;
 import com.gruzini.tennistico.domain.enums.NotificationType;
 import com.gruzini.tennistico.exceptions.NoGuestInMatchException;
 import com.gruzini.tennistico.exceptions.NotificationNotFoundException;
+import com.gruzini.tennistico.mappers.MatchInfoParser;
 import com.gruzini.tennistico.mappers.NotificationMapper;
 import com.gruzini.tennistico.models.dto.NotificationDto;
 import com.gruzini.tennistico.repositories.NotificationRepository;
@@ -27,12 +25,14 @@ public class NotificationService {
     private final NotificationMapper notificationMapper;
     private final UserService userService;
     private final MatchService matchService;
+    private final MatchInfoParser matchInfoParser;
 
-    public NotificationService(NotificationRepository notificationRepository, NotificationMapper notificationMapper, UserService userService, MatchService matchService) {
+    public NotificationService(NotificationRepository notificationRepository, NotificationMapper notificationMapper, UserService userService, MatchService matchService, MatchInfoParser matchInfoParser) {
         this.notificationRepository = notificationRepository;
         this.notificationMapper = notificationMapper;
         this.userService = userService;
         this.matchService = matchService;
+        this.matchInfoParser = matchInfoParser;
     }
 
     public Notification createNotificationForHost(final String senderUsername, final Long matchId, final NotificationType type) {
@@ -55,6 +55,7 @@ public class NotificationService {
                 .recipient(recipient)
                 .matchId(matchId)
                 .clicked(false)
+                .matchInfo(new MatchInfo(matchInfoParser.getOpponentName(matchId,recipient.getPlayer()), matchInfoParser.getScore(matchId, recipient.getPlayer())))
                 .build();
         return notificationRepository.save(notification);
     }

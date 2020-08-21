@@ -38,4 +38,7 @@ public class Notification {
     private LocalDateTime createdAt;
 
     private boolean clicked;
+
+    @Embedded
+    private MatchInfo matchInfo;
 }

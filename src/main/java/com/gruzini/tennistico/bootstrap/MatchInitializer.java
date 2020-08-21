@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Component
-@Profile("dev")
+@Profile("dev2")
 @Order(3)
 public class MatchInitializer implements CommandLineRunner {
    private final UserService userService;

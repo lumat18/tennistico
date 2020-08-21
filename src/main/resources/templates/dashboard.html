@@ -95,16 +95,22 @@
                                         <td th:utext="${notification.getMessage()}"></td>
                                         <td class="td-actions text-right">
                                             <div th:if="${notification.getButtonName() != null && !notification.getClicked()}">
-                                                <form method="post" th:action="@{__${notification.getPositiveEndpoint()}__}">
+                                                <button th:if="${notification.getNegativeEndpoint() != null}"
+                                                        class="btn btn-warning gruzini-btn-success gruzini-button-small"
+                                                        onclick="submitRejectButton()">REJECT</button>
+                                                <button th:text="${notification.getButtonName()}"
+                                                        class="btn btn-success gruzini-btn-success gruzini-button-small"
+                                                        onclick="submitConfirmButton()"></button>
+
+                                                <form hidden method="post" th:action="@{__${notification.getPositiveEndpoint()}__}">
                                                     <input hidden type="text" name="match_id" th:value="${notification.getMatchId()}"/>
                                                     <input hidden type="text" name="trigger_id" th:value="${notification.getId()}"/>
-                                                    <button th:if="${notification.getNegativeEndpoint() != null}" class="btn btn-warning gruzini-btn-success gruzini-button-small" id="buttonSubmit" onclick="submitByHiddenButton()">REJECT</button>
-                                                    <button class="btn btn-success gruzini-btn-success gruzini-button-small" th:text="${notification.getButtonName()}" type="submit"></button>
+                                                    <button id="confirmButton" type="submit" hidden></button>
                                                 </form>
                                                 <form hidden method="post" th:action="@{__${notification.getNegativeEndpoint()}__}">
                                                     <input hidden type="text" name="match_id" th:value="${notification.getMatchId()}"/>
                                                     <input hidden type="text" name="trigger_id" th:value="${notification.getId()}"/>
-                                                    <button id="hiddenSubmitButton" type="submit" hidden></button>
+                                                    <button id="rejectButton" type="submit" hidden></button>
                                                 </form>
                                             </div>
                                         </td>
@@ -156,8 +162,11 @@
         <footer th:insert="/fragments/footer :: footer"></footer>
         <!--END FOOTER-->
         <script>
-            function submitByHiddenButton() {
-                document.getElementById("hiddenSubmitButton").click();
+            function submitConfirmButton() {
+                document.getElementById("confirmButton").click();
+            }
+            function submitRejectButton() {
+                document.getElementById("rejectButton").click();
             }
         </script>
     </div>

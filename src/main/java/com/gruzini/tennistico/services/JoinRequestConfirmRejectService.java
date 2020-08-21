@@ -18,12 +18,12 @@ import static java.util.Objects.isNull;
 
 @Service
 @Slf4j
-public class JoinService {
+public class JoinRequestConfirmRejectService {
 
     private final PlayerService playerService;
     private final MatchService matchService;
 
-    public JoinService(PlayerService playerService, MatchService matchService) {
+    public JoinRequestConfirmRejectService(PlayerService playerService, MatchService matchService) {
         this.playerService = playerService;
         this.matchService = matchService;
     }
@@ -35,6 +35,7 @@ public class JoinService {
 
     private synchronized void confirmJoin(final Long matchId, final String username) {
         processStatusUpdate(matchId, username, MatchStatus.UPCOMING);
+        System.out.println("confirm join method called");
     }
 
     private void processStatusUpdate(final Long matchId, final String username, final MatchStatus desiredStatus) {
@@ -71,9 +72,16 @@ public class JoinService {
     @EventListener
     public void handleRejectJoinEvent(final RejectJoinEvent event) {
         rejectJoin(event.getMatchId(), event.getUsername());
+        System.out.println("reject join method called");
     }
 
     private synchronized void rejectJoin(final Long matchId, final String username) {
         processStatusUpdate(matchId, username, MatchStatus.HOSTED);
+        removeGuest(matchId);
+    }
+    private void removeGuest(final Long matchId){
+        final Match match = matchService.getById(matchId);
+        match.removeGuest();
+        matchService.save(match);
     }
 }
