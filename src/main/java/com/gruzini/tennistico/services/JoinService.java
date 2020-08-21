@@ -34,24 +34,14 @@ public class JoinService {
     }
 
     private synchronized void confirmJoin(final Long matchId, final String username) {
+        processStatusUpdate(matchId, username, MatchStatus.UPCOMING);
+    }
+
+    private void processStatusUpdate(final Long matchId, final String username, final MatchStatus desiredStatus) {
         final Player player = playerService.getByUsername(username);
         final Match match = matchService.getById(matchId);
         validateMatchAndPlayer(match, player);
-        matchService.updateMatchStatus(match, MatchStatus.UPCOMING);
-        log.info(player.getFullName() + " confirmed " + match.getGuest().get().getFullName() + " as his opponent in match with id = " + matchId);
-    }
-
-    @EventListener
-    public void handleRejectJoinEvent(final RejectJoinEvent event){
-        rejectJoin(event.getMatchId(), event.getUsername());
-    }
-
-    private synchronized void rejectJoin(final Long matchId, final String username) {
-        final Player player = playerService.getByUsername(username);
-        final Match match = matchService.getById(matchId);
-        validateMatchAndPlayer(match, player);
-        matchService.updateMatchStatus(match, MatchStatus.HOSTED);
-        log.info(player.getFullName() + " rejected " + match.getGuest().get().getFullName() + " as his opponent in match with id = " + matchId);
+        matchService.updateMatchStatus(match, desiredStatus);
     }
 
     private void validateMatchAndPlayer(final Match match, final Player player) {
@@ -76,5 +66,14 @@ public class JoinService {
         if (!match.getHost().equals(player)) {
             throw new PlayerIsNotAMatchHostException();
         }
+    }
+
+    @EventListener
+    public void handleRejectJoinEvent(final RejectJoinEvent event) {
+        rejectJoin(event.getMatchId(), event.getUsername());
+    }
+
+    private synchronized void rejectJoin(final Long matchId, final String username) {
+        processStatusUpdate(matchId, username, MatchStatus.HOSTED);
     }
 }
