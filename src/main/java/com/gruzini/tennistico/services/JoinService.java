@@ -4,6 +4,7 @@ import com.gruzini.tennistico.domain.Match;
 import com.gruzini.tennistico.domain.Player;
 import com.gruzini.tennistico.domain.enums.MatchStatus;
 import com.gruzini.tennistico.events.ConfirmJoinEvent;
+import com.gruzini.tennistico.events.RejectJoinEvent;
 import com.gruzini.tennistico.exceptions.MatchPlayersException;
 import com.gruzini.tennistico.exceptions.PlayerIsNotAMatchHostException;
 import com.gruzini.tennistico.exceptions.WrongMatchStatusException;
@@ -17,12 +18,12 @@ import static java.util.Objects.isNull;
 
 @Service
 @Slf4j
-public class ConfirmJoinService {
+public class JoinService {
 
     private final PlayerService playerService;
     private final MatchService matchService;
 
-    public ConfirmJoinService(PlayerService playerService, MatchService matchService) {
+    public JoinService(PlayerService playerService, MatchService matchService) {
         this.playerService = playerService;
         this.matchService = matchService;
     }
@@ -30,7 +31,6 @@ public class ConfirmJoinService {
     @EventListener
     public void handleConfirmJoinEvent(final ConfirmJoinEvent event) {
         confirmJoin(event.getMatchId(), event.getUsername());
-
     }
 
     private synchronized void confirmJoin(final Long matchId, final String username) {
@@ -41,8 +41,21 @@ public class ConfirmJoinService {
         log.info(player.getFullName() + " confirmed " + match.getGuest().get().getFullName() + " as his opponent in match with id = " + matchId);
     }
 
+    @EventListener
+    public void handleRejectJoinEvent(final RejectJoinEvent event){
+        rejectJoin(event.getMatchId(), event.getUsername());
+    }
+
+    private synchronized void rejectJoin(final Long matchId, final String username) {
+        final Player player = playerService.getByUsername(username);
+        final Match match = matchService.getById(matchId);
+        validateMatchAndPlayer(match, player);
+        matchService.updateMatchStatus(match, MatchStatus.HOSTED);
+        log.info(player.getFullName() + " rejected " + match.getGuest().get().getFullName() + " as his opponent in match with id = " + matchId);
+    }
+
     private void validateMatchAndPlayer(final Match match, final Player player) {
-        validateMatchStatus(match);
+        validateMatchStatus(match.getMatchStatus());
         validateMatchHost(match, player);
         validateMatchPlayers(match);
     }
@@ -53,8 +66,8 @@ public class ConfirmJoinService {
         }
     }
 
-    private void validateMatchStatus(final Match match) {
-        if (!match.getMatchStatus().equals(MatchStatus.JOIN_REQUEST)) {
+    private void validateMatchStatus(final MatchStatus status) {
+        if (!status.equals(MatchStatus.JOIN_REQUEST)) {
             throw new WrongMatchStatusException();
         }
     }
