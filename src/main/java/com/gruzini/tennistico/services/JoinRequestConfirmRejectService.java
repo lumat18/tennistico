@@ -5,17 +5,13 @@ import com.gruzini.tennistico.domain.Player;
 import com.gruzini.tennistico.domain.enums.MatchStatus;
 import com.gruzini.tennistico.events.ConfirmJoinEvent;
 import com.gruzini.tennistico.events.RejectJoinEvent;
-import com.gruzini.tennistico.exceptions.MatchPlayersException;
-import com.gruzini.tennistico.exceptions.PlayerIsNotAMatchHostException;
-import com.gruzini.tennistico.exceptions.WrongMatchStatusException;
 import com.gruzini.tennistico.services.entity_related.MatchService;
 import com.gruzini.tennistico.services.entity_related.PlayerService;
+import com.gruzini.tennistico.validators.MatchAndPlayerValidator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
-
-import static java.util.Objects.isNull;
 
 @Service
 @Slf4j
@@ -23,10 +19,12 @@ public class JoinRequestConfirmRejectService {
 
     private final PlayerService playerService;
     private final MatchService matchService;
+    private final MatchAndPlayerValidator validator;
 
-    public JoinRequestConfirmRejectService(PlayerService playerService, MatchService matchService) {
+    public JoinRequestConfirmRejectService(PlayerService playerService, MatchService matchService, MatchAndPlayerValidator validator) {
         this.playerService = playerService;
         this.matchService = matchService;
+        this.validator = validator;
     }
 
     @EventListener
@@ -46,31 +44,13 @@ public class JoinRequestConfirmRejectService {
     }
 
     private void validateMatchAndPlayer(final Match match, final Player player) {
-        validateMatchStatus(match.getMatchStatus());
-        validateMatchHost(match, player);
-        validateMatchPlayers(match);
-    }
-
-    private void validateMatchPlayers(final Match match) {
-        if (isNull(match.getHost()) || isNull(match.getGuest())) {
-            throw new MatchPlayersException();
-        }
-    }
-
-    private void validateMatchStatus(final MatchStatus status) {
-        if (!status.equals(MatchStatus.JOIN_REQUEST)) {
-            throw new WrongMatchStatusException();
-        }
-    }
-
-    private void validateMatchHost(final Match match, final Player player) {
-        if (!match.getHost().equals(player)) {
-            throw new PlayerIsNotAMatchHostException();
-        }
+        validator.isMatchStatusCorrect(match.getMatchStatus(), MatchStatus.JOIN_REQUEST);
+        validator.bothPlayersExist(match);
+        validator.isPlayerHost(match, player);
     }
 
     @EventListener
-    @Order(1)
+    @Order(1) // THIS HAS TO OCCUR AFTER NOTIFICATION BEING SENT
     public void handleRejectJoinEvent(final RejectJoinEvent event) {
         rejectJoin(event.getMatchId(), event.getUsername());
     }
@@ -79,7 +59,8 @@ public class JoinRequestConfirmRejectService {
         processStatusUpdate(matchId, username, MatchStatus.HOSTED);
         removeGuest(matchId);
     }
-    private void removeGuest(final Long matchId){
+
+    private void removeGuest(final Long matchId) {
         final Match match = matchService.getById(matchId);
         match.removeGuest();
         matchService.save(match);
