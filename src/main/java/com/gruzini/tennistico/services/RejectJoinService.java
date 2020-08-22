@@ -25,7 +25,7 @@ public class RejectJoinService {
         this.matchService = matchService;
         this.validator = validator;
     }
-    
+
     @EventListener
     @Order(1) // THIS HAS TO OCCUR AFTER NOTIFICATION BEING SENT
     public void handleRejectJoinEvent(final RejectJoinEvent event) {
