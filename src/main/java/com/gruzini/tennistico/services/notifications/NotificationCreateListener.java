@@ -50,6 +50,13 @@ public class NotificationCreateListener {
         final Notification notification = notificationService.createNotificationForGuest(event.getUsername(), event.getMatchId(), NotificationType.JOIN_CONFIRMED);
         log.info("Notification of type " + notification.getNotificationType().toString() + " for user " + notification.getRecipient().getEmail()  + " created");
     }
+    /* THIS EVENT IS ISSUED BY REJECT JOIN CONTROLLER WHEN USER CLICKS BUTTON ON NOTIFICATION */
+    @EventListener
+    @Order(0)
+    public void handleEvent(final RejectJoinEvent event){
+        final Notification notification = notificationService.createNotificationForGuest(event.getUsername(), event.getMatchId(), NotificationType.JOIN_REQUEST_REJECTED);
+        log.info("Notification of type " + notification.getNotificationType().toString() + " for user " + notification.getRecipient().getEmail()  + " created");
+    }
 
     /* THIS EVENT IS ISSUED BY THE SCHEDULED PUBLISHER */
     @EventListener

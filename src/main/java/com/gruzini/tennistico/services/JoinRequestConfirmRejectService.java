@@ -12,6 +12,7 @@ import com.gruzini.tennistico.services.entity_related.MatchService;
 import com.gruzini.tennistico.services.entity_related.PlayerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
 import static java.util.Objects.isNull;
@@ -35,7 +36,6 @@ public class JoinRequestConfirmRejectService {
 
     private synchronized void confirmJoin(final Long matchId, final String username) {
         processStatusUpdate(matchId, username, MatchStatus.UPCOMING);
-        System.out.println("confirm join method called");
     }
 
     private void processStatusUpdate(final Long matchId, final String username, final MatchStatus desiredStatus) {
@@ -70,9 +70,9 @@ public class JoinRequestConfirmRejectService {
     }
 
     @EventListener
+    @Order(1)
     public void handleRejectJoinEvent(final RejectJoinEvent event) {
         rejectJoin(event.getMatchId(), event.getUsername());
-        System.out.println("reject join method called");
     }
 
     private synchronized void rejectJoin(final Long matchId, final String username) {

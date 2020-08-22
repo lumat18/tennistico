@@ -24,7 +24,6 @@ public class ConfirmJoinController {
                                            @RequestParam(name = "trigger_id") final Long triggerNotificationId,
                                            final Principal principal) {
         applicationEventPublisher.publishEvent(new ConfirmJoinEvent(this, matchId, triggerNotificationId, principal.getName()));
-        System.out.println("confirm join event published");
         return "redirect:/dashboard";
     }
 }
