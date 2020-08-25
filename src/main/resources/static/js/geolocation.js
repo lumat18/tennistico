@@ -57,14 +57,10 @@ positionFeature.setStyle(
     })
 );
 
-geolocation.on('change', function(evt) {
-  console.log(geolocation.getPosition());
-  map.getView().setCenter(geolocation.getPosition());
-});
-
 geolocation.on('change:position', function () {
   let coordinates = geolocation.getPosition();
   positionFeature.setGeometry(coordinates ? new ol.geom.Point(coordinates) : null);
+  map.getView().setCenter(coordinates);
 });
 
 new ol.layer.Vector({
