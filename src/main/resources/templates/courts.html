@@ -1,65 +1,60 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head th:insert="/fragments/head :: head"></head>
 
 <body class="dark-edition" style="background-image: url(/img/upcoming_background.jpg); background-size: cover">
 <div class="wrapper">
 
-    <!--Side Bar-->
-    <div th:insert="fragments/sidebar :: sidebar"></div>
-    <!--End Side Bar-->
+  <!--Side Bar-->
+  <div th:insert="fragments/sidebar :: sidebar"></div>
+  <!--End Side Bar-->
 
-    <div class="main-panel">
-        <!-- Navbar -->
-        <nav th:insert="/fragments/navbar :: navbar"></nav>
-        <!-- End Navbar -->
+  <div class="main-panel">
+    <!-- Navbar -->
+    <nav th:insert="/fragments/navbar :: navbar"></nav>
+    <!-- End Navbar -->
 
-      <div class="main-panel gruzini-registration-main-panel">
-         <div class="content">
-            <div class="container-fluid">
-               <div class="row">
-                  <div class="col-lg-12">
-                     <div class="card card-chart">
-                        <div class="card-header card-header-success">
-                           <p class="gruzini-title">Courts</p>
-                        </div>
-                        <div class="card-body">
-                           <div class="card-body table-responsive gruzini-text-card-content">
-                              <div id="map" class="gruzini-ol-map"></div>
-                              <div id="info" style="display: none;"></div>
-                              <label for="track">
-                                 track position
-                                 <input id="track" type="checkbox"/>
-                              </label>
-                              <p>
-                                 position accuracy : <code id="accuracy"></code>&nbsp;&nbsp;
-                                 altitude : <code id="altitude"></code>&nbsp;&nbsp;
-                                 altitude accuracy : <code id="altitudeAccuracy"></code>&nbsp;&nbsp;
-                                 heading : <code id="heading"></code>&nbsp;&nbsp;
-                                 speed : <code id="speed"></code>
-                              </p>
-                           </div>
-                        </div>
-                    </div>
+    <div class="main-panel gruzini-registration-main-panel">
+      <div class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="card card-chart">
+                <div class="card-header card-header-success">
+                  <p class="gruzini-title">Courts</p>
                 </div>
+                <div class="card-body">
+                  <div class="card-body table-responsive gruzini-text-card-content">
+                    <div id="map" class="gruzini-ol-map"></div>
+                    <div id="info" style="display: none;"></div>
+                    <label for="track">
+                      track position
+                      <input id="track" type="checkbox"/>
+                    </label>
+                    <p>
+                      position accuracy : <code id="accuracy"></code>&nbsp;&nbsp;
+                      altitude : <code id="altitude"></code>&nbsp;&nbsp;
+                      altitude accuracy : <code id="altitudeAccuracy"></code>&nbsp;&nbsp;
+                      heading : <code id="heading"></code>&nbsp;&nbsp;
+                      speed : <code id="speed"></code>
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
-         </div>
+          </div>
+        </div>
       </div>
-   </div>
-   <!--FOOTER-->
-   <footer th:insert="/fragments/footer :: footer"></footer>
-   <!--END FOOTER-->
-   <script>
-      function submitByHiddenButton() {
-         document.getElementById("hiddenSubmitButton").click();
-      }
-   </script>
-   <script th:src="@{/js/geolocation.js}"></script>
+      <!--FOOTER-->
+      <footer th:insert="/fragments/footer :: footer"></footer>
+      <!--END FOOTER-->
+    </div>
+  </div>
+  <!--JAVASCRIPT IMPORTS-->
+  <div th:replace="/fragments/js-imports :: js-imports"></div>
+  <!--END JAVASCRIPT IMPORTS-->
+  <script th:src="@{/js/geolocation.js}"></script>
 </div>
-<!--JAVASCRIPT IMPORTS-->
-<div th:replace="/fragments/js-imports :: js-imports"></div>
-<!--END JAVASCRIPT IMPORTS-->
 </body>
 </html>
