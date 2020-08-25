@@ -1,7 +1,7 @@
-
 let view = new ol.View({
-  center: [0, 0],
-  zoom: 2,
+  //setting default position on Warsaw, used for when tracking isn't enabled in browser for this page
+  center: ol.proj.transform([21.1159131, 52.1992539], 'EPSG:4326', 'EPSG:3857'),
+  zoom: 10,
 });
 
 let map = new ol.Map({
@@ -19,23 +19,7 @@ let geolocation = new ol.Geolocation({
     enableHighAccuracy: true,
   },
   projection: view.getProjection(),
-});
-
-function el(id) {
-  return document.getElementById(id);
-}
-
-el('track').addEventListener('change', function () {
-  geolocation.setTracking(this.checked);
-});
-
-// update the HTML page when the position changes.
-geolocation.on('change', function () {
-  el('accuracy').innerText = geolocation.getAccuracy() + ' [m]';
-  el('altitude').innerText = geolocation.getAltitude() + ' [m]';
-  el('altitudeAccuracy').innerText = geolocation.getAltitudeAccuracy() + ' [m]';
-  el('heading').innerText = geolocation.getHeading() + ' [rad]';
-  el('speed').innerText = geolocation.getSpeed() + ' [m/s]';
+  tracking: true,
 });
 
 // handle geolocation error.
@@ -65,6 +49,11 @@ positionFeature.setStyle(
       }),
     })
 );
+
+geolocation.on('change', function(evt) {
+  console.log(geolocation.getPosition());
+  map.getView().setCenter(geolocation.getPosition());
+});
 
 geolocation.on('change:position', function () {
   let coordinates = geolocation.getPosition();
