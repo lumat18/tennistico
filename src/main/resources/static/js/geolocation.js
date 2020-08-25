@@ -1,6 +1,13 @@
+let viewport = document.getElementById('map');
+function getMinZoom() {
+  let width = viewport.clientWidth;
+  return Math.ceil(Math.LOG2E * Math.log(width / 256));
+}
+
 let view = new ol.View({
   //setting default position on Warsaw, used for when tracking isn't enabled in browser for this page
   center: ol.proj.transform([21.1159131, 52.1992539], 'EPSG:4326', 'EPSG:3857'),
+  minZoom: getMinZoom(),
   zoom: 10,
 });
 
