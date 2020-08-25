@@ -29,6 +29,7 @@ public class CourtController {
         List<String> cities = courtDtoService.getCities();
         model.addAttribute("cities", cities);
         model.addAttribute("foundCourts", allCourts);
+        model.addAttribute("courtForm", new CourtDto());
         return "courts";
     }
     @PostMapping

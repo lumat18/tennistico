@@ -25,10 +25,78 @@
                   <p class="gruzini-title">Courts</p>
                 </div>
                 <div class="card-body">
-                  <div class="card-body table-responsive gruzini-text-card-content">
-                    <div id="map" class="gruzini-ol-map"></div>
-                    <div id="info" style="display: none;"></div>
+                  <div class="row">
+                    <div class="col-lg-6 col-md-12">
+                      <div class="card-body table-responsive gruzini-text-card-content">
+                        <div id="map" class="gruzini-ol-map"></div>
+                        <div id="info" style="display: none;"></div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+                      <form method="post" th:action="@{/courts}"
+                            th:object="${courtForm}">
+
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                                 <span class="input-group-text gruzini-input-group-text" id="courtNameAddon">
+                                    Court name:
+                                 </span>
+                          </div>
+                          <input type="text" class="form-control gruzini-registration-text" id="courtName"
+                                 th:field="*{name}"
+                                 aria-label="court-name" aria-describedby="courtNameAddon"
+                                 disabled>
+                        </div>
+
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend gruzini-input-group-text">
+                                 <span class="input-group-text gruzini-input-group-text" id="addressAddon">
+                                    Address:
+                                 </span>
+                          </div>
+                          <input type="text" class="form-control gruzini-registration-text" id="courtAddress"
+                                 th:field="*{address}"
+                                 aria-label="address" aria-describedby="addressAddon"
+                                 disabled>
+                        </div>
+
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend gruzini-input-group-text">
+                                 <span class="input-group-text gruzini-input-group-text" id="cityAddon">
+                                    City:
+                                 </span>
+                          </div>
+                          <input type="text" class="form-control gruzini-registration-text" id="city"
+                                 th:field="*{city}"
+                                 aria-label="city" aria-describedby="cityAddon"
+                                 disabled>
+                        </div>
+
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend gruzini-input-group-text">
+                                 <span class="input-group-text gruzini-input-group-text" id="phoneAddon">
+                                    Phone Number:
+                                 </span>
+                          </div>
+                          <input type="text" class="form-control gruzini-registration-text" id="phoneNumber"
+                                 th:field="*{phoneNumber}"
+                                 aria-label="phone-number" aria-describedby="phoneAddon"
+                                 disabled>
+                        </div>
+
+                        <button id="hiddenSubmitButton" type="submit" hidden></button>
+                      </form>
+                    </div>
                   </div>
+                </div>
+                <div class="card-footer d-flex justify-content-center">
+                  <a th:href="@{/hosted}" class="btn btn-warning gruzini-btn-success" role="button"
+                     aria-pressed="true">
+                    Show hosted
+                  </a>
+                  <button class="btn btn-success gruzini-btn-success" id="buttonSubmit"
+                          onclick="submitByHiddenButton()">Next step
+                  </button>
                 </div>
               </div>
             </div>
@@ -42,8 +110,13 @@
   </div>
   <!--JAVASCRIPT IMPORTS-->
   <div th:replace="/fragments/js-imports :: js-imports"></div>
-  <!--END JAVASCRIPT IMPORTS-->
   <script th:src="@{/js/geolocation.js}"></script>
+  <script>
+    function submitByHiddenButton() {
+      document.getElementById("hiddenSubmitButton").click();
+    }
+  </script>
+  <!--END JAVASCRIPT IMPORTS-->
 </div>
 </body>
 </html>
