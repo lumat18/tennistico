@@ -69,3 +69,30 @@ new ol.layer.Vector({
     features: [accuracyFeature, positionFeature],
   }),
 });
+
+let courtName = document.getElementById("courtName");
+let courtAddress = document.getElementById("courtAddress");
+let courtCity = document.getElementById("courtCity");
+let courtPhone = document.getElementById("courtPhone");
+
+map.on('singleclick', function (event) {
+  let clickCoordinate = event.coordinate;
+  console.log(clickCoordinate);
+  let positionCoordinate = positionFeature.getGeometry().getCoordinates()
+  console.log(positionCoordinate);
+
+  if(Math.ceil(clickCoordinate[0]/100) === Math.ceil(positionCoordinate[0]/100)
+  && Math.ceil(clickCoordinate[1]/100) === Math.ceil(positionCoordinate[1]/100)){
+    console.log("true");
+    courtName.value = "test";
+    courtAddress.value = "test";
+    courtCity.value = "test";
+    courtPhone.value = "test";
+  } else {
+    console.log("false");
+    courtName.value = "";
+    courtAddress.value = "";
+    courtCity.value = "";
+    courtPhone.value = "";
+  }
+})
