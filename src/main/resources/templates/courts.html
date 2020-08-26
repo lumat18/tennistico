@@ -29,7 +29,7 @@
                     <div class="col-lg-6 col-md-12">
                       <div class="card-body table-responsive gruzini-text-card-content">
                         <div id="map" class="gruzini-ol-map"></div>
-<!--                        For displaying geolocation error-->
+<!--                        For displaying maps error-->
                         <div id="info" style="display: none; color: #f08f00;"></div>
                       </div>
                     </div>
@@ -111,7 +111,7 @@
   </div>
   <!--JAVASCRIPT IMPORTS-->
   <div th:replace="/fragments/js-imports :: js-imports"></div>
-  <script th:src="@{/js/geolocation.js}"></script>
+  <script th:src="@{/js/maps.js}"></script>
   <script>
     function submitByHiddenButton() {
       document.getElementById("hiddenSubmitButton").click();

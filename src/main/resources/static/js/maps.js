@@ -20,7 +20,7 @@ let map = new ol.Map({
   view: view,
 });
 
-let geolocation = new ol.Geolocation({
+let maps = new ol.Geolocation({
   // enableHighAccuracy must be set to true to have the heading value.
   trackingOptions: {
     enableHighAccuracy: true,
@@ -29,16 +29,16 @@ let geolocation = new ol.Geolocation({
   tracking: true,
 });
 
-// handle geolocation error.
-geolocation.on('error', function (error) {
+// handle maps error.
+maps.on('error', function (error) {
   let info = document.getElementById('info');
   info.innerHTML = 'WARNING! ' + error.message;
   info.style.display = '';
 });
 
 let accuracyFeature = new ol.Feature();
-geolocation.on('change:accuracyGeometry', function () {
-  accuracyFeature.setGeometry(geolocation.getAccuracyGeometry());
+maps.on('change:accuracyGeometry', function () {
+  accuracyFeature.setGeometry(maps.getAccuracyGeometry());
 });
 
 let positionFeature = new ol.Feature();
@@ -58,7 +58,7 @@ positionFeature.setStyle(
 );
 
 function showCurrentLocation() {
-  let coordinates = geolocation.getPosition();
+  let coordinates = maps.getPosition();
   positionFeature.setGeometry(coordinates ? new ol.geom.Point(coordinates) : null);
   map.getView().setCenter(coordinates);
 }
