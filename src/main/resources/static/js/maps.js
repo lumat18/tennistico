@@ -4,6 +4,11 @@ function getMinZoom() {
   return Math.ceil(Math.LOG2E * Math.log(width / 256));
 }
 
+let attribution = new ol.control.Attribution({
+  collapsible: true,
+  collapsed: true,
+});
+
 let view = new ol.View({
   //setting default position on Warsaw, used for when tracking isn't enabled in browser for this page
   center: ol.proj.fromLonLat([21.1159131, 52.1992539]),
@@ -17,8 +22,18 @@ let map = new ol.Map({
       source: new ol.source.OSM(),
     }) ],
   target: 'map',
+  controls: ol.control.defaults({attribution: false}).extend([attribution]),
   view: view,
 });
+
+function checkSize() {
+  if(map.getSize()[0] < 600){
+    attribution.setCollapsed(true);
+  }
+}
+
+window.addEventListener('resize', checkSize);
+checkSize();
 
 let maps = new ol.Geolocation({
   // enableHighAccuracy must be set to true to have the heading value.
@@ -70,9 +85,7 @@ let layer = new ol.layer.Vector({
   }),
 });
 
-layer.once("change", function(){
-  showCurrentLocation();
-});
+layer.once("change", showCurrentLocation);
 
 let courtName = document.getElementById("courtName");
 let courtAddress = document.getElementById("courtAddress");
