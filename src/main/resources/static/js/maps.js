@@ -35,7 +35,7 @@ function checkSize() {
 window.addEventListener('resize', checkSize);
 checkSize();
 
-let maps = new ol.Geolocation({
+let geolocation = new ol.Geolocation({
   // enableHighAccuracy must be set to true to have the heading value.
   trackingOptions: {
     enableHighAccuracy: true,
@@ -45,15 +45,15 @@ let maps = new ol.Geolocation({
 });
 
 // handle maps error.
-maps.on('error', function (error) {
+geolocation.on('error', function (error) {
   let info = document.getElementById('info');
   info.innerHTML = 'WARNING! ' + error.message;
   info.style.display = '';
 });
 
 let accuracyFeature = new ol.Feature();
-maps.on('change:accuracyGeometry', function () {
-  accuracyFeature.setGeometry(maps.getAccuracyGeometry());
+geolocation.on('change:accuracyGeometry', function () {
+  accuracyFeature.setGeometry(geolocation.getAccuracyGeometry());
 });
 
 let positionFeature = new ol.Feature();
@@ -73,10 +73,28 @@ positionFeature.setStyle(
 );
 
 function showCurrentLocation() {
-  let coordinates = maps.getPosition();
+  let coordinates = geolocation.getPosition();
   positionFeature.setGeometry(coordinates ? new ol.geom.Point(coordinates) : null);
   map.getView().setCenter(coordinates);
 }
+
+let button = document.createElement('button');
+button.innerHTML = "<i class='material-icons' style='color: white'>my_location</i>";
+
+let handleCenterLocation = function() {
+  showCurrentLocation();
+};
+
+button.addEventListener('click', handleCenterLocation, false);
+
+let element = document.createElement('div');
+element.className = 'location ol-unselectable ol-control';
+element.appendChild(button);
+
+let CenterLocation = new ol.control.Control({
+  element: element,
+});
+map.addControl(CenterLocation);
 
 let layer = new ol.layer.Vector({
   map: map,
@@ -127,4 +145,11 @@ $('.ol-zoom-in, .ol-zoom-out').tooltip({
 $('.ol-rotate-reset, .ol-attribution button[title]').tooltip({
   placement: 'bottom',
   container: '#map',
+});
+
+//TODO: further changes needed, tooltip not showing
+$('.location').tooltip({
+  placement: 'right',
+  container: '#map',
+  text: 'Current Location',
 });

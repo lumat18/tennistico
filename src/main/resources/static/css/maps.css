@@ -15,3 +15,8 @@
 .ol-attribution.ol-collapsed {
     background-color: rgba(0,60,136,.5);
 }
+
+.location {
+    top: 80px;
+    left: .5em;
+}
