@@ -40,7 +40,7 @@
                               <td class="gruzini-text-card-content">
                                  <span class="player-modal"
                                        th:attr="data-id=${match.opponentId}"
-                                       onclick="showModal(this.getAttribute('data-id'))"
+                                       onclick="showPlayerModalByPlayerId(this.getAttribute('data-id'))"
                                        th:text="${match.opponentName}">
                                  </span>
                               </td>

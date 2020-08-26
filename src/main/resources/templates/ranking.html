@@ -47,11 +47,11 @@
                         <td>
                           <span th:unless="${player == session.loggedUser}" class="player-modal"
                                 th:attr="data-id=${player.getId()}"
-                                onclick="showModal(this.getAttribute('data-id'))"
+                                onclick="showPlayerModalByPlayerId(this.getAttribute('data-id'))"
                                 th:text="${player.getFullName()}">
                           </span>
                           <span th:if="${player == session.loggedUser}" class="gruzini-text-card-content"
-                                th:text="${player.getFullName()}" style="color: #4caf50;"></span>
+                                th:text="${player.getFullName()}+' (you)'" style="color: #4caf50;"></span>
                         </td>
                         <td th:text="${player.rankingPoints}" style="color: #f08f00;"></td>
                         <td th:text="${player.getRatio()}"></td>

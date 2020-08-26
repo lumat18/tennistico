@@ -22,7 +22,9 @@ public class NotificationMapper {
 
     private String toStringMessage(Notification notification) {
         return String.format(notification.getNotificationType().getMessage(),
+                notification.getMatchId(),
                 notification.getMatchInfo().getOpponentFullName(),
+                notification.getMatchId(),
                 notification.getMatchInfo().getScoreAsString());
     }
 }

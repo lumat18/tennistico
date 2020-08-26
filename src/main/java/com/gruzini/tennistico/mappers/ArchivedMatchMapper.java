@@ -15,7 +15,7 @@ public class ArchivedMatchMapper {
     public ArchivedMatchDto toArchivedMatchDTO(final Match match, final Player player) {
         return ArchivedMatchDto.builder()
                 .opponentName(matchInfoParser.getOpponentName(match.getId(), player))
-                .opponentId(player.getId())
+                .opponentId(matchInfoParser.getOpponentId(match.getId(), player))
                 .score(matchInfoParser.getScore(match.getId(), player))
                 .courtName(match.getCourt().getName() + ", " + match.getCourt().getCity())
                 .date(match.getEndingAt().toLocalDate())
