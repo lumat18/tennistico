@@ -75,21 +75,43 @@ let courtAddress = document.getElementById("courtAddress");
 let courtCity = document.getElementById("courtCity");
 let courtPhone = document.getElementById("courtPhone");
 
-map.on('singleclick', function (event) {
-  let clickCoordinate = event.coordinate;
-  console.log(clickCoordinate);
-  let positionCoordinate = positionFeature.getGeometry().getCoordinates()
-  console.log(positionCoordinate);
+let hitTolerance = 10;
 
-  if(Math.ceil(clickCoordinate[0]/100) === Math.ceil(positionCoordinate[0]/100)
-  && Math.ceil(clickCoordinate[1]/100) === Math.ceil(positionCoordinate[1]/100)){
-    console.log("true");
+let circleCanvas = document.getElementById('circle');
+let size = 2 * hitTolerance + 2;
+circleCanvas.width = size;
+circleCanvas.height = size;
+let ctx = circleCanvas.getContext('2d');
+ctx.clearRect(0,0, size ,size);
+ctx.beginPath();
+ctx.arc(
+    hitTolerance + 1,
+    hitTolerance + 1,
+    hitTolerance + 0.5,
+    0,
+    2*Math.PI
+);
+ctx.fill();
+ctx.stroke();
+
+map.on('singleclick', function (event) {
+  let hit = false;
+  map.forEachFeatureAtPixel(
+      event.pixel,
+      function () {
+        hit = true;
+      },
+      {
+        hitTolerance: hitTolerance,
+      }
+  );
+
+  if(hit){
     courtName.value = "test";
     courtAddress.value = "test";
     courtCity.value = "test";
     courtPhone.value = "test";
   } else {
-    console.log("false");
     courtName.value = "";
     courtAddress.value = "";
     courtCity.value = "";
