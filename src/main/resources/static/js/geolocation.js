@@ -6,7 +6,7 @@ function getMinZoom() {
 
 let view = new ol.View({
   //setting default position on Warsaw, used for when tracking isn't enabled in browser for this page
-  center: ol.proj.transform([21.1159131, 52.1992539], 'EPSG:4326', 'EPSG:3857'),
+  center: ol.proj.fromLonLat([21.1159131, 52.1992539]),
   minZoom: getMinZoom(),
   zoom: 10,
 });
@@ -79,6 +79,11 @@ map.on('click', function (evt) {
   let feature = map.forEachFeatureAtPixel(evt.pixel, function (feature) {
     return feature;
   });
+
+  //logging click coordinate for testing
+  let coordinates = evt.coordinate;
+  console.log(coordinates);
+
   if (feature) {
     courtName.value = "test";
     courtAddress.value = "test";
