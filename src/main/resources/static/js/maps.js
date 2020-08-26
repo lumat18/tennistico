@@ -119,3 +119,12 @@ map.on('pointermove', function (evt) {
       ? 'pointer'
       : '';
 });
+
+$('.ol-zoom-in, .ol-zoom-out').tooltip({
+  placement: 'right',
+  container: '#map',
+});
+$('.ol-rotate-reset, .ol-attribution button[title]').tooltip({
+  placement: 'bottom',
+  container: '#map',
+});
