@@ -1,9 +1,3 @@
-let viewport = document.getElementById('map');
-function getMinZoom() {
-  let width = viewport.clientWidth;
-  return Math.ceil(Math.LOG2E * Math.log(width / 256));
-}
-
 let attribution = new ol.control.Attribution({
   collapsible: true,
   collapsed: true,
@@ -12,7 +6,6 @@ let attribution = new ol.control.Attribution({
 let view = new ol.View({
   //setting default position on Warsaw, used for when tracking isn't enabled in browser for this page
   center: ol.proj.fromLonLat([21.1159131, 52.1992539]),
-  minZoom: getMinZoom(),
   zoom: 10,
 });
 
