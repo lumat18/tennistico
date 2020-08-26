@@ -32,7 +32,7 @@ let geolocation = new ol.Geolocation({
 // handle geolocation error.
 geolocation.on('error', function (error) {
   let info = document.getElementById('info');
-  info.innerHTML = error.message;
+  info.innerHTML = 'WARNING! ' + error.message;
   info.style.display = '';
 });
 
