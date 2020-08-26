@@ -75,38 +75,11 @@ let courtAddress = document.getElementById("courtAddress");
 let courtCity = document.getElementById("courtCity");
 let courtPhone = document.getElementById("courtPhone");
 
-let hitTolerance = 10;
-
-let circleCanvas = document.getElementById('circle');
-let size = 2 * hitTolerance + 2;
-circleCanvas.width = size;
-circleCanvas.height = size;
-let ctx = circleCanvas.getContext('2d');
-ctx.clearRect(0,0, size ,size);
-ctx.beginPath();
-ctx.arc(
-    hitTolerance + 1,
-    hitTolerance + 1,
-    hitTolerance + 0.5,
-    0,
-    2*Math.PI
-);
-ctx.fill();
-ctx.stroke();
-
-map.on('singleclick', function (event) {
-  let hit = false;
-  map.forEachFeatureAtPixel(
-      event.pixel,
-      function () {
-        hit = true;
-      },
-      {
-        hitTolerance: hitTolerance,
-      }
-  );
-
-  if(hit){
+map.on('click', function (evt) {
+  let feature = map.forEachFeatureAtPixel(evt.pixel, function (feature) {
+    return feature;
+  });
+  if (feature) {
     courtName.value = "test";
     courtAddress.value = "test";
     courtCity.value = "test";
@@ -117,4 +90,4 @@ map.on('singleclick', function (event) {
     courtCity.value = "";
     courtPhone.value = "";
   }
-})
+});
