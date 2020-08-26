@@ -57,17 +57,21 @@ positionFeature.setStyle(
     })
 );
 
-geolocation.on('change:position', function () {
+function showCurrentLocation() {
   let coordinates = geolocation.getPosition();
   positionFeature.setGeometry(coordinates ? new ol.geom.Point(coordinates) : null);
   map.getView().setCenter(coordinates);
-});
+}
 
-new ol.layer.Vector({
+let layer = new ol.layer.Vector({
   map: map,
   source: new ol.source.Vector({
     features: [accuracyFeature, positionFeature],
   }),
+});
+
+layer.once("change", function(){
+  showCurrentLocation();
 });
 
 let courtName = document.getElementById("courtName");
