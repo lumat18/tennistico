@@ -13,14 +13,14 @@ let map = new ol.Map({
   layers: [
     new ol.layer.Tile({
       source: new ol.source.OSM(),
-    }) ],
+    })],
   target: 'map',
   controls: ol.control.defaults({attribution: false}).extend([attribution]),
   view: view,
 });
 
 function checkSize() {
-  if(map.getSize()[0] < 600){
+  if (map.getSize()[0] < 600) {
     attribution.setCollapsed(true);
   }
 }
@@ -42,6 +42,7 @@ geolocation.on('error', function (error) {
   let info = document.getElementById('info');
   info.innerHTML = 'WARNING! ' + error.message;
   info.style.display = '';
+  button.disabled = true;
 });
 
 let accuracyFeature = new ol.Feature();
@@ -74,7 +75,7 @@ function showCurrentLocation() {
 let button = document.createElement('button');
 button.innerHTML = "<i class='material-icons' style='color: white'>my_location</i>";
 
-let handleCenterLocation = function() {
+let handleCenterLocation = function () {
   showCurrentLocation();
 };
 
@@ -82,6 +83,7 @@ button.addEventListener('click', handleCenterLocation, false);
 
 let element = document.createElement('div');
 element.className = 'location ol-unselectable ol-control';
+
 element.appendChild(button);
 
 let CenterLocation = new ol.control.Control({

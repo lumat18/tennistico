@@ -20,3 +20,8 @@
     top: 80px;
     left: .5em;
 }
+
+.ol-control button:disabled{
+    background-color: rgba(0,60,136,.2);
+    cursor: not-allowed;
+}
