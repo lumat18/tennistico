@@ -69,4 +69,7 @@ public class Match {
         }
         players.add(player);
     }
+    public void removeGuest(){
+        players.remove(1);
+    }
 }

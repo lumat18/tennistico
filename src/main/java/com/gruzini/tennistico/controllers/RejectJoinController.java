@@ -22,7 +22,7 @@ public class RejectJoinController {
     @PostMapping
     public String rejectGuestJoiningMatch(@RequestParam(name = "match_id") final Long matchId,
                                           @RequestParam(name = "trigger_id") final Long triggerNotificationId,
-                                          final Principal principal){
+                                          final Principal principal) {
         applicationEventPublisher.publishEvent(new RejectJoinEvent(this, matchId, triggerNotificationId, principal.getName()));
         return "redirect:/dashboard";
     }

@@ -12,7 +12,7 @@ public enum NotificationType {
     JOIN_CONFIRMED(null, null, NotificationMessages.JOIN_CONFIRMED, null),
     SCORE_TO_SUBMIT("/input-score/begin", null, NotificationMessages.SCORE_TO_SUBMIT, "FILL IN"),
     SCORE_TO_CONFIRM("/confirm-score", "/reject-score", NotificationMessages.SCORE_TO_CONFIRM, "CONFIRM"),
-    SCORE_REJECTED("/input-score/begin", null, NotificationMessages.SCORE_REJECTED, "CONFIRM"),
+    SCORE_REJECTED("/input-score/begin", null, NotificationMessages.SCORE_REJECTED, "FILL IN"),
     MATCH_ARCHIVED(null, null, NotificationMessages.MATCH_ARCHIVED, null);
 
     private final String positiveEndpoint;

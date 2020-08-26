@@ -20,9 +20,9 @@ public class ConfirmScoreController {
     }
 
     @PostMapping
-    public String confirmScoreSetByHost(@RequestParam(name = "match_id") final Long matchId,
-                                        @RequestParam(name = "trigger_id") final Long triggerNotificationId,
-                                        final Principal principal) {
+    public String handleScoreConfirmation(@RequestParam(name = "match_id") final Long matchId,
+                                          @RequestParam(name = "trigger_id") final Long triggerNotificationId,
+                                          final Principal principal) {
         applicationEventPublisher.publishEvent(new ConfirmScoreEvent(this, matchId, triggerNotificationId, principal.getName()));
         return "redirect:/dashboard";
     }
