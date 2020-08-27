@@ -6,13 +6,17 @@ let attribution = new ol.control.Attribution({
 let view = new ol.View({
   //setting default position on Warsaw, used for when tracking isn't enabled in browser for this page
   center: ol.proj.fromLonLat([21.1159131, 52.1992539]),
-  zoom: 10,
+  zoom: 11,
+  minZoom: 2,
+  maxZoom: 20,
 });
 
 let interactions = ol.interaction.defaults({
   altShiftDragRotate:false,
   pinchRotate:false,
 });
+
+let zoomSlider = new ol.control.ZoomSlider();
 
 let map = new ol.Map({
   interactions: interactions,
@@ -21,7 +25,7 @@ let map = new ol.Map({
       source: new ol.source.OSM(),
     })],
   target: 'map',
-  controls: ol.control.defaults({attribution: false}).extend([attribution]),
+  controls: ol.control.defaults({attribution: false}).extend([attribution, zoomSlider]),
   view: view,
 });
 
