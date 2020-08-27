@@ -9,7 +9,13 @@ let view = new ol.View({
   zoom: 10,
 });
 
+let interactions = ol.interaction.defaults({
+  altShiftDragRotate:false,
+  pinchRotate:false,
+});
+
 let map = new ol.Map({
+  interactions: interactions,
   layers: [
     new ol.layer.Tile({
       source: new ol.source.OSM(),
