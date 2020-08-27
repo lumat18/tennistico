@@ -80,6 +80,7 @@ function showCurrentLocation() {
   let coordinates = geolocation.getPosition();
   positionFeature.setGeometry(coordinates ? new ol.geom.Point(coordinates) : null);
   map.getView().setCenter(coordinates);
+  map.getView().setZoom(11);
 }
 
 let button = document.createElement('button');
