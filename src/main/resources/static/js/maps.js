@@ -84,7 +84,8 @@ function showCurrentLocation() {
 }
 
 let button = document.createElement('button');
-button.innerHTML = "<i class='material-icons' style='color: white'>my_location</i>";
+button.innerHTML = "<i class='material-icons' data-toggle='tooltip' title='Current Location'" +
+    " style='color: white'>my_location</i>";
 
 let handleCenterLocation = function () {
   showCurrentLocation();
@@ -153,9 +154,9 @@ $('.ol-rotate-reset, .ol-attribution button[title]').tooltip({
   container: '#map',
 });
 
-//TODO: further changes needed, tooltip not showing
-$('.location').tooltip({
-  placement: 'right',
-  container: '#map',
-  text: 'Current Location',
+$('.location').ready(function(){
+  $('[data-toggle="tooltip"]').tooltip({
+    placement: 'right',
+    container: '#map',
+  });
 });
