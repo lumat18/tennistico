@@ -34,21 +34,10 @@
     background-color: transparent;
     top: 2.3em;
 }
-
 .ol-touch .ol-zoom .ol-zoom-out {
     margin-top: 212px;
 }
 .ol-touch .ol-zoomslider {
     top: 2.75em;
-}
-
-.ol-zoom-in.ol-has-tooltip:hover [role=tooltip],
-.ol-zoom-in.ol-has-tooltip:focus [role=tooltip] {
-    top: 3px;
-}
-
-.ol-zoom-out.ol-has-tooltip:hover [role=tooltip],
-.ol-zoom-out.ol-has-tooltip:focus [role=tooltip] {
-    top: 232px;
 }
 /*end of slider styling*/
