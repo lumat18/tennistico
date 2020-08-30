@@ -147,6 +147,21 @@ let vectorLayer = new ol.layer.Vector({
   source: vectorSource,
 })
 map.addLayer(vectorLayer);
+
+let displayFeatureInfo = function(pixel) {
+  let feature = map.forEachFeatureAtPixel(pixel, function(feature) {
+    return feature;
+  });
+  if (feature) {
+    console.log(feature.getProperties());
+  } else {
+    console.log('Nothing around');
+  }
+};
+
+map.on('click', function(evt) {
+  displayFeatureInfo(evt.pixel);
+});
 //end of courts layer
 
 let courtName = document.getElementById("courtName");
