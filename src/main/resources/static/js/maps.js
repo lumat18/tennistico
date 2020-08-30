@@ -112,6 +112,43 @@ let layer = new ol.layer.Vector({
 
 layer.once("change", showCurrentLocation);
 
+// courts layer
+let vectorSource = new ol.source.Vector({
+  format: new ol.format.GeoJSON(),
+  loader: function(extent, resolution, projection) {
+    let epsg4326Extent = ol.proj.transformExtent(extent, projection, 'EPSG:4326');
+    let stringExtent = epsg4326Extent[1] + ',' + epsg4326Extent[0] + ',' + epsg4326Extent[3] + ',' + epsg4326Extent[2];
+    let query = '[out:json][bbox:'+ stringExtent +'];' +
+        '(nwr[leisure="sports_centre"][sport="tennis"][access!="private"];' +
+        'nwr[leisure="pitch"][sport="tennis"][access!="private"];' +
+        'nwr[leisure="stadium"][sport="tennis"][access!="private"];);' +
+        '(._;>;);' +
+        'out body;';
+    fetch('https://overpass-api.de/api/interpreter', {
+      method: "POST",
+      body: query
+    })
+        .then(response => response.json())
+        .then(json => {
+          const geoJSON = osmtogeojson(json, {
+            flatProperties: true
+          });
+          let features = new ol.format.GeoJSON().readFeatures(geoJSON, {
+            featureProjection: map.getView().getProjection()
+          });
+          vectorSource.addFeatures(features);
+        });
+  },
+  strategy: ol.loadingstrategy.bbox,
+});
+
+let vectorLayer = new ol.layer.Vector({
+  renderMode: 'image',
+  source: vectorSource,
+})
+map.addLayer(vectorLayer);
+//end of courts layer
+
 let courtName = document.getElementById("courtName");
 let courtAddress = document.getElementById("courtAddress");
 let courtCity = document.getElementById("courtCity");
