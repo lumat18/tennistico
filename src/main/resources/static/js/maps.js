@@ -118,7 +118,7 @@ let vectorSource = new ol.source.Vector({
   loader: function(extent, resolution, projection) {
     let epsg4326Extent = ol.proj.transformExtent(extent, projection, 'EPSG:4326');
     let stringExtent = epsg4326Extent[1] + ',' + epsg4326Extent[0] + ',' + epsg4326Extent[3] + ',' + epsg4326Extent[2];
-    let query = '[out:json][bbox:'+ stringExtent +'];' +
+    let query = '[out:json][timeout:25][bbox:'+ stringExtent +'];' +
         '(nwr[leisure="sports_centre"][sport="tennis"][access!="private"];' +
         'nwr[leisure="pitch"][sport="tennis"][access!="private"];' +
         'nwr[leisure="stadium"][sport="tennis"][access!="private"];);' +
@@ -161,6 +161,8 @@ let displayFeatureInfo = function(pixel) {
 
 map.on('click', function(evt) {
   displayFeatureInfo(evt.pixel);
+  let coordinates = evt.coordinate;
+  console.log(coordinates);
 });
 //end of courts layer
 
@@ -168,28 +170,6 @@ let courtName = document.getElementById("courtName");
 let courtAddress = document.getElementById("courtAddress");
 let courtCity = document.getElementById("courtCity");
 let courtPhone = document.getElementById("courtPhone");
-
-map.on('click', function (evt) {
-  let feature = map.forEachFeatureAtPixel(evt.pixel, function (feature) {
-    return feature;
-  });
-
-  //logging click coordinate for testing
-  let coordinates = evt.coordinate;
-  console.log(coordinates);
-
-  if (feature) {
-    courtName.value = "test";
-    courtAddress.value = "test";
-    courtCity.value = "test";
-    courtPhone.value = "test";
-  } else {
-    courtName.value = "";
-    courtAddress.value = "";
-    courtCity.value = "";
-    courtPhone.value = "";
-  }
-});
 
 map.on('pointermove', function (evt) {
   map.getTargetElement().style.cursor = map.hasFeatureAtPixel(evt.pixel)
@@ -205,7 +185,6 @@ $('.ol-rotate-reset, .ol-attribution button[title]').tooltip({
   placement: 'bottom',
   container: '#map',
 });
-
 $('.location').ready(function(){
   $('[data-toggle="tooltip"]').tooltip({
     placement: 'right',
