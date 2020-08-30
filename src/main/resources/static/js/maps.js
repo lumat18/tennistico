@@ -6,7 +6,7 @@ let attribution = new ol.control.Attribution({
 let view = new ol.View({
   //setting default position on Warsaw, used for when tracking isn't enabled in browser for this page
   center: ol.proj.fromLonLat([21.1159131, 52.1992539]),
-  zoom: 11,
+  zoom: 12,
   minZoom: 2,
   maxZoom: 20,
 });
@@ -38,6 +38,50 @@ function checkSize() {
 window.addEventListener('resize', checkSize);
 checkSize();
 
+// courts layer
+let tennisLayer;
+
+function newTennisLayer(){
+  let vectorSource = new ol.source.Vector({
+    format: new ol.format.GeoJSON(),
+    loader: function(extent, resolution, projection) {
+      let epsg4326Extent = ol.proj.transformExtent(extent, projection, 'EPSG:4326');
+      let stringExtent = epsg4326Extent[1] + ',' + epsg4326Extent[0] + ',' + epsg4326Extent[3] + ',' + epsg4326Extent[2];
+      let query = '[out:json][timeout:25][bbox:'+ stringExtent +'];' +
+          '(nwr[leisure="sports_centre"][sport="tennis"][access!="private"];' +
+          'nwr[leisure="pitch"][sport="tennis"][access!="private"];' +
+          'nwr[leisure="stadium"][sport="tennis"][access!="private"];);' +
+          '(._;>;);' +
+          'out body;';
+      fetch('https://overpass-api.de/api/interpreter', {
+        method: "POST",
+        body: query
+      })
+          .then(response => response.json())
+          .then(json => {
+            const geoJSON = osmtogeojson(json, {
+              flatProperties: true
+            });
+            let features = new ol.format.GeoJSON().readFeatures(geoJSON, {
+              featureProjection: map.getView().getProjection()
+            });
+            vectorSource.addFeatures(features);
+          });
+    },
+    strategy: ol.loadingstrategy.bbox,
+  });
+
+  if(tennisLayer){
+    map.removeLayer(tennisLayer);
+  }
+  tennisLayer = new ol.layer.Vector({
+    renderMode: 'image',
+    source: vectorSource,
+  })
+  map.addLayer(tennisLayer);
+}
+//end of courts layer
+
 let geolocation = new ol.Geolocation({
   // enableHighAccuracy must be set to true to have the heading value.
   trackingOptions: {
@@ -52,7 +96,7 @@ geolocation.on('error', function (error) {
   let info = document.getElementById('info');
   info.innerHTML = 'WARNING! ' + error.message;
   info.style.display = '';
-  button.disabled = true;
+  locationButton.disabled = true;
 });
 
 let accuracyFeature = new ol.Feature();
@@ -80,26 +124,27 @@ function showCurrentLocation() {
   let coordinates = geolocation.getPosition();
   positionFeature.setGeometry(coordinates ? new ol.geom.Point(coordinates) : null);
   map.getView().setCenter(coordinates);
-  map.getView().setZoom(11);
+  map.getView().setZoom(12);
+  newTennisLayer();
 }
 
-let button = document.createElement('button');
-button.innerHTML = "<i class='material-icons' data-toggle='tooltip' title='Current Location'" +
+let locationButton = document.createElement('button');
+locationButton.innerHTML = "<i class='material-icons' data-toggle='tooltip' title='Current Location'" +
     " style='color: white'>my_location</i>";
 
 let handleCenterLocation = function () {
   showCurrentLocation();
 };
 
-button.addEventListener('click', handleCenterLocation, false);
+locationButton.addEventListener('click', handleCenterLocation, false);
 
-let element = document.createElement('div');
-element.className = 'location ol-unselectable ol-control';
+let centerLocationElement = document.createElement('div');
+centerLocationElement.className = 'location ol-unselectable ol-control';
 
-element.appendChild(button);
+centerLocationElement.appendChild(locationButton);
 
 let CenterLocation = new ol.control.Control({
-  element: element,
+  element: centerLocationElement,
 });
 map.addControl(CenterLocation);
 
@@ -111,42 +156,6 @@ let layer = new ol.layer.Vector({
 });
 
 layer.once("change", showCurrentLocation);
-
-// courts layer
-let vectorSource = new ol.source.Vector({
-  format: new ol.format.GeoJSON(),
-  loader: function(extent, resolution, projection) {
-    let epsg4326Extent = ol.proj.transformExtent(extent, projection, 'EPSG:4326');
-    let stringExtent = epsg4326Extent[1] + ',' + epsg4326Extent[0] + ',' + epsg4326Extent[3] + ',' + epsg4326Extent[2];
-    let query = '[out:json][timeout:25][bbox:'+ stringExtent +'];' +
-        '(nwr[leisure="sports_centre"][sport="tennis"][access!="private"];' +
-        'nwr[leisure="pitch"][sport="tennis"][access!="private"];' +
-        'nwr[leisure="stadium"][sport="tennis"][access!="private"];);' +
-        '(._;>;);' +
-        'out body;';
-    fetch('https://overpass-api.de/api/interpreter', {
-      method: "POST",
-      body: query
-    })
-        .then(response => response.json())
-        .then(json => {
-          const geoJSON = osmtogeojson(json, {
-            flatProperties: true
-          });
-          let features = new ol.format.GeoJSON().readFeatures(geoJSON, {
-            featureProjection: map.getView().getProjection()
-          });
-          vectorSource.addFeatures(features);
-        });
-  },
-  strategy: ol.loadingstrategy.bbox,
-});
-
-let vectorLayer = new ol.layer.Vector({
-  renderMode: 'image',
-  source: vectorSource,
-})
-map.addLayer(vectorLayer);
 
 let displayFeatureInfo = function(pixel) {
   let feature = map.forEachFeatureAtPixel(pixel, function(feature) {
@@ -164,7 +173,6 @@ map.on('click', function(evt) {
   let coordinates = evt.coordinate;
   console.log(coordinates);
 });
-//end of courts layer
 
 let courtName = document.getElementById("courtName");
 let courtAddress = document.getElementById("courtAddress");
