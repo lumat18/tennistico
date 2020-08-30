@@ -99,44 +99,20 @@ geolocation.on('error', function (error) {
   locationButton.disabled = true;
 });
 
-let accuracyFeature = new ol.Feature();
-geolocation.on('change:accuracyGeometry', function () {
-  accuracyFeature.setGeometry(geolocation.getAccuracyGeometry());
-});
-
-let positionFeature = new ol.Feature();
-positionFeature.setStyle(
-    new ol.style.Style({
-      image: new ol.style.Circle({
-        radius: 6,
-        fill: new ol.style.Fill({
-          color: '#3399CC',
-        }),
-        stroke: new ol.style.Stroke({
-          color: '#fff',
-          width: 2,
-        }),
-      }),
-    })
-);
-
 function showCurrentLocation() {
   let coordinates = geolocation.getPosition();
-  positionFeature.setGeometry(coordinates ? new ol.geom.Point(coordinates) : null);
   map.getView().setCenter(coordinates);
   map.getView().setZoom(12);
   newTennisLayer();
 }
 
+geolocation.once("change", showCurrentLocation);
+
 let locationButton = document.createElement('button');
 locationButton.innerHTML = "<i class='material-icons' data-toggle='tooltip' title='Current Location'" +
     " style='color: white'>my_location</i>";
 
-let handleCenterLocation = function () {
-  showCurrentLocation();
-};
-
-locationButton.addEventListener('click', handleCenterLocation, false);
+locationButton.addEventListener('click', showCurrentLocation, false);
 
 let centerLocationElement = document.createElement('div');
 centerLocationElement.className = 'location ol-unselectable ol-control';
@@ -147,15 +123,6 @@ let CenterLocation = new ol.control.Control({
   element: centerLocationElement,
 });
 map.addControl(CenterLocation);
-
-let layer = new ol.layer.Vector({
-  map: map,
-  source: new ol.source.Vector({
-    features: [accuracyFeature, positionFeature],
-  }),
-});
-
-layer.once("change", showCurrentLocation);
 
 let displayFeatureInfo = function(pixel) {
   let feature = map.forEachFeatureAtPixel(pixel, function(feature) {
