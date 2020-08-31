@@ -20,6 +20,10 @@
     top: 280px;
     left: .5em;
 }
+.search-courts {
+    top: 312px;
+    left: .5em;
+}
 
 .ol-control button:disabled{
     background-color: rgba(0,60,136,.2);

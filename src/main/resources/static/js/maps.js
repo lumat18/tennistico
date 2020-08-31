@@ -29,6 +29,7 @@ let map = new ol.Map({
   view: view,
 });
 
+//collapsing attribution button on window resize
 function checkSize() {
   if (map.getSize()[0] < 600) {
     attribution.setCollapsed(true);
@@ -37,6 +38,7 @@ function checkSize() {
 
 window.addEventListener('resize', checkSize);
 checkSize();
+//end of collapsing attribution button
 
 // courts layer
 let tennisLayer;
@@ -103,11 +105,14 @@ function showCurrentLocation() {
   let coordinates = geolocation.getPosition();
   map.getView().setCenter(coordinates);
   map.getView().setZoom(12);
-  newTennisLayer();
 }
 
-geolocation.once("change", showCurrentLocation);
+geolocation.once("change", function () {
+  showCurrentLocation();
+  newTennisLayer();
+});
 
+//adding button for centering on current location
 let locationButton = document.createElement('button');
 locationButton.innerHTML = "<i class='material-icons' data-toggle='tooltip' title='Current Location'" +
     " style='color: white'>my_location</i>";
@@ -119,11 +124,31 @@ centerLocationElement.className = 'location ol-unselectable ol-control';
 
 centerLocationElement.appendChild(locationButton);
 
-let CenterLocation = new ol.control.Control({
+let centerLocation = new ol.control.Control({
   element: centerLocationElement,
 });
-map.addControl(CenterLocation);
+map.addControl(centerLocation);
+//end of center on current location button
 
+//adding button for searching for courts on current map view
+let searchButton = document.createElement('button');
+searchButton.innerHTML = "<i class='material-icons' data-toggle='tooltip' title='Search courts'" +
+    " style='color: white'>search</i>";
+
+searchButton.addEventListener('click', newTennisLayer, false);
+
+let searchCourtsElement = document.createElement('div');
+searchCourtsElement.className = 'search-courts ol-unselectable ol-control';
+
+searchCourtsElement.appendChild(searchButton);
+
+let searchCourts = new ol.control.Control({
+  element: searchCourtsElement,
+});
+map.addControl(searchCourts);
+//end of search courts button
+
+//temp functions for logging geolocation data in console
 let displayFeatureInfo = function(pixel) {
   let feature = map.forEachFeatureAtPixel(pixel, function(feature) {
     return feature;
@@ -140,6 +165,7 @@ map.on('click', function(evt) {
   let coordinates = evt.coordinate;
   console.log(coordinates);
 });
+//end of logging functions
 
 let courtName = document.getElementById("courtName");
 let courtAddress = document.getElementById("courtAddress");
