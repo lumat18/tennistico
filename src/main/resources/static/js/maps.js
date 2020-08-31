@@ -42,9 +42,10 @@ checkSize();
 
 // courts layer
 let tennisLayer;
+let vectorSource;
 
 function newTennisLayer(){
-  let vectorSource = new ol.source.Vector({
+  vectorSource = new ol.source.Vector({
     format: new ol.format.GeoJSON(),
     loader: function(extent, resolution, projection) {
       let epsg4326Extent = ol.proj.transformExtent(extent, projection, 'EPSG:4326');
@@ -83,6 +84,15 @@ function newTennisLayer(){
   map.addLayer(tennisLayer);
 }
 //end of courts layer
+
+//clearing feature loader from vectorSource so there are no further fetch requests to overpass api when map view is changing
+map.on('movestart', function () {
+  if(vectorSource){
+    vectorSource.setLoader(function(extent, resolution, projection){
+      console.log('cleared loader');
+    });
+  }
+});
 
 let geolocation = new ol.Geolocation({
   // enableHighAccuracy must be set to true to have the heading value.
