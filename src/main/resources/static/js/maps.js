@@ -92,6 +92,7 @@ map.on('movestart', function () {
       console.log('cleared loader');
     });
   }
+  searchButton.disabled = map.getView().getZoom() < 11;
 });
 
 let geolocation = new ol.Geolocation({
