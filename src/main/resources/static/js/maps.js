@@ -43,6 +43,8 @@ checkSize();
 // courts layer
 let tennisLayer;
 let vectorSource;
+let clusterSource;
+let styleCache = {};
 let circleStyle = new ol.style.Style({
   image: new ol.style.Circle({
     radius: 6,
@@ -84,7 +86,6 @@ function newTennisLayer(){
             features.forEach(feature => {
               let featureCoordinates = feature.getGeometry().getCoordinates();
               feature.setGeometry(new ol.geom.Point(featureCoordinates));
-              feature.setStyle(circleStyle);
             })
             features.forEach(feature => console.log('2: ' + feature.getGeometry().getCoordinates()));
             vectorSource.addFeatures(features);
@@ -94,12 +95,42 @@ function newTennisLayer(){
     strategy: ol.loadingstrategy.bbox,
   });
 
+  clusterSource = new ol.source.Cluster({
+    distance: 20,
+    source: vectorSource,
+  });
+
   if(tennisLayer){
     map.removeLayer(tennisLayer);
   }
   tennisLayer = new ol.layer.Vector({
     renderMode: 'image',
-    source: vectorSource,
+    source: clusterSource,
+    style: function (feature) {
+      let size = feature.get('features').length;
+      let style = styleCache[size];
+      if (!style) {
+        style = new ol.style.Style({
+          image: new ol.style.Circle({
+            radius: 10,
+            stroke: new ol.style.Stroke({
+              color: '#fff',
+            }),
+            fill: new ol.style.Fill({
+              color: '#3399CC',
+            }),
+          }),
+          text: new ol.style.Text({
+            text: size.toString(),
+            fill: new ol.style.Fill({
+              color: '#fff',
+            }),
+          }),
+        });
+        styleCache[size] = style;
+      }
+      return style;
+    },
   })
   map.addLayer(tennisLayer);
 }
