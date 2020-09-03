@@ -43,6 +43,20 @@ checkSize();
 // courts layer
 let tennisLayer;
 let vectorSource;
+let clusterSource;
+let styleCache = {};
+let circleStyle = new ol.style.Style({
+  image: new ol.style.Circle({
+    radius: 6,
+    fill: new ol.style.Fill({
+      color: '#3399cc',
+    }),
+    stroke: new ol.style.Stroke({
+      color: '#fff',
+      width: 2,
+    }),
+  }),
+});
 
 function newTennisLayer(){
   vectorSource = new ol.source.Vector({
@@ -55,7 +69,7 @@ function newTennisLayer(){
           'nwr[leisure="pitch"][sport="tennis"][access!="private"];' +
           'nwr[leisure="stadium"][sport="tennis"][access!="private"];);' +
           '(._;>;);' +
-          'out body;';
+          'out center;';
       fetch('https://overpass-api.de/api/interpreter', {
         method: "POST",
         body: query
@@ -68,10 +82,19 @@ function newTennisLayer(){
             let features = new ol.format.GeoJSON().readFeatures(geoJSON, {
               featureProjection: map.getView().getProjection()
             });
+            features.forEach(feature => {
+              let featureCoordinates = feature.getGeometry().getFlatCoordinates();
+              feature.setGeometry(new ol.geom.Point(featureCoordinates));
+            })
             vectorSource.addFeatures(features);
           });
     },
     strategy: ol.loadingstrategy.bbox,
+  });
+
+  clusterSource = new ol.source.Cluster({
+    distance: 20,
+    source: vectorSource,
   });
 
   if(tennisLayer){
@@ -79,7 +102,32 @@ function newTennisLayer(){
   }
   tennisLayer = new ol.layer.Vector({
     renderMode: 'image',
-    source: vectorSource,
+    source: clusterSource,
+    style: function (feature) {
+      let size = feature.get('features').length;
+      let style = styleCache[size];
+      if (!style) {
+        style = new ol.style.Style({
+          image: new ol.style.Circle({
+            radius: 10,
+            stroke: new ol.style.Stroke({
+              color: '#fff',
+            }),
+            fill: new ol.style.Fill({
+              color: '#3399CC',
+            }),
+          }),
+          text: new ol.style.Text({
+            text: size.toString(),
+            fill: new ol.style.Fill({
+              color: '#fff',
+            }),
+          }),
+        });
+        styleCache[size] = style;
+      }
+      return style;
+    },
   })
   map.addLayer(tennisLayer);
 }
