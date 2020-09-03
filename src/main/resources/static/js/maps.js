@@ -69,7 +69,7 @@ function newTennisLayer(){
           'nwr[leisure="pitch"][sport="tennis"][access!="private"];' +
           'nwr[leisure="stadium"][sport="tennis"][access!="private"];);' +
           '(._;>;);' +
-          'out body;';
+          'out center;';
       fetch('https://overpass-api.de/api/interpreter', {
         method: "POST",
         body: query
@@ -85,7 +85,9 @@ function newTennisLayer(){
             features.forEach(feature => console.log('1: ' + feature.getGeometry().getCoordinates()));
             features.forEach(feature => {
               let featureCoordinates = feature.getGeometry().getCoordinates();
-              feature.setGeometry(new ol.geom.Point(featureCoordinates));
+              let coord = ol.proj.toLonLat(featureCoordinates);
+              console.log('1.5: ' + coord);
+              feature.setGeometry(new ol.geom.Point(ol.proj.fromLonLat(coord)));
             })
             features.forEach(feature => console.log('2: ' + feature.getGeometry().getCoordinates()));
             vectorSource.addFeatures(features);
