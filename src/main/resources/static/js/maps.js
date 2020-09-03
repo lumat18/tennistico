@@ -82,16 +82,11 @@ function newTennisLayer(){
             let features = new ol.format.GeoJSON().readFeatures(geoJSON, {
               featureProjection: map.getView().getProjection()
             });
-            features.forEach(feature => console.log('1: ' + feature.getGeometry().getCoordinates()));
             features.forEach(feature => {
-              let featureCoordinates = feature.getGeometry().getCoordinates();
-              let coord = ol.proj.toLonLat(featureCoordinates);
-              console.log('1.5: ' + coord);
-              feature.setGeometry(new ol.geom.Point(ol.proj.fromLonLat(coord)));
+              let featureCoordinates = feature.getGeometry().getFlatCoordinates();
+              feature.setGeometry(new ol.geom.Point(featureCoordinates));
             })
-            features.forEach(feature => console.log('2: ' + feature.getGeometry().getCoordinates()));
             vectorSource.addFeatures(features);
-            vectorSource.getFeatures().forEach(feature => console.log('3: ' + feature.getGeometry().getCoordinates()));
           });
     },
     strategy: ol.loadingstrategy.bbox,
