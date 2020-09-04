@@ -107,18 +107,21 @@ function newTennisLayer(){
       let size = feature.get('features').length;
       let style = styleCache[size];
       if (!style) {
+        let text = size.toString() > 1 ? size.toString() : '';
         style = new ol.style.Style({
           image: new ol.style.Circle({
             radius: 10,
             stroke: new ol.style.Stroke({
+              width: 2,
               color: '#fff',
             }),
             fill: new ol.style.Fill({
-              color: '#3399CC',
+              color: '#4075ba',
             }),
           }),
           text: new ol.style.Text({
-            text: size.toString(),
+            text: text,
+            font: '12px Teko',
             fill: new ol.style.Fill({
               color: '#fff',
             }),
