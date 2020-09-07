@@ -218,6 +218,15 @@ map.addControl(searchCourts);
 
 //temp functions for logging geolocation data in console
 function getFeatureOSMById(feature){
+  let type = feature.id_.charAt(0).toUpperCase();
+  let id = feature.id_.split('/')[1];
+
+  let endpoint = 'https://nominatim.openstreetmap.org/lookup?osm_ids='+type+id+'&format=json&addressdetails=1';
+  fetch(endpoint)
+      .then(response => response.json())
+      .then(function (json) {
+        console.log(json);
+  })
   return feature.id_;
 }
 
