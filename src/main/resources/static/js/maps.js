@@ -93,7 +93,7 @@ function newTennisLayer(){
   });
 
   clusterSource = new ol.source.Cluster({
-    distance: 20,
+    distance: 24,
     source: vectorSource,
   });
 
@@ -143,7 +143,13 @@ map.on('movestart', function () {
       console.log('cleared loader');
     });
   }
-  searchButton.disabled = map.getView().getZoom() < 11;
+  if(map.getView().getZoom() < 11){
+    searchButton.disabled = true;
+    document.getElementById("searchIcon").setAttribute('data-original-title', 'Zoom in to search courts');
+  } else {
+    searchButton.disabled = false;
+    document.getElementById("searchIcon").setAttribute('data-original-title', 'Search courts');
+  }
 });
 
 let geolocation = new ol.Geolocation({
@@ -194,7 +200,7 @@ map.addControl(centerLocation);
 
 //adding button for searching for courts on current map view
 let searchButton = document.createElement('button');
-searchButton.innerHTML = "<i class='material-icons' data-toggle='tooltip' title='Search courts'" +
+searchButton.innerHTML = "<i id='searchIcon' class='material-icons' data-toggle='tooltip' title='Search courts'" +
     " style='color: white'>search</i>";
 
 searchButton.addEventListener('click', newTennisLayer, false);
@@ -211,12 +217,16 @@ map.addControl(searchCourts);
 //end of search courts button
 
 //temp functions for logging geolocation data in console
+function getFeatureOSMById(feature){
+  return feature.id_;
+}
+
 let displayFeatureInfo = function(pixel) {
   let feature = map.forEachFeatureAtPixel(pixel, function(feature) {
     return feature;
   });
   if (feature) {
-    console.log(feature.getProperties());
+    console.log(feature.get('features').length > 1 ? 'number of features: ' + feature.get('features').length : getFeatureOSMById(feature.get('features')[0]));
   } else {
     console.log('Nothing around');
   }
