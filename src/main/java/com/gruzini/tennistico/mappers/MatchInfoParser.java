@@ -7,6 +7,8 @@ import com.gruzini.tennistico.services.entity_related.MatchService;
 import com.gruzini.tennistico.services.entity_related.ScoreService;
 import org.springframework.stereotype.Component;
 
+import java.util.stream.Collectors;
+
 import static java.util.Objects.isNull;
 
 @Component
@@ -31,20 +33,20 @@ public class MatchInfoParser {
     }
 
     private String getDivertedScoreString(final Match match, final Player player) {
-        StringBuilder stringBuilder = new StringBuilder();
         final Score score = scoreService.getScoreWithSets(match.getScore().getId());
-        score.getSets().forEach(set -> {
-            if (player.equals(match.getHost())) {
-                stringBuilder.append(appendSet(set.getHostScore(), set.getGuestScore()));
-            } else {
-                stringBuilder.append(appendSet(set.getGuestScore(), set.getHostScore()));
-            }
-        });
-        return stringBuilder.toString().trim();
+        return score.getSets()
+                .stream().map(set -> {
+                    if (player.equals(match.getHost())) {
+                        return appendSet(set.getHostScore(), set.getGuestScore());
+                    } else {
+                        return appendSet(set.getGuestScore(), set.getHostScore());
+                    }
+                })
+                .collect(Collectors.joining(" "));
     }
 
     private String appendSet(int recipientScore, int opponentScore) {
-        return recipientScore + "-" + opponentScore + " ";
+        return recipientScore + "-" + opponentScore;
     }
 
     public Player getOpponent(final Match match, final Player player) {
