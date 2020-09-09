@@ -27,16 +27,19 @@ public class CourtDtoService {
       return courtMapper.toCourtInfoDto(court);
    }
 
+   //to delete
    public List<CourtDto> getAllCourtDto(){
       return courtService.getAll().stream()
               .map(courtMapper::toCourtInfoDto)
               .collect(Collectors.toList());
    }
 
+   //to delete
    public List<String> getCities(){
       return courtService.getCities();
    }
 
+   //to delete
    public List<CourtDto> getCourtInfoDtoByCity(final String city){
       return courtService.getByCity(city).stream()
               .map(courtMapper::toCourtInfoDto)

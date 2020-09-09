@@ -1,7 +1,5 @@
 package com.gruzini.tennistico.models.forms;
 
-import com.gruzini.tennistico.domain.enums.Gender;
-import com.gruzini.tennistico.domain.enums.PlayerSkill;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,14 +7,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
-import java.util.Arrays;
-
-import static java.util.Objects.isNull;
-import static java.util.Objects.nonNull;
 
 @Data
 @AllArgsConstructor

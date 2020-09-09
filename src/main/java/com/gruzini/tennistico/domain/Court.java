@@ -23,7 +23,7 @@ public class Court {
    private String email;
    private String phoneNumber;
    private String website;
-   
+
    private String houseNumber;
    @NotNull
    private String street;
