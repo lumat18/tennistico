@@ -19,19 +19,30 @@ public class Court {
    @Column(name = "court_id")
    private Long id;
 
-   @NotNull
    private String name;
-
+   private String email;
+   private String phoneNumber;
+   private String website;
+   
+   private String houseNumber;
+   @NotNull
    private String street;
-
    @NotNull
    private String city;
-
    private String state;
-
+   @NotNull
    private String country;
+   private String postCode;
 
-   private String zipCode;
+   //city - notnull
+   //country - notnull
+   //postcode
+   //road - notnull
+   //house_number
+   //state
 
-   private String phoneNumber;
+   //email  -  feature.email
+   //name  -  feature.name
+   //phone_number  -  feature.phone
+   //web_page  -  website/url, facebook?
 }
