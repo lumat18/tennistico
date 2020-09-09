@@ -53,7 +53,9 @@ function newTennisLayer(){
       let epsg4326Extent = ol.proj.transformExtent(extent, projection, 'EPSG:4326');
       let stringExtent = epsg4326Extent[1] + ',' + epsg4326Extent[0] + ',' + epsg4326Extent[3] + ',' + epsg4326Extent[2];
       let query = '[out:json][timeout:25][bbox:'+ stringExtent +'];' +
-          '(nwr[leisure="sports_centre"][phone];nwr[leisure="pitch"][phone];nwr[leisure="stadium"][phone];);' +
+          '(nwr[leisure="sports_centre"][sport="tennis"][access!="private"];' +
+          'nwr[leisure="pitch"][sport="tennis"][access!="private"];' +
+          'nwr[leisure="stadium"][sport="tennis"][access!="private"];);' +
           '(._;>;);' +
           'out center;';
       fetch('https://overpass-api.de/api/interpreter', {
