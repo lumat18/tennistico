@@ -32,17 +32,5 @@ public class Court {
    private String state;
    @NotNull
    private String country;
-   private String postCode;
-
-   //city - notnull
-   //country - notnull
-   //postcode
-   //road - notnull
-   //house_number
-   //state
-
-   //email  -  feature.email
-   //name  -  feature.name
-   //phone_number  -  feature.phone
-   //web_page  -  website/url, facebook?
+   private String postcode;
 }

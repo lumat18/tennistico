@@ -238,9 +238,27 @@ map.on('click', function(evt) {
 //end of logging functions
 
 let courtName = document.getElementById("courtName");
-let courtAddress = document.getElementById("courtAddress");
+let courtEmail = document.getElementById("courtEmail");
+let courtWebsite = document.getElementById("courtWebsite");
+let courtHouseNumber = document.getElementById("courtHouseNumber");
+let courtAddress = document.getElementById("courtStreet");
 let courtCity = document.getElementById("courtCity");
+let courtState = document.getElementById("courtState");
+let courtCountry = document.getElementById("courtCountry");
+let courtPostcode = document.getElementById("courtPostcode");
 let courtPhone = document.getElementById("courtPhone");
+
+//city - notnull
+//country - notnull
+//postcode
+//road - notnull
+//house_number
+//state
+
+//email  -  feature.email
+//name  -  feature.name
+//phone_number  -  feature.phone
+//web_page  -  website/url, facebook?
 
 map.on('pointermove', function (evt) {
   map.getTargetElement().style.cursor = map.hasFeatureAtPixel(evt.pixel)

@@ -23,7 +23,7 @@ public class CourtForm {
   private String city;
   private String state;
   private String country;
-  private String postCode;
+  private String postcode;
 
   @AssertTrue(message = "Insufficient data. Please choose another court.")
   @JsonIgnore

@@ -27,6 +27,7 @@ public class MatchCreationController {
         this.courtDtoService = courtDtoService;
     }
 
+    //here will come courtForm and its validation
     @PostMapping("/begin")
     public String beginMatchCreation(@RequestParam(name = "courtId") final Long courtId, final Model model) {
         model.addAttribute("chosenCourt", courtDtoService.getCourtInfoById(courtId));

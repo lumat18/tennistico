@@ -34,7 +34,7 @@
                       </div>
                     </div>
                     <div class="col-lg-6 col-md-12">
-                      <form method="post" th:action="@{/courts}"
+                      <form method="post" th:action="@{/create/begin}"
                             th:object="${courtForm}">
 
                         <div class="input-group mb-3">
@@ -49,15 +49,19 @@
                                  readonly>
                         </div>
 
+                        <input type="text" id="courtEmail" th:field="*{email}" hidden>
+                        <input type="text" id="courtWebsite" th:field="*{website}" hidden>
+                        <input type="text" id="courtHouseNumber" th:field="*{houseNumber}" hidden>
+
                         <div class="input-group mb-3">
                           <div class="input-group-prepend gruzini-input-group-text">
-                                 <span class="input-group-text gruzini-input-group-text" id="courtAddressAddon">
-                                    Address:
+                                 <span class="input-group-text gruzini-input-group-text" id="courtStreetAddon">
+                                    Street:
                                  </span>
                           </div>
-                          <input type="text" class="form-control gruzini-registration-text" id="courtAddress"
-                                 th:field="*{address}"
-                                 aria-label="court-address" aria-describedby="courtAddressAddon"
+                          <input type="text" class="form-control gruzini-registration-text" id="courtStreet"
+                                 th:field="*{street}"
+                                 aria-label="court-street" aria-describedby="courtStreetAddon"
                                  readonly>
                         </div>
 
@@ -72,6 +76,22 @@
                                  aria-label="court-city" aria-describedby="courtCityAddon"
                                  readonly>
                         </div>
+
+                        <input type="text" id="courtState" th:field="*{state}" hidden>
+
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend gruzini-input-group-text">
+                                 <span class="input-group-text gruzini-input-group-text" id="courtCountryAddon">
+                                    Country:
+                                 </span>
+                          </div>
+                          <input type="text" class="form-control gruzini-registration-text" id="courtCountry"
+                                 th:field="*{country}"
+                                 aria-label="court-country" aria-describedby="courtCountryAddon"
+                                 readonly>
+                        </div>
+
+                        <input type="text" id="courtPostcode" th:field="*{postcode}" hidden>
 
                         <div class="input-group mb-3">
                           <div class="input-group-prepend gruzini-input-group-text">
