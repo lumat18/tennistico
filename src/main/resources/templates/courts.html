@@ -105,6 +105,11 @@
                                  readonly>
                         </div>
 
+                        <div class="d-flex justify-content-between">
+                              <span class="gruzini-registration-error" th:if="${#fields.hasErrors('dataSufficient')}"
+                                    th:errors="*{dataSufficient}"></span>
+                        </div>
+
                         <button id="hiddenSubmitButton" type="submit" hidden></button>
                       </form>
                     </div>

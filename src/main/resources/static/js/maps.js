@@ -205,17 +205,30 @@ map.addControl(searchCourts);
 //end of search courts button
 
 //temp functions for logging geolocation data in console
-function getFeatureOSMById(feature){
+function fillFormFieldsFromOsmFeature(feature){
   let type = feature.id_.charAt(0).toUpperCase();
   let id = feature.id_.split('/')[1];
-
   let endpoint = 'https://nominatim.openstreetmap.org/lookup?osm_ids='+type+id+'&format=json&addressdetails=1';
+
   fetch(endpoint)
       .then(response => response.json())
       .then(function (json) {
-        console.log(json);
+        let object = JSON.parse(JSON.stringify(json));
+        const {house_number, country, postcode, state, road, city} = object[0].address;
+        courtHouseNumber.value = house_number !== undefined ? house_number : null;
+        courtAddress.value = road !== undefined ? road : null;
+        courtCity.value = city !== undefined ? city : null;
+        courtState.value = state !== undefined ? state : null;
+        courtCountry.value = country !== undefined ? country : null;
+        courtPostcode.value = postcode !== undefined ? postcode : null;
+        console.log(object);
   });
-  console.log(feature.getProperties());
+
+  let {email, name, phone, website} = feature.getProperties();
+  courtName.value = name !== undefined ? name : null;
+  courtEmail.value = email !== undefined ? email : null;
+  courtWebsite.value = website !== undefined ? website : null;
+  courtPhone.value = phone !== undefined ? phone : null;
   return feature.id_;
 }
 
@@ -224,7 +237,7 @@ let displayFeatureInfo = function(pixel) {
     return feature;
   });
   if (feature) {
-    console.log(feature.get('features').length > 1 ? 'number of features: ' + feature.get('features').length : getFeatureOSMById(feature.get('features')[0]));
+    console.log(feature.get('features').length > 1 ? 'number of features: ' + feature.get('features').length : fillFormFieldsFromOsmFeature(feature.get('features')[0]));
   } else {
     console.log('Nothing around');
   }

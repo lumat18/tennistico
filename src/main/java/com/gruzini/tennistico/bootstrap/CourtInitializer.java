@@ -28,11 +28,11 @@ public class CourtInitializer implements CommandLineRunner {
                 .state("Castilla")
                 .street("Calle")
                 .phoneNumber("+00 700 777 777")
-                .postCode("00-000")
+                .postcode("00-000")
                 .build();
         final Court court2 = Court.builder()
                 .phoneNumber("+33 555 222 111")
-                .postCode("55-555")
+                .postcode("55-555")
                 .street("Key Biscayne")
                 .country("Florida")
                 .state("Florida")
@@ -41,7 +41,7 @@ public class CourtInitializer implements CommandLineRunner {
                 .build();
         final Court court3 = Court.builder()
                 .phoneNumber("+351 54 781 781")
-                .postCode("31-300")
+                .postcode("31-300")
                 .street("Rua do Benformoso")
                 .state("Portugal")
                 .country("Portugal")
@@ -50,7 +50,7 @@ public class CourtInitializer implements CommandLineRunner {
                 .build();
         final Court court4 = Court.builder()
                 .phoneNumber("+00 500 500")
-                .postCode("30-30")
+                .postcode("30-30")
                 .street("Long")
                 .country("Florida")
                 .state("Florida")

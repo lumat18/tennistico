@@ -14,20 +14,20 @@ function showModal(id) {
    fetch('/getPlayerDto?id=' + id)
        .then(response => response.json())
        .then(function (json) {
-          let player = JSON.parse(JSON.stringify(json));
-          modalTitle.textContent = player.fullName;
-          modalAge.textContent = player.age;
-          modalGender.textContent = player.gender;
-          modalPoints.textContent = player.rankingPoints;
-          if(player.photoUrl == null || player.photoUrl === ''){
-             if(player.gender === 'MALE'){
+          let {age, fullName, gender, photoUrl, rankingPoints} = JSON.parse(JSON.stringify(json));
+          modalTitle.textContent = fullName;
+          modalAge.textContent = age;
+          modalGender.textContent = gender;
+          modalPoints.textContent = rankingPoints;
+          if(photoUrl == null || photoUrl === ''){
+             if(gender === 'MALE'){
                 modalPhoto.setAttribute('src', "/img/silhouette-male.png")
              }
-             if(player.gender === 'FEMALE'){
+             if(gender === 'FEMALE'){
                 modalPhoto.setAttribute('src', "/img/silhouette-female.png")
              }
           } else {
-             modalPhoto.setAttribute('src', player.photoUrl);
+             modalPhoto.setAttribute('src', photoUrl);
           }
        })
 
