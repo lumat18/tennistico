@@ -43,7 +43,7 @@
                                     Court name:
                                  </span>
                           </div>
-                          <input type="text" class="form-control gruzini-registration-text" id="courtName"
+                          <input type="text" class="form-control gruzini-registration-text gruzini-maps-input" id="courtName"
                                  th:field="*{name}"
                                  aria-label="court-name" aria-describedby="courtNameAddon"
                                  readonly>
@@ -59,7 +59,7 @@
                                     Street:
                                  </span>
                           </div>
-                          <input type="text" class="form-control gruzini-registration-text" id="courtStreet"
+                          <input type="text" class="form-control gruzini-registration-text gruzini-maps-input" id="courtStreet"
                                  th:field="*{street}"
                                  aria-label="court-street" aria-describedby="courtStreetAddon"
                                  readonly required>
@@ -71,7 +71,7 @@
                                     City:
                                  </span>
                           </div>
-                          <input type="text" class="form-control gruzini-registration-text" id="courtCity"
+                          <input type="text" class="form-control gruzini-registration-text gruzini-maps-input" id="courtCity"
                                  th:field="*{city}"
                                  aria-label="court-city" aria-describedby="courtCityAddon"
                                  readonly required>
@@ -85,7 +85,7 @@
                                     Country:
                                  </span>
                           </div>
-                          <input type="text" class="form-control gruzini-registration-text" id="courtCountry"
+                          <input type="text" class="form-control gruzini-registration-text gruzini-maps-input" id="courtCountry"
                                  th:field="*{country}"
                                  aria-label="court-country" aria-describedby="courtCountryAddon"
                                  readonly required>
@@ -99,15 +99,14 @@
                                     Phone Number:
                                  </span>
                           </div>
-                          <input type="text" class="form-control gruzini-registration-text" id="courtPhone"
+                          <input type="text" class="form-control gruzini-registration-text gruzini-maps-input" id="courtPhone"
                                  th:field="*{phoneNumber}"
                                  aria-label="court-phone-number" aria-describedby="courtPhoneAddon"
                                  readonly>
                         </div>
 
                         <div class="d-flex justify-content-between">
-                              <span class="gruzini-registration-error" th:if="${#fields.hasErrors('dataSufficient')}"
-                                    th:errors="*{dataSufficient}"></span>
+                              <span id="errorMessage" class="gruzini-registration-error" style="display: none;"></span>
                         </div>
 
                         <button id="hiddenSubmitButton" type="submit" hidden></button>
@@ -139,7 +138,11 @@
   <script th:src="@{/js/maps.js}"></script>
   <script>
     function submitByHiddenButton() {
-      document.getElementById("hiddenSubmitButton").click();
+      if(isAllRequiredFilled()){
+        document.getElementById("hiddenSubmitButton").click();
+      } else {
+        showRequiredInputFields();
+      }
     }
   </script>
   <!--END JAVASCRIPT IMPORTS-->

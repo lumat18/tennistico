@@ -45,3 +45,12 @@
     top: 2.75em;
 }
 /*end of slider styling*/
+
+/*TODO: find out how to change placeholder styling*/
+.gruzini-maps-input::-webkit-input-placeholder,
+.gruzini-maps-input:-moz-placeholder,
+.gruzini-maps-input::-moz-placeholder,
+.gruzini-maps-input:-ms-input-placeholder,
+.gruzini-maps-input input::placeholder {
+    color: #d22824;
+}

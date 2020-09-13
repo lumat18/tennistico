@@ -282,7 +282,7 @@ $('.location').ready(function(){
   });
 });
 
-$(document).change(function () {
+$(document).click(function () {
   let inputs = $('.form-control');
   inputs.each(function () {
     if($(this).val()){
@@ -290,3 +290,26 @@ $(document).change(function () {
     }
   })
 });
+
+function isAllRequiredFilled() {
+  let required = $('.form-control').filter('[required]:visible');
+  let allFilled = true;
+  required.each(function () {
+    if (!$(this).val()) {
+      allFilled = false;
+    }
+  });
+  return allFilled;
+}
+
+function showRequiredInputFields() {
+  let required = $('.form-control').filter('[required]:visible');
+  required.each(function () {
+    if (!$(this).val()) {
+      this.setAttribute("placeholder", "This field cannot be empty!")
+    }
+  });
+  let error = document.getElementById('errorMessage');
+  error.innerHTML = "Insufficient data. Please choose another court.";
+  error.style.display = '';
+}
