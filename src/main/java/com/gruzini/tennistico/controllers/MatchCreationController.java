@@ -2,6 +2,7 @@ package com.gruzini.tennistico.controllers;
 
 import com.gruzini.tennistico.events.CreateMatchEvent;
 import com.gruzini.tennistico.models.dto.matchDto.CreatedMatchDto;
+import com.gruzini.tennistico.models.forms.CourtForm;
 import com.gruzini.tennistico.services.dto_related.CourtDtoService;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Controller;
@@ -10,7 +11,6 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -27,10 +27,10 @@ public class MatchCreationController {
         this.courtDtoService = courtDtoService;
     }
 
-    //here will come courtForm and its validation
     @PostMapping("/begin")
-    public String beginMatchCreation(@RequestParam(name = "courtId") final Long courtId, final Model model) {
-        model.addAttribute("chosenCourt", courtDtoService.getCourtInfoById(courtId));
+    public String beginMatchCreation(@ModelAttribute("courtForm") final CourtForm courtForm,
+                                     final Model model) {
+        model.addAttribute("chosenCourt", courtDtoService.getCourtInfoForMatchCreation(courtForm));
         model.addAttribute("match", new CreatedMatchDto());
         return "create";
     }

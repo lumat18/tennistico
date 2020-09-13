@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class CourtDto {
     private Long courtId;
     private String name;
-    private String address;
+    private String street;
     private String city;
     private String phoneNumber;
 }

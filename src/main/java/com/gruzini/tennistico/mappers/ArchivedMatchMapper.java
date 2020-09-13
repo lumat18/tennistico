@@ -17,7 +17,7 @@ public class ArchivedMatchMapper {
                 .opponentName(matchInfoParser.getOpponentName(match.getId(), player))
                 .opponentId(player.getId())
                 .score(matchInfoParser.getScore(match.getId(), player))
-                .courtName(match.getCourt().getName() + ", " + match.getCourt().getCity())
+                .courtName(match.getCourt().getStreet() + ", " + match.getCourt().getCity())
                 .date(match.getEndingAt().toLocalDate())
                 .matchResult(matchInfoParser.getMatchResult(match, player))
                 .build();

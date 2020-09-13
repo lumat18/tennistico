@@ -15,7 +15,7 @@ public class FutureMatchMapper {
         return FutureMatchDto.builder()
                 .opponentName(matchInfoParser.getOpponentName(match.getId(), involvedPlayer))
                 .opponentId(matchInfoParser.getOpponentId(match.getId(), involvedPlayer))
-                .court(match.getCourt().getName() + ", " + match.getCourt().getCity())
+                .court(match.getCourt().getStreet() + ", " + match.getCourt().getCity())
                 .start(match.getStartingAt())
                 .end(match.getEndingAt())
                 .matchStatus(match.getMatchStatus().toString())

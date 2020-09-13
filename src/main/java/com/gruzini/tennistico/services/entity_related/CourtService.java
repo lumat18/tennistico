@@ -2,6 +2,7 @@ package com.gruzini.tennistico.services.entity_related;
 
 import com.gruzini.tennistico.domain.Court;
 import com.gruzini.tennistico.exceptions.CourtNotFoundException;
+import com.gruzini.tennistico.models.forms.CourtForm;
 import com.gruzini.tennistico.repositories.CourtRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,12 +27,28 @@ public class CourtService {
         return courtRepository.findById(courtId).orElseThrow(CourtNotFoundException::new);
     }
 
-    public List<String> getCities() {
-        return courtRepository.getCities();
+    public Court getCourt(final Court court) {
+        final Long courtId = getExistingCourtId(court);
+        if(courtId == null){
+            return courtRepository.save(court);
+        }
+        return getById(courtId);
     }
 
-    public List<Court> getByCity(final String city) {
-        if (isNull(city)) throw new CourtNotFoundException();
-        return courtRepository.getByCity(city);
+    private Long getExistingCourtId(final Court court) {
+        if(court.getName() != null){
+            if(courtRepository.getFirstByStreetAndCityAndCountryAndName(court.getStreet(), court.getCity(), court.getCountry(), court.getName()).isPresent()){
+                return courtRepository.getFirstByStreetAndCityAndCountryAndName(court.getStreet(), court.getCity(), court.getCountry(), court.getName()).get().getId();
+            }
+        }
+        if(court.getHouseNumber() != null){
+            if(courtRepository.getFirstByStreetAndCityAndCountryAndHouseNumber(court.getStreet(), court.getCity(), court.getCountry(), court.getHouseNumber()).isPresent()){
+                return courtRepository.getFirstByStreetAndCityAndCountryAndHouseNumber(court.getStreet(), court.getCity(), court.getCountry(), court.getHouseNumber()).get().getId();
+            }
+        }
+        if(courtRepository.getFirstByStreetAndCityAndCountry(court.getStreet(), court.getCity(), court.getCountry()).isPresent()){
+            return courtRepository.getFirstByStreetAndCityAndCountry(court.getStreet(), court.getCity(), court.getCountry()).get().getId();
+        }
+        return null;
     }
 }

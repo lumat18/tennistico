@@ -3,6 +3,7 @@ package com.gruzini.tennistico.services.dto_related;
 import com.gruzini.tennistico.domain.Court;
 import com.gruzini.tennistico.mappers.CourtMapper;
 import com.gruzini.tennistico.models.dto.CourtDto;
+import com.gruzini.tennistico.models.forms.CourtForm;
 import com.gruzini.tennistico.services.entity_related.CourtService;
 import org.springframework.stereotype.Service;
 
@@ -25,5 +26,10 @@ public class CourtDtoService {
 
    private CourtDto mapToCourtInfoDto(final Court court){
       return courtMapper.toCourtInfoDto(court);
+   }
+
+   public CourtDto getCourtInfoForMatchCreation(final CourtForm courtForm){
+      final Court court = courtMapper.courtFormToCourt(courtForm);
+      return mapToCourtInfoDto(courtService.getCourt(court));
    }
 }

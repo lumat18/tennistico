@@ -1,6 +1,5 @@
 package com.gruzini.tennistico.models.dto.matchDto;
 
-import com.gruzini.tennistico.models.dto.PlayerDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
