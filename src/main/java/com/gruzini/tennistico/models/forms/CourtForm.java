@@ -5,8 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Data
 @AllArgsConstructor
@@ -19,17 +22,15 @@ public class CourtForm {
   private String website;
 
   private String houseNumber;
+  @NotNull
+  @NotEmpty
   private String street;
+  @NotNull
+  @NotEmpty
   private String city;
   private String state;
+  @NotNull
+  @NotEmpty
   private String country;
   private String postcode;
-
-  @AssertTrue(message = "Insufficient data. Please choose another court.")
-  @JsonIgnore
-  public boolean isDataSufficient(){
-    return street != null && street.length() != 0
-            && city != null && city.length() != 0
-            && country != null && country.length() != 0;
-  }
 }

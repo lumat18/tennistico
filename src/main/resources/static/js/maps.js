@@ -229,6 +229,8 @@ function fillFormFieldsFromOsmFeature(feature){
   courtEmail.value = email !== undefined ? email : null;
   courtWebsite.value = website !== undefined ? website : null;
   courtPhone.value = phone !== undefined ? phone : null;
+
+  $("#buttonSubmit").prop("disabled", false);
   return feature.id_;
 }
 
@@ -280,15 +282,6 @@ $('.location').ready(function(){
     placement: 'right',
     container: '#map',
   });
-});
-
-$(document).click(function () {
-  let inputs = $('.form-control');
-  inputs.each(function () {
-    if($(this).val()){
-      $("#buttonSubmit").prop("disabled", false);
-    }
-  })
 });
 
 function isAllRequiredFilled() {
