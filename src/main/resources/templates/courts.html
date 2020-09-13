@@ -62,7 +62,7 @@
                           <input type="text" class="form-control gruzini-registration-text" id="courtStreet"
                                  th:field="*{street}"
                                  aria-label="court-street" aria-describedby="courtStreetAddon"
-                                 readonly>
+                                 readonly required>
                         </div>
 
                         <div class="input-group mb-3">
@@ -74,7 +74,7 @@
                           <input type="text" class="form-control gruzini-registration-text" id="courtCity"
                                  th:field="*{city}"
                                  aria-label="court-city" aria-describedby="courtCityAddon"
-                                 readonly>
+                                 readonly required>
                         </div>
 
                         <input type="text" id="courtState" th:field="*{state}" hidden>
@@ -88,7 +88,7 @@
                           <input type="text" class="form-control gruzini-registration-text" id="courtCountry"
                                  th:field="*{country}"
                                  aria-label="court-country" aria-describedby="courtCountryAddon"
-                                 readonly>
+                                 readonly required>
                         </div>
 
                         <input type="text" id="courtPostcode" th:field="*{postcode}" hidden>
@@ -121,7 +121,7 @@
                     Show hosted
                   </a>
                   <button class="btn btn-success gruzini-btn-success" id="buttonSubmit"
-                          onclick="submitByHiddenButton()">Play here
+                          onclick="submitByHiddenButton()" disabled>Play here
                   </button>
                 </div>
               </div>

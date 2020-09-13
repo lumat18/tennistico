@@ -261,18 +261,6 @@ let courtCountry = document.getElementById("courtCountry");
 let courtPostcode = document.getElementById("courtPostcode");
 let courtPhone = document.getElementById("courtPhone");
 
-//city - notnull
-//country - notnull
-//postcode
-//road - notnull
-//house_number
-//state
-
-//email  -  feature.email
-//name  -  feature.name
-//phone_number  -  feature.phone
-//web_page  -  website/url, facebook?
-
 map.on('pointermove', function (evt) {
   map.getTargetElement().style.cursor = map.hasFeatureAtPixel(evt.pixel)
       ? 'pointer'
@@ -292,4 +280,13 @@ $('.location').ready(function(){
     placement: 'right',
     container: '#map',
   });
+});
+
+$(document).change(function () {
+  let inputs = $('.form-control');
+  inputs.each(function () {
+    if($(this).val()){
+      $("#buttonSubmit").prop("disabled", false);
+    }
+  })
 });
