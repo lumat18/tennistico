@@ -3,6 +3,7 @@ package com.gruzini.tennistico.mappers;
 import com.gruzini.tennistico.domain.Match;
 import com.gruzini.tennistico.domain.Player;
 import com.gruzini.tennistico.domain.Score;
+import com.gruzini.tennistico.domain.Set;
 import com.gruzini.tennistico.services.entity_related.MatchService;
 import com.gruzini.tennistico.services.entity_related.ScoreService;
 import org.springframework.stereotype.Component;
@@ -34,18 +35,21 @@ public class MatchInfoParser {
 
     private String getDivertedScoreString(final Match match, final Player player) {
         final Score score = scoreService.getScoreWithSets(match.getScore().getId());
+        final boolean isHost = player.equals(match.getHost());
         return score.getSets()
-                .stream().map(set -> {
-                    if (player.equals(match.getHost())) {
-                        return appendSet(set.getHostScore(), set.getGuestScore());
-                    } else {
-                        return appendSet(set.getGuestScore(), set.getHostScore());
-                    }
-                })
+                .stream().map(set -> getDivertedSet(isHost, set))
                 .collect(Collectors.joining(" "));
     }
 
-    private String appendSet(int recipientScore, int opponentScore) {
+    private String getDivertedSet(final boolean isHost, final Set set) {
+        if (isHost) {
+            return mapSetToString(set.getHostScore(), set.getGuestScore());
+        } else {
+            return mapSetToString(set.getGuestScore(), set.getHostScore());
+        }
+    }
+
+    private String mapSetToString(int recipientScore, int opponentScore) {
         return recipientScore + "-" + opponentScore;
     }
 
