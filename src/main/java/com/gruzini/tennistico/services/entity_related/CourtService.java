@@ -2,14 +2,12 @@ package com.gruzini.tennistico.services.entity_related;
 
 import com.gruzini.tennistico.domain.Court;
 import com.gruzini.tennistico.exceptions.CourtNotFoundException;
-import com.gruzini.tennistico.models.forms.CourtForm;
 import com.gruzini.tennistico.repositories.CourtRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
-import static java.util.Objects.isNull;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -28,27 +26,17 @@ public class CourtService {
     }
 
     public Court getCourt(final Court court) {
-        final Long courtId = getExistingCourtId(court);
-        if(courtId == null){
-            return courtRepository.save(court);
-        }
-        return getById(courtId);
+        final Optional<Court> existingCourt = getExistingCourt(court);
+        return existingCourt.orElseGet(() -> courtRepository.save(court));
     }
 
-    private Long getExistingCourtId(final Court court) {
-        if(court.getName() != null){
-            if(courtRepository.getFirstByStreetAndCityAndCountryAndName(court.getStreet(), court.getCity(), court.getCountry(), court.getName()).isPresent()){
-                return courtRepository.getFirstByStreetAndCityAndCountryAndName(court.getStreet(), court.getCity(), court.getCountry(), court.getName()).get().getId();
-            }
+    private Optional<Court> getExistingCourt(final Court court) {
+        if(court.getName() != null && !court.getName().equals("")){
+            return courtRepository.getFirstByStreetAndCityAndCountryAndName(court.getStreet(), court.getCity(), court.getCountry(), court.getName());
         }
-        if(court.getHouseNumber() != null){
-            if(courtRepository.getFirstByStreetAndCityAndCountryAndHouseNumber(court.getStreet(), court.getCity(), court.getCountry(), court.getHouseNumber()).isPresent()){
-                return courtRepository.getFirstByStreetAndCityAndCountryAndHouseNumber(court.getStreet(), court.getCity(), court.getCountry(), court.getHouseNumber()).get().getId();
-            }
+        if(court.getHouseNumber() != null && !court.getHouseNumber().equals("")){
+            return courtRepository.getFirstByStreetAndCityAndCountryAndHouseNumber(court.getStreet(), court.getCity(), court.getCountry(), court.getHouseNumber());
         }
-        if(courtRepository.getFirstByStreetAndCityAndCountry(court.getStreet(), court.getCity(), court.getCountry()).isPresent()){
-            return courtRepository.getFirstByStreetAndCityAndCountry(court.getStreet(), court.getCity(), court.getCountry()).get().getId();
-        }
-        return null;
+        return courtRepository.getFirstByStreetAndCityAndCountry(court.getStreet(), court.getCity(), court.getCountry());
     }
 }
