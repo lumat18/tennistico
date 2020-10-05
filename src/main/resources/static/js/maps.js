@@ -95,20 +95,43 @@ function newTennisLayer(){
       let size = feature.get('features').length;
       let style = styleCache[size];
       if (!style) {
-        let text = size.toString() > 1 ? size.toString() : '';
-        style = new ol.style.Style({
-          image: new ol.style.Icon({
-            src: "/img/tennis_ball_icon.png",
-            scale: 0.05,
-          }),
-          text: new ol.style.Text({
-            text: text,
-            font: '12px Teko',
-            fill: new ol.style.Fill({
-              color: '#000000',
+        let sizeText = size.toString();
+        let ballStyle = new ol.style.Style({
+              image: new ol.style.Icon({
+                src: "/img/tennis_ball_icon.png",
+                scale: 0.05,
+                anchor: [0.5, 0.48],
+              }),
+            });
+        let multipleStyle;
+        if(sizeText > 1){
+          multipleStyle = new ol.style.Style({
+            image: new ol.style.Icon({
+              src: "/img/map_toggle_slider.png",
+              scale: 0.08,
+              anchor: [0.3, 0.50]
             }),
-          }),
-        });
+            text: new ol.style.Text({
+              text: sizeText,
+              font: '14px Teko',
+              fill: new ol.style.Fill({
+                color: '#ffffff',
+              }),
+              offsetX: 18,
+              offsetY: 2,
+            }),
+          });
+        } else {
+          multipleStyle = new ol.style.Style({
+            image: new ol.style.Circle({
+              radius: 11.5,
+              fill: new ol.style.Fill({
+                color: '#000000',
+              }),
+            })
+          });
+        }
+        style = [multipleStyle, ballStyle];
         styleCache[size] = style;
       }
       return style;
