@@ -97,21 +97,15 @@ function newTennisLayer(){
       if (!style) {
         let text = size.toString() > 1 ? size.toString() : '';
         style = new ol.style.Style({
-          image: new ol.style.Circle({
-            radius: 10,
-            stroke: new ol.style.Stroke({
-              width: 2,
-              color: '#fff',
-            }),
-            fill: new ol.style.Fill({
-              color: '#4075ba',
-            }),
+          image: new ol.style.Icon({
+            src: "/img/tennis_ball_icon.png",
+            scale: 0.05,
           }),
           text: new ol.style.Text({
             text: text,
             font: '12px Teko',
             fill: new ol.style.Fill({
-              color: '#fff',
+              color: '#000000',
             }),
           }),
         });
