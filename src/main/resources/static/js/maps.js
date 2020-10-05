@@ -21,6 +21,7 @@ let zoomSlider = new ol.control.ZoomSlider();
 let loader = document.createElement("div");
 loader.innerHTML = "<div class='lds-roller'><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>";
 loader.className = "loader-container";
+loader.style.display = "none";
 
 let map = new ol.Map({
   interactions: interactions,
@@ -64,24 +65,29 @@ function newTennisLayer(){
           'nwr[leisure="stadium"][sport="tennis"][access!="private"];);' +
           '(._;>;);' +
           'out center;';
-      fetch('https://overpass-api.de/api/interpreter', {
-        method: "POST",
-        body: query
-      })
-          .then(response => response.json())
-          .then(json => {
-            const geoJSON = osmtogeojson(json, {
-              flatProperties: true
-            });
-            let features = new ol.format.GeoJSON().readFeatures(geoJSON, {
-              featureProjection: map.getView().getProjection()
-            });
-            features.forEach(feature => {
-              let featureCoordinates = feature.getGeometry().getFlatCoordinates();
-              feature.setGeometry(new ol.geom.Point(featureCoordinates));
-            })
-            vectorSource.addFeatures(features);
-          });
+
+      const overpassRequest = async () => {
+        loader.style.display = "";
+        const overpassResponse = await fetch('https://overpass-api.de/api/interpreter', {
+          method: "POST",
+          body: query
+        });
+        const overpassJson = await overpassResponse.json()
+
+        const geoJSON = osmtogeojson(overpassJson, {
+          flatProperties: true
+        });
+        let features = new ol.format.GeoJSON().readFeatures(geoJSON, {
+          featureProjection: map.getView().getProjection()
+        });
+        features.forEach(feature => {
+          let featureCoordinates = feature.getGeometry().getFlatCoordinates();
+          feature.setGeometry(new ol.geom.Point(featureCoordinates));
+        })
+        vectorSource.addFeatures(features);
+        loader.style.display = "none";
+      };
+      overpassRequest();
     },
     strategy: ol.loadingstrategy.bbox,
   });
