@@ -18,6 +18,10 @@ let interactions = ol.interaction.defaults({
 
 let zoomSlider = new ol.control.ZoomSlider();
 
+let loader = document.createElement("div");
+loader.innerHTML = "<div class='lds-roller'><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>";
+loader.className = "loader-container";
+
 let map = new ol.Map({
   interactions: interactions,
   layers: [
@@ -28,6 +32,8 @@ let map = new ol.Map({
   controls: ol.control.defaults({attribution: false}).extend([attribution, zoomSlider]),
   view: view,
 });
+
+map.getViewport().appendChild(loader);
 
 //collapsing attribution button on window resize
 function checkSize() {
