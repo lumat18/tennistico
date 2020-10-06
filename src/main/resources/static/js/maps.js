@@ -52,6 +52,23 @@ let tennisLayer;
 let vectorSource;
 let clusterSource;
 let styleCache = {};
+let mapInteractions = map.getInteractions();
+
+function freezeMap() {
+  loader.style.display = "";
+  mapInteractions.forEach(interaction => interaction.setActive(false));
+  $('.ol-control').find('button').each(function () {
+    $(this).attr('disabled', 'disabled');
+  });
+}
+
+function unfreezeMap() {
+  loader.style.display = "none";
+  mapInteractions.forEach(interaction => interaction.setActive(true));
+  $('.ol-control').find('button').each(function () {
+    $(this).removeAttr('disabled');
+  });
+}
 
 function newTennisLayer(){
   vectorSource = new ol.source.Vector({
@@ -67,7 +84,7 @@ function newTennisLayer(){
           'out center;';
 
       const overpassRequest = async () => {
-        loader.style.display = "";
+        freezeMap();
         const overpassResponse = await fetch('https://overpass-api.de/api/interpreter', {
           method: "POST",
           body: query
@@ -85,7 +102,7 @@ function newTennisLayer(){
           feature.setGeometry(new ol.geom.Point(featureCoordinates));
         })
         vectorSource.addFeatures(features);
-        loader.style.display = "none";
+        unfreezeMap();
       };
       overpassRequest();
     },
@@ -136,7 +153,7 @@ function newTennisLayer(){
         } else {
           multipleStyle = new ol.style.Style({
             image: new ol.style.Circle({
-              radius: 11.5,
+              radius: 12,
               fill: new ol.style.Fill({
                 color: '#000000',
               }),
