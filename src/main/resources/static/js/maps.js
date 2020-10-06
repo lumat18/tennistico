@@ -47,6 +47,7 @@ window.addEventListener('resize', checkSize);
 checkSize();
 //end of collapsing attribution button
 
+let initialLoad = true;
 // courts layer
 let tennisLayer;
 let vectorSource;
@@ -70,7 +71,16 @@ function unfreezeMap() {
   });
 }
 
+function handleErrors(response) {
+  if (!response.ok) {
+    unfreezeMap();
+    throw Error(response.statusText);
+  }
+  return response;
+}
+
 function newTennisLayer(){
+  info.style.display = 'none';
   vectorSource = new ol.source.Vector({
     format: new ol.format.GeoJSON(),
     loader: function(extent, resolution, projection) {
@@ -88,6 +98,10 @@ function newTennisLayer(){
         const overpassResponse = await fetch('https://overpass-api.de/api/interpreter', {
           method: "POST",
           body: query
+        }).then(handleErrors).catch(function (error) {
+          console.log(error);
+          info.innerHTML = 'WARNING! Failed to load courts - Try again!';
+          info.style.display = '';
         });
         const overpassJson = await overpassResponse.json()
 
@@ -177,13 +191,16 @@ map.on('movestart', function () {
       console.log('cleared loader');
     });
   }
-  if(map.getView().getZoom() < 11){
-    searchButton.disabled = true;
-    document.getElementById("searchIcon").setAttribute('data-original-title', 'Zoom in to search courts');
-  } else {
-    searchButton.disabled = false;
-    document.getElementById("searchIcon").setAttribute('data-original-title', 'Search courts');
+  if(!initialLoad){
+    if(map.getView().getZoom() < 11){
+      searchButton.disabled = true;
+      document.getElementById("searchIcon").setAttribute('data-original-title', 'Zoom in to search courts');
+    } else {
+      searchButton.disabled = false;
+      document.getElementById("searchIcon").setAttribute('data-original-title', 'Search courts');
+    }
   }
+  initialLoad = false;
 });
 
 let geolocation = new ol.Geolocation({
@@ -197,10 +214,11 @@ let geolocation = new ol.Geolocation({
 
 // handle maps error.
 geolocation.on('error', function (error) {
-  let info = document.getElementById('info');
   info.innerHTML = 'WARNING! ' + error.message;
   info.style.display = '';
   locationButton.disabled = true;
+  searchButton.disabled = false;
+  initialLoad = false;
 });
 
 function showCurrentLocation() {
@@ -234,6 +252,7 @@ map.addControl(centerLocation);
 
 //adding button for searching for courts on current map view
 let searchButton = document.createElement('button');
+searchButton.disabled = true;
 searchButton.innerHTML = "<i id='searchIcon' class='material-icons' data-toggle='tooltip' title='Search courts'" +
     " style='color: white'>search</i>";
 
@@ -297,6 +316,8 @@ map.on('click', function(evt) {
   console.log(coordinates);
 });
 //end of logging functions
+
+let info = document.getElementById('info');
 
 let courtName = document.getElementById("courtName");
 let courtEmail = document.getElementById("courtEmail");
