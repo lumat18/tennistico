@@ -17,6 +17,9 @@ let interactions = ol.interaction.defaults({
 });
 
 let zoomSlider = new ol.control.ZoomSlider();
+let tileLayer = new ol.layer.Tile({
+  source: new ol.source.OSM(),
+});
 
 let loader = document.createElement("div");
 loader.innerHTML = "<div class='lds-roller'><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>";
@@ -25,10 +28,7 @@ loader.style.display = "none";
 
 let map = new ol.Map({
   interactions: interactions,
-  layers: [
-    new ol.layer.Tile({
-      source: new ol.source.OSM(),
-    })],
+  layers: [tileLayer],
   target: 'map',
   controls: ol.control.defaults({attribution: false}).extend([attribution, zoomSlider]),
   view: view,
@@ -61,6 +61,7 @@ function freezeMap() {
   $('.ol-control').find('button').each(function () {
     $(this).attr('disabled', 'disabled');
   });
+  map.getViewport().style.opacity = 0.5;
 }
 
 function unfreezeMap() {
@@ -69,6 +70,7 @@ function unfreezeMap() {
   $('.ol-control').find('button').each(function () {
     $(this).removeAttr('disabled');
   });
+  map.getViewport().style.opacity = 1.0;
 }
 
 function handleErrors(response) {
