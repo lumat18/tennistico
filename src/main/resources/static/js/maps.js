@@ -47,7 +47,8 @@ window.addEventListener('resize', checkSize);
 checkSize();
 //end of collapsing attribution button
 
-let initialLoad = true;
+let afterSearch = true;
+let startedSearch = true;
 // courts layer
 let tennisLayer;
 let vectorSource;
@@ -62,6 +63,7 @@ function freezeMap() {
     $(this).attr('disabled', 'disabled');
   });
   map.getViewport().style.opacity = 0.5;
+  startedSearch = true;
 }
 
 function unfreezeMap() {
@@ -71,6 +73,8 @@ function unfreezeMap() {
     $(this).removeAttr('disabled');
   });
   map.getViewport().style.opacity = 1.0;
+  afterSearch = true;
+  startedSearch = false;
 }
 
 function handleErrors(response) {
@@ -193,16 +197,7 @@ map.on('movestart', function () {
       console.log('cleared loader');
     });
   }
-  if(!initialLoad){
-    if(map.getView().getZoom() < 11){
-      searchButton.disabled = true;
-      document.getElementById("searchIcon").setAttribute('data-original-title', 'Zoom in to search courts');
-    } else {
-      searchButton.disabled = false;
-      document.getElementById("searchIcon").setAttribute('data-original-title', 'Search courts');
-    }
-  }
-  initialLoad = false;
+  afterSearch = false;
 });
 
 let geolocation = new ol.Geolocation({
@@ -219,8 +214,6 @@ geolocation.on('error', function (error) {
   info.innerHTML = 'WARNING! ' + error.message;
   info.style.display = '';
   locationButton.disabled = true;
-  searchButton.disabled = false;
-  initialLoad = false;
 });
 
 function showCurrentLocation() {
@@ -252,24 +245,10 @@ let centerLocation = new ol.control.Control({
 map.addControl(centerLocation);
 //end of center on current location button
 
-//adding button for searching for courts on current map view
-let searchButton = document.createElement('button');
-searchButton.disabled = true;
-searchButton.innerHTML = "<i id='searchIcon' class='material-icons' data-toggle='tooltip' title='Search courts'" +
-    " style='color: white'>search</i>";
-
-searchButton.addEventListener('click', newTennisLayer, false);
-
-let searchCourtsElement = document.createElement('div');
-searchCourtsElement.className = 'search-courts ol-unselectable ol-control';
-
-searchCourtsElement.appendChild(searchButton);
-
-let searchCourts = new ol.control.Control({
-  element: searchCourtsElement,
-});
-map.addControl(searchCourts);
-//end of search courts button
+//app starts searching courts after 2 seconds of inactivity on the map, to be changed if needed
+map.on("rendercomplete", debounced(2000, function () {
+  if(!afterSearch && !startedSearch && map.getView().getZoom() > 10) newTennisLayer();
+}))
 
 //temp functions for logging geolocation data in console
 function fillFormFieldsFromOsmFeature(feature){
@@ -374,4 +353,17 @@ function showRequiredInputFields() {
   let error = document.getElementById('errorMessage');
   error.innerHTML = "Insufficient data. Please choose another court.";
   error.style.display = '';
+}
+
+function debounced(delay, fn) {
+  let timerId;
+  return function (...args) {
+    if (timerId) {
+      clearTimeout(timerId);
+    }
+    timerId = setTimeout(() => {
+      fn(...args);
+      timerId = null;
+    }, delay);
+  }
 }
