@@ -24,7 +24,6 @@ let tileLayer = new ol.layer.Tile({
 let loader = document.createElement("div");
 loader.innerHTML = "<div class='lds-roller'><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>";
 loader.className = "loader-container";
-loader.style.display = "none";
 
 let map = new ol.Map({
   interactions: interactions,
@@ -33,8 +32,6 @@ let map = new ol.Map({
   controls: ol.control.defaults({attribution: false}).extend([attribution, zoomSlider]),
   view: view,
 });
-
-map.getViewport().appendChild(loader);
 
 //collapsing attribution button on window resize
 function checkSize() {
@@ -56,22 +53,27 @@ let clusterSource;
 let styleCache = {};
 let mapInteractions = map.getInteractions();
 
-//TODO: zoomSlider even if disabled is still working
 function freezeMap() {
-  loader.style.display = "";
+  map.getViewport().appendChild(loader);
   mapInteractions.forEach(interaction => interaction.setActive(false));
   $('.ol-control').find('button').each(function () {
     $(this).attr('disabled', 'disabled');
+  });
+  $('.ol-zoomslider-thumb').each(function () {
+    $(this).css('display', 'none');
   });
   map.getViewport().style.opacity = 0.5;
   startedSearch = true;
 }
 
 function unfreezeMap() {
-  loader.style.display = "none";
+  map.getViewport().removeChild(loader);
   mapInteractions.forEach(interaction => interaction.setActive(true));
   $('.ol-control').find('button').each(function () {
     $(this).removeAttr('disabled');
+  });
+  $('.ol-zoomslider-thumb').each(function () {
+    $(this).css('display', 'block');
   });
   map.getViewport().style.opacity = 1.0;
   afterSearch = true;
