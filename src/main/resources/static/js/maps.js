@@ -56,6 +56,7 @@ let clusterSource;
 let styleCache = {};
 let mapInteractions = map.getInteractions();
 
+//TODO: zoomSlider even if disabled is still working
 function freezeMap() {
   loader.style.display = "";
   mapInteractions.forEach(interaction => interaction.setActive(false));

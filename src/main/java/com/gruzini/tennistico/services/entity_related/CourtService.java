@@ -31,12 +31,7 @@ public class CourtService {
     }
 
     private Optional<Court> getExistingCourt(final Court court) {
-        if(court.getName() != null && !court.getName().equals("")){
-            return courtRepository.getFirstByStreetAndCityAndCountryAndName(court.getStreet(), court.getCity(), court.getCountry(), court.getName());
-        }
-        if(court.getHouseNumber() != null && !court.getHouseNumber().equals("")){
-            return courtRepository.getFirstByStreetAndCityAndCountryAndHouseNumber(court.getStreet(), court.getCity(), court.getCountry(), court.getHouseNumber());
-        }
-        return courtRepository.getFirstByStreetAndCityAndCountry(court.getStreet(), court.getCity(), court.getCountry());
+        return courtRepository.getFirstByStreetAndCityAndCountryAndHouseNumberAndName(
+                court.getStreet(), court.getCity(), court.getCountry(), court.getHouseNumber(), court.getName());
     }
 }
