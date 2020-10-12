@@ -175,7 +175,7 @@ function newTennisLayer(){
             image: new ol.style.Circle({
               radius: 12,
               fill: new ol.style.Fill({
-                color: '#000000',
+                color: 'rgba(0,60,136,.7)',
               }),
             })
           });
